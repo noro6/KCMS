@@ -20,7 +20,7 @@ namespace Manager.Forms
 			InitializeComponent();
 		}
 
-		private void FrmEnemyMaster_Load(object sender, EventArgs e)
+		private void FrmEnemyList_Load(object sender, EventArgs e)
 		{
 			// コントロール初期化
 			InitializeControl();

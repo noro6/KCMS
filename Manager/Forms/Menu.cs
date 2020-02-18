@@ -23,7 +23,12 @@ namespace Manager
 		/// <param name="e"></param>
 		private void BtnEquipmentEdit_Click(object sender, EventArgs e)
 		{
-
+			using (var form = new FrmEquipmentList())
+			{
+				Hide();
+				form.ShowDialog();
+				Show();
+			}
 		}
 		/// <summary>
 		/// 艦娘編集
@@ -34,9 +39,9 @@ namespace Manager
 		{
 			using (var form = new FrmShipList())
 			{
-				this.Hide();
+				Hide();
 				form.ShowDialog();
-				this.Show();
+				Show();
 			}
 		}
 		/// <summary>
@@ -48,9 +53,9 @@ namespace Manager
 		{
 			using (var form = new FrmMapMaster())
 			{
-				this.Hide();
+				Hide();
 				form.ShowDialog();
-				this.Show();
+				Show();
 			}
 		}
 
@@ -63,9 +68,9 @@ namespace Manager
 		{
 			using (var form = new FrmEnemyList())
 			{
-				this.Hide();
+				Hide();
 				form.ShowDialog();
-				this.Show();
+				Show();
 			}
 		}
 
@@ -96,7 +101,7 @@ namespace Manager
 		/// <param name="e"></param>
 		private void BtnOutputShips_Click(object sender, EventArgs e)
 		{
-			txtOutput.Text = Enemy.OutputEnemies();
+			txtOutput.Text = Ship.OutputShip();
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		/// <summary>
@@ -106,7 +111,7 @@ namespace Manager
 		/// <param name="e"></param>
 		private void BtnOutputEquipments_Click(object sender, EventArgs e)
 		{
-			txtOutput.Text = Enemy.OutputEnemies();
+			txtOutput.Text = Equipment.OutputEquipment();
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 	}

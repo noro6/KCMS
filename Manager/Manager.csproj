@@ -66,17 +66,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB\DBManager.cs" />
+    <Compile Include="Forms\FrmEquipmentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmEquipmentEdit.Designer.cs">
+      <DependentUpon>FrmEquipmentEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmShipEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmShipEdit.Designer.cs">
+      <DependentUpon>FrmShipEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmEnemyEdit.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FrmEnemyEdit.Designer.cs">
       <DependentUpon>FrmEnemyEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmEditEnemyFleet.cs">
+    <Compile Include="Forms\FrmEnemyFleetEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmEditEnemyFleet.Designer.cs">
-      <DependentUpon>FrmEditEnemyFleet.cs</DependentUpon>
+    <Compile Include="Forms\FrmEnemyFleetEdit.Designer.cs">
+      <DependentUpon>FrmEnemyFleetEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmEquipmentList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmEquipmentList.Designer.cs">
+      <DependentUpon>FrmEquipmentList.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmShipList.cs">
       <SubType>Form</SubType>
@@ -108,6 +126,9 @@
     <Compile Include="Forms\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Avoid.cs" />
+    <Compile Include="Models\Equipment.cs" />
+    <Compile Include="Models\EquipmentType.cs" />
     <Compile Include="Models\ShipType.cs" />
     <Compile Include="Models\Ship.cs" />
     <Compile Include="Models\Enemy.cs" />
@@ -127,11 +148,20 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ConvertUtil.cs" />
-    <EmbeddedResource Include="Forms\FrmEditEnemyFleet.resx">
-      <DependentUpon>FrmEditEnemyFleet.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmEquipmentEdit.resx">
+      <DependentUpon>FrmEquipmentEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmShipEdit.resx">
+      <DependentUpon>FrmShipEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmEnemyFleetEdit.resx">
+      <DependentUpon>FrmEnemyFleetEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmEnemyEdit.resx">
       <DependentUpon>FrmEnemyEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmEquipmentList.resx">
+      <DependentUpon>FrmEquipmentList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmShipList.resx">
       <DependentUpon>FrmShipList.cs</DependentUpon>

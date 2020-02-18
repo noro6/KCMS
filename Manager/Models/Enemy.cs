@@ -405,6 +405,5 @@ GROUP BY
 			output = output.Replace(",]", "]");
 			return output;
 		}
-
 	}
 }

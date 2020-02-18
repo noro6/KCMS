@@ -30,10 +30,6 @@
 		{
 			this.txtSearch = new System.Windows.Forms.TextBox();
 			this.dgvShip = new System.Windows.Forms.DataGridView();
-			this.cmbShipType = new System.Windows.Forms.ComboBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.btnClose = new System.Windows.Forms.Button();
-			this.btnAdd = new System.Windows.Forms.Button();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +40,10 @@
 			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.cmbShipType = new System.Windows.Forms.ComboBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.btnClose = new System.Windows.Forms.Button();
+			this.btnAdd = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvShip)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -52,7 +52,7 @@
 			this.txtSearch.Location = new System.Drawing.Point(94, 65);
 			this.txtSearch.Name = "txtSearch";
 			this.txtSearch.Size = new System.Drawing.Size(141, 23);
-			this.txtSearch.TabIndex = 11;
+			this.txtSearch.TabIndex = 0;
 			this.txtSearch.TextChanged += new System.EventHandler(this.TxtSearch_TextChanged);
 			// 
 			// dgvShip
@@ -84,46 +84,7 @@
 			this.dgvShip.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvShip.Size = new System.Drawing.Size(825, 363);
 			this.dgvShip.TabIndex = 12;
-			this.dgvShip.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvEnemies_CellDoubleClick);
-			// 
-			// cmbShipType
-			// 
-			this.cmbShipType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbShipType.FormattingEnabled = true;
-			this.cmbShipType.Location = new System.Drawing.Point(241, 65);
-			this.cmbShipType.Name = "cmbShipType";
-			this.cmbShipType.Size = new System.Drawing.Size(174, 23);
-			this.cmbShipType.TabIndex = 1;
-			this.cmbShipType.SelectedIndexChanged += new System.EventHandler(this.CmbEnemyType_SelectedIndexChanged);
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 68);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(64, 15);
-			this.label1.TabIndex = 13;
-			this.label1.Text = "IDや艦名：";
-			// 
-			// btnClose
-			// 
-			this.btnClose.Location = new System.Drawing.Point(752, 12);
-			this.btnClose.Name = "btnClose";
-			this.btnClose.Size = new System.Drawing.Size(85, 32);
-			this.btnClose.TabIndex = 14;
-			this.btnClose.Text = "閉じる";
-			this.btnClose.UseVisualStyleBackColor = true;
-			this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(752, 56);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(85, 32);
-			this.btnAdd.TabIndex = 15;
-			this.btnAdd.Text = "新規追加";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
+			this.dgvShip.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvShips_CellDoubleClick);
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
@@ -206,6 +167,45 @@
 			this.Column8.Name = "Column8";
 			this.Column8.ReadOnly = true;
 			// 
+			// cmbShipType
+			// 
+			this.cmbShipType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbShipType.FormattingEnabled = true;
+			this.cmbShipType.Location = new System.Drawing.Point(241, 65);
+			this.cmbShipType.Name = "cmbShipType";
+			this.cmbShipType.Size = new System.Drawing.Size(174, 23);
+			this.cmbShipType.TabIndex = 1;
+			this.cmbShipType.SelectedIndexChanged += new System.EventHandler(this.CmbShipType_SelectedIndexChanged);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(12, 68);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(64, 15);
+			this.label1.TabIndex = 13;
+			this.label1.Text = "IDや艦名：";
+			// 
+			// btnClose
+			// 
+			this.btnClose.Location = new System.Drawing.Point(752, 12);
+			this.btnClose.Name = "btnClose";
+			this.btnClose.Size = new System.Drawing.Size(85, 32);
+			this.btnClose.TabIndex = 2;
+			this.btnClose.Text = "閉じる";
+			this.btnClose.UseVisualStyleBackColor = true;
+			this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
+			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(752, 56);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(85, 32);
+			this.btnAdd.TabIndex = 3;
+			this.btnAdd.Text = "新規追加";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
+			// 
 			// FrmShipList
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -222,7 +222,7 @@
 			this.Name = "FrmShipList";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "艦娘一覧";
-			this.Load += new System.EventHandler(this.FrmEnemyMaster_Load);
+			this.Load += new System.EventHandler(this.FrmShipList_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dgvShip)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

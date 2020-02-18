@@ -201,7 +201,7 @@
 			this.Name = "FrmEnemyList";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "敵艦一覧";
-			this.Load += new System.EventHandler(this.FrmEnemyMaster_Load);
+			this.Load += new System.EventHandler(this.FrmEnemyList_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dgvEnemies)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

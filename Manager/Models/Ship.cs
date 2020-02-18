@@ -10,11 +10,11 @@ namespace Manager.Models
 	{
 		public int TypeID { set; get; }
 		public string TypeName { set; get; }
-		public int Slot1 { set; get; }
-		public int Slot2 { set; get; }
-		public int Slot3 { set; get; }
-		public int Slot4 { set; get; }
-		public int Slot5 { set; get; }
+		public int? Slot1 { set; get; }
+		public int? Slot2 { set; get; }
+		public int? Slot3 { set; get; }
+		public int? Slot4 { set; get; }
+		public int? Slot5 { set; get; }
 		public bool IsFinal { set; get; }
 		public string IsFinalString { set; get; }
 		public int OriginalID { set; get; }
@@ -48,7 +48,7 @@ namespace Manager.Models
 				IsFinalString = ships[0].IsFinalString;
 				OriginalID = ships[0].OriginalID;
 				DeckID = ships[0].DeckID;
-			} 
+			}
 		}
 
 		/// <summary>
@@ -65,10 +65,10 @@ namespace Manager.Models
 		/// </summary>
 		/// <param name="shipId">ID</param>
 		/// <returns></returns>
-        public static List<Ship> Select(int shipId)
+		public static List<Ship> Select(int shipId)
 		{
 			var list = new List<Ship>();
-			using(var db = new DBManager())
+			using (var db = new DBManager())
 			{
 				var dt = db.Select($@"
 SELECT
@@ -91,7 +91,9 @@ FROM
 		ON ships.ship_type_id = ship_types.id 
 	LEFT JOIN ships AS original_ships 
 		ON ships.original_id = original_ships.id
-
+WHERE
+	1 = 1
+	{(shipId != 0 ? "AND ships.id = " + shipId : "")}
 ");
 				foreach (DataRow dr in dt.Rows)
 				{
@@ -101,17 +103,22 @@ FROM
 						Name = ConvertUtil.ToString(dr["ship_name"]),
 						TypeID = ConvertUtil.ToInt(dr["type_id"]),
 						TypeName = ConvertUtil.ToString(dr["type_name"]),
-						Slot1 = ConvertUtil.ToInt(dr["slot_1"]),
-						Slot2 = ConvertUtil.ToInt(dr["slot_2"]),
-						Slot3 = ConvertUtil.ToInt(dr["slot_3"]),
-						Slot4 = ConvertUtil.ToInt(dr["slot_4"]),
-						Slot5 = ConvertUtil.ToInt(dr["slot_5"]),
+						Slot1 = ConvertUtil.ToInt(dr["slot_1"], -1),
+						Slot2 = ConvertUtil.ToInt(dr["slot_2"], -1),
+						Slot3 = ConvertUtil.ToInt(dr["slot_3"], -1),
+						Slot4 = ConvertUtil.ToInt(dr["slot_4"], -1),
+						Slot5 = ConvertUtil.ToInt(dr["slot_5"], -1),
 						IsFinal = ConvertUtil.ToBool(dr["is_final"]),
 						IsFinalString = ConvertUtil.ToBool(dr["is_final"]) ? "最終" : "",
 						OriginalID = ConvertUtil.ToInt(dr["original_id"]),
 						OriginalName = ConvertUtil.ToString(dr["original_name"]),
 						DeckID = ConvertUtil.ToInt(dr["deck_id"])
 					};
+					ship.Slot1 = ship.Slot1 < 0 ? null : ship.Slot1;
+					ship.Slot2 = ship.Slot2 < 0 ? null : ship.Slot2;
+					ship.Slot3 = ship.Slot3 < 0 ? null : ship.Slot3;
+					ship.Slot4 = ship.Slot4 < 0 ? null : ship.Slot4;
+					ship.Slot5 = ship.Slot5 < 0 ? null : ship.Slot5;
 					list.Add(ship);
 				}
 			}
@@ -143,11 +150,11 @@ VALUES (
 	{ID}
 	, {TypeID}
 	, @name
-	, {Slot1}
-	, {Slot2}
-	, {Slot3}
-	, {Slot4}
-	, {Slot5}
+	, @slot_1
+	, @slot_2
+	, @slot_3
+	, @slot_4
+	, @slot_5
 	, {(IsFinal ? 1 : 0)}
 	, {OriginalID}
 	, {DeckID}
@@ -155,6 +162,11 @@ VALUES (
 			var param = new Dictionary<string, object>()
 			{
 				{ "@name", Name },
+				{ "@slot_1", Slot1 == null ? (object)DBNull.Value : Slot1 },
+				{ "@slot_2", Slot2 == null ? (object)DBNull.Value : Slot2 },
+				{ "@slot_3", Slot3 == null ? (object)DBNull.Value : Slot3 },
+				{ "@slot_4", Slot4 == null ? (object)DBNull.Value : Slot4 },
+				{ "@slot_5", Slot5 == null ? (object)DBNull.Value : Slot5 },
 			};
 			db.ExecuteNonQuery(sql, param);
 		}
@@ -168,6 +180,54 @@ VALUES (
 		{
 			var sql = $@"DELETE FROM ships WHERE ID = " + enemyId;
 			db.ExecuteNonQuery(sql);
+		}
+
+		/// <summary>
+		/// 敵出現海域(js側 ENEMY_PATTERN)出力
+		/// </summary>
+		/// <returns></returns>
+		public static string OutputShip()
+		{
+			var output = "";
+			var sql = @"
+SELECT
+	  '{ id: ' || ships.id || ', type: ' || ships.ship_type_id || ', name: ''' || ships.name || '''' || ', slot: ['
+	 || CASE
+		WHEN slot_1 > 0
+			THEN slot_1 || ','
+		ELSE ''
+		END || CASE
+		WHEN slot_2 > 0
+			THEN slot_2 || ','
+		ELSE ''
+		END || CASE
+		WHEN slot_3 > 0
+			THEN slot_3 || ','
+		ELSE ''
+		END || CASE
+		WHEN slot_4 > 0
+			THEN slot_4 || ','
+		ELSE ''
+		END || CASE
+		WHEN slot_5 > 0
+			THEN slot_5 || ','
+		ELSE ''
+		END || ']' || 
+	', final: ' || ships.is_final || ', orig: ' || ships.original_id || ', deckid: ' || ships.deck_id || ' },' AS json
+FROM
+	ships
+";
+			using (var db = new DBManager())
+			{
+				var dt = db.Select(sql);
+				foreach (DataRow dr in dt.Rows)
+				{
+					output += ConvertUtil.ToString(dr["json"]) + "\r\n";
+				}
+			}
+
+			output = output.Replace(",]", "]");
+			return output;
 		}
 	}
 }

@@ -40,7 +40,9 @@ namespace Manager.Util
 			try
 			{
 				if (value is null) return alt;
-				decimal.TryParse(ToString(value), out decimal dec);
+				var strValue = value.ToString();
+				if (strValue == "") return alt;
+				decimal.TryParse(strValue, out decimal dec);
 				return dec;
 			}
 			catch (Exception)

@@ -46,26 +46,31 @@
 			this.chkType110 = new System.Windows.Forms.CheckBox();
 			this.chkType100 = new System.Windows.Forms.CheckBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.numSlot1 = new System.Windows.Forms.NumericUpDown();
 			this.cmbType1 = new System.Windows.Forms.ComboBox();
 			this.label6 = new System.Windows.Forms.Label();
 			this.cmbEquipment1 = new System.Windows.Forms.ComboBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.numSlot2 = new System.Windows.Forms.NumericUpDown();
 			this.cmbType2 = new System.Windows.Forms.ComboBox();
 			this.cmbEquipment2 = new System.Windows.Forms.ComboBox();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.numSlot3 = new System.Windows.Forms.NumericUpDown();
 			this.cmbType3 = new System.Windows.Forms.ComboBox();
 			this.cmbEquipment3 = new System.Windows.Forms.ComboBox();
 			this.label10 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.numSlot5 = new System.Windows.Forms.NumericUpDown();
 			this.cmbType5 = new System.Windows.Forms.ComboBox();
 			this.cmbEquipment5 = new System.Windows.Forms.ComboBox();
 			this.label13 = new System.Windows.Forms.Label();
 			this.label15 = new System.Windows.Forms.Label();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.numSlot4 = new System.Windows.Forms.NumericUpDown();
 			this.cmbType4 = new System.Windows.Forms.ComboBox();
 			this.cmbEquipment4 = new System.Windows.Forms.ComboBox();
 			this.label16 = new System.Windows.Forms.Label();
@@ -76,24 +81,19 @@
 			this.cmbOriginalEnemy = new System.Windows.Forms.ComboBox();
 			this.btnClose = new System.Windows.Forms.Button();
 			this.btnSave = new System.Windows.Forms.Button();
-			this.numSlot1 = new System.Windows.Forms.NumericUpDown();
-			this.numSlot2 = new System.Windows.Forms.NumericUpDown();
-			this.numSlot3 = new System.Windows.Forms.NumericUpDown();
-			this.numSlot4 = new System.Windows.Forms.NumericUpDown();
-			this.numSlot5 = new System.Windows.Forms.NumericUpDown();
 			this.numAntiAirWeight = new System.Windows.Forms.NumericUpDown();
 			this.numAntiAirBonus = new System.Windows.Forms.NumericUpDown();
 			this.chkType20 = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
-			this.groupBox2.SuspendLayout();
-			this.groupBox3.SuspendLayout();
-			this.groupBox4.SuspendLayout();
-			this.groupBox5.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot1)).BeginInit();
+			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot2)).BeginInit();
+			this.groupBox3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot3)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numSlot4)).BeginInit();
+			this.groupBox4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot5)).BeginInit();
+			this.groupBox5.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numSlot4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirWeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirBonus)).BeginInit();
 			this.SuspendLayout();
@@ -112,7 +112,7 @@
 			this.txtID.Location = new System.Drawing.Point(93, 69);
 			this.txtID.Name = "txtID";
 			this.txtID.Size = new System.Drawing.Size(50, 23);
-			this.txtID.TabIndex = 1;
+			this.txtID.TabIndex = 0;
 			// 
 			// txtName
 			// 
@@ -120,7 +120,7 @@
 			this.txtName.MaxLength = 60;
 			this.txtName.Name = "txtName";
 			this.txtName.Size = new System.Drawing.Size(270, 23);
-			this.txtName.TabIndex = 3;
+			this.txtName.TabIndex = 2;
 			// 
 			// label2
 			// 
@@ -137,7 +137,7 @@
 			this.chkType1.Location = new System.Drawing.Point(93, 129);
 			this.chkType1.Name = "chkType1";
 			this.chkType1.Size = new System.Drawing.Size(74, 19);
-			this.chkType1.TabIndex = 4;
+			this.chkType1.TabIndex = 3;
 			this.chkType1.Text = "正規空母";
 			this.chkType1.UseVisualStyleBackColor = true;
 			// 
@@ -156,7 +156,7 @@
 			this.chkType2.Location = new System.Drawing.Point(173, 129);
 			this.chkType2.Name = "chkType2";
 			this.chkType2.Size = new System.Drawing.Size(62, 19);
-			this.chkType2.TabIndex = 6;
+			this.chkType2.TabIndex = 4;
 			this.chkType2.Text = "軽空母";
 			this.chkType2.UseVisualStyleBackColor = true;
 			// 
@@ -166,7 +166,7 @@
 			this.chkType3.Location = new System.Drawing.Point(241, 129);
 			this.chkType3.Name = "chkType3";
 			this.chkType3.Size = new System.Drawing.Size(50, 19);
-			this.chkType3.TabIndex = 7;
+			this.chkType3.TabIndex = 5;
 			this.chkType3.Text = "戦艦";
 			this.chkType3.UseVisualStyleBackColor = true;
 			// 
@@ -176,7 +176,7 @@
 			this.chkType4.Location = new System.Drawing.Point(297, 129);
 			this.chkType4.Name = "chkType4";
 			this.chkType4.Size = new System.Drawing.Size(50, 19);
-			this.chkType4.TabIndex = 8;
+			this.chkType4.TabIndex = 6;
 			this.chkType4.Text = "重巡";
 			this.chkType4.UseVisualStyleBackColor = true;
 			// 
@@ -186,7 +186,7 @@
 			this.chkType5.Location = new System.Drawing.Point(353, 129);
 			this.chkType5.Name = "chkType5";
 			this.chkType5.Size = new System.Drawing.Size(50, 19);
-			this.chkType5.TabIndex = 9;
+			this.chkType5.TabIndex = 7;
 			this.chkType5.Text = "軽巡";
 			this.chkType5.UseVisualStyleBackColor = true;
 			// 
@@ -196,7 +196,7 @@
 			this.chkType10.Location = new System.Drawing.Point(205, 154);
 			this.chkType10.Name = "chkType10";
 			this.chkType10.Size = new System.Drawing.Size(50, 19);
-			this.chkType10.TabIndex = 10;
+			this.chkType10.TabIndex = 12;
 			this.chkType10.Text = "水母";
 			this.chkType10.UseVisualStyleBackColor = true;
 			// 
@@ -216,7 +216,7 @@
 			this.chkType8.Location = new System.Drawing.Point(93, 154);
 			this.chkType8.Name = "chkType8";
 			this.chkType8.Size = new System.Drawing.Size(50, 19);
-			this.chkType8.TabIndex = 12;
+			this.chkType8.TabIndex = 10;
 			this.chkType8.Text = "潜水";
 			this.chkType8.UseVisualStyleBackColor = true;
 			// 
@@ -226,7 +226,7 @@
 			this.chkType7.Location = new System.Drawing.Point(465, 129);
 			this.chkType7.Name = "chkType7";
 			this.chkType7.Size = new System.Drawing.Size(50, 19);
-			this.chkType7.TabIndex = 13;
+			this.chkType7.TabIndex = 9;
 			this.chkType7.Text = "雷巡";
 			this.chkType7.UseVisualStyleBackColor = true;
 			// 
@@ -236,7 +236,7 @@
 			this.chkType6.Location = new System.Drawing.Point(409, 129);
 			this.chkType6.Name = "chkType6";
 			this.chkType6.Size = new System.Drawing.Size(50, 19);
-			this.chkType6.TabIndex = 14;
+			this.chkType6.TabIndex = 8;
 			this.chkType6.Text = "駆逐";
 			this.chkType6.UseVisualStyleBackColor = true;
 			// 
@@ -257,7 +257,7 @@
 			this.chkType100.Location = new System.Drawing.Point(349, 154);
 			this.chkType100.Name = "chkType100";
 			this.chkType100.Size = new System.Drawing.Size(74, 19);
-			this.chkType100.TabIndex = 16;
+			this.chkType100.TabIndex = 14;
 			this.chkType100.Text = "地上施設";
 			this.chkType100.UseVisualStyleBackColor = true;
 			// 
@@ -271,9 +271,21 @@
 			this.groupBox1.Location = new System.Drawing.Point(15, 185);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(515, 54);
-			this.groupBox1.TabIndex = 19;
+			this.groupBox1.TabIndex = 16;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "スロット1";
+			// 
+			// numSlot1
+			// 
+			this.numSlot1.Location = new System.Drawing.Point(78, 23);
+			this.numSlot1.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numSlot1.Name = "numSlot1";
+			this.numSlot1.Size = new System.Drawing.Size(50, 23);
+			this.numSlot1.TabIndex = 0;
 			// 
 			// cmbType1
 			// 
@@ -283,7 +295,7 @@
 			this.cmbType1.Location = new System.Drawing.Point(207, 22);
 			this.cmbType1.Name = "cmbType1";
 			this.cmbType1.Size = new System.Drawing.Size(98, 23);
-			this.cmbType1.TabIndex = 23;
+			this.cmbType1.TabIndex = 1;
 			this.cmbType1.ValueMember = "ID";
 			this.cmbType1.SelectedIndexChanged += new System.EventHandler(this.CmbType1_SelectedIndexChanged);
 			// 
@@ -304,7 +316,7 @@
 			this.cmbEquipment1.Location = new System.Drawing.Point(311, 22);
 			this.cmbEquipment1.Name = "cmbEquipment1";
 			this.cmbEquipment1.Size = new System.Drawing.Size(190, 23);
-			this.cmbEquipment1.TabIndex = 21;
+			this.cmbEquipment1.TabIndex = 2;
 			this.cmbEquipment1.ValueMember = "ID";
 			// 
 			// label4
@@ -326,9 +338,21 @@
 			this.groupBox2.Location = new System.Drawing.Point(15, 245);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(515, 54);
-			this.groupBox2.TabIndex = 23;
+			this.groupBox2.TabIndex = 17;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "スロット2";
+			// 
+			// numSlot2
+			// 
+			this.numSlot2.Location = new System.Drawing.Point(78, 23);
+			this.numSlot2.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numSlot2.Name = "numSlot2";
+			this.numSlot2.Size = new System.Drawing.Size(50, 23);
+			this.numSlot2.TabIndex = 0;
 			// 
 			// cmbType2
 			// 
@@ -338,7 +362,7 @@
 			this.cmbType2.Location = new System.Drawing.Point(207, 22);
 			this.cmbType2.Name = "cmbType2";
 			this.cmbType2.Size = new System.Drawing.Size(98, 23);
-			this.cmbType2.TabIndex = 24;
+			this.cmbType2.TabIndex = 1;
 			this.cmbType2.ValueMember = "ID";
 			this.cmbType2.SelectedIndexChanged += new System.EventHandler(this.CmbType2_SelectedIndexChanged);
 			// 
@@ -350,7 +374,7 @@
 			this.cmbEquipment2.Location = new System.Drawing.Point(311, 22);
 			this.cmbEquipment2.Name = "cmbEquipment2";
 			this.cmbEquipment2.Size = new System.Drawing.Size(190, 23);
-			this.cmbEquipment2.TabIndex = 23;
+			this.cmbEquipment2.TabIndex = 2;
 			this.cmbEquipment2.ValueMember = "ID";
 			// 
 			// label7
@@ -381,9 +405,21 @@
 			this.groupBox3.Location = new System.Drawing.Point(15, 305);
 			this.groupBox3.Name = "groupBox3";
 			this.groupBox3.Size = new System.Drawing.Size(515, 54);
-			this.groupBox3.TabIndex = 24;
+			this.groupBox3.TabIndex = 18;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "スロット3";
+			// 
+			// numSlot3
+			// 
+			this.numSlot3.Location = new System.Drawing.Point(78, 23);
+			this.numSlot3.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numSlot3.Name = "numSlot3";
+			this.numSlot3.Size = new System.Drawing.Size(50, 23);
+			this.numSlot3.TabIndex = 0;
 			// 
 			// cmbType3
 			// 
@@ -393,7 +429,7 @@
 			this.cmbType3.Location = new System.Drawing.Point(207, 22);
 			this.cmbType3.Name = "cmbType3";
 			this.cmbType3.Size = new System.Drawing.Size(98, 23);
-			this.cmbType3.TabIndex = 25;
+			this.cmbType3.TabIndex = 1;
 			this.cmbType3.ValueMember = "ID";
 			this.cmbType3.SelectedIndexChanged += new System.EventHandler(this.CmbType3_SelectedIndexChanged);
 			// 
@@ -405,7 +441,7 @@
 			this.cmbEquipment3.Location = new System.Drawing.Point(311, 22);
 			this.cmbEquipment3.Name = "cmbEquipment3";
 			this.cmbEquipment3.Size = new System.Drawing.Size(190, 23);
-			this.cmbEquipment3.TabIndex = 24;
+			this.cmbEquipment3.TabIndex = 2;
 			this.cmbEquipment3.ValueMember = "ID";
 			// 
 			// label10
@@ -436,9 +472,21 @@
 			this.groupBox4.Location = new System.Drawing.Point(15, 425);
 			this.groupBox4.Name = "groupBox4";
 			this.groupBox4.Size = new System.Drawing.Size(515, 54);
-			this.groupBox4.TabIndex = 26;
+			this.groupBox4.TabIndex = 20;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "スロット5";
+			// 
+			// numSlot5
+			// 
+			this.numSlot5.Location = new System.Drawing.Point(78, 23);
+			this.numSlot5.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numSlot5.Name = "numSlot5";
+			this.numSlot5.Size = new System.Drawing.Size(50, 23);
+			this.numSlot5.TabIndex = 0;
 			// 
 			// cmbType5
 			// 
@@ -448,7 +496,7 @@
 			this.cmbType5.Location = new System.Drawing.Point(207, 22);
 			this.cmbType5.Name = "cmbType5";
 			this.cmbType5.Size = new System.Drawing.Size(98, 23);
-			this.cmbType5.TabIndex = 27;
+			this.cmbType5.TabIndex = 1;
 			this.cmbType5.ValueMember = "ID";
 			this.cmbType5.SelectedIndexChanged += new System.EventHandler(this.CmbType5_SelectedIndexChanged);
 			// 
@@ -460,7 +508,7 @@
 			this.cmbEquipment5.Location = new System.Drawing.Point(311, 22);
 			this.cmbEquipment5.Name = "cmbEquipment5";
 			this.cmbEquipment5.Size = new System.Drawing.Size(190, 23);
-			this.cmbEquipment5.TabIndex = 26;
+			this.cmbEquipment5.TabIndex = 2;
 			this.cmbEquipment5.ValueMember = "ID";
 			// 
 			// label13
@@ -491,9 +539,21 @@
 			this.groupBox5.Location = new System.Drawing.Point(15, 365);
 			this.groupBox5.Name = "groupBox5";
 			this.groupBox5.Size = new System.Drawing.Size(515, 54);
-			this.groupBox5.TabIndex = 25;
+			this.groupBox5.TabIndex = 19;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "スロット4";
+			// 
+			// numSlot4
+			// 
+			this.numSlot4.Location = new System.Drawing.Point(78, 23);
+			this.numSlot4.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numSlot4.Name = "numSlot4";
+			this.numSlot4.Size = new System.Drawing.Size(50, 23);
+			this.numSlot4.TabIndex = 0;
 			// 
 			// cmbType4
 			// 
@@ -503,7 +563,7 @@
 			this.cmbType4.Location = new System.Drawing.Point(207, 22);
 			this.cmbType4.Name = "cmbType4";
 			this.cmbType4.Size = new System.Drawing.Size(98, 23);
-			this.cmbType4.TabIndex = 26;
+			this.cmbType4.TabIndex = 1;
 			this.cmbType4.ValueMember = "ID";
 			this.cmbType4.SelectedIndexChanged += new System.EventHandler(this.CmbType4_SelectedIndexChanged);
 			// 
@@ -515,7 +575,7 @@
 			this.cmbEquipment4.Location = new System.Drawing.Point(311, 22);
 			this.cmbEquipment4.Name = "cmbEquipment4";
 			this.cmbEquipment4.Size = new System.Drawing.Size(190, 23);
-			this.cmbEquipment4.TabIndex = 25;
+			this.cmbEquipment4.TabIndex = 2;
 			this.cmbEquipment4.ValueMember = "ID";
 			// 
 			// label16
@@ -572,7 +632,7 @@
 			this.cmbOriginalEnemy.Location = new System.Drawing.Point(261, 69);
 			this.cmbOriginalEnemy.Name = "cmbOriginalEnemy";
 			this.cmbOriginalEnemy.Size = new System.Drawing.Size(102, 23);
-			this.cmbOriginalEnemy.TabIndex = 23;
+			this.cmbOriginalEnemy.TabIndex = 1;
 			this.cmbOriginalEnemy.ValueMember = "ID";
 			// 
 			// btnClose
@@ -580,7 +640,7 @@
 			this.btnClose.Location = new System.Drawing.Point(444, 12);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(88, 35);
-			this.btnClose.TabIndex = 32;
+			this.btnClose.TabIndex = 24;
 			this.btnClose.Text = "閉じる";
 			this.btnClose.UseVisualStyleBackColor = true;
 			this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
@@ -590,70 +650,10 @@
 			this.btnSave.Location = new System.Drawing.Point(350, 12);
 			this.btnSave.Name = "btnSave";
 			this.btnSave.Size = new System.Drawing.Size(88, 35);
-			this.btnSave.TabIndex = 33;
+			this.btnSave.TabIndex = 23;
 			this.btnSave.Text = "保存";
 			this.btnSave.UseVisualStyleBackColor = true;
 			this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
-			// 
-			// numSlot1
-			// 
-			this.numSlot1.Location = new System.Drawing.Point(78, 23);
-			this.numSlot1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-			this.numSlot1.Name = "numSlot1";
-			this.numSlot1.Size = new System.Drawing.Size(50, 23);
-			this.numSlot1.TabIndex = 24;
-			// 
-			// numSlot2
-			// 
-			this.numSlot2.Location = new System.Drawing.Point(78, 23);
-			this.numSlot2.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-			this.numSlot2.Name = "numSlot2";
-			this.numSlot2.Size = new System.Drawing.Size(50, 23);
-			this.numSlot2.TabIndex = 25;
-			// 
-			// numSlot3
-			// 
-			this.numSlot3.Location = new System.Drawing.Point(78, 23);
-			this.numSlot3.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-			this.numSlot3.Name = "numSlot3";
-			this.numSlot3.Size = new System.Drawing.Size(50, 23);
-			this.numSlot3.TabIndex = 26;
-			// 
-			// numSlot4
-			// 
-			this.numSlot4.Location = new System.Drawing.Point(78, 23);
-			this.numSlot4.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-			this.numSlot4.Name = "numSlot4";
-			this.numSlot4.Size = new System.Drawing.Size(50, 23);
-			this.numSlot4.TabIndex = 27;
-			// 
-			// numSlot5
-			// 
-			this.numSlot5.Location = new System.Drawing.Point(78, 23);
-			this.numSlot5.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-			this.numSlot5.Name = "numSlot5";
-			this.numSlot5.Size = new System.Drawing.Size(50, 23);
-			this.numSlot5.TabIndex = 28;
 			// 
 			// numAntiAirWeight
 			// 
@@ -665,7 +665,7 @@
             0});
 			this.numAntiAirWeight.Name = "numAntiAirWeight";
 			this.numAntiAirWeight.Size = new System.Drawing.Size(54, 23);
-			this.numAntiAirWeight.TabIndex = 25;
+			this.numAntiAirWeight.TabIndex = 21;
 			// 
 			// numAntiAirBonus
 			// 
@@ -677,7 +677,7 @@
             0});
 			this.numAntiAirBonus.Name = "numAntiAirBonus";
 			this.numAntiAirBonus.Size = new System.Drawing.Size(54, 23);
-			this.numAntiAirBonus.TabIndex = 34;
+			this.numAntiAirBonus.TabIndex = 22;
 			// 
 			// chkType20
 			// 
@@ -685,7 +685,7 @@
 			this.chkType20.Location = new System.Drawing.Point(261, 154);
 			this.chkType20.Name = "chkType20";
 			this.chkType20.Size = new System.Drawing.Size(82, 19);
-			this.chkType20.TabIndex = 35;
+			this.chkType20.TabIndex = 13;
 			this.chkType20.Text = "護衛/ 浮遊";
 			this.chkType20.UseVisualStyleBackColor = true;
 			// 
@@ -734,19 +734,19 @@
 			this.Load += new System.EventHandler(this.FrmEnemyEdit_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numSlot1)).EndInit();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numSlot2)).EndInit();
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numSlot3)).EndInit();
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numSlot5)).EndInit();
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numSlot1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numSlot2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numSlot3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot4)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numSlot5)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirWeight)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirBonus)).EndInit();
 			this.ResumeLayout(false);

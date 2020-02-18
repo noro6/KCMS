@@ -14,11 +14,6 @@ namespace Manager.Forms
 		/// </summary>
 		public int EditEnemyID { set; get; }
 
-		/// <summary>
-		/// 編集対象敵艦クラス
-		/// </summary>
-		private Enemy Enemy { set; get; }
-
 		private List<EnemyPlane> equipmentsAll = null;
 		private List<EnemyPlane> equipments1 = null;
 		private List<EnemyPlane> equipments2 = null;
@@ -40,47 +35,47 @@ namespace Manager.Forms
 		/// <param name="e"></param>
 		private void FrmEnemyEdit_Load(object sender, System.EventArgs e)
 		{
-			Enemy = new Enemy(EditEnemyID);
+			var enemy = new Enemy(EditEnemyID);
 			InitializeControl();
 
-			if(Enemy.ID > 0)
+			if(enemy.ID > 0)
 			{
 				// データセット
-				txtID.Text = ConvertUtil.ToString(Enemy.ID);
+				txtID.Text = ConvertUtil.ToString(enemy.ID);
 				txtID.ReadOnly = true;
-				txtName.Text = ConvertUtil.ToString(Enemy.Name);
-				numAntiAirWeight.Value = Enemy.AntiAirWeight;
-				numAntiAirBonus.Value = Enemy.AntiAirBonus;
+				txtName.Text = ConvertUtil.ToString(enemy.Name);
+				numAntiAirWeight.Value = enemy.AntiAirWeight;
+				numAntiAirBonus.Value = enemy.AntiAirBonus;
 
-				chkType1.Checked = Enemy.TypeIds.Contains(" 1,");
-				chkType2.Checked = Enemy.TypeIds.Contains(" 2,");
-				chkType3.Checked = Enemy.TypeIds.Contains(" 3,");
-				chkType4.Checked = Enemy.TypeIds.Contains(" 4,");
-				chkType5.Checked = Enemy.TypeIds.Contains(" 5,");
-				chkType6.Checked = Enemy.TypeIds.Contains(" 6,");
-				chkType7.Checked = Enemy.TypeIds.Contains(" 7,");
-				chkType8.Checked = Enemy.TypeIds.Contains(" 8,");
-				chkType9.Checked = Enemy.TypeIds.Contains(" 9,");
-				chkType10.Checked = Enemy.TypeIds.Contains(" 10,");
-				chkType20.Checked = Enemy.TypeIds.Contains(" 20,");
-				chkType100.Checked = Enemy.TypeIds.Contains(" 100,");
-				chkType110.Checked = Enemy.TypeIds.Contains(" 110,");
+				chkType1.Checked = enemy.TypeIds.Contains(" 1,");
+				chkType2.Checked = enemy.TypeIds.Contains(" 2,");
+				chkType3.Checked = enemy.TypeIds.Contains(" 3,");
+				chkType4.Checked = enemy.TypeIds.Contains(" 4,");
+				chkType5.Checked = enemy.TypeIds.Contains(" 5,");
+				chkType6.Checked = enemy.TypeIds.Contains(" 6,");
+				chkType7.Checked = enemy.TypeIds.Contains(" 7,");
+				chkType8.Checked = enemy.TypeIds.Contains(" 8,");
+				chkType9.Checked = enemy.TypeIds.Contains(" 9,");
+				chkType10.Checked = enemy.TypeIds.Contains(" 10,");
+				chkType20.Checked = enemy.TypeIds.Contains(" 20,");
+				chkType100.Checked = enemy.TypeIds.Contains(" 100,");
+				chkType110.Checked = enemy.TypeIds.Contains(" 110,");
 
-				numSlot1.Value = ConvertUtil.ToInt(Enemy.Slot1);
-				numSlot2.Value = ConvertUtil.ToInt(Enemy.Slot2);
-				numSlot3.Value = ConvertUtil.ToInt(Enemy.Slot3);
-				numSlot4.Value = ConvertUtil.ToInt(Enemy.Slot4);
-				numSlot5.Value = ConvertUtil.ToInt(Enemy.Slot5);
+				numSlot1.Value = ConvertUtil.ToInt(enemy.Slot1);
+				numSlot2.Value = ConvertUtil.ToInt(enemy.Slot2);
+				numSlot3.Value = ConvertUtil.ToInt(enemy.Slot3);
+				numSlot4.Value = ConvertUtil.ToInt(enemy.Slot4);
+				numSlot5.Value = ConvertUtil.ToInt(enemy.Slot5);
 
-				cmbEquipment1.SelectedValue = Enemy.Equipment1ID;
-				cmbEquipment2.SelectedValue = Enemy.Equipment2ID;
-				cmbEquipment3.SelectedValue = Enemy.Equipment3ID;
-				cmbEquipment4.SelectedValue = Enemy.Equipment4ID;
-				cmbEquipment5.SelectedValue = Enemy.Equipment5ID;
+				cmbEquipment1.SelectedValue = enemy.Equipment1ID;
+				cmbEquipment2.SelectedValue = enemy.Equipment2ID;
+				cmbEquipment3.SelectedValue = enemy.Equipment3ID;
+				cmbEquipment4.SelectedValue = enemy.Equipment4ID;
+				cmbEquipment5.SelectedValue = enemy.Equipment5ID;
 
 				if (!chkType110.Checked)
 				{
-					cmbOriginalEnemy.SelectedValue = Enemy.OriginalID;
+					cmbOriginalEnemy.SelectedValue = enemy.OriginalID;
 					cmbOriginalEnemy.Enabled = true;
 				}
 			}

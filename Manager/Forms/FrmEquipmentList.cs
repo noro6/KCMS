@@ -8,14 +8,14 @@ using System.Windows.Forms;
 
 namespace Manager.Forms
 {
-	public partial class FrmShipList : Form
+	public partial class FrmEquipmentList : Form
 	{
-		private List<Ship> shipAll = null;
-		private List<Ship> ships = null;
+		private List<Equipment> equipmentAll = null;
+		private List<Equipment> equipments = null;
 
 		public bool isLoaded = false;
 
-		public FrmShipList()
+		public FrmEquipmentList()
 		{
 			InitializeComponent();
 		}
@@ -37,16 +37,16 @@ namespace Manager.Forms
 		/// </summary>
 		private void InitializeControl()
 		{
-			dgvShip.AutoGenerateColumns = false;
-			typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvShip, true, null);
+			dgvEquipments.AutoGenerateColumns = false;
+			typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvEquipments, true, null);
 
-			shipAll = Ship.Select();
-			ships = Ship.Select();
-			dgvShip.DataSource = ships;
+			equipmentAll = Equipment.Select();
+			equipments = Equipment.Select();
+			dgvEquipments.DataSource = equipments;
 
-			cmbShipType.DataSource = ShipType.Select();
-			cmbShipType.DisplayMember = "name";
-			cmbShipType.ValueMember = "id";
+			cmbType.DataSource = EquipmentType.Select();
+			cmbType.DisplayMember = "name";
+			cmbType.ValueMember = "id";
 		}
 
 		/// <summary>
@@ -58,14 +58,14 @@ namespace Manager.Forms
 		{
 			var text = txtSearch.Text.Trim();
 
-			dgvShip.DataSource = null;
-			ships = shipAll.FindAll(v =>
+			dgvEquipments.DataSource = null;
+			equipments = equipmentAll.FindAll(v =>
 			{
 				if (v.Name.Contains(text)) return true;
 				if (v.ID.ToString().Contains(text)) return true;
 				return false;
 			});
-			dgvShip.DataSource = ships;
+			dgvEquipments.DataSource = equipments;
 		}
 
 		/// <summary>
@@ -76,10 +76,10 @@ namespace Manager.Forms
 		private void CmbShipType_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!isLoaded) return;
-			var selectedType = ConvertUtil.ToInt(cmbShipType.SelectedValue);
-			dgvShip.DataSource = null;
-			ships = shipAll.FindAll(v => v.TypeID == selectedType).ToList();
-			dgvShip.DataSource = ships;
+			var selectedType = ConvertUtil.ToInt(cmbType.SelectedValue);
+			dgvEquipments.DataSource = null;
+			equipments = equipmentAll.FindAll(v => v.TypeID == selectedType).ToList();
+			dgvEquipments.DataSource = equipments;
 		}
 
 		/// <summary>
@@ -89,15 +89,15 @@ namespace Manager.Forms
 		/// <param name="e"></param>
 		private void BtnAdd_Click(object sender, EventArgs e)
 		{
-			using (var frm = new FrmShipEdit())
+			using (var frm = new FrmEquipmentEdit())
 			{
 				frm.ShowDialog();
 			}
 
 			// 編集終了後再検索
-			dgvShip.DataSource = null;
-			ships = Ship.Select();
-			dgvShip.DataSource = ships;
+			dgvEquipments.DataSource = null;
+			equipments = Equipment.Select();
+			dgvEquipments.DataSource = equipments;
 		}
 
 		/// <summary>
@@ -105,24 +105,24 @@ namespace Manager.Forms
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void DgvShips_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		private void DgvEquipments_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
 			var rowIndex = e.RowIndex;
 			if (rowIndex < 0) return;
-			using (var frm = new FrmShipEdit())
+			using (var frm = new FrmEquipmentEdit())
 			{
-				frm.EditShipID = ConvertUtil.ToInt(dgvShip[0, rowIndex].Value);
+				frm.EditEquipmentId = ConvertUtil.ToInt(dgvEquipments[0, rowIndex].Value);
 				frm.ShowDialog();
 			}
 
 			// 編集終了後再検索
-			dgvShip.DataSource = null;
-			ships = Ship.Select();
-			dgvShip.DataSource = ships;
+			dgvEquipments.DataSource = null;
+			equipments = Equipment.Select();
+			dgvEquipments.DataSource = equipments;
 
 			var displayRowIndex = rowIndex - 10 < 0 ? 0 : rowIndex - 10;
-			dgvShip.FirstDisplayedScrollingRowIndex = ships.Count - 1 < displayRowIndex ? ships.Count - 1 : displayRowIndex;
-			dgvShip[0, rowIndex].Selected = true;
+			dgvEquipments.FirstDisplayedScrollingRowIndex = equipments.Count - 1 < displayRowIndex ? equipments.Count - 1 : displayRowIndex;
+			dgvEquipments[0, rowIndex].Selected = true;
 		}
 	}
 }

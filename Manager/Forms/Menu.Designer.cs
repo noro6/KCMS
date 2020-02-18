@@ -94,9 +94,9 @@
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(12, 22);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(254, 15);
+			this.label1.Size = new System.Drawing.Size(234, 15);
 			this.label1.TabIndex = 5;
-			this.label1.Text = "変更が多そうなやつ操作するためだけのシステムです。";
+			this.label1.Text = "変更が多そうなやつ操作するためだけのシステム。";
 			// 
 			// btnOutputEnemies
 			// 
@@ -165,6 +165,7 @@
 			this.Controls.Add(this.btnMapEdit);
 			this.Controls.Add(this.btnEnd);
 			this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Name = "Form1";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

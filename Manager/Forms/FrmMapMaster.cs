@@ -330,7 +330,7 @@ namespace Manager.Forms
 		{
 			var nodeId = ConvertUtil.ToInt(cmbNode.SelectedValue);
 			if (nodeId < 1) return;
-			using(var frm = new FrmEditEnemyFleet())
+			using(var frm = new FrmEnemyFleetEdit())
 			{
 				frm.NodeId = nodeId;
 				frm.ShowDialog();
@@ -350,7 +350,7 @@ namespace Manager.Forms
 			var rowIndex = dgvPatterns.CurrentCell.RowIndex;
 			var detailId = ConvertUtil.ToInt(dgvPatterns[6, rowIndex].Value);
 			if (detailId < 1) return;
-			using (var frm = new FrmEditEnemyFleet())
+			using (var frm = new FrmEnemyFleetEdit())
 			{
 				frm.NodeDetailId = detailId;
 				frm.ShowDialog();
