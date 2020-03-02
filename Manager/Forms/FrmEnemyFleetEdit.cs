@@ -70,7 +70,7 @@ namespace Manager.Forms
 		{
 			var selectedType = ConvertUtil.ToString(cmbEnemyType.SelectedValue);
 			dgvEnemies.DataSource = null;
-			enemies = enemiesAll.FindAll(v => v.TypeIds.Contains(selectedType));
+			enemies = enemiesAll.FindAll(v => v.TypeIds.Contains(" " + selectedType + ","));
 			dgvEnemies.DataSource = enemies;
 		}
 

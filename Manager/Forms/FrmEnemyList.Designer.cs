@@ -30,6 +30,10 @@
 		{
 			this.txtSearch = new System.Windows.Forms.TextBox();
 			this.dgvEnemies = new System.Windows.Forms.DataGridView();
+			this.cmbEnemyType = new System.Windows.Forms.ComboBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.btnClose = new System.Windows.Forms.Button();
+			this.btnAdd = new System.Windows.Forms.Button();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,10 +42,6 @@
 			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.cmbEnemyType = new System.Windows.Forms.ComboBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.btnClose = new System.Windows.Forms.Button();
-			this.btnAdd = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvEnemies)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -82,13 +82,52 @@
 			this.dgvEnemies.TabIndex = 12;
 			this.dgvEnemies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvEnemies_CellDoubleClick);
 			// 
+			// cmbEnemyType
+			// 
+			this.cmbEnemyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbEnemyType.FormattingEnabled = true;
+			this.cmbEnemyType.Location = new System.Drawing.Point(241, 65);
+			this.cmbEnemyType.Name = "cmbEnemyType";
+			this.cmbEnemyType.Size = new System.Drawing.Size(174, 23);
+			this.cmbEnemyType.TabIndex = 1;
+			this.cmbEnemyType.SelectedIndexChanged += new System.EventHandler(this.CmbEnemyType_SelectedIndexChanged);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(12, 68);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(76, 15);
+			this.label1.TabIndex = 13;
+			this.label1.Text = "IDや敵艦名：";
+			// 
+			// btnClose
+			// 
+			this.btnClose.Location = new System.Drawing.Point(843, 12);
+			this.btnClose.Name = "btnClose";
+			this.btnClose.Size = new System.Drawing.Size(85, 32);
+			this.btnClose.TabIndex = 14;
+			this.btnClose.Text = "閉じる";
+			this.btnClose.UseVisualStyleBackColor = true;
+			this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
+			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(843, 56);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(85, 32);
+			this.btnAdd.TabIndex = 15;
+			this.btnAdd.Text = "新規追加";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
+			// 
 			// dataGridViewTextBoxColumn1
 			// 
 			this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
 			this.dataGridViewTextBoxColumn1.HeaderText = "ID";
 			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
 			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			this.dataGridViewTextBoxColumn1.Width = 48;
+			this.dataGridViewTextBoxColumn1.Width = 42;
 			// 
 			// dataGridViewTextBoxColumn2
 			// 
@@ -146,45 +185,6 @@
 			this.Column6.ReadOnly = true;
 			this.Column6.Width = 120;
 			// 
-			// cmbEnemyType
-			// 
-			this.cmbEnemyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbEnemyType.FormattingEnabled = true;
-			this.cmbEnemyType.Location = new System.Drawing.Point(241, 65);
-			this.cmbEnemyType.Name = "cmbEnemyType";
-			this.cmbEnemyType.Size = new System.Drawing.Size(174, 23);
-			this.cmbEnemyType.TabIndex = 1;
-			this.cmbEnemyType.SelectedIndexChanged += new System.EventHandler(this.CmbEnemyType_SelectedIndexChanged);
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 68);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(76, 15);
-			this.label1.TabIndex = 13;
-			this.label1.Text = "IDや敵艦名：";
-			// 
-			// btnClose
-			// 
-			this.btnClose.Location = new System.Drawing.Point(843, 12);
-			this.btnClose.Name = "btnClose";
-			this.btnClose.Size = new System.Drawing.Size(85, 32);
-			this.btnClose.TabIndex = 14;
-			this.btnClose.Text = "閉じる";
-			this.btnClose.UseVisualStyleBackColor = true;
-			this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(843, 56);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(85, 32);
-			this.btnAdd.TabIndex = 15;
-			this.btnAdd.Text = "新規追加";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
-			// 
 			// FrmEnemyList
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -212,6 +212,9 @@
 		private System.Windows.Forms.TextBox txtSearch;
 		private System.Windows.Forms.DataGridView dgvEnemies;
 		private System.Windows.Forms.ComboBox cmbEnemyType;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Button btnClose;
+		private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
@@ -220,8 +223,5 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Button btnClose;
-		private System.Windows.Forms.Button btnAdd;
 	}
 }

@@ -78,7 +78,7 @@ namespace Manager.Forms
 			if (!isLoaded) return;
 			var selectedType = ConvertUtil.ToString(cmbEnemyType.SelectedValue);
 			dgvEnemies.DataSource = null;
-			enemies = enemiesAll.FindAll(v => v.TypeIds.Contains(selectedType)).ToList();
+			enemies = enemiesAll.FindAll(v => v.TypeIds.Contains(" " + selectedType + ",")).ToList();
 			dgvEnemies.DataSource = enemies;
 		}
 
@@ -117,7 +117,9 @@ namespace Manager.Forms
 
 			// 編集終了後再検索
 			dgvEnemies.DataSource = null;
-			enemies = Enemy.Select();
+			enemiesAll = Enemy.Select();
+			CmbEnemyType_SelectedIndexChanged(cmbEnemyType, null);
+			TxtSearch_TextChanged(txtSearch, null);
 			dgvEnemies.DataSource = enemies;
 
 			dgvEnemies.FirstDisplayedScrollingRowIndex = enemies.Count - 1 < rowIndex ? enemies.Count - 1 : rowIndex;

@@ -118,17 +118,16 @@ FROM
 		ON enemies.id = enemies_types.enemy_id 
 	LEFT JOIN enemy_types 
 		ON enemies_types.enemy_type_id = enemy_types.id 
-	LEFT JOIN enemy_planes AS enemy_plane1 
+	LEFT JOIN enemy_equipments AS enemy_plane1 
 		ON enemies.equipment_1 = enemy_plane1.id 
-	LEFT JOIN enemy_planes AS enemy_plane2 
+	LEFT JOIN enemy_equipments AS enemy_plane2 
 		ON enemies.equipment_2 = enemy_plane2.id 
-	LEFT JOIN enemy_planes AS enemy_plane3 
+	LEFT JOIN enemy_equipments AS enemy_plane3 
 		ON enemies.equipment_3 = enemy_plane3.id 
-	LEFT JOIN enemy_planes AS enemy_plane4 
+	LEFT JOIN enemy_equipments AS enemy_plane4 
 		ON enemies.equipment_4 = enemy_plane4.id 
-	LEFT JOIN enemy_planes AS enemy_plane5 
+	LEFT JOIN enemy_equipments AS enemy_plane5 
 		ON enemies.equipment_5 = enemy_plane5.id
-
 WHERE
 	enemies.id <> - 1 
 	{(enemyId != 0 ? "AND enemies.id = " + enemyId : "")}
@@ -269,7 +268,7 @@ VALUES (
 		}
 
 		/// <summary>
-		/// 敵出現海域(js側 ENEMY_PATTERN)出力
+		/// 敵出現海域( ENEMY_PATTERN)出力
 		/// </summary>
 		/// <returns></returns>
 		public static string OutputEnemyPatterns()
@@ -277,16 +276,16 @@ VALUES (
 			var output = "";
 			var sql = @"
 SELECT
-  '{ area: ' || world_id || map_no ||
-  ', node: ''' || nodes.name || 
-  ''', remarks: ''' || node_details.name ||
-  ''', pattern: ' || IFNULL(node_details.pattern_no, '') ||
+  '  { area: ' || world_id || map_no ||
+  ', node: ""' || nodes.name || 
+  '"", remarks: ""' || node_details.name ||
+  '"", pattern: ' || IFNULL(node_details.pattern_no, '') ||
   ', lv: ' || levels.id ||
   ', type: ' || node_types.id ||
   ', form: ' || formations.id ||
   ', radius: ' || nodes.radius ||
   ', enemies: [' || pattern.enemy_id || ']' ||
-  ', coords: ''' || IFNULL(nodes.coords, '') || ''' },' AS json
+  ', coords: ""' || IFNULL(nodes.coords, '') || '"" },' AS json
 FROM
   worlds 
   LEFT JOIN nodes 
@@ -296,7 +295,7 @@ FROM
   LEFT JOIN ( 
     SELECT
       node_detail_id
-      , GROUP_CONCAT(enemy_id) AS enemy_id
+      , GROUP_CONCAT(enemy_id, ', ') AS enemy_id
       , GROUP_CONCAT(enemies.name) AS enemy_name 
     FROM
       node_details_enemies
@@ -335,54 +334,54 @@ GROUP BY
 		}
 
 		/// <summary>
-		/// 敵出現海域(js側 ENEMY_PATTERN)出力
+		/// Json出力
 		/// </summary>
 		/// <returns></returns>
-		public static string OutputEnemies()
+		public static string OutputJson()
 		{
 			var output = "";
 			var sql = @"
 SELECT
-	  '{ id: ' || id || ', type: [' || GROUP_CONCAT(enemies_types.enemy_type_id, ', ') || ']' || ', name: ''' || name || '''' || ', slot: [' || 
+	  '  { id: ' || id || ', type: [' || GROUP_CONCAT(enemies_types.enemy_type_id, ', ') || ']' || ', name: ""' || name || '""' || ', slot: [' || 
 	  	CASE 
 		WHEN slot_1 > 0 
-			THEN slot_1 || ',' 
+			THEN slot_1 || ', ' 
 		ELSE '' 
 		END || CASE 
 		WHEN slot_2 > 0 
-			THEN slot_2 || ',' 
+			THEN slot_2 || ', ' 
 		ELSE '' 
 		END || CASE 
 		WHEN slot_3 > 0 
-			THEN slot_3 || ',' 
+			THEN slot_3 || ', ' 
 		ELSE '' 
 		END || CASE 
 		WHEN slot_4 > 0 
-			THEN slot_4 || ',' 
+			THEN slot_4 || ', ' 
 		ELSE '' 
 		END || CASE 
 		WHEN slot_5 > 0 
-			THEN slot_5 || ',' 
+			THEN slot_5 || ', ' 
 		ELSE '' 
 		END || ']' || ', eqp: [' || CASE 
 		WHEN equipment_1 > 0 
-			THEN equipment_1 || ',' 
+			THEN equipment_1 || ', ' 
 		ELSE '' 
 		END || CASE 
 		WHEN equipment_2 > 0 
-			THEN equipment_2 || ',' 
+			THEN equipment_2 || ', ' 
 		ELSE '' 
 		END || CASE 
 		WHEN equipment_3 > 0 
-			THEN equipment_3 || ',' 
+			THEN equipment_3 || ', ' 
 		ELSE '' 
 		END || CASE 
 		WHEN equipment_4 > 0 
-			THEN equipment_4 || ',' 
+			THEN equipment_4 || ', ' 
 		ELSE '' 
 		END || CASE 
 		WHEN equipment_5 > 0 
-			THEN equipment_5 || ',' 
+			THEN equipment_5 || ', ' 
 		ELSE '' 
 		END || ']' || ', orig: ' || original_id || ', aaw: ' || anti_air_weight || ', aabo: ' || anti_air_bonus || ' },' AS json 
 FROM
@@ -402,7 +401,7 @@ GROUP BY
 				}
 			}
 
-			output = output.Replace(",]", "]");
+			output = output.Replace(", ]", "]");
 			return output;
 		}
 	}

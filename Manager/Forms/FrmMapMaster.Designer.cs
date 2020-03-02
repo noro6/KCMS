@@ -57,7 +57,7 @@
 			// 
 			this.cmbWorld.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbWorld.FormattingEnabled = true;
-			this.cmbWorld.Location = new System.Drawing.Point(12, 40);
+			this.cmbWorld.Location = new System.Drawing.Point(12, 59);
 			this.cmbWorld.Name = "cmbWorld";
 			this.cmbWorld.Size = new System.Drawing.Size(192, 23);
 			this.cmbWorld.TabIndex = 0;
@@ -67,7 +67,7 @@
 			// 
 			this.cmbMap.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbMap.FormattingEnabled = true;
-			this.cmbMap.Location = new System.Drawing.Point(210, 41);
+			this.cmbMap.Location = new System.Drawing.Point(210, 60);
 			this.cmbMap.Name = "cmbMap";
 			this.cmbMap.Size = new System.Drawing.Size(172, 23);
 			this.cmbMap.TabIndex = 1;
@@ -77,7 +77,7 @@
 			// 
 			this.cmbNode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbNode.FormattingEnabled = true;
-			this.cmbNode.Location = new System.Drawing.Point(388, 41);
+			this.cmbNode.Location = new System.Drawing.Point(388, 60);
 			this.cmbNode.Name = "cmbNode";
 			this.cmbNode.Size = new System.Drawing.Size(121, 23);
 			this.cmbNode.TabIndex = 2;
@@ -85,9 +85,9 @@
 			// 
 			// btnAddWorld
 			// 
-			this.btnAddWorld.Location = new System.Drawing.Point(12, 11);
+			this.btnAddWorld.Location = new System.Drawing.Point(12, 12);
 			this.btnAddWorld.Name = "btnAddWorld";
-			this.btnAddWorld.Size = new System.Drawing.Size(192, 23);
+			this.btnAddWorld.Size = new System.Drawing.Size(192, 35);
 			this.btnAddWorld.TabIndex = 3;
 			this.btnAddWorld.Text = "海域追加";
 			this.btnAddWorld.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@
 			// 
 			this.btnAddMap.Location = new System.Drawing.Point(210, 12);
 			this.btnAddMap.Name = "btnAddMap";
-			this.btnAddMap.Size = new System.Drawing.Size(172, 23);
+			this.btnAddMap.Size = new System.Drawing.Size(172, 35);
 			this.btnAddMap.TabIndex = 4;
 			this.btnAddMap.Text = "マップ追加";
 			this.btnAddMap.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
 			// 
 			this.btnAddNode.Location = new System.Drawing.Point(388, 12);
 			this.btnAddNode.Name = "btnAddNode";
-			this.btnAddNode.Size = new System.Drawing.Size(121, 23);
+			this.btnAddNode.Size = new System.Drawing.Size(121, 35);
 			this.btnAddNode.TabIndex = 5;
 			this.btnAddNode.Text = "マス追加";
 			this.btnAddNode.UseVisualStyleBackColor = true;
@@ -130,13 +130,13 @@
             this.Column6,
             this.Column7,
             this.Column1});
-			this.dgvPatterns.Location = new System.Drawing.Point(12, 70);
+			this.dgvPatterns.Location = new System.Drawing.Point(12, 92);
 			this.dgvPatterns.MultiSelect = false;
 			this.dgvPatterns.Name = "dgvPatterns";
 			this.dgvPatterns.RowHeadersVisible = false;
 			this.dgvPatterns.RowTemplate.Height = 21;
 			this.dgvPatterns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvPatterns.Size = new System.Drawing.Size(825, 205);
+			this.dgvPatterns.Size = new System.Drawing.Size(825, 221);
 			this.dgvPatterns.TabIndex = 6;
 			this.dgvPatterns.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPatterns_CellDoubleClick);
 			// 
@@ -209,9 +209,9 @@
 			// btnAddPattern
 			// 
 			this.btnAddPattern.Enabled = false;
-			this.btnAddPattern.Location = new System.Drawing.Point(746, 41);
+			this.btnAddPattern.Location = new System.Drawing.Point(612, 53);
 			this.btnAddPattern.Name = "btnAddPattern";
-			this.btnAddPattern.Size = new System.Drawing.Size(91, 23);
+			this.btnAddPattern.Size = new System.Drawing.Size(225, 35);
 			this.btnAddPattern.TabIndex = 7;
 			this.btnAddPattern.Text = "パターン追加";
 			this.btnAddPattern.UseVisualStyleBackColor = true;
@@ -221,7 +221,7 @@
 			// 
 			this.btnClose.Location = new System.Drawing.Point(746, 12);
 			this.btnClose.Name = "btnClose";
-			this.btnClose.Size = new System.Drawing.Size(91, 23);
+			this.btnClose.Size = new System.Drawing.Size(91, 35);
 			this.btnClose.TabIndex = 9;
 			this.btnClose.Text = "閉じる";
 			this.btnClose.UseVisualStyleBackColor = true;
@@ -229,9 +229,9 @@
 			// 
 			// btnSearch
 			// 
-			this.btnSearch.Location = new System.Drawing.Point(515, 41);
+			this.btnSearch.Location = new System.Drawing.Point(515, 53);
 			this.btnSearch.Name = "btnSearch";
-			this.btnSearch.Size = new System.Drawing.Size(91, 23);
+			this.btnSearch.Size = new System.Drawing.Size(91, 35);
 			this.btnSearch.TabIndex = 10;
 			this.btnSearch.Text = "検索";
 			this.btnSearch.UseVisualStyleBackColor = true;
@@ -241,7 +241,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(849, 287);
+			this.ClientSize = new System.Drawing.Size(849, 325);
 			this.Controls.Add(this.btnSearch);
 			this.Controls.Add(this.btnClose);
 			this.Controls.Add(this.btnAddPattern);

@@ -191,26 +191,26 @@ VALUES (
 			var output = "";
 			var sql = @"
 SELECT
-	  '{ id: ' || ships.id || ', type: ' || ships.ship_type_id || ', name: ''' || ships.name || '''' || ', slot: ['
+	  '  { id: ' || ships.id || ', type: ' || ships.ship_type_id || ', name: ""' || ships.name || '""' || ', slot: ['
 	 || CASE
-		WHEN slot_1 > 0
-			THEN slot_1 || ','
+		WHEN slot_1 >= 0
+			THEN slot_1 || ', '
 		ELSE ''
 		END || CASE
-		WHEN slot_2 > 0
-			THEN slot_2 || ','
+		WHEN slot_2 >= 0
+			THEN slot_2 || ', '
 		ELSE ''
 		END || CASE
-		WHEN slot_3 > 0
-			THEN slot_3 || ','
+		WHEN slot_3 >= 0
+			THEN slot_3 || ', '
 		ELSE ''
 		END || CASE
-		WHEN slot_4 > 0
-			THEN slot_4 || ','
+		WHEN slot_4 >= 0
+			THEN slot_4 || ', '
 		ELSE ''
 		END || CASE
-		WHEN slot_5 > 0
-			THEN slot_5 || ','
+		WHEN slot_5 >= 0
+			THEN slot_5 || ', '
 		ELSE ''
 		END || ']' || 
 	', final: ' || ships.is_final || ', orig: ' || ships.original_id || ', deckid: ' || ships.deck_id || ' },' AS json
@@ -226,7 +226,7 @@ FROM
 				}
 			}
 
-			output = output.Replace(",]", "]");
+			output = output.Replace(", ]", "]");
 			return output;
 		}
 	}

@@ -2,6 +2,7 @@
 using Manager.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,6 +65,37 @@ VALUES({ID}, {WorldId}, {MapNo}, @name)
 			var param = new Dictionary<string, object>() { { "@name", Name } };
 
 			db.ExecuteNonQuery(sql, param);
+		}
+
+		/// <summary>
+		/// JSON出力
+		/// </summary>
+		/// <returns></returns>
+		internal static string OutputJson()
+		{
+			var output = "";
+			var sql = @"
+SELECT
+	  '  { area: ' || world_id || map_no || ', name: ""' || maps.name || '"" },' AS json 
+FROM
+	maps
+LEFT JOIN worlds
+	ON maps.world_id = worlds.id
+WHERE
+	worlds.status = 1
+";
+			using (var db = new DBManager())
+			{
+				var dt = db.Select(sql);
+
+				foreach (DataRow dr in dt.Rows)
+				{
+					output += ConvertUtil.ToString(dr["json"]) + "\r\n";
+				}
+			}
+
+			output = output.Replace(",]", "]");
+			return output;
 		}
 	}
 }

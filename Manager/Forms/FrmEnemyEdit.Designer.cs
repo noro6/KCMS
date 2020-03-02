@@ -32,19 +32,19 @@
 			this.txtID = new System.Windows.Forms.TextBox();
 			this.txtName = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
-			this.chkType1 = new System.Windows.Forms.CheckBox();
 			this.label3 = new System.Windows.Forms.Label();
+			this.chkType1 = new System.Windows.Forms.CheckBox();
 			this.chkType2 = new System.Windows.Forms.CheckBox();
-			this.chkType3 = new System.Windows.Forms.CheckBox();
-			this.chkType4 = new System.Windows.Forms.CheckBox();
-			this.chkType5 = new System.Windows.Forms.CheckBox();
-			this.chkType10 = new System.Windows.Forms.CheckBox();
-			this.chkType9 = new System.Windows.Forms.CheckBox();
-			this.chkType8 = new System.Windows.Forms.CheckBox();
-			this.chkType7 = new System.Windows.Forms.CheckBox();
-			this.chkType6 = new System.Windows.Forms.CheckBox();
-			this.chkType110 = new System.Windows.Forms.CheckBox();
-			this.chkType100 = new System.Windows.Forms.CheckBox();
+			this.chkType11 = new System.Windows.Forms.CheckBox();
+			this.chkType12 = new System.Windows.Forms.CheckBox();
+			this.chkType13 = new System.Windows.Forms.CheckBox();
+			this.chkType14 = new System.Windows.Forms.CheckBox();
+			this.chkType15 = new System.Windows.Forms.CheckBox();
+			this.chkType16 = new System.Windows.Forms.CheckBox();
+			this.chkType17 = new System.Windows.Forms.CheckBox();
+			this.chkType18 = new System.Windows.Forms.CheckBox();
+			this.chkType19 = new System.Windows.Forms.CheckBox();
+			this.chkType21 = new System.Windows.Forms.CheckBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.numSlot1 = new System.Windows.Forms.NumericUpDown();
 			this.cmbType1 = new System.Windows.Forms.ComboBox();
@@ -83,6 +83,7 @@
 			this.btnSave = new System.Windows.Forms.Button();
 			this.numAntiAirWeight = new System.Windows.Forms.NumericUpDown();
 			this.numAntiAirBonus = new System.Windows.Forms.NumericUpDown();
+			this.chkType0 = new System.Windows.Forms.CheckBox();
 			this.chkType20 = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot1)).BeginInit();
@@ -131,16 +132,6 @@
 			this.label2.TabIndex = 2;
 			this.label2.Text = "敵艦名：";
 			// 
-			// chkType1
-			// 
-			this.chkType1.AutoSize = true;
-			this.chkType1.Location = new System.Drawing.Point(93, 129);
-			this.chkType1.Name = "chkType1";
-			this.chkType1.Size = new System.Drawing.Size(74, 19);
-			this.chkType1.TabIndex = 3;
-			this.chkType1.Text = "正規空母";
-			this.chkType1.UseVisualStyleBackColor = true;
-			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
@@ -150,116 +141,126 @@
 			this.label3.TabIndex = 5;
 			this.label3.Text = "艦種\r\n(複数選択)：";
 			// 
+			// chkType1
+			// 
+			this.chkType1.AutoSize = true;
+			this.chkType1.Location = new System.Drawing.Point(409, 154);
+			this.chkType1.Name = "chkType1";
+			this.chkType1.Size = new System.Drawing.Size(55, 19);
+			this.chkType1.TabIndex = 15;
+			this.chkType1.Text = "鬼/姫";
+			this.chkType1.UseVisualStyleBackColor = true;
+			this.chkType1.CheckedChanged += new System.EventHandler(this.ChkType110_CheckedChanged);
+			// 
 			// chkType2
 			// 
 			this.chkType2.AutoSize = true;
-			this.chkType2.Location = new System.Drawing.Point(173, 129);
+			this.chkType2.Location = new System.Drawing.Point(353, 154);
 			this.chkType2.Name = "chkType2";
-			this.chkType2.Size = new System.Drawing.Size(62, 19);
-			this.chkType2.TabIndex = 4;
-			this.chkType2.Text = "軽空母";
+			this.chkType2.Size = new System.Drawing.Size(50, 19);
+			this.chkType2.TabIndex = 14;
+			this.chkType2.Text = "地上";
 			this.chkType2.UseVisualStyleBackColor = true;
 			// 
-			// chkType3
+			// chkType11
 			// 
-			this.chkType3.AutoSize = true;
-			this.chkType3.Location = new System.Drawing.Point(241, 129);
-			this.chkType3.Name = "chkType3";
-			this.chkType3.Size = new System.Drawing.Size(50, 19);
-			this.chkType3.TabIndex = 5;
-			this.chkType3.Text = "戦艦";
-			this.chkType3.UseVisualStyleBackColor = true;
+			this.chkType11.AutoSize = true;
+			this.chkType11.Location = new System.Drawing.Point(93, 129);
+			this.chkType11.Name = "chkType11";
+			this.chkType11.Size = new System.Drawing.Size(74, 19);
+			this.chkType11.TabIndex = 3;
+			this.chkType11.Text = "正規空母";
+			this.chkType11.UseVisualStyleBackColor = true;
 			// 
-			// chkType4
+			// chkType12
 			// 
-			this.chkType4.AutoSize = true;
-			this.chkType4.Location = new System.Drawing.Point(297, 129);
-			this.chkType4.Name = "chkType4";
-			this.chkType4.Size = new System.Drawing.Size(50, 19);
-			this.chkType4.TabIndex = 6;
-			this.chkType4.Text = "重巡";
-			this.chkType4.UseVisualStyleBackColor = true;
+			this.chkType12.AutoSize = true;
+			this.chkType12.Location = new System.Drawing.Point(173, 129);
+			this.chkType12.Name = "chkType12";
+			this.chkType12.Size = new System.Drawing.Size(62, 19);
+			this.chkType12.TabIndex = 4;
+			this.chkType12.Text = "軽空母";
+			this.chkType12.UseVisualStyleBackColor = true;
 			// 
-			// chkType5
+			// chkType13
 			// 
-			this.chkType5.AutoSize = true;
-			this.chkType5.Location = new System.Drawing.Point(353, 129);
-			this.chkType5.Name = "chkType5";
-			this.chkType5.Size = new System.Drawing.Size(50, 19);
-			this.chkType5.TabIndex = 7;
-			this.chkType5.Text = "軽巡";
-			this.chkType5.UseVisualStyleBackColor = true;
+			this.chkType13.AutoSize = true;
+			this.chkType13.Location = new System.Drawing.Point(241, 129);
+			this.chkType13.Name = "chkType13";
+			this.chkType13.Size = new System.Drawing.Size(50, 19);
+			this.chkType13.TabIndex = 5;
+			this.chkType13.Text = "戦艦";
+			this.chkType13.UseVisualStyleBackColor = true;
 			// 
-			// chkType10
+			// chkType14
 			// 
-			this.chkType10.AutoSize = true;
-			this.chkType10.Location = new System.Drawing.Point(205, 154);
-			this.chkType10.Name = "chkType10";
-			this.chkType10.Size = new System.Drawing.Size(50, 19);
-			this.chkType10.TabIndex = 12;
-			this.chkType10.Text = "水母";
-			this.chkType10.UseVisualStyleBackColor = true;
+			this.chkType14.AutoSize = true;
+			this.chkType14.Location = new System.Drawing.Point(297, 129);
+			this.chkType14.Name = "chkType14";
+			this.chkType14.Size = new System.Drawing.Size(50, 19);
+			this.chkType14.TabIndex = 6;
+			this.chkType14.Text = "重巡";
+			this.chkType14.UseVisualStyleBackColor = true;
 			// 
-			// chkType9
+			// chkType15
 			// 
-			this.chkType9.AutoSize = true;
-			this.chkType9.Location = new System.Drawing.Point(149, 154);
-			this.chkType9.Name = "chkType9";
-			this.chkType9.Size = new System.Drawing.Size(50, 19);
-			this.chkType9.TabIndex = 11;
-			this.chkType9.Text = "補給";
-			this.chkType9.UseVisualStyleBackColor = true;
+			this.chkType15.AutoSize = true;
+			this.chkType15.Location = new System.Drawing.Point(353, 129);
+			this.chkType15.Name = "chkType15";
+			this.chkType15.Size = new System.Drawing.Size(50, 19);
+			this.chkType15.TabIndex = 7;
+			this.chkType15.Text = "軽巡";
+			this.chkType15.UseVisualStyleBackColor = true;
 			// 
-			// chkType8
+			// chkType16
 			// 
-			this.chkType8.AutoSize = true;
-			this.chkType8.Location = new System.Drawing.Point(93, 154);
-			this.chkType8.Name = "chkType8";
-			this.chkType8.Size = new System.Drawing.Size(50, 19);
-			this.chkType8.TabIndex = 10;
-			this.chkType8.Text = "潜水";
-			this.chkType8.UseVisualStyleBackColor = true;
+			this.chkType16.AutoSize = true;
+			this.chkType16.Location = new System.Drawing.Point(409, 129);
+			this.chkType16.Name = "chkType16";
+			this.chkType16.Size = new System.Drawing.Size(50, 19);
+			this.chkType16.TabIndex = 8;
+			this.chkType16.Text = "駆逐";
+			this.chkType16.UseVisualStyleBackColor = true;
 			// 
-			// chkType7
+			// chkType17
 			// 
-			this.chkType7.AutoSize = true;
-			this.chkType7.Location = new System.Drawing.Point(465, 129);
-			this.chkType7.Name = "chkType7";
-			this.chkType7.Size = new System.Drawing.Size(50, 19);
-			this.chkType7.TabIndex = 9;
-			this.chkType7.Text = "雷巡";
-			this.chkType7.UseVisualStyleBackColor = true;
+			this.chkType17.AutoSize = true;
+			this.chkType17.Location = new System.Drawing.Point(465, 129);
+			this.chkType17.Name = "chkType17";
+			this.chkType17.Size = new System.Drawing.Size(50, 19);
+			this.chkType17.TabIndex = 9;
+			this.chkType17.Text = "雷巡";
+			this.chkType17.UseVisualStyleBackColor = true;
 			// 
-			// chkType6
+			// chkType18
 			// 
-			this.chkType6.AutoSize = true;
-			this.chkType6.Location = new System.Drawing.Point(409, 129);
-			this.chkType6.Name = "chkType6";
-			this.chkType6.Size = new System.Drawing.Size(50, 19);
-			this.chkType6.TabIndex = 8;
-			this.chkType6.Text = "駆逐";
-			this.chkType6.UseVisualStyleBackColor = true;
+			this.chkType18.AutoSize = true;
+			this.chkType18.Location = new System.Drawing.Point(93, 154);
+			this.chkType18.Name = "chkType18";
+			this.chkType18.Size = new System.Drawing.Size(50, 19);
+			this.chkType18.TabIndex = 10;
+			this.chkType18.Text = "潜水";
+			this.chkType18.UseVisualStyleBackColor = true;
 			// 
-			// chkType110
+			// chkType19
 			// 
-			this.chkType110.AutoSize = true;
-			this.chkType110.Location = new System.Drawing.Point(429, 154);
-			this.chkType110.Name = "chkType110";
-			this.chkType110.Size = new System.Drawing.Size(61, 19);
-			this.chkType110.TabIndex = 15;
-			this.chkType110.Text = "鬼 / 姫";
-			this.chkType110.UseVisualStyleBackColor = true;
-			this.chkType110.CheckedChanged += new System.EventHandler(this.ChkType110_CheckedChanged);
+			this.chkType19.AutoSize = true;
+			this.chkType19.Location = new System.Drawing.Point(149, 154);
+			this.chkType19.Name = "chkType19";
+			this.chkType19.Size = new System.Drawing.Size(50, 19);
+			this.chkType19.TabIndex = 11;
+			this.chkType19.Text = "補給";
+			this.chkType19.UseVisualStyleBackColor = true;
 			// 
-			// chkType100
+			// chkType21
 			// 
-			this.chkType100.AutoSize = true;
-			this.chkType100.Location = new System.Drawing.Point(349, 154);
-			this.chkType100.Name = "chkType100";
-			this.chkType100.Size = new System.Drawing.Size(74, 19);
-			this.chkType100.TabIndex = 14;
-			this.chkType100.Text = "地上施設";
-			this.chkType100.UseVisualStyleBackColor = true;
+			this.chkType21.AutoSize = true;
+			this.chkType21.Location = new System.Drawing.Point(261, 154);
+			this.chkType21.Name = "chkType21";
+			this.chkType21.Size = new System.Drawing.Size(79, 19);
+			this.chkType21.TabIndex = 13;
+			this.chkType21.Text = "護衛/浮遊";
+			this.chkType21.UseVisualStyleBackColor = true;
 			// 
 			// groupBox1
 			// 
@@ -679,14 +680,24 @@
 			this.numAntiAirBonus.Size = new System.Drawing.Size(54, 23);
 			this.numAntiAirBonus.TabIndex = 22;
 			// 
+			// chkType0
+			// 
+			this.chkType0.AutoSize = true;
+			this.chkType0.Location = new System.Drawing.Point(470, 154);
+			this.chkType0.Name = "chkType0";
+			this.chkType0.Size = new System.Drawing.Size(50, 19);
+			this.chkType0.TabIndex = 33;
+			this.chkType0.Text = "現行";
+			this.chkType0.UseVisualStyleBackColor = true;
+			// 
 			// chkType20
 			// 
 			this.chkType20.AutoSize = true;
-			this.chkType20.Location = new System.Drawing.Point(261, 154);
+			this.chkType20.Location = new System.Drawing.Point(205, 154);
 			this.chkType20.Name = "chkType20";
-			this.chkType20.Size = new System.Drawing.Size(82, 19);
-			this.chkType20.TabIndex = 13;
-			this.chkType20.Text = "護衛/ 浮遊";
+			this.chkType20.Size = new System.Drawing.Size(50, 19);
+			this.chkType20.TabIndex = 34;
+			this.chkType20.Text = "水母";
 			this.chkType20.UseVisualStyleBackColor = true;
 			// 
 			// FrmEnemyEdit
@@ -695,6 +706,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(544, 491);
 			this.Controls.Add(this.chkType20);
+			this.Controls.Add(this.chkType0);
 			this.Controls.Add(this.numAntiAirBonus);
 			this.Controls.Add(this.numAntiAirWeight);
 			this.Controls.Add(this.btnSave);
@@ -708,19 +720,19 @@
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.chkType100);
-			this.Controls.Add(this.chkType110);
-			this.Controls.Add(this.chkType6);
-			this.Controls.Add(this.chkType7);
-			this.Controls.Add(this.chkType8);
-			this.Controls.Add(this.chkType9);
-			this.Controls.Add(this.chkType10);
-			this.Controls.Add(this.chkType5);
-			this.Controls.Add(this.chkType4);
-			this.Controls.Add(this.chkType3);
-			this.Controls.Add(this.chkType2);
-			this.Controls.Add(this.label3);
 			this.Controls.Add(this.chkType1);
+			this.Controls.Add(this.chkType2);
+			this.Controls.Add(this.chkType11);
+			this.Controls.Add(this.chkType12);
+			this.Controls.Add(this.chkType13);
+			this.Controls.Add(this.chkType14);
+			this.Controls.Add(this.chkType15);
+			this.Controls.Add(this.chkType16);
+			this.Controls.Add(this.chkType17);
+			this.Controls.Add(this.chkType18);
+			this.Controls.Add(this.chkType19);
+			this.Controls.Add(this.chkType21);
+			this.Controls.Add(this.label3);
 			this.Controls.Add(this.txtName);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.txtID);
@@ -760,19 +772,20 @@
 		private System.Windows.Forms.TextBox txtID;
 		private System.Windows.Forms.TextBox txtName;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.CheckBox chkType1;
 		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.CheckBox chkType1;
 		private System.Windows.Forms.CheckBox chkType2;
-		private System.Windows.Forms.CheckBox chkType3;
-		private System.Windows.Forms.CheckBox chkType4;
-		private System.Windows.Forms.CheckBox chkType5;
-		private System.Windows.Forms.CheckBox chkType10;
-		private System.Windows.Forms.CheckBox chkType9;
-		private System.Windows.Forms.CheckBox chkType8;
-		private System.Windows.Forms.CheckBox chkType7;
-		private System.Windows.Forms.CheckBox chkType6;
-		private System.Windows.Forms.CheckBox chkType110;
-		private System.Windows.Forms.CheckBox chkType100;
+		private System.Windows.Forms.CheckBox chkType11;
+		private System.Windows.Forms.CheckBox chkType12;
+		private System.Windows.Forms.CheckBox chkType13;
+		private System.Windows.Forms.CheckBox chkType14;
+		private System.Windows.Forms.CheckBox chkType15;
+		private System.Windows.Forms.CheckBox chkType16;
+		private System.Windows.Forms.CheckBox chkType17;
+		private System.Windows.Forms.CheckBox chkType18;
+		private System.Windows.Forms.CheckBox chkType19;
+		private System.Windows.Forms.CheckBox chkType21;
+		private System.Windows.Forms.CheckBox chkType20;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label6;
@@ -811,6 +824,6 @@
 		private System.Windows.Forms.NumericUpDown numSlot4;
 		private System.Windows.Forms.NumericUpDown numAntiAirWeight;
 		private System.Windows.Forms.NumericUpDown numAntiAirBonus;
-		private System.Windows.Forms.CheckBox chkType20;
+		private System.Windows.Forms.CheckBox chkType0;
 	}
 }

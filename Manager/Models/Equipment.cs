@@ -192,18 +192,18 @@ VALUES (
 		}
 
 		/// <summary>
-		/// 敵出現海域(js側 ENEMY_PATTERN)出力
+		/// JSON出力
 		/// </summary>
 		/// <returns></returns>
-		public static string OutputEquipment()
+		public static string OutputJson()
 		{
 			var output = "";
 			var sql = @"
 SELECT
-	'{ id: ' || id || 
+	'  { id: ' || id || 
 	', type: ' || equipment_type_id || 
-	', name: ''' || name || '''' || 
-	', abbr: ''' || IFNULL(abbr, '') || '''' || 
+	', name: ""' || name || '""' || 
+	', abbr: ""' || IFNULL(abbr, '') || '""' || 
 	', antiAir: ' || anti_air || 
 	', torpedo: ' || torpedo || 
 	', bomber: ' || bomber || 
@@ -219,6 +219,7 @@ FROM
 	equipments
 ORDER BY
 	ABS(equipment_type_id)
+	, equipment_type_id DESC
 ";
 			using (var db = new DBManager())
 			{

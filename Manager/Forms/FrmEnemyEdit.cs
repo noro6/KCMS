@@ -14,12 +14,12 @@ namespace Manager.Forms
 		/// </summary>
 		public int EditEnemyID { set; get; }
 
-		private List<EnemyPlane> equipmentsAll = null;
-		private List<EnemyPlane> equipments1 = null;
-		private List<EnemyPlane> equipments2 = null;
-		private List<EnemyPlane> equipments3 = null;
-		private List<EnemyPlane> equipments4 = null;
-		private List<EnemyPlane> equipments5 = null;
+		private List<EnemyEquipment> equipmentsAll = null;
+		private List<EnemyEquipment> equipments1 = null;
+		private List<EnemyEquipment> equipments2 = null;
+		private List<EnemyEquipment> equipments3 = null;
+		private List<EnemyEquipment> equipments4 = null;
+		private List<EnemyEquipment> equipments5 = null;
 
 		private bool isLoaded = false;
 
@@ -47,19 +47,20 @@ namespace Manager.Forms
 				numAntiAirWeight.Value = enemy.AntiAirWeight;
 				numAntiAirBonus.Value = enemy.AntiAirBonus;
 
+				chkType0.Checked = enemy.TypeIds.Contains(" 0,");
 				chkType1.Checked = enemy.TypeIds.Contains(" 1,");
 				chkType2.Checked = enemy.TypeIds.Contains(" 2,");
-				chkType3.Checked = enemy.TypeIds.Contains(" 3,");
-				chkType4.Checked = enemy.TypeIds.Contains(" 4,");
-				chkType5.Checked = enemy.TypeIds.Contains(" 5,");
-				chkType6.Checked = enemy.TypeIds.Contains(" 6,");
-				chkType7.Checked = enemy.TypeIds.Contains(" 7,");
-				chkType8.Checked = enemy.TypeIds.Contains(" 8,");
-				chkType9.Checked = enemy.TypeIds.Contains(" 9,");
-				chkType10.Checked = enemy.TypeIds.Contains(" 10,");
+				chkType11.Checked = enemy.TypeIds.Contains(" 11,");
+				chkType12.Checked = enemy.TypeIds.Contains(" 12,");
+				chkType13.Checked = enemy.TypeIds.Contains(" 13,");
+				chkType14.Checked = enemy.TypeIds.Contains(" 14,");
+				chkType15.Checked = enemy.TypeIds.Contains(" 15,");
+				chkType16.Checked = enemy.TypeIds.Contains(" 16,");
+				chkType17.Checked = enemy.TypeIds.Contains(" 17,");
+				chkType18.Checked = enemy.TypeIds.Contains(" 18,");
+				chkType19.Checked = enemy.TypeIds.Contains(" 19,");
 				chkType20.Checked = enemy.TypeIds.Contains(" 20,");
-				chkType100.Checked = enemy.TypeIds.Contains(" 100,");
-				chkType110.Checked = enemy.TypeIds.Contains(" 110,");
+				chkType21.Checked = enemy.TypeIds.Contains(" 21,");
 
 				numSlot1.Value = ConvertUtil.ToInt(enemy.Slot1);
 				numSlot2.Value = ConvertUtil.ToInt(enemy.Slot2);
@@ -73,7 +74,8 @@ namespace Manager.Forms
 				cmbEquipment4.SelectedValue = enemy.Equipment4ID;
 				cmbEquipment5.SelectedValue = enemy.Equipment5ID;
 
-				if (!chkType110.Checked)
+				// 鬼姫じゃないなら元選択
+				if (!chkType1.Checked)
 				{
 					cmbOriginalEnemy.SelectedValue = enemy.OriginalID;
 					cmbOriginalEnemy.Enabled = true;
@@ -93,21 +95,21 @@ namespace Manager.Forms
 		private void InitializeControl()
 		{
 			// コンボボックス初期化
-			var originals = Enemy.Select().FindAll(v => v.Name.Length == 4 && !v.TypeIds.Contains(" 100,") && !v.TypeIds.Contains(" 110,"));
+			var originals = Enemy.Select().FindAll(v => v.Name.Length == 4 && !v.TypeIds.Contains(" 1,") && !v.TypeIds.Contains(" 2,"));
 			originals.Insert(0, new Enemy() { ID = 0, Name = "" });
 			cmbOriginalEnemy.DataSource = originals;
 
-			var planeType = PlaneType.Select();
+			var planeType = EquipmentType.Select();
 			var enabledTypes = new List<int>() { 1, 2, 3, 5, 6, 101 };
-			cmbType1.DataSource = planeType.FindAll(v => enabledTypes.Contains(v.ID));
-			cmbType2.DataSource = planeType.FindAll(v => enabledTypes.Contains(v.ID));
-			cmbType3.DataSource = planeType.FindAll(v => enabledTypes.Contains(v.ID));
-			cmbType4.DataSource = planeType.FindAll(v => enabledTypes.Contains(v.ID));
-			cmbType5.DataSource = planeType.FindAll(v => enabledTypes.Contains(v.ID));
+			cmbType1.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
+			cmbType2.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
+			cmbType3.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
+			cmbType4.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
+			cmbType5.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
 
-			var allEquipments = EnemyPlane.Select();
+			var allEquipments = EnemyEquipment.Select();
 			// 空データ挿入
-			allEquipments.Insert(0, new EnemyPlane() { ID = -1, Name = "" });
+			allEquipments.Insert(0, new EnemyEquipment() { ID = -1, Name = "" });
 			equipmentsAll = allEquipments;
 			equipments1 = allEquipments.FindAll(v => true);
 			equipments2 = allEquipments.FindAll(v => true);
@@ -146,7 +148,7 @@ namespace Manager.Forms
 		/// <param name="e"></param>
 		private void ChkType110_CheckedChanged(object sender, System.EventArgs e)
 		{
-			cmbOriginalEnemy.Enabled = !chkType110.Checked;
+			cmbOriginalEnemy.Enabled = !chkType1.Checked;
 		}
 
 		private void CmbType1_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -252,19 +254,20 @@ namespace Manager.Forms
 
 			// 艦種
 			var types = new List<int>();
+			if (chkType0.Checked) types.Add(0);
 			if (chkType1.Checked) types.Add(1);
 			if (chkType2.Checked) types.Add(2);
-			if (chkType3.Checked) types.Add(3);
-			if (chkType4.Checked) types.Add(4);
-			if (chkType5.Checked) types.Add(5);
-			if (chkType6.Checked) types.Add(6);
-			if (chkType7.Checked) types.Add(7);
-			if (chkType8.Checked) types.Add(8);
-			if (chkType9.Checked) types.Add(9);
-			if (chkType10.Checked) types.Add(10);
+			if (chkType11.Checked) types.Add(11);
+			if (chkType12.Checked) types.Add(12);
+			if (chkType13.Checked) types.Add(13);
+			if (chkType14.Checked) types.Add(14);
+			if (chkType15.Checked) types.Add(15);
+			if (chkType16.Checked) types.Add(16);
+			if (chkType17.Checked) types.Add(17);
+			if (chkType18.Checked) types.Add(18);
+			if (chkType19.Checked) types.Add(19);
 			if (chkType20.Checked) types.Add(20);
-			if (chkType100.Checked) types.Add(100);
-			if (chkType110.Checked) types.Add(110);
+			if (chkType21.Checked) types.Add(21);
 
 			enemy.TypeIds = string.Join(",", types);
 

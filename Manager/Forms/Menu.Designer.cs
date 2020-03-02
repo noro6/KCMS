@@ -1,6 +1,6 @@
 ﻿namespace Manager
 {
-	partial class Form1
+	partial class Menu
 	{
 		/// <summary>
 		/// 必要なデザイナー変数です。
@@ -39,6 +39,11 @@
 			this.btnShipEdit = new System.Windows.Forms.Button();
 			this.btnOutputEquipments = new System.Windows.Forms.Button();
 			this.btnEquipmentEdit = new System.Windows.Forms.Button();
+			this.btnOutputEnemyTypes = new System.Windows.Forms.Button();
+			this.btnOutputShipTypes = new System.Windows.Forms.Button();
+			this.btnOutputEquipmentTypes = new System.Windows.Forms.Button();
+			this.btnOutputWorlds = new System.Windows.Forms.Button();
+			this.btnOutputAll = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnEnd
@@ -63,11 +68,13 @@
 			// 
 			// btnOutputEnemyPatterns
 			// 
-			this.btnOutputEnemyPatterns.Location = new System.Drawing.Point(358, 117);
+			this.btnOutputEnemyPatterns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOutputEnemyPatterns.Location = new System.Drawing.Point(358, 232);
 			this.btnOutputEnemyPatterns.Name = "btnOutputEnemyPatterns";
 			this.btnOutputEnemyPatterns.Size = new System.Drawing.Size(114, 33);
 			this.btnOutputEnemyPatterns.TabIndex = 2;
-			this.btnOutputEnemyPatterns.Text = "マップ情報出力";
+			this.btnOutputEnemyPatterns.Text = "敵パターン出力";
 			this.btnOutputEnemyPatterns.UseVisualStyleBackColor = true;
 			this.btnOutputEnemyPatterns.Click += new System.EventHandler(this.BtnOutputEnemyPatterns_Click);
 			// 
@@ -83,10 +90,12 @@
 			// 
 			// txtOutput
 			// 
-			this.txtOutput.Location = new System.Drawing.Point(12, 156);
+			this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtOutput.Location = new System.Drawing.Point(12, 271);
 			this.txtOutput.Multiline = true;
 			this.txtOutput.Name = "txtOutput";
-			this.txtOutput.Size = new System.Drawing.Size(460, 73);
+			this.txtOutput.Size = new System.Drawing.Size(460, 78);
 			this.txtOutput.TabIndex = 4;
 			// 
 			// label1
@@ -100,17 +109,21 @@
 			// 
 			// btnOutputEnemies
 			// 
-			this.btnOutputEnemies.Location = new System.Drawing.Point(246, 117);
+			this.btnOutputEnemies.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOutputEnemies.Location = new System.Drawing.Point(246, 232);
 			this.btnOutputEnemies.Name = "btnOutputEnemies";
 			this.btnOutputEnemies.Size = new System.Drawing.Size(106, 33);
 			this.btnOutputEnemies.TabIndex = 6;
-			this.btnOutputEnemies.Text = "敵艦情報出力";
+			this.btnOutputEnemies.Text = "敵艦出力";
 			this.btnOutputEnemies.UseVisualStyleBackColor = true;
 			this.btnOutputEnemies.Click += new System.EventHandler(this.BtnOutputEnemies_Click);
 			// 
 			// btnOutputShips
 			// 
-			this.btnOutputShips.Location = new System.Drawing.Point(12, 117);
+			this.btnOutputShips.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOutputShips.Location = new System.Drawing.Point(12, 232);
 			this.btnOutputShips.Name = "btnOutputShips";
 			this.btnOutputShips.Size = new System.Drawing.Size(111, 33);
 			this.btnOutputShips.TabIndex = 8;
@@ -130,7 +143,9 @@
 			// 
 			// btnOutputEquipments
 			// 
-			this.btnOutputEquipments.Location = new System.Drawing.Point(129, 117);
+			this.btnOutputEquipments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOutputEquipments.Location = new System.Drawing.Point(129, 232);
 			this.btnOutputEquipments.Name = "btnOutputEquipments";
 			this.btnOutputEquipments.Size = new System.Drawing.Size(111, 33);
 			this.btnOutputEquipments.TabIndex = 10;
@@ -148,11 +163,76 @@
 			this.btnEquipmentEdit.UseVisualStyleBackColor = true;
 			this.btnEquipmentEdit.Click += new System.EventHandler(this.BtnEquipmentEdit_Click);
 			// 
-			// Form1
+			// btnOutputEnemyTypes
+			// 
+			this.btnOutputEnemyTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOutputEnemyTypes.Location = new System.Drawing.Point(246, 193);
+			this.btnOutputEnemyTypes.Name = "btnOutputEnemyTypes";
+			this.btnOutputEnemyTypes.Size = new System.Drawing.Size(106, 33);
+			this.btnOutputEnemyTypes.TabIndex = 11;
+			this.btnOutputEnemyTypes.Text = "敵艦カテゴリ出力";
+			this.btnOutputEnemyTypes.UseVisualStyleBackColor = true;
+			this.btnOutputEnemyTypes.Click += new System.EventHandler(this.BtnOutputEnemyTypes_Click);
+			// 
+			// btnOutputShipTypes
+			// 
+			this.btnOutputShipTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOutputShipTypes.Location = new System.Drawing.Point(12, 193);
+			this.btnOutputShipTypes.Name = "btnOutputShipTypes";
+			this.btnOutputShipTypes.Size = new System.Drawing.Size(111, 33);
+			this.btnOutputShipTypes.TabIndex = 12;
+			this.btnOutputShipTypes.Text = "艦娘カテゴリ出力";
+			this.btnOutputShipTypes.UseVisualStyleBackColor = true;
+			this.btnOutputShipTypes.Click += new System.EventHandler(this.BtnOutputShipTypes_Click);
+			// 
+			// btnOutputEquipmentTypes
+			// 
+			this.btnOutputEquipmentTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOutputEquipmentTypes.Location = new System.Drawing.Point(129, 193);
+			this.btnOutputEquipmentTypes.Name = "btnOutputEquipmentTypes";
+			this.btnOutputEquipmentTypes.Size = new System.Drawing.Size(111, 33);
+			this.btnOutputEquipmentTypes.TabIndex = 13;
+			this.btnOutputEquipmentTypes.Text = "装備カテゴリ出力";
+			this.btnOutputEquipmentTypes.UseVisualStyleBackColor = true;
+			this.btnOutputEquipmentTypes.Click += new System.EventHandler(this.BtnOutputEquipmentTypes_Click);
+			// 
+			// btnOutputWorlds
+			// 
+			this.btnOutputWorlds.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOutputWorlds.Location = new System.Drawing.Point(358, 193);
+			this.btnOutputWorlds.Name = "btnOutputWorlds";
+			this.btnOutputWorlds.Size = new System.Drawing.Size(114, 33);
+			this.btnOutputWorlds.TabIndex = 14;
+			this.btnOutputWorlds.Text = "海域一覧出力";
+			this.btnOutputWorlds.UseVisualStyleBackColor = true;
+			this.btnOutputWorlds.Click += new System.EventHandler(this.BtnOutputWorlds_Click);
+			// 
+			// btnOutputAll
+			// 
+			this.btnOutputAll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOutputAll.Location = new System.Drawing.Point(12, 154);
+			this.btnOutputAll.Name = "btnOutputAll";
+			this.btnOutputAll.Size = new System.Drawing.Size(111, 33);
+			this.btnOutputAll.TabIndex = 15;
+			this.btnOutputAll.Text = "全出力";
+			this.btnOutputAll.UseVisualStyleBackColor = true;
+			this.btnOutputAll.Click += new System.EventHandler(this.BtnOutputAll_Click);
+			// 
+			// Menu
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(484, 241);
+			this.ClientSize = new System.Drawing.Size(484, 361);
+			this.Controls.Add(this.btnOutputAll);
+			this.Controls.Add(this.btnOutputWorlds);
+			this.Controls.Add(this.btnOutputEquipmentTypes);
+			this.Controls.Add(this.btnOutputShipTypes);
+			this.Controls.Add(this.btnOutputEnemyTypes);
 			this.Controls.Add(this.btnOutputEquipments);
 			this.Controls.Add(this.btnEquipmentEdit);
 			this.Controls.Add(this.btnOutputShips);
@@ -167,7 +247,7 @@
 			this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.Name = "Form1";
+			this.Name = "Menu";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "メインメニュー";
 			this.ResumeLayout(false);
@@ -188,6 +268,11 @@
 		private System.Windows.Forms.Button btnShipEdit;
 		private System.Windows.Forms.Button btnOutputEquipments;
 		private System.Windows.Forms.Button btnEquipmentEdit;
+		private System.Windows.Forms.Button btnOutputEnemyTypes;
+		private System.Windows.Forms.Button btnOutputShipTypes;
+		private System.Windows.Forms.Button btnOutputEquipmentTypes;
+		private System.Windows.Forms.Button btnOutputWorlds;
+		private System.Windows.Forms.Button btnOutputAll;
 	}
 }
 

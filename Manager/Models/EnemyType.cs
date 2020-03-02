@@ -31,5 +31,32 @@ namespace Manager.Models
 			}
 			return list;
 		}
+
+		/// <summary>
+		/// JSON出力
+		/// </summary>
+		/// <returns></returns>
+		public static string OutputJson()
+		{
+			var output = "";
+			var sql = @"
+SELECT
+	  '  { id: ' || id || ', name: ""' || name || '"" },' AS json 
+FROM
+	enemy_types
+";
+			using (var db = new DBManager())
+			{
+				var dt = db.Select(sql);
+
+				foreach (DataRow dr in dt.Rows)
+				{
+					output += ConvertUtil.ToString(dr["json"]) + "\r\n";
+				}
+			}
+
+			output = output.Replace(",]", "]");
+			return output;
+		}
 	}
 }

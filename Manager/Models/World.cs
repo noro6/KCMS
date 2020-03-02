@@ -1,6 +1,8 @@
 ﻿using Manager.DB;
 using Manager.Util;
+using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Manager.Models
 {
@@ -43,6 +45,37 @@ VALUES(@id, @name, true)
 			};
 
 			db.ExecuteNonQuery(sql, param);
+		}
+
+		/// <summary>
+		/// JSON出力
+		/// </summary>
+		/// <returns></returns>
+		internal static string OutputJson()
+		{
+			var output = "";
+			var sql = @"
+SELECT
+	  '  { world: ' || id || ', name: ""' || name || '"" },' AS json 
+FROM
+	worlds 
+WHERE
+	status = 1 
+ORDER BY
+	sort
+";
+			using (var db = new DBManager())
+			{
+				var dt = db.Select(sql);
+
+				foreach (DataRow dr in dt.Rows)
+				{
+					output += ConvertUtil.ToString(dr["json"]) + "\r\n";
+				}
+			}
+
+			output = output.Replace(",]", "]");
+			return output;
 		}
 	}
 }

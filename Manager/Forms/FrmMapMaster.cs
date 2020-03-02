@@ -245,7 +245,7 @@ namespace Manager.Forms
 		{
 			using(var db = new DBManager())
 			{
-				var dt = db.Select("SELECT id, name FROM worlds");
+				var dt = db.Select("SELECT id, name FROM worlds WHERE status = 1");
 				worldAll = new List<World>();
 				foreach (DataRow row in dt.Rows)
 				{
