@@ -319,6 +319,12 @@ GROUP BY
   , map_no
   , nodes.name
   , pattern_no
+ORDER BY
+  world_id ASC
+  , map_no ASC
+  , nodes.name ASC
+  , levels.id DESC
+  , node_details.pattern_no ASC
 ";
 
 			using(var db = new DBManager())

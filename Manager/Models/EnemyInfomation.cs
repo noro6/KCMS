@@ -50,7 +50,7 @@ SELECT
 	, enemy_name
 	, node_detail_id
 FROM
-	node_infomation
+	node_information
 WHERE
 	world_id = {worldId}
 	{(mapNo > 0 ? "AND map_no = " + mapNo : "")}
