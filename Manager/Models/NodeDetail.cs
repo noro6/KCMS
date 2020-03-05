@@ -80,6 +80,33 @@ namespace Manager.Models
 		}
 
 		/// <summary>
+		/// 複数件返す
+		/// </summary>
+		/// <param name="detailId"></param>
+		/// <returns></returns>
+		public static List<NodeDetail> SelectAll(DBManager db, int nodeId)
+		{
+			var dt = db.Select("SELECT * FROM node_details WHERE node_id = " + nodeId);
+
+			var details = new List<NodeDetail>();
+			foreach (DataRow dr in dt.Rows)
+			{
+				var nodeDetail = new NodeDetail()
+				{
+					ID = ConvertUtil.ToInt(dr["id"]),
+					NodeId = ConvertUtil.ToInt(dr["node_id"]),
+					Name = ConvertUtil.ToString(dr["name"]),
+					PatternNo = ConvertUtil.ToInt(dr["pattern_no"]),
+					LevelId = ConvertUtil.ToInt(dr["level_id"]),
+					NodeTypeId = ConvertUtil.ToInt(dr["node_type_id"]),
+					FormationId = ConvertUtil.ToInt(dr["formation_id"]),
+				};
+				details.Add(nodeDetail);
+			}
+			return details;
+		}
+
+		/// <summary>
 		/// 指定したセルのパターン数の最大値を返却
 		/// </summary>
 		/// <param name="nodeId">nodes.id</param>
@@ -129,14 +156,29 @@ VALUES(
 		}
 
 		/// <summary>
-		/// 削除
+		/// 一意キーで削除処理
 		/// </summary>
 		/// <param name="db"></param>
-		/// <param name="nodeDetailId"></param>
-		internal static void Delete(DBManager db, int nodeDetailId)
+		/// <param name="nodeDetailId">主キー</param>
+		public static void Delete(DBManager db, int nodeDetailId)
 		{
-			var sql = $@"DELETE FROM node_details WHERE ID = " + nodeDetailId ;
+			var sql = $@"DELETE FROM node_details WHERE id = " + nodeDetailId ;
 			db.ExecuteNonQuery(sql);
+		}
+
+		/// <summary>
+		/// 削除処理 セルID指定で削除するので複数削除される可能性がある
+		/// </summary>
+		/// <param name="db"></param>
+		/// <param name="deleteNodeId">紐づいているセルID</param>
+		/// <returns>削除された node_details レコードインスタンス</returns>
+		public static List<NodeDetail> DeleteNode(DBManager db, int deleteNodeId)
+		{
+			var list = SelectAll(db, deleteNodeId);
+			var sql = "DELETE FROM node_details WHERE node_id = " + deleteNodeId;
+			db.ExecuteNonQuery(sql);
+
+			return list;
 		}
 	}
 }

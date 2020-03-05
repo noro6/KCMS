@@ -28,6 +28,8 @@ namespace Manager.Models
 		public int OriginalID { set; get; }
 		public int AntiAirWeight { set; get; }
 		public int AntiAirBonus { set; get; }
+		public int AirPower { set; get; }
+		public int LandBaseAirPower { set; get; }
 
 		public Enemy()
 		{
@@ -66,7 +68,40 @@ namespace Manager.Models
 				OriginalID = enemies[0].OriginalID;
 				AntiAirWeight = enemies[0].AntiAirWeight;
 				AntiAirBonus = enemies[0].AntiAirBonus;
+
+				var equipments = EnemyEquipment.Select();
+
+				AirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment1ID), ConvertUtil.ToInt(Slot1));
+				AirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment2ID), ConvertUtil.ToInt(Slot2));
+				AirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment3ID), ConvertUtil.ToInt(Slot3));
+				AirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment4ID), ConvertUtil.ToInt(Slot4));
+				AirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment5ID), ConvertUtil.ToInt(Slot5));
+
+				LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment1ID), ConvertUtil.ToInt(Slot1), true);
+				LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment2ID), ConvertUtil.ToInt(Slot2), true);
+				LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment3ID), ConvertUtil.ToInt(Slot3), true);
+				LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment4ID), ConvertUtil.ToInt(Slot4), true);
+				LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment5ID), ConvertUtil.ToInt(Slot5), true);
 			} 
+		}
+
+		/// <summary>
+		/// 制空値を返却する　
+		/// </summary>
+		/// <param name="equipments">装備リスト</param>
+		/// <param name="equipmentId">装備ID</param>
+		/// <param name="slot">搭載数</param>
+		public static int GetAirPower(List<EnemyEquipment> equipments, int equipmentId, int slot, bool isLandBase = false)
+		{
+			if (equipments == null || equipments.Count == 0) return 0;
+			
+			var equipment = equipments.Find(v => v.ID == equipmentId);
+			if (equipment == null) return 0;
+			if(!isLandBase && (equipment.TypeID == 4 || equipment.TypeID == 5)) {
+				return 0;
+			}
+
+			return (int)(ConvertUtil.ToInt(equipment.AntiAir) * Math.Sqrt(slot));
 		}
 
 		/// <summary>
@@ -134,6 +169,9 @@ WHERE
 GROUP BY
 	enemies.id
 ");
+
+				var equipments = EnemyEquipment.Select();
+
 				foreach (DataRow dr in dt.Rows)
 				{
 					var enemy = new Enemy()
@@ -161,6 +199,19 @@ GROUP BY
 						AntiAirWeight = ConvertUtil.ToInt(dr["anti_air_weight"]),
 						AntiAirBonus = ConvertUtil.ToInt(dr["anti_air_bonus"]),
 					};
+
+					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment1ID), ConvertUtil.ToInt(enemy.Slot1));
+					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment2ID), ConvertUtil.ToInt(enemy.Slot2));
+					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment3ID), ConvertUtil.ToInt(enemy.Slot3));
+					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment4ID), ConvertUtil.ToInt(enemy.Slot4));
+					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment5ID), ConvertUtil.ToInt(enemy.Slot5));
+
+					enemy.LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment1ID), ConvertUtil.ToInt(enemy.Slot1), true);
+					enemy.LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment2ID), ConvertUtil.ToInt(enemy.Slot2), true);
+					enemy.LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment3ID), ConvertUtil.ToInt(enemy.Slot3), true);
+					enemy.LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment4ID), ConvertUtil.ToInt(enemy.Slot4), true);
+					enemy.LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment5ID), ConvertUtil.ToInt(enemy.Slot5), true);
+
 					list.Add(enemy);
 				}
 			}
@@ -276,55 +327,18 @@ VALUES (
 			var output = "";
 			var sql = @"
 SELECT
-  '  { area: ' || world_id || map_no ||
-  ', node: ""' || nodes.name || 
-  '"", remarks: ""' || node_details.name ||
-  '"", pattern: ' || IFNULL(node_details.pattern_no, '') ||
-  ', lv: ' || levels.id ||
-  ', type: ' || node_types.id ||
-  ', form: ' || formations.id ||
-  ', radius: ' || nodes.radius ||
-  ', enemies: [' || pattern.enemy_id || ']' ||
-  ', coords: ""' || IFNULL(nodes.coords, '') || '"" },' AS json
+	'  { area: ' || world_id || map_no || 
+	', node: ""' || node_name || 
+	'"", remarks: ""' || node_remarks || 
+	'"", pattern: ' || IFNULL(pattern_no, '') || 
+	', lv: ' || level_id || 
+	', type: ' || node_type_id || 
+	', form: ' || formation_id || 
+	', radius: ' || radius || 
+	', enemies: [' || enemy_id || ']' || 
+	', coords: ""' || IFNULL(coords, '') || '"" },' AS json 
 FROM
-  worlds 
-  LEFT JOIN nodes 
-    ON worlds.id = nodes.world_id 
-  LEFT JOIN node_details 
-    ON nodes.id = node_details.node_id 
-  LEFT JOIN ( 
-    SELECT
-      node_detail_id
-      , GROUP_CONCAT(enemy_id, ', ') AS enemy_id
-      , GROUP_CONCAT(enemies.name) AS enemy_name 
-    FROM
-      node_details_enemies
-	  LEFT JOIN enemies
-		ON node_details_enemies.enemy_id = enemies.id
-	GROUP BY
-	  node_detail_id
-  ) AS pattern
-	ON pattern.node_detail_id = node_details.id
-  LEFT JOIN levels
-	ON node_details.level_id = levels.id
-  LEFT JOIN node_types
-	ON node_details.node_type_id = node_types.id
-  LEFT JOIN formations
-	ON node_details.formation_id = formations.id
-WHERE
-  worlds.status = 1
-  AND node_details.id is not null
-GROUP BY
-  world_id
-  , map_no
-  , nodes.name
-  , pattern_no
-ORDER BY
-  world_id ASC
-  , map_no ASC
-  , nodes.name ASC
-  , levels.id DESC
-  , node_details.pattern_no ASC
+	node_information
 ";
 
 			using(var db = new DBManager())

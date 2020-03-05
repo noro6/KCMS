@@ -19,6 +19,9 @@ namespace Manager.Forms
 		private List<Map> mapAll = null;
 		private List<Node> nodeAll = null;
 
+		private List<EnemyInfomation> patternAll = null;
+		private List<EnemyInfomation> patterns = null;
+
 		public FrmMapMaster()
 		{
 			InitializeComponent();
@@ -34,6 +37,7 @@ namespace Manager.Forms
 
 			dgvPatterns.AutoGenerateColumns = false;
 			typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvPatterns, true, null);
+			dgvPatterns.RowTemplate.Height = 36;
 
 			// 海域データ取得
 			InitializeComboBoxDataSource();
@@ -42,6 +46,11 @@ namespace Manager.Forms
 			Search();
 		}
 
+		/// <summary>
+		/// 海域選択値変更
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void CmbWorld_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			var worldId = ConvertUtil.ToInt(cmbWorld.SelectedValue);
@@ -52,6 +61,11 @@ namespace Manager.Forms
 			ChangeAddButtonEnabled();
 		}
 
+		/// <summary>
+		/// マップ選択値変更
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void CmbMap_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			var worldId = ConvertUtil.ToInt(cmbWorld.SelectedValue);
@@ -63,11 +77,26 @@ namespace Manager.Forms
 			ChangeAddButtonEnabled();
 		}
 
+		/// <summary>
+		/// セル選択値変更
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void CmbNode_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			ChangeAddButtonEnabled();
+
+			if(ConvertUtil.ToString(cmbNode.Text) != "")
+			{
+				Search();
+			}
 		}
 
+		/// <summary>
+		/// 海域追加クリック
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void BtnAddWorld_Click(object sender, EventArgs e)
 		{
 			var world = new World();
@@ -115,10 +144,17 @@ namespace Manager.Forms
 			}
 		}
 
+		/// <summary>
+		/// マップ追加クリック
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void BtnAddMap_Click(object sender, EventArgs e)
 		{
-			var map = new Map();
-			map.WorldId = ConvertUtil.ToInt(cmbWorld.SelectedValue);
+			var map = new Map
+			{
+				WorldId = ConvertUtil.ToInt(cmbWorld.SelectedValue)
+			};
 			using (var frm = new FrmTextInput())
 			{
 				var exist = false;
@@ -163,11 +199,18 @@ namespace Manager.Forms
 			}
 		}
 
+		/// <summary>
+		/// マス追加クリック
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void BtnAddNode_Click(object sender, EventArgs e)
 		{
-			var node = new Node();
-			node.WorldId = ConvertUtil.ToInt(cmbWorld.SelectedValue);
-			node.MapNo = ConvertUtil.ToInt(cmbMap.SelectedValue);
+			var node = new Node
+			{
+				WorldId = ConvertUtil.ToInt(cmbWorld.SelectedValue),
+				MapNo = ConvertUtil.ToInt(cmbMap.SelectedValue)
+			};
 			using (var frm = new FrmTextInput())
 			{
 				var exist = false;
@@ -208,7 +251,17 @@ namespace Manager.Forms
 					db.Commit();
 
 					MessageBox.Show("マス登録完了", Text, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+					var world = ConvertUtil.ToInt(cmbWorld.SelectedValue);
+					var map = ConvertUtil.ToInt(cmbMap.SelectedValue);
+					var nodeId = ConvertUtil.ToInt(node.ID);
 					InitializeComboBoxDataSource();
+
+					cmbWorld.SelectedValue = world;
+					cmbMap.SelectedValue = map;
+					cmbNode.SelectedValue = nodeId;
+
+					Search();
 				}
 				catch (Exception)
 				{
@@ -218,9 +271,47 @@ namespace Manager.Forms
 			}
 		}
 
-		private void BtnSearch_Click(object sender, EventArgs e)
+		/// <summary>
+		/// セル削除ボタンクリック
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void btnDeleteNode_Click(object sender, EventArgs e)
 		{
-			Search();
+			var node = new Node(ConvertUtil.ToInt(cmbNode.SelectedValue));
+
+			if (node.ID > 0)
+			{
+				var dr = MessageBox.Show("セルを削除します。このセルに登録されている敵編成パターンも全て削除されます。\r\nよろしいですか?", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+				if (dr == DialogResult.Cancel) return;
+
+				using (var db = new DBManager())
+				{
+					try
+					{
+						db.CreateConnection();
+						db.BeginTran();
+
+						Node.Delete(db, node.ID);
+						var deleteRecords = NodeDetail.DeleteNode(db, node.ID);
+						foreach (var detail in deleteRecords)
+						{
+							NodeDetailsEnemies.Delete(db, detail.ID);
+						}
+
+						db.Commit();
+						MessageBox.Show("削除が完了しました。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					}
+					catch (Exception)
+					{
+						db.RollBack();
+						throw;
+					}
+				}
+
+				InitializeComboBoxDataSource();
+				ReSearch();
+			}
 		}
 
 		/// <summary>
@@ -231,11 +322,21 @@ namespace Manager.Forms
 			var worldId = ConvertUtil.ToInt(cmbWorld.SelectedValue);
 			var mapNo = ConvertUtil.ToInt(cmbMap.SelectedValue);
 			var nodeId = ConvertUtil.ToInt(cmbNode.SelectedValue);
-			var list = EnemyInfomation.Select(worldId, mapNo, nodeId);
+
+			patterns = patternAll.FindAll(v => v.WorldId == worldId && v.MapNo == mapNo && v.NodeId == nodeId);
 
 			dgvPatterns.SuspendLayout();
-			dgvPatterns.DataSource = list;
+			dgvPatterns.DataSource = patterns;
 			dgvPatterns.ResumeLayout();
+		}
+
+		/// <summary>
+		/// DB再接続して検索
+		/// </summary>
+		private void ReSearch()
+		{
+			patternAll = EnemyInfomation.Select();
+			Search();
 		}
 
 		/// <summary>
@@ -245,7 +346,7 @@ namespace Manager.Forms
 		{
 			using(var db = new DBManager())
 			{
-				var dt = db.Select("SELECT id, name FROM worlds WHERE status = 1");
+				var dt = db.Select("SELECT id, name FROM worlds WHERE status = 1 ORDER BY sort");
 				worldAll = new List<World>();
 				foreach (DataRow row in dt.Rows)
 				{
@@ -271,7 +372,7 @@ namespace Manager.Forms
 					mapAll.Add(map);
 				}
 
-				dt = db.Select("SELECT id, name, world_id, map_no FROM nodes");
+				dt = db.Select("SELECT id, name, world_id, map_no FROM nodes ORDER BY name");
 				nodeAll = new List<Node>() { new Node() { ID = 0, Name = "", MapNo = 0, WorldId = 0 } };
 				foreach (DataRow row in dt.Rows)
 				{
@@ -289,6 +390,9 @@ namespace Manager.Forms
 			worlds = worldAll.FindAll(v => true);
 			maps = mapAll.FindAll(v => v.WorldId == 0);
 			nodes = nodeAll.FindAll(v => v.WorldId == 0 && v.MapNo == 0);
+
+			patternAll = EnemyInfomation.Select();
+			patterns = EnemyInfomation.Select();
 
 			cmbWorld.DataSource = worlds;
 			cmbMap.DataSource = maps;
@@ -316,11 +420,6 @@ namespace Manager.Forms
 			btnAddPattern.Enabled = worldId > 0 && mapNo > 0 && nodeName != "";
 		}
 
-		private void BtnClose_Click(object sender, EventArgs e)
-		{
-			Close();
-		}
-
 		/// <summary>
 		/// 新パターン追加ボタン
 		/// </summary>
@@ -336,7 +435,42 @@ namespace Manager.Forms
 				frm.ShowDialog();
 			}
 
-			Search();
+			ReSearch();
+		}
+
+		/// <summary>
+		/// 複製して新規ボタン
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnCopyPattern_Click(object sender, EventArgs e)
+		{
+			if (dgvPatterns.CurrentCell == null)
+			{
+				MessageBox.Show("複製対象を選択してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+
+			var rowIndex = dgvPatterns.CurrentCell.RowIndex;
+			if (rowIndex < 0 || patterns[rowIndex] == null)
+			{
+				MessageBox.Show("複製対象を選択してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+			var detailId = patterns[rowIndex].DetailId;
+			if (detailId < 1)
+			{
+				MessageBox.Show("複製対象を選択してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+			using (var frm = new FrmEnemyFleetEdit())
+			{
+				frm.NodeDetailId = detailId;
+				frm.CopyMode = true;
+				frm.ShowDialog();
+			}
+
+			ReSearch();
 		}
 
 		/// <summary>
@@ -346,17 +480,40 @@ namespace Manager.Forms
 		/// <param name="e"></param>
 		private void DgvPatterns_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
-			if (dgvPatterns.CurrentCell is null) return;
+			if (dgvPatterns.CurrentCell == null)
+			{
+				return;
+			}
+
 			var rowIndex = dgvPatterns.CurrentCell.RowIndex;
-			var detailId = ConvertUtil.ToInt(dgvPatterns[6, rowIndex].Value);
-			if (detailId < 1) return;
+			if (rowIndex < 0 || patterns[rowIndex] == null)
+			{
+				return;
+			}
+
+			var detailId = patterns[rowIndex].DetailId;
+			if (detailId < 1)
+			{
+				return;
+			}
+
 			using (var frm = new FrmEnemyFleetEdit())
 			{
 				frm.NodeDetailId = detailId;
 				frm.ShowDialog();
 			}
 
-			Search();
+			ReSearch();
+		}
+
+		/// <summary>
+		/// 閉じる
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnClose_Click(object sender, EventArgs e)
+		{
+			Close();
 		}
 	}
 }

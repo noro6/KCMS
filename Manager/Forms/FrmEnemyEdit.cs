@@ -14,6 +14,8 @@ namespace Manager.Forms
 		/// </summary>
 		public int EditEnemyID { set; get; }
 
+		public bool CopyMode { set; get; } = false;
+
 		private List<EnemyEquipment> equipmentsAll = null;
 		private List<EnemyEquipment> equipments1 = null;
 		private List<EnemyEquipment> equipments2 = null;
@@ -78,6 +80,15 @@ namespace Manager.Forms
 				if (!chkType1.Checked)
 				{
 					cmbOriginalEnemy.SelectedValue = enemy.OriginalID;
+					cmbOriginalEnemy.Enabled = true;
+				}
+
+				if (CopyMode)
+				{
+					EditEnemyID = 0;
+					txtID.Text = "";
+					txtID.ReadOnly = false;
+					txtName.Text = "";
 					cmbOriginalEnemy.Enabled = true;
 				}
 			}
@@ -389,6 +400,29 @@ namespace Manager.Forms
 			}
 
 			return false;
+		}
+
+		/// <summary>
+		/// 装備変更時
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void EquipmentStatus_Changed(object sender, EventArgs e)
+		{
+			var ap1 = Enemy.GetAirPower(equipments1, ConvertUtil.ToInt(cmbEquipment1.SelectedValue), ConvertUtil.ToInt(numSlot1.Value));
+			var ap2 = Enemy.GetAirPower(equipments2, ConvertUtil.ToInt(cmbEquipment2.SelectedValue), ConvertUtil.ToInt(numSlot2.Value));
+			var ap3 = Enemy.GetAirPower(equipments3, ConvertUtil.ToInt(cmbEquipment3.SelectedValue), ConvertUtil.ToInt(numSlot3.Value));
+			var ap4 = Enemy.GetAirPower(equipments4, ConvertUtil.ToInt(cmbEquipment4.SelectedValue), ConvertUtil.ToInt(numSlot4.Value));
+			var ap5 = Enemy.GetAirPower(equipments5, ConvertUtil.ToInt(cmbEquipment5.SelectedValue), ConvertUtil.ToInt(numSlot5.Value));
+
+			lblAirPower1.Text = ap1.ToString();
+			lblAirPower2.Text = ap2.ToString();
+			lblAirPower3.Text = ap3.ToString();
+			lblAirPower4.Text = ap4.ToString();
+			lblAirPower5.Text = ap5.ToString();
+
+			var sum = ap1 + ap2 + ap3 + ap4 + ap5;
+			lblAirPower.Text = sum.ToString();
 		}
 	}
 }

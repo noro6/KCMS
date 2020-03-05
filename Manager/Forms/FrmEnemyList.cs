@@ -56,16 +56,7 @@ namespace Manager.Forms
 		/// <param name="e"></param>
 		private void TxtSearch_TextChanged(object sender, EventArgs e)
 		{
-			var text = txtSearch.Text.Trim();
-
-			dgvEnemies.DataSource = null;
-			enemies = enemiesAll.FindAll(v =>
-			{
-				if (v.Name.Contains(text)) return true;
-				if (v.ID.ToString().Contains(text)) return true;
-				return false;
-			});
-			dgvEnemies.DataSource = enemies;
+			Search();
 		}
 
 		/// <summary>
@@ -123,7 +114,50 @@ namespace Manager.Forms
 			dgvEnemies.DataSource = enemies;
 
 			dgvEnemies.FirstDisplayedScrollingRowIndex = enemies.Count - 1 < rowIndex ? enemies.Count - 1 : rowIndex;
-			dgvEnemies[0, rowIndex].Selected = true;
+		}
+
+		/// <summary>
+		/// 複製追加
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnCopy_Click(object sender, EventArgs e)
+		{
+			if(dgvEnemies.CurrentCell == null)
+			{
+				MessageBox.Show("複製対象を選択してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+			var rowIndex = dgvEnemies.CurrentCell.RowIndex;
+			if (rowIndex < 0)
+			{
+				MessageBox.Show("複製対象を選択してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+			using (var frm = new FrmEnemyEdit())
+			{
+				frm.EditEnemyID = ConvertUtil.ToInt(dgvEnemies[0, rowIndex].Value);
+				frm.CopyMode = true;
+				frm.ShowDialog();
+			}
+
+			// 編集終了後再検索
+			Search();
+			dgvEnemies.FirstDisplayedScrollingRowIndex = enemies.Count - 1 < rowIndex ? enemies.Count - 1 : rowIndex;
+		}
+
+		private void Search()
+		{
+			var text = txtSearch.Text.Trim();
+
+			dgvEnemies.DataSource = null;
+			enemies = enemiesAll.FindAll(v =>
+			{
+				if (v.Name.Contains(text)) return true;
+				if (v.ID.ToString().Contains(text)) return true;
+				return false;
+			});
+			dgvEnemies.DataSource = enemies;
 		}
 	}
 }

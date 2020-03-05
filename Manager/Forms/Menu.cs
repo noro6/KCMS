@@ -8,42 +8,10 @@ namespace Manager
 {
 	public partial class Menu : Form
 	{
-		class Buyer
-		{
-			public int BuyerCd { set; get; }
-		}
-
-		class Color
-		{
-			public int ColorCd { set; get; }
-			public int BuyerCd { set; get; }
-		}
 
 		public Menu()
 		{
 			InitializeComponent();
-
-			var buyers = new List<Buyer>()
-			{
-				new Buyer(){ BuyerCd = 1 },
-				new Buyer(){ BuyerCd = 2 },
-				new Buyer(){ BuyerCd = 3 },
-			};
-			var colors = new List<Color>()
-			{
-				new Color(){ ColorCd = 1, BuyerCd = 1},
-				new Color(){ ColorCd = 2, BuyerCd = 2},
-				new Color(){ ColorCd = 3, BuyerCd = 3},
-			};
-
-			var errorBuyerCodes = new List<int>();
-			foreach (var color in colors)
-			{
-				if (!buyers.Exists(v => v.BuyerCd == color.BuyerCd))
-				{
-					errorBuyerCodes.Add(color.BuyerCd);
-				}
-			}
 		}
 
 		private void BtnEnd_Click(object sender, EventArgs e)

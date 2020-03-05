@@ -82,5 +82,16 @@ VALUES({ID}, {WorldId}, {MapNo}, @name, {Radius}, @coords)
 
 			db.ExecuteNonQuery(sql, param);
 		}
+
+
+		/// <summary>
+		/// 削除処理
+		/// </summary>
+		/// <param name="db"></param>
+		public static void Delete(DBManager db, int deleteID)
+		{
+			var sql = "DELETE FROM nodes WHERE ID = " + deleteID;
+			db.ExecuteNonQuery(sql);
+		}
 	}
 }

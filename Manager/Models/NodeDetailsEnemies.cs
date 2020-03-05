@@ -43,11 +43,7 @@ WHERE
 
 				foreach (DataRow dr in dt.Rows)
 				{
-					var enemy = new Enemy()
-					{
-						ID = ConvertUtil.ToInt(dr["enemy_id"]),
-						Name = ConvertUtil.ToString(dr["enemy_name"]),
-					};
+					var enemy = new Enemy(ConvertUtil.ToInt(dr["enemy_id"]));
 					retValue.Enemies.Add(enemy);
 				}
 

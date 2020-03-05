@@ -17,7 +17,7 @@ namespace Manager.Models
 			var list = new List<EnemyType>();
 			using (var db = new DBManager())
 			{
-				var dt = db.Select("SELECT id, name FROM enemy_types");
+				var dt = db.Select("SELECT id, name FROM enemy_types ORDER BY sort");
 
 				foreach (DataRow dr in dt.Rows)
 				{
@@ -44,6 +44,8 @@ SELECT
 	  '  { id: ' || id || ', name: ""' || name || '"" },' AS json 
 FROM
 	enemy_types
+ORDER BY 
+	sort
 ";
 			using (var db = new DBManager())
 			{
