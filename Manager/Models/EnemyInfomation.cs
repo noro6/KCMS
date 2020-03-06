@@ -17,6 +17,7 @@ namespace Manager.Models
 		public string FormationName { set; get; }
 		public string EnemyName { set; get; }
 		public int DetailId { set; get; }
+		public string AirPower { set; get; }
 
 		/// <summary>
 		/// 検索
@@ -36,6 +37,8 @@ SELECT
 	, formation
 	, enemy_name
 	, node_detail_id
+	, air_power
+	, land_base_air_power
 FROM
 	node_information
 ";
@@ -56,7 +59,8 @@ FROM
 						TypeName = ConvertUtil.ToString(dr["node_type"]),
 						FormationName = ConvertUtil.ToString(dr["formation"]),
 						EnemyName = ConvertUtil.ToString(dr["enemy_name"]),
-						DetailId = ConvertUtil.ToInt(dr["node_detail_id"])
+						DetailId = ConvertUtil.ToInt(dr["node_detail_id"]),
+						AirPower = ConvertUtil.ToInt(dr["air_power"]) + "\r\n(" + ConvertUtil.ToInt(dr["land_base_air_power"]) + ")",
 					};
 					if (ins.NodeRemarks == "") ins.NodeRemarks = "(未指定)";
 

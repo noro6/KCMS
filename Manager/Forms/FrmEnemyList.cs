@@ -2,6 +2,7 @@
 using Manager.Util;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -39,6 +40,7 @@ namespace Manager.Forms
 		{
 			dgvEnemies.AutoGenerateColumns = false;
 			typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvEnemies, true, null);
+			dgvEnemies.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
 
 			enemiesAll = Enemy.Select();
 			enemies = Enemy.Select();

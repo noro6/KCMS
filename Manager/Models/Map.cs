@@ -1,24 +1,36 @@
 ﻿using Manager.DB;
 using Manager.Util;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Manager.Models
 {
+	/// <summary>
+	/// マップモデル
+	/// </summary>
 	class Map : ModelBase
 	{
+		/// <summary>
+		/// 海域id
+		/// </summary>
 		public int WorldId { set; get; }
+		/// <summary>
+		/// マップ番号
+		/// </summary>
 		public int MapNo { set; get; }
 
+		/// <summary>
+		/// 空の<see cref="Map"/>インスタンス生成
+		/// </summary>
 		public Map()
 		{
 			TableName = "maps";
 		}
 
+		/// <summary>
+		/// DBから指定id(PK)を持つ<see	cref="Map"/>インスタンス生成
+		/// </summary>
+		/// <param name="id"></param>
 		public Map(int id)
 		{
 			TableName = "maps";
@@ -34,7 +46,11 @@ namespace Manager.Models
 				}
 			}
 		}
-
+		/// <summary>
+		/// DBから指定海域、指定マップ番号を持つ<see	cref="Map"/>インスタンス生成
+		/// </summary>
+		/// <param name="worldId">海域id</param>
+		/// <param name="mapNo">マップ番号</param>
 		public Map(int worldId, int mapNo)
 		{
 			TableName = "maps";
@@ -57,6 +73,7 @@ namespace Manager.Models
 		/// <param name="db"></param>
 		public void Insert(DBManager db)
 		{
+			ID = SelectMaxId(db) + 1;
 			var sql = $@"
 INSERT 
 INTO maps(id, world_id, map_no, name) 
@@ -96,6 +113,39 @@ WHERE
 
 			output = output.Replace(",]", "]");
 			return output;
+		}
+
+		/// <summary>
+		/// マップ削除処理
+		/// </summary>
+		/// <param name="db"></param>
+		/// <param name="worldId">削除対象海域id</param>
+		/// <param name="mapNo">削除対象マップ番号</param>
+		public static void Delete(DBManager db, int worldId, int mapNo)
+		{
+			var sql = "DELETE FROM maps WHERE world_id = " + worldId + " AND map_no = " + mapNo;
+			db.ExecuteNonQuery(sql);
+		}
+
+		/// <summary>
+		/// 更新処理
+		/// </summary>
+		/// <param name="db"></param>
+		internal void Update(DBManager db)
+		{
+			var sql = $@"
+UPDATE maps 
+SET
+	name = @name
+WHERE
+	world_id = {WorldId}
+	AND map_no = {MapNo}
+";
+			var param = new Dictionary<string, object>()
+			{
+				{ "@name", Name },
+			};
+			db.ExecuteNonQuery(sql, param);
 		}
 	}
 }

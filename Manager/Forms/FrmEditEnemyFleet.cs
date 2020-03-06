@@ -8,26 +8,23 @@ using System.Windows.Forms;
 
 namespace Manager.Forms
 {
-	public partial class FrmEnemyFleetEdit : Form
+	public partial class FrmEditEnemyFleet : Form
 	{
 		public int NodeId { set; get; }
 		public int PatternNo { set; get; }
 		public int NodeDetailId { set; get; }
-		public bool CopyMode { set; get; } = false;
-
-		private int worldId = 0;
 
 		private List<Enemy> enemiesAll = null;
 		private List<Enemy> enemies = null;
 
 		private List<Enemy> fleet = new List<Enemy>();
 
-		public FrmEnemyFleetEdit()
+		public FrmEditEnemyFleet()
 		{
 			InitializeComponent();
 		}
 
-		private void FrmEnemyFleetEdit_Load(object sender, EventArgs e)
+		private void FrmEditEnemyFleet_Load(object sender, EventArgs e)
 		{
 			// コントロール初期化
 			InitializeControl();
@@ -42,44 +39,26 @@ namespace Manager.Forms
 				txtRemarks.Text = detailData.Name;
 				NodeId = detailData.NodeId;
 				PatternNo = detailData.PatternNo;
+				var node = new Node(NodeId);
+				lblNodeId.Text = node.WorldId + "-" + node.MapNo + " " + node.Name;
+				lblPatternNo.Text = PatternNo.ToString();
 
 				var fleetData = NodeDetailsEnemies.Select(NodeDetailId);
 				fleet = fleetData.Enemies;
 				dgvFleet.DataSource = fleet;
 
 				btnDelete.Visible = true;
-
-				var sumAirPower = 0;
-				var sumLandBaseAirPower = 0;
-				foreach (var enm in fleet)
-				{
-					sumAirPower += enm.AirPower;
-					sumLandBaseAirPower += enm.LandBaseAirPower;
-				}
-				lblSumAirPower.Text = sumAirPower.ToString();
-				lblSumAirPower_LB.Text = "（ " + sumLandBaseAirPower + " ）";
 			}
 			// 新規パターン
 			else
 			{
+				var node = new Node(NodeId);
+				lblNodeId.Text = node.WorldId + "-" + node.MapNo + " " + node.Name;
 				PatternNo = NodeDetail.GetNextPatternNo(NodeId) + 1;
+				lblPatternNo.Text = PatternNo.ToString();
+
 				btnDelete.Visible = false;
 			}
-
-			// 複製新規モード
-			if (CopyMode)
-			{
-				// NodeDetailId を破棄して新規登録モードにする
-				NodeDetailId = 0;
-				PatternNo = NodeDetail.GetNextPatternNo(NodeId) + 1;
-				btnDelete.Visible = false;
-			}
-
-			// 基本情報
-			var node = new Node(NodeId);
-			lblNodeId.Text = node.WorldId + "-" + node.MapNo + " " + node.Name;
-			worldId = node.WorldId;
-			lblPatternNo.Text = PatternNo.ToString();
 		}
 
 		/// <summary>
@@ -89,14 +68,12 @@ namespace Manager.Forms
 		/// <param name="e"></param>
 		private void CmbEnemyType_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			Search();
+			var selectedType = ConvertUtil.ToString(cmbEnemyType.SelectedValue);
+			dgvEnemies.DataSource = null;
+			enemies = enemiesAll.FindAll(v => v.TypeIds.Contains(selectedType));
+			dgvEnemies.DataSource = enemies;
 		}
 
-		/// <summary>
-		/// 挿入クリック
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 		private void BtnInsert_Click(object sender, EventArgs e)
 		{
 			if (dgvEnemies.CurrentCell is null) return;
@@ -107,23 +84,8 @@ namespace Manager.Forms
 			dgvFleet.DataSource = null;
 			fleet.Add(enemy);
 			dgvFleet.DataSource = fleet;
-
-			int sumAirPower = 0;
-			int sumLandBaseAirPower = 0;
-			foreach (var enm in fleet)
-			{
-				sumAirPower += enm.AirPower;
-				sumLandBaseAirPower += enm.LandBaseAirPower;
-			}
-			lblSumAirPower.Text = sumAirPower.ToString();
-			lblSumAirPower_LB.Text = "（ " + sumLandBaseAirPower + " ）";
 		}
 
-		/// <summary>
-		/// 削除ボタン
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 		private void DgvFleet_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			if(e.RowIndex > -1 && e.ColumnIndex == 0 && e.RowIndex < fleet.Count)
@@ -131,16 +93,6 @@ namespace Manager.Forms
 				dgvFleet.DataSource = null;
 				fleet.RemoveAt(e.RowIndex);
 				dgvFleet.DataSource = fleet;
-
-				int sumAirPower = 0;
-				int sumLandBaseAirPower = 0;
-				foreach (var enm in fleet)
-				{
-					sumAirPower += enm.AirPower;
-					sumLandBaseAirPower += enm.LandBaseAirPower;
-				}
-				lblSumAirPower.Text = sumAirPower.ToString();
-				lblSumAirPower_LB.Text = "（ " + sumLandBaseAirPower + " ）";
 			}
 		}
 
@@ -151,14 +103,18 @@ namespace Manager.Forms
 		/// <param name="e"></param>
 		private void TxtSearch_TextChanged(object sender, EventArgs e)
 		{
-			Search();
+			var text = txtSearch.Text.Trim();
+
+			dgvEnemies.DataSource = null;
+			enemies = enemiesAll.FindAll(v =>
+			{
+				if (v.Name.Contains(text)) return true;
+				if (v.ID.ToString().Contains(text)) return true;
+				return false;
+			});
+			dgvEnemies.DataSource = enemies;
 		}
 
-		/// <summary>
-		/// 閉じる
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 		private void BtnClose_Click(object sender, EventArgs e)
 		{
 			Close();
@@ -166,81 +122,24 @@ namespace Manager.Forms
 
 		private void BtnSave_Click(object sender, EventArgs e)
 		{
-			// 設定敵艦総数
-			var enemyCount = fleet.Count;
-			// 戦闘形式
-			var nodeType = ConvertUtil.ToInt(cmbNodeType.SelectedValue);
-			// 陣形
-			var formation = ConvertUtil.ToInt(cmbFormation.SelectedValue);
-			// 難易度
-			var level = ConvertUtil.ToInt(cmbLevel.SelectedValue);
-
-
-			// エラー
-			if (enemyCount < 1)
+			if (fleet.Count < 1)
 			{
 				MessageBox.Show("敵艦未選択", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
-			if (formation < 10 && nodeType == 2)
+			if (ConvertUtil.ToInt(cmbNodeType.SelectedValue) == 0)
 			{
-				MessageBox.Show("連合艦隊ですが陣形が連合艦隊仕様ではありません。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				ActiveControl = cmbFormation;
-				cmbFormation.DroppedDown = true;
+				MessageBox.Show("戦闘形式未選択", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
-			if (formation > 10 && nodeType != 2)
+			if (ConvertUtil.ToInt(cmbFormation.SelectedValue) == 0)
 			{
-				MessageBox.Show("通常艦隊ですが陣形が通常艦隊仕様ではありません。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				ActiveControl = cmbFormation;
-				cmbFormation.DroppedDown = true;
+				MessageBox.Show("陣形未選択", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
-
-			// 警告
-			if (nodeType != 2 && enemyCount > 6)
+			if (ConvertUtil.ToInt(cmbNodeType.SelectedValue) == 0)
 			{
-				var dr = MessageBox.Show("敵艦数が6隻を超えています。\r\nこのまま登録しますか？", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-				if (dr == DialogResult.Cancel) return;
-			}
-			if (nodeType == 2 && enemyCount != 12)
-			{
-				var dr = MessageBox.Show("連合艦隊ですが12隻ではありません。(" + enemyCount + "隻)\r\nこのまま登録しますか？", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-				if (dr == DialogResult.Cancel) return;
-			}
-			if ((nodeType == 3 || nodeType == 5) && formation != 3)
-			{
-				var dr = MessageBox.Show("空襲系ですが輪形陣ではありません。\r\nこのまま登録しますか？", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-				if (dr == DialogResult.Cancel)
-				{
-					ActiveControl = cmbFormation;
-					cmbFormation.DroppedDown = true;
-					return;
-				}
-			}
-			if (worldId > 1000 && level < 0)
-			{
-				var dr = MessageBox.Show("イベント海域ですが難易度が選択されていません。\r\nこのまま登録しますか？", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-				if (dr == DialogResult.Cancel)
-				{
-					ActiveControl = cmbLevel;
-					cmbLevel.DroppedDown = true;
-					return;
-				}
-			}
-			if (worldId < 1000 && level >= 0)
-			{
-				var dr = MessageBox.Show("通常海域ですが難易度が選択されています。\r\nこのまま登録しますか？", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-				if (dr == DialogResult.Cancel)
-				{
-					ActiveControl = cmbLevel;
-					cmbLevel.DroppedDown = true;
-					return;
-				}
-
-			}
-			if (MessageBox.Show("セル情報を登録 / 更新します。\r\nよろしいですか？", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
-			{
+				MessageBox.Show("難易度未選択", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
 
@@ -253,6 +152,13 @@ namespace Manager.Forms
 				LevelId = ConvertUtil.ToInt(cmbLevel.SelectedValue),
 				NodeTypeId = ConvertUtil.ToInt(cmbNodeType.SelectedValue),
 			};
+
+			var info = "セル情報を登録 / 更新します。";
+
+			if (MessageBox.Show(info, Text, MessageBoxButtons.OKCancel) != DialogResult.OK)
+			{
+				return;
+			}
 
 			using (var db = new DBManager())
 			{
@@ -305,36 +211,6 @@ namespace Manager.Forms
 					MessageBox.Show("登録失敗\r\n" + ex.Message + "\r\n" + ex.StackTrace, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
-		}
-
-		/// <summary>
-		/// 右側検索
-		/// </summary>
-		private void Search()
-		{
-			dgvEnemies.DataSource = null;
-
-			// テキスト検索が最優先
-			var text = txtSearch.Text.Trim();
-
-			// テキストがなければカテゴリ検索
-			var selectedType = ConvertUtil.ToString(cmbEnemyType.SelectedValue);
-			cmbEnemyType.Enabled = text == "";
-
-			enemies = enemiesAll.FindAll(v =>
-			{
-				if (text != "")
-				{
-					if (v.Name.Contains(text)) return true;
-					if (v.ID.ToString().Contains(text)) return true;
-				}
-				else if (v.TypeIds.Contains(" " + selectedType + ","))
-				{
-					return true;
-				}
-				return false;
-			});
-			dgvEnemies.DataSource = enemies;
 		}
 
 		/// <summary>
@@ -451,42 +327,6 @@ namespace Manager.Forms
 			}
 
 			Close();
-		}
-
-		/// <summary>
-		/// 戦闘形式変更時
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void CmbNodeType_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			// 空襲系なら輪形にする
-			if(ConvertUtil.ToInt(cmbNodeType.SelectedValue) == 3 || ConvertUtil.ToInt(cmbNodeType.SelectedValue) == 5)
-			{
-				cmbFormation.SelectedValue = 3;
-			}
-		}
-
-		/// <summary>
-		/// セルダブルクリック
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void DgvEnemies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-		{
-			if (e.RowIndex < 0) return;
-			if (enemies[e.RowIndex] == null) return;
-			var enemyId = enemies[e.RowIndex].ID;
-			if (enemyId == 0) return;
-			
-			using (var frm = new FrmEnemyEdit())
-			{
-				frm.EditEnemyID = enemyId;
-				frm.ShowDialog();
-			}
-
-			enemiesAll = Enemy.Select();
-			Search();
 		}
 	}
 }

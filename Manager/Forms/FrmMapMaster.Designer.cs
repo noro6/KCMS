@@ -28,11 +28,13 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.cmbWorld = new System.Windows.Forms.ComboBox();
 			this.cmbMap = new System.Windows.Forms.ComboBox();
 			this.cmbNode = new System.Windows.Forms.ComboBox();
@@ -40,6 +42,13 @@
 			this.btnAddMap = new System.Windows.Forms.Button();
 			this.btnAddNode = new System.Windows.Forms.Button();
 			this.dgvPatterns = new System.Windows.Forms.DataGridView();
+			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnAddPattern = new System.Windows.Forms.Button();
 			this.btnClose = new System.Windows.Forms.Button();
 			this.btnCopyPattern = new System.Windows.Forms.Button();
@@ -52,12 +61,14 @@
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.btnDeleteNode = new System.Windows.Forms.Button();
 			this.btnEditNode = new System.Windows.Forms.Button();
-			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnDown = new System.Windows.Forms.Button();
+			this.btnUp = new System.Windows.Forms.Button();
+			this.btnUpdateSort = new System.Windows.Forms.Button();
+			this.chkKo = new System.Windows.Forms.CheckBox();
+			this.chkOtsu = new System.Windows.Forms.CheckBox();
+			this.chkHei = new System.Windows.Forms.CheckBox();
+			this.chkTei = new System.Windows.Forms.CheckBox();
+			this.chkAll = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPatterns)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -92,7 +103,7 @@
 			this.cmbNode.Name = "cmbNode";
 			this.cmbNode.Size = new System.Drawing.Size(183, 23);
 			this.cmbNode.TabIndex = 2;
-			this.cmbNode.SelectedIndexChanged += new System.EventHandler(this.CmbNode_SelectedIndexChanged);
+			this.cmbNode.SelectedValueChanged += new System.EventHandler(this.CmbNode_SelectedValueChanged);
 			// 
 			// btnAddWorld
 			// 
@@ -132,23 +143,107 @@
 			this.dgvPatterns.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle8.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvPatterns.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
 			this.dgvPatterns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvPatterns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
             this.Column4,
             this.Column5,
             this.Column6,
+            this.Column2,
             this.Column7,
             this.Column1});
-			this.dgvPatterns.Location = new System.Drawing.Point(12, 100);
+			this.dgvPatterns.Location = new System.Drawing.Point(12, 130);
 			this.dgvPatterns.MultiSelect = false;
 			this.dgvPatterns.Name = "dgvPatterns";
 			this.dgvPatterns.RowHeadersVisible = false;
 			this.dgvPatterns.RowTemplate.Height = 21;
 			this.dgvPatterns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvPatterns.Size = new System.Drawing.Size(980, 250);
+			this.dgvPatterns.Size = new System.Drawing.Size(941, 219);
 			this.dgvPatterns.TabIndex = 6;
 			this.dgvPatterns.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPatterns_CellDoubleClick);
+			// 
+			// Column3
+			// 
+			this.Column3.DataPropertyName = "NodeRemarks";
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column3.DefaultCellStyle = dataGridViewCellStyle9;
+			this.Column3.HeaderText = "セル";
+			this.Column3.Name = "Column3";
+			this.Column3.ReadOnly = true;
+			this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.Column3.Width = 80;
+			// 
+			// Column4
+			// 
+			this.Column4.DataPropertyName = "TypeName";
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column4.DefaultCellStyle = dataGridViewCellStyle10;
+			this.Column4.HeaderText = "形式";
+			this.Column4.Name = "Column4";
+			this.Column4.ReadOnly = true;
+			this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.Column4.Width = 80;
+			// 
+			// Column5
+			// 
+			this.Column5.DataPropertyName = "FormationName";
+			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column5.DefaultCellStyle = dataGridViewCellStyle11;
+			this.Column5.HeaderText = "陣形";
+			this.Column5.Name = "Column5";
+			this.Column5.ReadOnly = true;
+			this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.Column5.Width = 64;
+			// 
+			// Column6
+			// 
+			this.Column6.DataPropertyName = "LevelName";
+			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column6.DefaultCellStyle = dataGridViewCellStyle12;
+			this.Column6.HeaderText = "Lv";
+			this.Column6.Name = "Column6";
+			this.Column6.ReadOnly = true;
+			this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.Column6.Width = 32;
+			// 
+			// Column2
+			// 
+			this.Column2.DataPropertyName = "AirPower";
+			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.Column2.DefaultCellStyle = dataGridViewCellStyle13;
+			this.Column2.HeaderText = "制空";
+			this.Column2.Name = "Column2";
+			this.Column2.ReadOnly = true;
+			this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.Column2.Width = 48;
+			// 
+			// Column7
+			// 
+			this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.Column7.DataPropertyName = "EnemyName";
+			dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.Column7.DefaultCellStyle = dataGridViewCellStyle14;
+			this.Column7.HeaderText = "敵一覧";
+			this.Column7.Name = "Column7";
+			this.Column7.ReadOnly = true;
+			this.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			// 
+			// Column1
+			// 
+			this.Column1.DataPropertyName = "DetailId";
+			this.Column1.HeaderText = "セル詳細ID";
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
+			this.Column1.Visible = false;
 			// 
 			// btnAddPattern
 			// 
@@ -202,6 +297,7 @@
 			this.btnDeleteWorld.TabIndex = 5;
 			this.btnDeleteWorld.Text = "削除";
 			this.btnDeleteWorld.UseVisualStyleBackColor = true;
+			this.btnDeleteWorld.Click += new System.EventHandler(this.BtnDeleteWorld_Click);
 			// 
 			// btnEditWorld
 			// 
@@ -211,6 +307,7 @@
 			this.btnEditWorld.TabIndex = 4;
 			this.btnEditWorld.Text = "編集";
 			this.btnEditWorld.UseVisualStyleBackColor = true;
+			this.btnEditWorld.Click += new System.EventHandler(this.BtnEditWorld_Click);
 			// 
 			// groupBox2
 			// 
@@ -233,6 +330,7 @@
 			this.btnDeleteMap.TabIndex = 5;
 			this.btnDeleteMap.Text = "削除";
 			this.btnDeleteMap.UseVisualStyleBackColor = true;
+			this.btnDeleteMap.Click += new System.EventHandler(this.BtnDeleteMap_Click);
 			// 
 			// btnEditMap
 			// 
@@ -242,6 +340,7 @@
 			this.btnEditMap.TabIndex = 4;
 			this.btnEditMap.Text = "編集";
 			this.btnEditMap.UseVisualStyleBackColor = true;
+			this.btnEditMap.Click += new System.EventHandler(this.BtnEditMap_Click);
 			// 
 			// groupBox3
 			// 
@@ -264,7 +363,7 @@
 			this.btnDeleteNode.TabIndex = 5;
 			this.btnDeleteNode.Text = "削除";
 			this.btnDeleteNode.UseVisualStyleBackColor = true;
-			this.btnDeleteNode.Click += new System.EventHandler(this.btnDeleteNode_Click);
+			this.btnDeleteNode.Click += new System.EventHandler(this.BtnDeleteNode_Click);
 			// 
 			// btnEditNode
 			// 
@@ -274,68 +373,116 @@
 			this.btnEditNode.TabIndex = 4;
 			this.btnEditNode.Text = "編集";
 			this.btnEditNode.UseVisualStyleBackColor = true;
+			this.btnEditNode.Click += new System.EventHandler(this.BtnEditNode_Click);
 			// 
-			// Column3
+			// btnDown
 			// 
-			this.Column3.DataPropertyName = "NodeRemarks";
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column3.DefaultCellStyle = dataGridViewCellStyle6;
-			this.Column3.HeaderText = "セル";
-			this.Column3.Name = "Column3";
-			this.Column3.ReadOnly = true;
+			this.btnDown.Location = new System.Drawing.Point(959, 253);
+			this.btnDown.Name = "btnDown";
+			this.btnDown.Size = new System.Drawing.Size(33, 60);
+			this.btnDown.TabIndex = 22;
+			this.btnDown.Text = "↓下へ";
+			this.btnDown.UseVisualStyleBackColor = true;
+			this.btnDown.Click += new System.EventHandler(this.BtnDown_Click);
 			// 
-			// Column4
+			// btnUp
 			// 
-			this.Column4.DataPropertyName = "TypeName";
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column4.DefaultCellStyle = dataGridViewCellStyle7;
-			this.Column4.HeaderText = "形式";
-			this.Column4.Name = "Column4";
-			this.Column4.ReadOnly = true;
+			this.btnUp.Location = new System.Drawing.Point(959, 187);
+			this.btnUp.Name = "btnUp";
+			this.btnUp.Size = new System.Drawing.Size(33, 60);
+			this.btnUp.TabIndex = 21;
+			this.btnUp.Text = "↑上へ";
+			this.btnUp.UseVisualStyleBackColor = true;
+			this.btnUp.Click += new System.EventHandler(this.BtnUp_Click);
 			// 
-			// Column5
+			// btnUpdateSort
 			// 
-			this.Column5.DataPropertyName = "FormationName";
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column5.DefaultCellStyle = dataGridViewCellStyle8;
-			this.Column5.HeaderText = "陣形";
-			this.Column5.Name = "Column5";
-			this.Column5.ReadOnly = true;
-			this.Column5.Width = 64;
+			this.btnUpdateSort.Location = new System.Drawing.Point(882, 62);
+			this.btnUpdateSort.Name = "btnUpdateSort";
+			this.btnUpdateSort.Size = new System.Drawing.Size(110, 32);
+			this.btnUpdateSort.TabIndex = 23;
+			this.btnUpdateSort.Text = "順序更新";
+			this.btnUpdateSort.UseVisualStyleBackColor = true;
+			this.btnUpdateSort.Click += new System.EventHandler(this.BtnUpdateSort_Click);
 			// 
-			// Column6
+			// chkKo
 			// 
-			this.Column6.DataPropertyName = "LevelName";
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column6.DefaultCellStyle = dataGridViewCellStyle9;
-			this.Column6.HeaderText = "Lv";
-			this.Column6.Name = "Column6";
-			this.Column6.ReadOnly = true;
-			this.Column6.Width = 32;
+			this.chkKo.AutoSize = true;
+			this.chkKo.Checked = true;
+			this.chkKo.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkKo.Location = new System.Drawing.Point(12, 105);
+			this.chkKo.Name = "chkKo";
+			this.chkKo.Size = new System.Drawing.Size(38, 19);
+			this.chkKo.TabIndex = 24;
+			this.chkKo.Text = "甲";
+			this.chkKo.UseVisualStyleBackColor = true;
+			this.chkKo.CheckedChanged += new System.EventHandler(this.ChkLevel_CheckedChanged);
 			// 
-			// Column7
+			// chkOtsu
 			// 
-			this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Column7.DataPropertyName = "EnemyName";
-			dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.Column7.DefaultCellStyle = dataGridViewCellStyle10;
-			this.Column7.HeaderText = "敵一覧";
-			this.Column7.Name = "Column7";
-			this.Column7.ReadOnly = true;
+			this.chkOtsu.AutoSize = true;
+			this.chkOtsu.Checked = true;
+			this.chkOtsu.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkOtsu.Location = new System.Drawing.Point(56, 105);
+			this.chkOtsu.Name = "chkOtsu";
+			this.chkOtsu.Size = new System.Drawing.Size(38, 19);
+			this.chkOtsu.TabIndex = 25;
+			this.chkOtsu.Text = "乙";
+			this.chkOtsu.UseVisualStyleBackColor = true;
+			this.chkOtsu.CheckedChanged += new System.EventHandler(this.ChkLevel_CheckedChanged);
 			// 
-			// Column1
+			// chkHei
 			// 
-			this.Column1.DataPropertyName = "DetailId";
-			this.Column1.HeaderText = "セル詳細ID";
-			this.Column1.Name = "Column1";
-			this.Column1.ReadOnly = true;
-			this.Column1.Visible = false;
+			this.chkHei.AutoSize = true;
+			this.chkHei.Checked = true;
+			this.chkHei.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkHei.Location = new System.Drawing.Point(100, 105);
+			this.chkHei.Name = "chkHei";
+			this.chkHei.Size = new System.Drawing.Size(38, 19);
+			this.chkHei.TabIndex = 26;
+			this.chkHei.Text = "丙";
+			this.chkHei.UseVisualStyleBackColor = true;
+			this.chkHei.CheckedChanged += new System.EventHandler(this.ChkLevel_CheckedChanged);
+			// 
+			// chkTei
+			// 
+			this.chkTei.AutoSize = true;
+			this.chkTei.Checked = true;
+			this.chkTei.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkTei.Location = new System.Drawing.Point(144, 105);
+			this.chkTei.Name = "chkTei";
+			this.chkTei.Size = new System.Drawing.Size(38, 19);
+			this.chkTei.TabIndex = 27;
+			this.chkTei.Text = "丁";
+			this.chkTei.UseVisualStyleBackColor = true;
+			this.chkTei.CheckedChanged += new System.EventHandler(this.ChkLevel_CheckedChanged);
+			// 
+			// chkAll
+			// 
+			this.chkAll.AutoSize = true;
+			this.chkAll.Checked = true;
+			this.chkAll.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkAll.Location = new System.Drawing.Point(188, 105);
+			this.chkAll.Name = "chkAll";
+			this.chkAll.Size = new System.Drawing.Size(50, 19);
+			this.chkAll.TabIndex = 28;
+			this.chkAll.Text = "全部";
+			this.chkAll.UseVisualStyleBackColor = true;
+			this.chkAll.CheckedChanged += new System.EventHandler(this.ChkAll_CheckedChanged);
 			// 
 			// FrmMapMaster
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1004, 362);
+			this.ClientSize = new System.Drawing.Size(1004, 361);
+			this.Controls.Add(this.chkAll);
+			this.Controls.Add(this.chkTei);
+			this.Controls.Add(this.chkHei);
+			this.Controls.Add(this.chkOtsu);
+			this.Controls.Add(this.chkKo);
+			this.Controls.Add(this.btnUpdateSort);
+			this.Controls.Add(this.btnDown);
+			this.Controls.Add(this.btnUp);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
@@ -345,6 +492,7 @@
 			this.Controls.Add(this.dgvPatterns);
 			this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.MinimumSize = new System.Drawing.Size(1020, 400);
 			this.Name = "FrmMapMaster";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "海域編集";
@@ -354,6 +502,7 @@
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox3.ResumeLayout(false);
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -378,11 +527,20 @@
 		private System.Windows.Forms.GroupBox groupBox3;
 		private System.Windows.Forms.Button btnDeleteNode;
 		private System.Windows.Forms.Button btnEditNode;
+		private System.Windows.Forms.Button btnDown;
+		private System.Windows.Forms.Button btnUp;
+		private System.Windows.Forms.Button btnUpdateSort;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+		private System.Windows.Forms.CheckBox chkKo;
+		private System.Windows.Forms.CheckBox chkOtsu;
+		private System.Windows.Forms.CheckBox chkHei;
+		private System.Windows.Forms.CheckBox chkTei;
+		private System.Windows.Forms.CheckBox chkAll;
 	}
 }

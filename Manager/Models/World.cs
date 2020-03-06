@@ -77,5 +77,25 @@ ORDER BY
 			output = output.Replace(",]", "]");
 			return output;
 		}
+
+		/// <summary>
+		/// 更新処理
+		/// </summary>
+		/// <param name="db"></param>
+		internal void Update(DBManager db)
+		{
+			var sql = $@"
+UPDATE worlds 
+SET
+	name = @name
+WHERE
+	id = {ID}
+";
+			var param = new Dictionary<string, object>()
+			{
+				{ "@name", Name },
+			};
+			db.ExecuteNonQuery(sql, param);
+		}
 	}
 }

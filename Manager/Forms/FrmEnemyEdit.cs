@@ -262,6 +262,8 @@ namespace Manager.Forms
 			enemy.AntiAirWeight = ConvertUtil.ToInt(numAntiAirWeight.Value);
 			enemy.AntiAirBonus = ConvertUtil.ToInt(numAntiAirBonus.Value);
 			enemy.OriginalID = cmbOriginalEnemy.Enabled ? ConvertUtil.ToInt(cmbOriginalEnemy.SelectedValue) : enemy.ID;
+			enemy.AirPower = ConvertUtil.ToInt(lblAirPower.Text);
+			enemy.LandBaseAirPower = ConvertUtil.ToInt(lblLandBaseAirPower.Text);
 
 			// 艦種
 			var types = new List<int>();
@@ -414,6 +416,7 @@ namespace Manager.Forms
 			var ap3 = Enemy.GetAirPower(equipments3, ConvertUtil.ToInt(cmbEquipment3.SelectedValue), ConvertUtil.ToInt(numSlot3.Value));
 			var ap4 = Enemy.GetAirPower(equipments4, ConvertUtil.ToInt(cmbEquipment4.SelectedValue), ConvertUtil.ToInt(numSlot4.Value));
 			var ap5 = Enemy.GetAirPower(equipments5, ConvertUtil.ToInt(cmbEquipment5.SelectedValue), ConvertUtil.ToInt(numSlot5.Value));
+			var sum = ap1 + ap2 + ap3 + ap4 + ap5;
 
 			lblAirPower1.Text = ap1.ToString();
 			lblAirPower2.Text = ap2.ToString();
@@ -421,8 +424,15 @@ namespace Manager.Forms
 			lblAirPower4.Text = ap4.ToString();
 			lblAirPower5.Text = ap5.ToString();
 
-			var sum = ap1 + ap2 + ap3 + ap4 + ap5;
+			var ap1_ = Enemy.GetAirPower(equipments1, ConvertUtil.ToInt(cmbEquipment1.SelectedValue), ConvertUtil.ToInt(numSlot1.Value), true);
+			var ap2_ = Enemy.GetAirPower(equipments2, ConvertUtil.ToInt(cmbEquipment2.SelectedValue), ConvertUtil.ToInt(numSlot2.Value), true);
+			var ap3_ = Enemy.GetAirPower(equipments3, ConvertUtil.ToInt(cmbEquipment3.SelectedValue), ConvertUtil.ToInt(numSlot3.Value), true);
+			var ap4_ = Enemy.GetAirPower(equipments4, ConvertUtil.ToInt(cmbEquipment4.SelectedValue), ConvertUtil.ToInt(numSlot4.Value), true);
+			var ap5_ = Enemy.GetAirPower(equipments5, ConvertUtil.ToInt(cmbEquipment5.SelectedValue), ConvertUtil.ToInt(numSlot5.Value), true);
+			var sum_ = ap1_ + ap2_ + ap3_ + ap4_ + ap5_;
+
 			lblAirPower.Text = sum.ToString();
+			lblLandBaseAirPower.Text = sum_.ToString();
 		}
 	}
 }

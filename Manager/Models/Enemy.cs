@@ -91,6 +91,7 @@ namespace Manager.Models
 		/// <param name="equipments">装備リスト</param>
 		/// <param name="equipmentId">装備ID</param>
 		/// <param name="slot">搭載数</param>
+		/// <param name="isLandBase">対基地の制空値を返すかどうか</param>
 		public static int GetAirPower(List<EnemyEquipment> equipments, int equipmentId, int slot, bool isLandBase = false)
 		{
 			if (equipments == null || equipments.Count == 0) return 0;
@@ -174,31 +175,29 @@ GROUP BY
 
 				foreach (DataRow dr in dt.Rows)
 				{
-					var enemy = new Enemy()
-					{
-						ID = ConvertUtil.ToInt(dr["enemy_id"]),
-						Name = ConvertUtil.ToString(dr["enemy_name"]),
-						TypeIds = ConvertUtil.ToString(dr["type_ids"]),
-						TypeNames = ConvertUtil.ToString(dr["type_names"]),
-						Slot1 = ConvertUtil.ToInt(dr["slot_1"]),
-						Equipment1ID = ConvertUtil.ToInt(dr["equipment1_id"]),
-						Equipment1 = ConvertUtil.ToString(dr["equipment1"]),
-						Slot2 = ConvertUtil.ToInt(dr["slot_2"]),
-						Equipment2ID = ConvertUtil.ToInt(dr["equipment2_id"]),
-						Equipment2 = ConvertUtil.ToString(dr["equipment2"]),
-						Slot3 = ConvertUtil.ToInt(dr["slot_3"]),
-						Equipment3ID = ConvertUtil.ToInt(dr["equipment3_id"]),
-						Equipment3 = ConvertUtil.ToString(dr["equipment3"]),
-						Slot4 = ConvertUtil.ToInt(dr["slot_4"]),
-						Equipment4ID = ConvertUtil.ToInt(dr["equipment4_id"]),
-						Equipment4 = ConvertUtil.ToString(dr["equipment4"]),
-						Slot5 = ConvertUtil.ToInt(dr["slot_5"]),
-						Equipment5ID = ConvertUtil.ToInt(dr["equipment5_id"]),
-						Equipment5 = ConvertUtil.ToString(dr["equipment5"]),
-						OriginalID = ConvertUtil.ToInt(dr["original_id"]),
-						AntiAirWeight = ConvertUtil.ToInt(dr["anti_air_weight"]),
-						AntiAirBonus = ConvertUtil.ToInt(dr["anti_air_bonus"]),
-					};
+					var enemy = new Enemy();
+					enemy.ID = ConvertUtil.ToInt(dr["enemy_id"]);
+					enemy.Name = ConvertUtil.ToString(dr["enemy_name"]);
+					enemy.TypeIds = ConvertUtil.ToString(dr["type_ids"]);
+					enemy.TypeNames = ConvertUtil.ToString(dr["type_names"]);
+					enemy.Slot1 = ConvertUtil.ToInt(dr["slot_1"]);
+					enemy.Equipment1ID = ConvertUtil.ToInt(dr["equipment1_id"]);
+					enemy.Equipment1 = "[" + enemy.Slot1 + "] " + ConvertUtil.ToString(dr["equipment1"]);
+					enemy.Slot2 = ConvertUtil.ToInt(dr["slot_2"]);
+					enemy.Equipment2ID = ConvertUtil.ToInt(dr["equipment2_id"]);
+					enemy.Equipment2 = "[" + enemy.Slot2 + "] " + ConvertUtil.ToString(dr["equipment2"]);
+					enemy.Slot3 = ConvertUtil.ToInt(dr["slot_3"]);
+					enemy.Equipment3ID = ConvertUtil.ToInt(dr["equipment3_id"]);
+					enemy.Equipment3 = "[" + enemy.Slot3 + "] " + ConvertUtil.ToString(dr["equipment3"]);
+					enemy.Slot4 = ConvertUtil.ToInt(dr["slot_4"]);
+					enemy.Equipment4ID = ConvertUtil.ToInt(dr["equipment4_id"]);
+					enemy.Equipment4 = "[" + enemy.Slot4 + "] " + ConvertUtil.ToString(dr["equipment4"]);
+					enemy.Slot5 = ConvertUtil.ToInt(dr["slot_5"]);
+					enemy.Equipment5ID = ConvertUtil.ToInt(dr["equipment5_id"]);
+					enemy.Equipment5 = "[" + enemy.Slot5 + "] " + ConvertUtil.ToString(dr["equipment5"]);
+					enemy.OriginalID = ConvertUtil.ToInt(dr["original_id"]);
+					enemy.AntiAirWeight = ConvertUtil.ToInt(dr["anti_air_weight"]);
+					enemy.AntiAirBonus = ConvertUtil.ToInt(dr["anti_air_bonus"]);
 
 					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment1ID), ConvertUtil.ToInt(enemy.Slot1));
 					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment2ID), ConvertUtil.ToInt(enemy.Slot2));
@@ -242,6 +241,8 @@ INTO enemies(
 	, original_id
 	, anti_air_weight
 	, anti_air_bonus
+	, air_power
+	, land_base_air_power
 ) 
 VALUES ( 
 	{ID}
@@ -259,6 +260,8 @@ VALUES (
 	, {OriginalID}
 	, {AntiAirWeight}
 	, {AntiAirBonus}
+	, {AirPower}
+	, {LandBaseAirPower}
 ) ";
 			var param = new Dictionary<string, object>()
 			{

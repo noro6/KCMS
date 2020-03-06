@@ -156,6 +156,24 @@ VALUES(
 		}
 
 		/// <summary>
+		/// 指定details.id の順序を変更する
+		/// </summary>
+		/// <param name="db"></param>
+		/// <param name="detailId">id</param>
+		/// <param name="patternNo">パターン番号</param>
+		public static void UpdatePatternNo(DBManager db, int detailId, int patternNo)
+		{
+			var sql = $@"
+UPDATE node_details 
+SET
+	pattern_no = {patternNo}
+WHERE
+	id = {detailId}
+";
+			db.ExecuteNonQuery(sql);
+		}
+
+		/// <summary>
 		/// 一意キーで削除処理
 		/// </summary>
 		/// <param name="db"></param>
@@ -172,7 +190,7 @@ VALUES(
 		/// <param name="db"></param>
 		/// <param name="deleteNodeId">紐づいているセルID</param>
 		/// <returns>削除された node_details レコードインスタンス</returns>
-		public static List<NodeDetail> DeleteNode(DBManager db, int deleteNodeId)
+		public static List<NodeDetail> DeleteNodeDetails(DBManager db, int deleteNodeId)
 		{
 			var list = SelectAll(db, deleteNodeId);
 			var sql = "DELETE FROM node_details WHERE node_id = " + deleteNodeId;
