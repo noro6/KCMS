@@ -99,6 +99,12 @@
 			this.lblAirPower = new System.Windows.Forms.Label();
 			this.label14 = new System.Windows.Forms.Label();
 			this.lblLandBaseAirPower = new System.Windows.Forms.Label();
+			this.numAntiAir = new System.Windows.Forms.NumericUpDown();
+			this.label22 = new System.Windows.Forms.Label();
+			this.numEquipmentAntiAir = new System.Windows.Forms.NumericUpDown();
+			this.label24 = new System.Windows.Forms.Label();
+			this.lblAntiAirWeight = new System.Windows.Forms.Label();
+			this.lblAntiAirBonus = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot1)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -111,12 +117,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.numSlot4)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirWeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirBonus)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numAntiAir)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numEquipmentAntiAir)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(33, 73);
+			this.label1.Location = new System.Drawing.Point(33, 44);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(54, 15);
 			this.label1.TabIndex = 0;
@@ -124,14 +132,14 @@
 			// 
 			// txtID
 			// 
-			this.txtID.Location = new System.Drawing.Point(93, 70);
+			this.txtID.Location = new System.Drawing.Point(93, 41);
 			this.txtID.Name = "txtID";
 			this.txtID.Size = new System.Drawing.Size(50, 23);
 			this.txtID.TabIndex = 0;
 			// 
 			// txtName
 			// 
-			this.txtName.Location = new System.Drawing.Point(93, 99);
+			this.txtName.Location = new System.Drawing.Point(93, 70);
 			this.txtName.MaxLength = 60;
 			this.txtName.Name = "txtName";
 			this.txtName.Size = new System.Drawing.Size(198, 23);
@@ -140,7 +148,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(32, 102);
+			this.label2.Location = new System.Drawing.Point(32, 73);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(55, 15);
 			this.label2.TabIndex = 2;
@@ -743,7 +751,7 @@
 			// label21
 			// 
 			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(152, 73);
+			this.label21.Location = new System.Drawing.Point(152, 44);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(43, 15);
 			this.label21.TabIndex = 31;
@@ -755,9 +763,9 @@
 			this.cmbOriginalEnemy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbOriginalEnemy.Enabled = false;
 			this.cmbOriginalEnemy.FormattingEnabled = true;
-			this.cmbOriginalEnemy.Location = new System.Drawing.Point(201, 70);
+			this.cmbOriginalEnemy.Location = new System.Drawing.Point(201, 41);
 			this.cmbOriginalEnemy.Name = "cmbOriginalEnemy";
-			this.cmbOriginalEnemy.Size = new System.Drawing.Size(146, 23);
+			this.cmbOriginalEnemy.Size = new System.Drawing.Size(90, 23);
 			this.cmbOriginalEnemy.TabIndex = 1;
 			this.cmbOriginalEnemy.ValueMember = "ID";
 			// 
@@ -861,11 +869,77 @@
 			this.lblLandBaseAirPower.TabIndex = 34;
 			this.lblLandBaseAirPower.Text = "0";
 			// 
+			// numAntiAir
+			// 
+			this.numAntiAir.Location = new System.Drawing.Point(93, 99);
+			this.numAntiAir.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numAntiAir.Name = "numAntiAir";
+			this.numAntiAir.Size = new System.Drawing.Size(54, 23);
+			this.numAntiAir.TabIndex = 35;
+			// 
+			// label22
+			// 
+			this.label22.AutoSize = true;
+			this.label22.Location = new System.Drawing.Point(32, 102);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(55, 15);
+			this.label22.TabIndex = 36;
+			this.label22.Text = "素対空：";
+			// 
+			// numEquipmentAntiAir
+			// 
+			this.numEquipmentAntiAir.Location = new System.Drawing.Point(237, 99);
+			this.numEquipmentAntiAir.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numEquipmentAntiAir.Name = "numEquipmentAntiAir";
+			this.numEquipmentAntiAir.Size = new System.Drawing.Size(54, 23);
+			this.numEquipmentAntiAir.TabIndex = 37;
+			// 
+			// label24
+			// 
+			this.label24.AutoSize = true;
+			this.label24.Location = new System.Drawing.Point(153, 102);
+			this.label24.Name = "label24";
+			this.label24.Size = new System.Drawing.Size(79, 15);
+			this.label24.TabIndex = 38;
+			this.label24.Text = "総装備対空：";
+			// 
+			// lblAntiAirWeight
+			// 
+			this.lblAntiAirWeight.AutoSize = true;
+			this.lblAntiAirWeight.Location = new System.Drawing.Point(435, 53);
+			this.lblAntiAirWeight.Name = "lblAntiAirWeight";
+			this.lblAntiAirWeight.Size = new System.Drawing.Size(13, 15);
+			this.lblAntiAirWeight.TabIndex = 39;
+			this.lblAntiAirWeight.Text = "0";
+			// 
+			// lblAntiAirBonus
+			// 
+			this.lblAntiAirBonus.AutoSize = true;
+			this.lblAntiAirBonus.Location = new System.Drawing.Point(480, 53);
+			this.lblAntiAirBonus.Name = "lblAntiAirBonus";
+			this.lblAntiAirBonus.Size = new System.Drawing.Size(13, 15);
+			this.lblAntiAirBonus.TabIndex = 40;
+			this.lblAntiAirBonus.Text = "0";
+			// 
 			// FrmEnemyEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(599, 495);
+			this.Controls.Add(this.lblAntiAirBonus);
+			this.Controls.Add(this.lblAntiAirWeight);
+			this.Controls.Add(this.numEquipmentAntiAir);
+			this.Controls.Add(this.label24);
+			this.Controls.Add(this.numAntiAir);
+			this.Controls.Add(this.label22);
 			this.Controls.Add(this.lblLandBaseAirPower);
 			this.Controls.Add(this.label14);
 			this.Controls.Add(this.lblAirPower);
@@ -926,6 +1000,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.numSlot4)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirWeight)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirBonus)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numAntiAir)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numEquipmentAntiAir)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1004,5 +1080,11 @@
 		private System.Windows.Forms.Label lblAirPower;
 		private System.Windows.Forms.Label label14;
 		private System.Windows.Forms.Label lblLandBaseAirPower;
+		private System.Windows.Forms.NumericUpDown numAntiAir;
+		private System.Windows.Forms.Label label22;
+		private System.Windows.Forms.NumericUpDown numEquipmentAntiAir;
+		private System.Windows.Forms.Label label24;
+		private System.Windows.Forms.Label lblAntiAirWeight;
+		private System.Windows.Forms.Label lblAntiAirBonus;
 	}
 }

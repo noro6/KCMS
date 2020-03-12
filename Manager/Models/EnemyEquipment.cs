@@ -132,6 +132,8 @@ SELECT
 	'  { id: ' || id || ', type: ' || equipment_type_id || ', name: ""' || name || '""' || ', antiAir: ' || anti_air || ' },' AS JSON 
 FROM
 	enemy_equipments
+WHERE
+	equipment_type_id < 1000
 ORDER BY
 	ABS(equipment_type_id)
 	, equipment_type_id DESC

@@ -106,6 +106,74 @@ namespace Manager.Models
 		}
 
 		/// <summary>
+		/// 制空値を返却する　
+		/// </summary>
+		/// <param name="equipments">装備リスト</param>
+		/// <param name="equipmentId">装備ID</param>
+		/// <param name="slot">搭載数</param>
+		/// <param name="isLandBase">対基地の制空値を返すかどうか</param>
+		public static int GetAirPower(EnemyEquipment equipment, int slot, bool isLandBase = false)
+		{
+			if (equipment == null) return 0;
+			if (!isLandBase && (equipment.TypeID == 4 || equipment.TypeID == 5))
+			{
+				return 0;
+			}
+
+			return (int)(ConvertUtil.ToInt(equipment.AntiAir) * Math.Sqrt(slot));
+		}
+
+		/// <summary>
+		/// 加重対空（装備倍率分）を取得
+		/// </summary>
+		/// <param name="equipments"></param>
+		/// <param name="equipmentId"></param>
+		/// <returns></returns>
+		public static int GetAntiAirWeight(EnemyEquipment equipment)
+		{
+
+			if (equipment == null) return 0;
+			// 機銃
+			if (equipment.TypeID == 1005) return 6 * ConvertUtil.ToInt(equipment.AntiAir);
+			// 高角砲
+			if (equipment.TypeID == 1002) return 4 * ConvertUtil.ToInt(equipment.AntiAir);
+			// 電探
+			if (equipment.TypeID == 1004) return 3 * ConvertUtil.ToInt(equipment.AntiAir);
+
+			return 0;
+		}
+
+		/// <summary>
+		/// 防空ボーナスを取得
+		/// </summary>
+		/// <param name="equipments"></param>
+		/// <param name="equipmentId"></param>
+		/// <returns></returns>
+		public static double GetAntiAirBonus(EnemyEquipment equipment)
+		{
+
+			if (equipment == null) return 0;
+			// 三式弾
+			//if (equipment.TypeID == 2000) return 0.6 * ConvertUtil.ToInt(equipment.AntiAir);
+			// 電探
+			if (equipment.TypeID == 1004) return 0.4 * ConvertUtil.ToInt(equipment.AntiAir);
+			// 高角砲
+			if (equipment.TypeID == 1002) return 0.35 * ConvertUtil.ToInt(equipment.AntiAir);
+			// 主砲（赤）副砲　機銃　艦戦　艦爆　水偵
+			if (equipment.TypeID == 1001 
+				|| equipment.TypeID == 1003
+				|| equipment.TypeID == 1005
+				|| equipment.TypeID == 1
+				|| equipment.TypeID == -1
+				|| equipment.TypeID == 2
+				|| equipment.TypeID == -2
+				|| equipment.TypeID == 3
+				|| equipment.TypeID == 5) return 0.2 * ConvertUtil.ToInt(equipment.AntiAir);
+
+			return 0;
+		}
+
+		/// <summary>
 		/// 敵艦全体取得
 		/// </summary>
 		/// <returns></returns>

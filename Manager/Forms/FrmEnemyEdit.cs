@@ -111,7 +111,7 @@ namespace Manager.Forms
 			cmbOriginalEnemy.DataSource = originals;
 
 			var planeType = EquipmentType.Select();
-			var enabledTypes = new List<int>() { 1, 2, 3, 5, 6, 101 };
+			var enabledTypes = new List<int>() { 1, 2, 3, 5, 6, 101, 1001, 1002, 1003, 1004, 1005 };
 			cmbType1.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
 			cmbType2.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
 			cmbType3.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
@@ -411,11 +411,18 @@ namespace Manager.Forms
 		/// <param name="e"></param>
 		private void EquipmentStatus_Changed(object sender, EventArgs e)
 		{
-			var ap1 = Enemy.GetAirPower(equipments1, ConvertUtil.ToInt(cmbEquipment1.SelectedValue), ConvertUtil.ToInt(numSlot1.Value));
-			var ap2 = Enemy.GetAirPower(equipments2, ConvertUtil.ToInt(cmbEquipment2.SelectedValue), ConvertUtil.ToInt(numSlot2.Value));
-			var ap3 = Enemy.GetAirPower(equipments3, ConvertUtil.ToInt(cmbEquipment3.SelectedValue), ConvertUtil.ToInt(numSlot3.Value));
-			var ap4 = Enemy.GetAirPower(equipments4, ConvertUtil.ToInt(cmbEquipment4.SelectedValue), ConvertUtil.ToInt(numSlot4.Value));
-			var ap5 = Enemy.GetAirPower(equipments5, ConvertUtil.ToInt(cmbEquipment5.SelectedValue), ConvertUtil.ToInt(numSlot5.Value));
+			var equipment1 = equipments1.Find(v => v.ID == ConvertUtil.ToInt(cmbEquipment1.SelectedValue));
+			var equipment2 = equipments2.Find(v => v.ID == ConvertUtil.ToInt(cmbEquipment2.SelectedValue));
+			var equipment3 = equipments3.Find(v => v.ID == ConvertUtil.ToInt(cmbEquipment3.SelectedValue));
+			var equipment4 = equipments4.Find(v => v.ID == ConvertUtil.ToInt(cmbEquipment4.SelectedValue));
+			var equipment5 = equipments5.Find(v => v.ID == ConvertUtil.ToInt(cmbEquipment5.SelectedValue));
+
+			// 通常制空値
+			var ap1 = Enemy.GetAirPower(equipment1, ConvertUtil.ToInt(numSlot1.Value));
+			var ap2 = Enemy.GetAirPower(equipment2, ConvertUtil.ToInt(numSlot2.Value));
+			var ap3 = Enemy.GetAirPower(equipment3, ConvertUtil.ToInt(numSlot3.Value));
+			var ap4 = Enemy.GetAirPower(equipment4, ConvertUtil.ToInt(numSlot4.Value));
+			var ap5 = Enemy.GetAirPower(equipment5, ConvertUtil.ToInt(numSlot5.Value));
 			var sum = ap1 + ap2 + ap3 + ap4 + ap5;
 
 			lblAirPower1.Text = ap1.ToString();
@@ -424,15 +431,43 @@ namespace Manager.Forms
 			lblAirPower4.Text = ap4.ToString();
 			lblAirPower5.Text = ap5.ToString();
 
-			var ap1_ = Enemy.GetAirPower(equipments1, ConvertUtil.ToInt(cmbEquipment1.SelectedValue), ConvertUtil.ToInt(numSlot1.Value), true);
-			var ap2_ = Enemy.GetAirPower(equipments2, ConvertUtil.ToInt(cmbEquipment2.SelectedValue), ConvertUtil.ToInt(numSlot2.Value), true);
-			var ap3_ = Enemy.GetAirPower(equipments3, ConvertUtil.ToInt(cmbEquipment3.SelectedValue), ConvertUtil.ToInt(numSlot3.Value), true);
-			var ap4_ = Enemy.GetAirPower(equipments4, ConvertUtil.ToInt(cmbEquipment4.SelectedValue), ConvertUtil.ToInt(numSlot4.Value), true);
-			var ap5_ = Enemy.GetAirPower(equipments5, ConvertUtil.ToInt(cmbEquipment5.SelectedValue), ConvertUtil.ToInt(numSlot5.Value), true);
+			// 基地制空値
+			var ap1_ = Enemy.GetAirPower(equipment1, ConvertUtil.ToInt(numSlot1.Value), true);
+			var ap2_ = Enemy.GetAirPower(equipment2, ConvertUtil.ToInt(numSlot2.Value), true);
+			var ap3_ = Enemy.GetAirPower(equipment3, ConvertUtil.ToInt(numSlot3.Value), true);
+			var ap4_ = Enemy.GetAirPower(equipment4, ConvertUtil.ToInt(numSlot4.Value), true);
+			var ap5_ = Enemy.GetAirPower(equipment5, ConvertUtil.ToInt(numSlot5.Value), true);
 			var sum_ = ap1_ + ap2_ + ap3_ + ap4_ + ap5_;
 
 			lblAirPower.Text = sum.ToString();
 			lblLandBaseAirPower.Text = sum_.ToString();
+
+			// 装備対空値
+			var antiAirWeight1 = Enemy.GetAntiAirWeight(equipment1);
+			var antiAirWeight2 = Enemy.GetAntiAirWeight(equipment2);
+			var antiAirWeight3 = Enemy.GetAntiAirWeight(equipment3);
+			var antiAirWeight4 = Enemy.GetAntiAirWeight(equipment4);
+			var antiAirWeight5 = Enemy.GetAntiAirWeight(equipment5);
+			var sumAntiAirWeight = antiAirWeight1 + antiAirWeight2 + antiAirWeight3 + antiAirWeight4 + antiAirWeight5;
+
+			var sumEquipmentAntiAir =
+				ConvertUtil.ToInt(equipment1 == null ? "0" : equipment1.AntiAir)
+				+ ConvertUtil.ToInt(equipment2 == null ? "0" : equipment2.AntiAir)
+				+ ConvertUtil.ToInt(equipment3 == null ? "0" : equipment3.AntiAir)
+				+ ConvertUtil.ToInt(equipment4 == null ? "0" : equipment4.AntiAir)
+				+ ConvertUtil.ToInt(equipment5 == null ? "0" : equipment5.AntiAir);
+
+			var antiAirWeight = 2 * Math.Floor(Math.Sqrt(ConvertUtil.ToInt(numAntiAir.Value) + sumEquipmentAntiAir)) + sumAntiAirWeight;
+			lblAntiAirWeight.Text = antiAirWeight.ToString();
+
+			// 防空ボーナス
+			var antiAirBonus1 = Enemy.GetAntiAirBonus(equipment1);
+			var antiAirBonus2 = Enemy.GetAntiAirBonus(equipment2);
+			var antiAirBonus3 = Enemy.GetAntiAirBonus(equipment3);
+			var antiAirBonus4 = Enemy.GetAntiAirBonus(equipment4);
+			var antiAirBonus5 = Enemy.GetAntiAirBonus(equipment5);
+			var sumantiAirBonus = antiAirBonus1 + antiAirBonus2 + antiAirBonus3 + antiAirBonus4 + antiAirBonus5;
+			lblAntiAirBonus.Text = Math.Floor(sumantiAirBonus).ToString();
 		}
 	}
 }
