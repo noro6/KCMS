@@ -914,7 +914,7 @@
 			// lblAntiAirWeight
 			// 
 			this.lblAntiAirWeight.AutoSize = true;
-			this.lblAntiAirWeight.Location = new System.Drawing.Point(435, 53);
+			this.lblAntiAirWeight.Location = new System.Drawing.Point(334, 53);
 			this.lblAntiAirWeight.Name = "lblAntiAirWeight";
 			this.lblAntiAirWeight.Size = new System.Drawing.Size(13, 15);
 			this.lblAntiAirWeight.TabIndex = 39;

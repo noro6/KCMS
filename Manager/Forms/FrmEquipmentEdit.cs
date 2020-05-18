@@ -120,6 +120,7 @@ namespace Manager.Forms
 					db.Commit();
 
 					MessageBox.Show("登録完了", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					Close();
 				}
 				catch (Exception ex)
 				{
@@ -156,7 +157,7 @@ namespace Manager.Forms
 				ActiveControl = txtID;
 				return true;
 			}
-			if (equipment.TypeID < 1)
+			if (equipment.TypeID == 0)
 			{
 				MessageBox.Show("種別未選択エラー", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return true;

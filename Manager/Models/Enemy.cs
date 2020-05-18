@@ -131,14 +131,16 @@ namespace Manager.Models
 		/// <returns></returns>
 		public static int GetAntiAirWeight(EnemyEquipment equipment)
 		{
-
 			if (equipment == null) return 0;
+
+			var aa = ConvertUtil.ToInt(equipment.AntiAir);
+
 			// 機銃
-			if (equipment.TypeID == 1005) return 6 * ConvertUtil.ToInt(equipment.AntiAir);
+			if (equipment.TypeID == 1005) return 6 * aa;
 			// 高角砲
-			if (equipment.TypeID == 1002) return 4 * ConvertUtil.ToInt(equipment.AntiAir);
+			if (equipment.TypeID == 1002) return 4 * aa;
 			// 電探
-			if (equipment.TypeID == 1004) return 3 * ConvertUtil.ToInt(equipment.AntiAir);
+			if (equipment.TypeID == 1004) return 3 * aa;
 
 			return 0;
 		}
@@ -151,14 +153,15 @@ namespace Manager.Models
 		/// <returns></returns>
 		public static double GetAntiAirBonus(EnemyEquipment equipment)
 		{
-
 			if (equipment == null) return 0;
+
+			var aa = ConvertUtil.ToInt(equipment.AntiAir);
 			// 三式弾
-			//if (equipment.TypeID == 2000) return 0.6 * ConvertUtil.ToInt(equipment.AntiAir);
+			//if (equipment.TypeID == 2000) return 0.6 * aa;
 			// 電探
-			if (equipment.TypeID == 1004) return 0.4 * ConvertUtil.ToInt(equipment.AntiAir);
+			if (equipment.TypeID == 1004) return 0.4 * aa;
 			// 高角砲
-			if (equipment.TypeID == 1002) return 0.35 * ConvertUtil.ToInt(equipment.AntiAir);
+			if (equipment.TypeID == 1002) return 0.35 * aa;
 			// 主砲（赤）副砲　機銃　艦戦　艦爆　水偵
 			if (equipment.TypeID == 1001 
 				|| equipment.TypeID == 1003
@@ -168,7 +171,7 @@ namespace Manager.Models
 				|| equipment.TypeID == 2
 				|| equipment.TypeID == -2
 				|| equipment.TypeID == 3
-				|| equipment.TypeID == 5) return 0.2 * ConvertUtil.ToInt(equipment.AntiAir);
+				|| equipment.TypeID == 5) return 0.2 * aa;
 
 			return 0;
 		}
