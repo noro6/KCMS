@@ -2,7 +2,6 @@
 using Manager.Util;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -40,13 +39,24 @@ namespace Manager.Forms
 			dgvShip.AutoGenerateColumns = false;
 			typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvShip, true, null);
 
+			RefreshData();
+
+			var types = ShipType.Select();
+			types.Insert(0, new ShipType() { ID = -99, Name = "全て" });
+			cmbShipType.DataSource = types;
+			cmbShipType.DisplayMember = "name";
+			cmbShipType.ValueMember = "id";
+		}
+
+		/// <summary>
+		/// データ関連初期化再読み込み
+		/// </summary>
+		private void RefreshData()
+		{
+			dgvShip.DataSource = null;
 			shipAll = Ship.Select();
 			ships = Ship.Select();
 			dgvShip.DataSource = ships;
-
-			cmbShipType.DataSource = ShipType.Select();
-			cmbShipType.DisplayMember = "name";
-			cmbShipType.ValueMember = "id";
 		}
 
 		/// <summary>
@@ -56,16 +66,7 @@ namespace Manager.Forms
 		/// <param name="e"></param>
 		private void TxtSearch_TextChanged(object sender, EventArgs e)
 		{
-			var text = txtSearch.Text.Trim();
-
-			dgvShip.DataSource = null;
-			ships = shipAll.FindAll(v =>
-			{
-				if (v.Name.Contains(text)) return true;
-				if (v.ID.ToString().Contains(text)) return true;
-				return false;
-			});
-			dgvShip.DataSource = ships;
+			Filter();
 		}
 
 		/// <summary>
@@ -76,10 +77,42 @@ namespace Manager.Forms
 		private void CmbShipType_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!isLoaded) return;
-			var selectedType = ConvertUtil.ToInt(cmbShipType.SelectedValue);
+			Filter();
+		}
+
+		/// <summary>
+		/// 表示物のフィルタ　もとい検索処理
+		/// </summary>
+		private void Filter()
+		{
+			var keyword = txtSearch.Text.Trim();
 			dgvShip.DataSource = null;
-			ships = shipAll.FindAll(v => v.TypeID == selectedType).ToList();
-			dgvShip.DataSource = ships;
+			if (keyword != "")
+			{
+				// キーワード検索
+				ships = shipAll.FindAll(v =>
+				{
+					if (v.Name.Contains(keyword)) return true;
+					if (v.ID.ToString().Contains(keyword)) return true;
+					return false;
+				});
+				dgvShip.DataSource = ships;
+			}
+			else
+			{
+				// カテゴリ検索
+				var type = ConvertUtil.ToInt(cmbShipType.SelectedValue);
+				if (type != -99)
+				{
+					ships = shipAll.FindAll(v => v.TypeID == type);
+				}
+				else
+				{
+					// 全件取得
+					ships = shipAll.FindAll(v => true);
+				}
+				dgvShip.DataSource = ships;
+			}
 		}
 
 		/// <summary>
@@ -94,10 +127,14 @@ namespace Manager.Forms
 				frm.ShowDialog();
 			}
 
-			// 編集終了後再検索
-			dgvShip.DataSource = null;
-			ships = Ship.Select();
-			dgvShip.DataSource = ships;
+			var firstIndex = dgvShip.FirstDisplayedScrollingRowIndex;
+			// 新規追加終了後再読み込み再検索
+			RefreshData();
+			Filter();
+			if (firstIndex > 0 && firstIndex < dgvShip.Rows.Count)
+			{
+				dgvShip.FirstDisplayedScrollingRowIndex = firstIndex;
+			}
 		}
 
 		/// <summary>
@@ -115,14 +152,19 @@ namespace Manager.Forms
 				frm.ShowDialog();
 			}
 
-			// 編集終了後再検索
-			dgvShip.DataSource = null;
-			ships = Ship.Select();
-			dgvShip.DataSource = ships;
+			var firstIndex = dgvShip.FirstDisplayedScrollingRowIndex;
+			// 編集終了後再読み込み再検索
+			RefreshData();
+			Filter();
 
-			var displayRowIndex = rowIndex - 10 < 0 ? 0 : rowIndex - 10;
-			dgvShip.FirstDisplayedScrollingRowIndex = ships.Count - 1 < displayRowIndex ? ships.Count - 1 : displayRowIndex;
-			dgvShip[0, rowIndex].Selected = true;
+			if(firstIndex > 0 && firstIndex < dgvShip.Rows.Count)
+			{
+				dgvShip.FirstDisplayedScrollingRowIndex = firstIndex;
+			}
+			if(rowIndex < dgvShip.Rows.Count)
+			{
+				dgvShip[0, rowIndex].Selected = true;
+			}
 		}
 	}
 }

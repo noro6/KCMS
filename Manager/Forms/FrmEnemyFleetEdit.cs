@@ -318,7 +318,7 @@ namespace Manager.Forms
 			var text = txtSearch.Text.Trim();
 
 			// テキストがなければカテゴリ検索
-			var selectedType = ConvertUtil.ToString(cmbEnemyType.SelectedValue);
+			var type = ConvertUtil.ToString(cmbEnemyType.SelectedValue);
 			cmbEnemyType.Enabled = text == "";
 
 			enemies = enemiesAll.FindAll(v =>
@@ -328,7 +328,7 @@ namespace Manager.Forms
 					if (v.Name.Contains(text)) return true;
 					if (v.ID.ToString().Contains(text)) return true;
 				}
-				else if (v.TypeIds.Contains(" " + selectedType + ","))
+				else if (v.TypeIds.Contains(" " + type + ","))
 				{
 					return true;
 				}

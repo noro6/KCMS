@@ -30,10 +30,6 @@
 		{
 			this.txtSearch = new System.Windows.Forms.TextBox();
 			this.dgvEquipments = new System.Windows.Forms.DataGridView();
-			this.cmbType = new System.Windows.Forms.ComboBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.btnClose = new System.Windows.Forms.Button();
-			this.btnAdd = new System.Windows.Forms.Button();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,14 +44,18 @@
 			this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.cmbType = new System.Windows.Forms.ComboBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.btnClose = new System.Windows.Forms.Button();
+			this.btnAdd = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvEquipments)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// txtSearch
 			// 
-			this.txtSearch.Location = new System.Drawing.Point(94, 65);
+			this.txtSearch.Location = new System.Drawing.Point(92, 21);
 			this.txtSearch.Name = "txtSearch";
-			this.txtSearch.Size = new System.Drawing.Size(141, 23);
+			this.txtSearch.Size = new System.Drawing.Size(153, 23);
 			this.txtSearch.TabIndex = 0;
 			this.txtSearch.TextChanged += new System.EventHandler(this.TxtSearch_TextChanged);
 			// 
@@ -84,54 +84,15 @@
             this.Column11,
             this.Column12,
             this.Column13});
-			this.dgvEquipments.Location = new System.Drawing.Point(12, 94);
+			this.dgvEquipments.Location = new System.Drawing.Point(12, 50);
 			this.dgvEquipments.MultiSelect = false;
 			this.dgvEquipments.Name = "dgvEquipments";
 			this.dgvEquipments.RowHeadersVisible = false;
 			this.dgvEquipments.RowTemplate.Height = 21;
 			this.dgvEquipments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvEquipments.Size = new System.Drawing.Size(924, 363);
+			this.dgvEquipments.Size = new System.Drawing.Size(924, 407);
 			this.dgvEquipments.TabIndex = 12;
 			this.dgvEquipments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvEquipments_CellDoubleClick);
-			// 
-			// cmbType
-			// 
-			this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cmbType.FormattingEnabled = true;
-			this.cmbType.Location = new System.Drawing.Point(241, 65);
-			this.cmbType.Name = "cmbType";
-			this.cmbType.Size = new System.Drawing.Size(174, 23);
-			this.cmbType.TabIndex = 1;
-			this.cmbType.SelectedIndexChanged += new System.EventHandler(this.CmbShipType_SelectedIndexChanged);
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 68);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(64, 15);
-			this.label1.TabIndex = 13;
-			this.label1.Text = "IDや名称：";
-			// 
-			// btnClose
-			// 
-			this.btnClose.Location = new System.Drawing.Point(851, 12);
-			this.btnClose.Name = "btnClose";
-			this.btnClose.Size = new System.Drawing.Size(85, 32);
-			this.btnClose.TabIndex = 2;
-			this.btnClose.Text = "閉じる";
-			this.btnClose.UseVisualStyleBackColor = true;
-			this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
-			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(851, 56);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(85, 32);
-			this.btnAdd.TabIndex = 3;
-			this.btnAdd.Text = "新規追加";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
@@ -244,6 +205,45 @@
 			this.Column13.Name = "Column13";
 			this.Column13.ReadOnly = true;
 			this.Column13.Width = 42;
+			// 
+			// cmbType
+			// 
+			this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbType.FormattingEnabled = true;
+			this.cmbType.Location = new System.Drawing.Point(251, 21);
+			this.cmbType.Name = "cmbType";
+			this.cmbType.Size = new System.Drawing.Size(174, 23);
+			this.cmbType.TabIndex = 1;
+			this.cmbType.SelectedIndexChanged += new System.EventHandler(this.CmbShipType_SelectedIndexChanged);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(22, 24);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(64, 15);
+			this.label1.TabIndex = 13;
+			this.label1.Text = "IDや名称：";
+			// 
+			// btnClose
+			// 
+			this.btnClose.Location = new System.Drawing.Point(851, 12);
+			this.btnClose.Name = "btnClose";
+			this.btnClose.Size = new System.Drawing.Size(85, 32);
+			this.btnClose.TabIndex = 2;
+			this.btnClose.Text = "閉じる";
+			this.btnClose.UseVisualStyleBackColor = true;
+			this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
+			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(760, 12);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(85, 32);
+			this.btnAdd.TabIndex = 3;
+			this.btnAdd.Text = "新規追加";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
 			// 
 			// FrmEquipmentList
 			// 

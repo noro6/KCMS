@@ -2,7 +2,6 @@
 using Manager.Util;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -40,13 +39,24 @@ namespace Manager.Forms
 			dgvEquipments.AutoGenerateColumns = false;
 			typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvEquipments, true, null);
 
+			RefreshData();
+
+			var types = EquipmentType.Select();
+			types.Insert(0, new EquipmentType() { ID = -99, Name = "全て" });
+			cmbType.DataSource = types;
+			cmbType.DisplayMember = "name";
+			cmbType.ValueMember = "id";
+		}
+
+		/// <summary>
+		/// データ関連初期化再読み込み
+		/// </summary>
+		private void RefreshData()
+		{
+			dgvEquipments.DataSource = null;
 			equipmentAll = Equipment.Select();
 			equipments = Equipment.Select();
 			dgvEquipments.DataSource = equipments;
-
-			cmbType.DataSource = EquipmentType.Select();
-			cmbType.DisplayMember = "name";
-			cmbType.ValueMember = "id";
 		}
 
 		/// <summary>
@@ -56,16 +66,7 @@ namespace Manager.Forms
 		/// <param name="e"></param>
 		private void TxtSearch_TextChanged(object sender, EventArgs e)
 		{
-			var text = txtSearch.Text.Trim();
-
-			dgvEquipments.DataSource = null;
-			equipments = equipmentAll.FindAll(v =>
-			{
-				if (v.Name.Contains(text)) return true;
-				if (v.ID.ToString().Contains(text)) return true;
-				return false;
-			});
-			dgvEquipments.DataSource = equipments;
+			Filter();
 		}
 
 		/// <summary>
@@ -76,10 +77,42 @@ namespace Manager.Forms
 		private void CmbShipType_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!isLoaded) return;
-			var selectedType = ConvertUtil.ToInt(cmbType.SelectedValue);
+			Filter();
+		}
+
+		/// <summary>
+		/// 表示物のフィルタ　もとい検索処理
+		/// </summary>
+		private void Filter()
+		{
+			var keyword = txtSearch.Text.Trim();
 			dgvEquipments.DataSource = null;
-			equipments = equipmentAll.FindAll(v => v.TypeID == selectedType).ToList();
-			dgvEquipments.DataSource = equipments;
+			if(keyword != "")
+			{
+				// キーワード検索
+				equipments = equipmentAll.FindAll(v =>
+				{
+					if (v.Name.Contains(keyword)) return true;
+					if (v.ID.ToString().Contains(keyword)) return true;
+					return false;
+				});
+				dgvEquipments.DataSource = equipments;
+			}
+			else
+			{
+				// カテゴリ検索
+				var type = ConvertUtil.ToInt(cmbType.SelectedValue);
+				if (type != -99)
+				{
+					equipments = equipmentAll.FindAll(v => v.TypeID == type);
+				}
+				else
+				{
+					// 全件取得
+					equipments = equipmentAll.FindAll(v => true);
+				}
+				dgvEquipments.DataSource = equipments;
+			}
 		}
 
 		/// <summary>
@@ -94,10 +127,15 @@ namespace Manager.Forms
 				frm.ShowDialog();
 			}
 
-			// 編集終了後再検索
-			dgvEquipments.DataSource = null;
-			equipments = Equipment.Select();
-			dgvEquipments.DataSource = equipments;
+			var scrollIndex = dgvEquipments.FirstDisplayedScrollingRowIndex;
+			// 新規追加終了後再検索
+			RefreshData();
+			Filter();
+			// スクロール位置復帰
+			if (scrollIndex > 0 && scrollIndex < dgvEquipments.Rows.Count)
+			{
+				dgvEquipments.FirstDisplayedScrollingRowIndex = scrollIndex;
+			}
 		}
 
 		/// <summary>
@@ -115,14 +153,20 @@ namespace Manager.Forms
 				frm.ShowDialog();
 			}
 
+			var scrollIndex = dgvEquipments.FirstDisplayedScrollingRowIndex;
 			// 編集終了後再検索
-			dgvEquipments.DataSource = null;
-			equipments = Equipment.Select();
-			dgvEquipments.DataSource = equipments;
-
-			var displayRowIndex = rowIndex - 10 < 0 ? 0 : rowIndex - 10;
-			dgvEquipments.FirstDisplayedScrollingRowIndex = equipments.Count - 1 < displayRowIndex ? equipments.Count - 1 : displayRowIndex;
-			dgvEquipments[0, rowIndex].Selected = true;
+			RefreshData();
+			// フィルタ適用
+			Filter();
+			// スクロール位置復帰
+			if (scrollIndex > 0 && scrollIndex < dgvEquipments.Rows.Count)
+			{
+				dgvEquipments.FirstDisplayedScrollingRowIndex = scrollIndex;
+			}
+			if(rowIndex < dgvEquipments.Rows.Count)
+			{
+				dgvEquipments[0, rowIndex].Selected = true;
+			}
 		}
 	}
 }

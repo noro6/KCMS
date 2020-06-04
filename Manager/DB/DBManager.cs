@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Manager.DB
@@ -139,7 +135,7 @@ namespace Manager.DB
 		/// <para name="query">SQL文</para>
 		/// <param name="paramDict">SQLパラメータ(key, value)形式</param>
 		/// </summary>
-		public void ExecuteNonQuery(string query, Dictionary<string, object> paramDict)
+		public int ExecuteNonQuery(string query, Dictionary<string, object> paramDict)
 		{
 			SQLiteCommand sqlCom = new SQLiteCommand
 			{
@@ -153,7 +149,7 @@ namespace Manager.DB
 			}
 
 			// SQLを実行
-			sqlCom.ExecuteNonQuery();
+			return sqlCom.ExecuteNonQuery();
 		}
 	}
 }

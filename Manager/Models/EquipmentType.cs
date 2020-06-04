@@ -8,7 +8,10 @@ namespace Manager.Models
 {
 	class EquipmentType : ModelBase
 	{
-
+		/// <summary>
+		/// 装備カテゴリ読み込み
+		/// </summary>
+		/// <returns></returns>
 		public static List<EquipmentType> Select()
 		{
 			var list = new List<EquipmentType>();
