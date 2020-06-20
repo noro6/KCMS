@@ -129,7 +129,7 @@ WHERE
 			var output = "";
 			var sql = @"
 SELECT
-	'  { id: ' || id || ', type: ' || equipment_type_id || ', name: ""' || name || '""' || ', antiAir: ' || anti_air || ' },' AS JSON 
+	'  { id: ' || id || ', type: ' || equipment_type_id || ', name: ""' || name || '""' || ', antiAir: ' || anti_air || ', torpedo: ' || torpedo || ', bomber: ' || bomber || ' },' AS JSON 
 FROM
 	enemy_equipments
 WHERE

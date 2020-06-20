@@ -401,16 +401,15 @@ VALUES (
 			var output = "";
 			var sql = @"
 SELECT
-	'  { area: ' || world_id || map_no || 
-	', node: ""' || node_name || 
-	'"", remarks: ""' || node_remarks || 
-	'"", pattern: ' || IFNULL(pattern_no, '') || 
-	', lv: ' || level_id || 
-	', type: ' || node_type_id || 
-	', form: ' || formation_id || 
-	', radius: ' || radius || 
-	', enemies: [' || enemy_id || ']' || 
-	', coords: ""' || IFNULL(coords, '') || '"" },' AS json 
+	'  { a: ' || world_id || map_no || 
+	', n: ""' || node_name || 
+	'"", d: ""' || node_remarks || 
+	'"", l: ' || level_id || 
+	', t: ' || node_type_id || 
+	', f: ' || formation_id || 
+	', r: ' || radius || 
+	', e: [' || enemy_id || ']' || 
+	', c: ""' || IFNULL(coords, '') || '"" },' AS json 
 FROM
 	node_information
 ";

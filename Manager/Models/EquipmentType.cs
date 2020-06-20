@@ -43,7 +43,9 @@ namespace Manager.Models
 SELECT
 	  '  { id: ' || id || ', name: ""' || name || '"", abbr: ""' || abbr || '"", css: ""' || css || '"" },' AS json 
 FROM
-	equipment_types 
+	equipment_types
+WHERE
+	ABS(id) < 1000
 ORDER BY
 	ABS(id)
 	, id DESC

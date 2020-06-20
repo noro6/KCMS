@@ -28,13 +28,13 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.cmbWorld = new System.Windows.Forms.ComboBox();
 			this.cmbMap = new System.Windows.Forms.ComboBox();
 			this.cmbNode = new System.Windows.Forms.ComboBox();
@@ -42,13 +42,6 @@
 			this.btnAddMap = new System.Windows.Forms.Button();
 			this.btnAddNode = new System.Windows.Forms.Button();
 			this.dgvPatterns = new System.Windows.Forms.DataGridView();
-			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnAddPattern = new System.Windows.Forms.Button();
 			this.btnClose = new System.Windows.Forms.Button();
 			this.btnCopyPattern = new System.Windows.Forms.Button();
@@ -69,6 +62,13 @@
 			this.chkHei = new System.Windows.Forms.CheckBox();
 			this.chkTei = new System.Windows.Forms.CheckBox();
 			this.chkAll = new System.Windows.Forms.CheckBox();
+			this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPatterns)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -143,14 +143,14 @@
 			this.dgvPatterns.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle8.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dgvPatterns.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvPatterns.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.dgvPatterns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvPatterns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
@@ -169,81 +169,6 @@
 			this.dgvPatterns.Size = new System.Drawing.Size(941, 219);
 			this.dgvPatterns.TabIndex = 6;
 			this.dgvPatterns.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPatterns_CellDoubleClick);
-			// 
-			// Column3
-			// 
-			this.Column3.DataPropertyName = "NodeRemarks";
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column3.DefaultCellStyle = dataGridViewCellStyle9;
-			this.Column3.HeaderText = "セル";
-			this.Column3.Name = "Column3";
-			this.Column3.ReadOnly = true;
-			this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.Column3.Width = 80;
-			// 
-			// Column4
-			// 
-			this.Column4.DataPropertyName = "TypeName";
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column4.DefaultCellStyle = dataGridViewCellStyle10;
-			this.Column4.HeaderText = "形式";
-			this.Column4.Name = "Column4";
-			this.Column4.ReadOnly = true;
-			this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.Column4.Width = 80;
-			// 
-			// Column5
-			// 
-			this.Column5.DataPropertyName = "FormationName";
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column5.DefaultCellStyle = dataGridViewCellStyle11;
-			this.Column5.HeaderText = "陣形";
-			this.Column5.Name = "Column5";
-			this.Column5.ReadOnly = true;
-			this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.Column5.Width = 64;
-			// 
-			// Column6
-			// 
-			this.Column6.DataPropertyName = "LevelName";
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column6.DefaultCellStyle = dataGridViewCellStyle12;
-			this.Column6.HeaderText = "Lv";
-			this.Column6.Name = "Column6";
-			this.Column6.ReadOnly = true;
-			this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.Column6.Width = 32;
-			// 
-			// Column2
-			// 
-			this.Column2.DataPropertyName = "AirPower";
-			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.Column2.DefaultCellStyle = dataGridViewCellStyle13;
-			this.Column2.HeaderText = "制空";
-			this.Column2.Name = "Column2";
-			this.Column2.ReadOnly = true;
-			this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.Column2.Width = 48;
-			// 
-			// Column7
-			// 
-			this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Column7.DataPropertyName = "EnemyName";
-			dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.Column7.DefaultCellStyle = dataGridViewCellStyle14;
-			this.Column7.HeaderText = "敵一覧";
-			this.Column7.Name = "Column7";
-			this.Column7.ReadOnly = true;
-			this.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			// 
-			// Column1
-			// 
-			this.Column1.DataPropertyName = "DetailId";
-			this.Column1.HeaderText = "セル詳細ID";
-			this.Column1.Name = "Column1";
-			this.Column1.ReadOnly = true;
-			this.Column1.Visible = false;
 			// 
 			// btnAddPattern
 			// 
@@ -377,6 +302,7 @@
 			// 
 			// btnDown
 			// 
+			this.btnDown.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.btnDown.Location = new System.Drawing.Point(959, 253);
 			this.btnDown.Name = "btnDown";
 			this.btnDown.Size = new System.Drawing.Size(33, 60);
@@ -387,6 +313,7 @@
 			// 
 			// btnUp
 			// 
+			this.btnUp.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.btnUp.Location = new System.Drawing.Point(959, 187);
 			this.btnUp.Name = "btnUp";
 			this.btnUp.Size = new System.Drawing.Size(33, 60);
@@ -470,6 +397,81 @@
 			this.chkAll.UseVisualStyleBackColor = true;
 			this.chkAll.CheckedChanged += new System.EventHandler(this.ChkAll_CheckedChanged);
 			// 
+			// Column3
+			// 
+			this.Column3.DataPropertyName = "NodeRemarks";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column3.DefaultCellStyle = dataGridViewCellStyle2;
+			this.Column3.HeaderText = "編成名";
+			this.Column3.Name = "Column3";
+			this.Column3.ReadOnly = true;
+			this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.Column3.Width = 80;
+			// 
+			// Column4
+			// 
+			this.Column4.DataPropertyName = "TypeName";
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column4.DefaultCellStyle = dataGridViewCellStyle3;
+			this.Column4.HeaderText = "形式";
+			this.Column4.Name = "Column4";
+			this.Column4.ReadOnly = true;
+			this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.Column4.Width = 80;
+			// 
+			// Column5
+			// 
+			this.Column5.DataPropertyName = "FormationName";
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column5.DefaultCellStyle = dataGridViewCellStyle4;
+			this.Column5.HeaderText = "陣形";
+			this.Column5.Name = "Column5";
+			this.Column5.ReadOnly = true;
+			this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.Column5.Width = 64;
+			// 
+			// Column6
+			// 
+			this.Column6.DataPropertyName = "LevelName";
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column6.DefaultCellStyle = dataGridViewCellStyle5;
+			this.Column6.HeaderText = "Lv";
+			this.Column6.Name = "Column6";
+			this.Column6.ReadOnly = true;
+			this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.Column6.Width = 32;
+			// 
+			// Column2
+			// 
+			this.Column2.DataPropertyName = "AirPower";
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.Column2.DefaultCellStyle = dataGridViewCellStyle6;
+			this.Column2.HeaderText = "制空";
+			this.Column2.Name = "Column2";
+			this.Column2.ReadOnly = true;
+			this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.Column2.Width = 48;
+			// 
+			// Column7
+			// 
+			this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.Column7.DataPropertyName = "EnemyName";
+			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.Column7.DefaultCellStyle = dataGridViewCellStyle7;
+			this.Column7.HeaderText = "敵一覧";
+			this.Column7.Name = "Column7";
+			this.Column7.ReadOnly = true;
+			this.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			// 
+			// Column1
+			// 
+			this.Column1.DataPropertyName = "DetailId";
+			this.Column1.HeaderText = "セル詳細ID";
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
+			this.Column1.Visible = false;
+			// 
 			// FrmMapMaster
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -530,6 +532,11 @@
 		private System.Windows.Forms.Button btnDown;
 		private System.Windows.Forms.Button btnUp;
 		private System.Windows.Forms.Button btnUpdateSort;
+		private System.Windows.Forms.CheckBox chkKo;
+		private System.Windows.Forms.CheckBox chkOtsu;
+		private System.Windows.Forms.CheckBox chkHei;
+		private System.Windows.Forms.CheckBox chkTei;
+		private System.Windows.Forms.CheckBox chkAll;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
@@ -537,10 +544,5 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-		private System.Windows.Forms.CheckBox chkKo;
-		private System.Windows.Forms.CheckBox chkOtsu;
-		private System.Windows.Forms.CheckBox chkHei;
-		private System.Windows.Forms.CheckBox chkTei;
-		private System.Windows.Forms.CheckBox chkAll;
 	}
 }
