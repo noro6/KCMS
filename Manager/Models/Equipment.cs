@@ -19,6 +19,7 @@ namespace Manager.Models
 		public bool CanRemodel { set; get; }
 		public string CanRemodelString { set; get; }
 		public int Radius { set; get; }
+		public int Accracy { set; get; }
 		public int Cost { set; get; }
 		public int AvoidID { set; get; }
 		public string AvoidName { set; get; }
@@ -211,6 +212,7 @@ SELECT
 	', interception: ' || interception || 
 	', scout: ' || scout || 
 	', canRemodel: ' || can_remodel || 
+	', accuracy: ' || accuracy || 
 	', radius: ' || radius || 
 	', cost: ' || cost || 
 	', avoid: ' || avoid_id || 
