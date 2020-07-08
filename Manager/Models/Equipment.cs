@@ -205,20 +205,26 @@ SELECT
 	', type: ' || equipment_type_id || 
 	', name: ""' || name || '""' || 
 	', abbr: ""' || IFNULL(abbr, '') || '""' || 
+	', fire: ' || fire || 
 	', antiAir: ' || anti_air || 
 	', torpedo: ' || torpedo || 
 	', bomber: ' || bomber || 
+	', armor: ' || armor || 
+	', asw: ' || anti_submarine || 
 	', antiBomber: ' || anti_bomer || 
 	', interception: ' || interception || 
 	', scout: ' || scout || 
 	', canRemodel: ' || can_remodel || 
 	', accuracy: ' || accuracy || 
+	', avoid2: ' || avoid2 || 
 	', radius: ' || radius || 
 	', cost: ' || cost || 
 	', avoid: ' || avoid_id || 
 	' },' AS JSON 
 FROM
-	equipments
+	equipments_view
+WHERE
+	equipment_type_id <> 0
 ORDER BY
 	ABS(equipment_type_id)
 	, equipment_type_id DESC
