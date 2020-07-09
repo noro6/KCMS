@@ -224,7 +224,8 @@ SELECT
 FROM
 	equipments_view
 WHERE
-	equipment_type_id <> 0
+	id < 500
+	AND equipment_type_id < 1000
 ORDER BY
 	ABS(equipment_type_id)
 	, equipment_type_id DESC

@@ -20,12 +20,12 @@ namespace Manager.Models
 
 		public EnemyEquipment()
 		{
-			TableName = "enemy_equipments";
+			TableName = "equipments_view";
 		}
 
 		public EnemyEquipment(int planeId)
 		{
-			TableName = "enemy_equipments";
+			TableName = "equipments_view";
 		}
 
 
@@ -50,18 +50,18 @@ namespace Manager.Models
 			{
 				var dt = db.Select($@"
 SELECT
-	  enemy_equipments.id   AS id
-	, enemy_equipments.name AS name
+	  equipments_view.id   AS id
+	, equipments_view.name AS name
 	, equipment_types.id    AS type_id
 	, equipment_types.name  AS type_name
-	, enemy_equipments.anti_air 
+	, equipments_view.anti_air 
 FROM
-	enemy_equipments 
+	equipments_view 
 	LEFT JOIN equipment_types 
-		ON enemy_equipments.equipment_type_id = equipment_types.id 
+		ON equipments_view.equipment_type_id = equipment_types.id 
 WHERE
-	1 = 1
-	{(planeId != 0 ? "AND enemy_equipments.id = " + planeId : "")}
+	equipments_view.id >= 500
+	{(planeId != 0 ? "AND equipments_view.id = " + planeId : "")}
 ");
 				foreach (DataRow dr in dt.Rows)
 				{
@@ -91,17 +91,17 @@ WHERE
 			{
 				var dt = db.Select($@"
 SELECT
-	  enemy_equipments.id   AS id
-	, enemy_equipments.name AS name
+	  equipments_view.id   AS id
+	, equipments_view.name AS name
 	, equipment_types.id    AS type_id
 	, equipment_types.name  AS type_name
-	, enemy_equipments.anti_air 
+	, equipments_view.anti_air 
 FROM
-	enemy_equipments 
+	equipments_view 
 	LEFT JOIN equipment_types 
-		ON enemy_equipments.equipment_type_id = equipment_types.id 
+		ON equipments_view.equipment_type_id = equipment_types.id 
 WHERE
-	1 = 1
+	equipments_view.id >= 500
 	{(typeId != 0 ? "AND equipment_types.id = " + typeId : "")}
 ");
 				foreach (DataRow dr in dt.Rows)
@@ -131,9 +131,10 @@ WHERE
 SELECT
 	'  { id: ' || id || ', type: ' || equipment_type_id || ', name: ""' || name || '""' || ', antiAir: ' || anti_air || ', torpedo: ' || torpedo || ', bomber: ' || bomber || ' },' AS JSON 
 FROM
-	enemy_equipments
+	equipments_view
 WHERE
-	equipment_type_id < 1000
+	id >= 500
+	AND equipment_type_id < 1000
 ORDER BY
 	ABS(equipment_type_id)
 	, equipment_type_id DESC

@@ -225,15 +225,15 @@ FROM
 		ON enemies.id = enemies_types.enemy_id 
 	LEFT JOIN enemy_types 
 		ON enemies_types.enemy_type_id = enemy_types.id 
-	LEFT JOIN enemy_equipments AS enemy_plane1 
+	LEFT JOIN equipments_view AS enemy_plane1 
 		ON enemies.equipment_1 = enemy_plane1.id 
-	LEFT JOIN enemy_equipments AS enemy_plane2 
+	LEFT JOIN equipments_view AS enemy_plane2 
 		ON enemies.equipment_2 = enemy_plane2.id 
-	LEFT JOIN enemy_equipments AS enemy_plane3 
+	LEFT JOIN equipments_view AS enemy_plane3 
 		ON enemies.equipment_3 = enemy_plane3.id 
-	LEFT JOIN enemy_equipments AS enemy_plane4 
+	LEFT JOIN equipments_view AS enemy_plane4 
 		ON enemies.equipment_4 = enemy_plane4.id 
-	LEFT JOIN enemy_equipments AS enemy_plane5 
+	LEFT JOIN equipments_view AS enemy_plane5 
 		ON enemies.equipment_5 = enemy_plane5.id
 WHERE
 	enemies.id <> - 1 
@@ -435,54 +435,53 @@ FROM
 			var output = "";
 			var sql = @"
 SELECT
-	  '  { id: ' || id || ', type: [' || GROUP_CONCAT(enemies_types.enemy_type_id, ', ') || ']' || ', name: ""' || name || '""' || ', slot: [' || 
-	  	CASE 
-		WHEN slot_1 > 0 
-			THEN slot_1 || ', ' 
-		ELSE '' 
-		END || CASE 
-		WHEN slot_2 > 0 
-			THEN slot_2 || ', ' 
-		ELSE '' 
-		END || CASE 
-		WHEN slot_3 > 0 
-			THEN slot_3 || ', ' 
-		ELSE '' 
-		END || CASE 
-		WHEN slot_4 > 0 
-			THEN slot_4 || ', ' 
-		ELSE '' 
-		END || CASE 
-		WHEN slot_5 > 0 
-			THEN slot_5 || ', ' 
-		ELSE '' 
-		END || ']' || ', eqp: [' || CASE 
-		WHEN equipment_1 > 0 
-			THEN equipment_1 || ', ' 
-		ELSE '' 
-		END || CASE 
-		WHEN equipment_2 > 0 
-			THEN equipment_2 || ', ' 
-		ELSE '' 
-		END || CASE 
-		WHEN equipment_3 > 0 
-			THEN equipment_3 || ', ' 
-		ELSE '' 
-		END || CASE 
-		WHEN equipment_4 > 0 
-			THEN equipment_4 || ', ' 
-		ELSE '' 
-		END || CASE 
-		WHEN equipment_5 > 0 
-			THEN equipment_5 || ', ' 
-		ELSE '' 
-		END || ']' || ', orig: ' || original_id || ', aaw: ' || anti_air_weight || ', aabo: ' || anti_air_bonus || ' },' AS json 
+    '  { id: ' || id || ', type: [' || GROUP_CONCAT(enemies_types.enemy_type_id, ', ') || ']' || ', name: ""' || name || '""' || ', slot: [' || CASE 
+        WHEN slot_1 > 0 
+            THEN slot_1 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_2 > 0 
+            THEN slot_2 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_3 > 0 
+            THEN slot_3 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_4 > 0 
+            THEN slot_4 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_5 > 0 
+            THEN slot_5 || ', ' 
+        ELSE '' 
+        END || ']' || ', eqp: [' || CASE 
+        WHEN slot_1 > 0 AND equipment_1 > 0 
+            THEN equipment_1 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_2 > 0 AND equipment_2 > 0 
+            THEN equipment_2 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_3 > 0 AND equipment_3 > 0 
+            THEN equipment_3 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_4 > 0 AND equipment_4 > 0 
+            THEN equipment_4 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_5 > 0 AND equipment_5 > 0 
+            THEN equipment_5 || ', ' 
+        ELSE '' 
+        END || ']' || ', orig: ' || original_id || ', aaw: ' || anti_air_weight || ', aabo: ' || anti_air_bonus || ' },' AS json 
 FROM
-	enemies 
-	LEFT JOIN enemies_types 
-		ON enemies.id = enemies_types.enemy_id 
+    enemies 
+    LEFT JOIN enemies_types 
+        ON enemies.id = enemies_types.enemy_id 
 GROUP BY
-	enemies.id
+    enemies.id
 ";
 			using (var db = new DBManager())
 			{
