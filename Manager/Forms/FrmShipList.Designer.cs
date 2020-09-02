@@ -31,6 +31,7 @@
 			this.txtSearch = new System.Windows.Forms.TextBox();
 			this.dgvShip = new System.Windows.Forms.DataGridView();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.図鑑 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,12 +45,13 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnClose = new System.Windows.Forms.Button();
 			this.btnAdd = new System.Windows.Forms.Button();
+			this.chkEnabled = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.dgvShip)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// txtSearch
 			// 
-			this.txtSearch.Location = new System.Drawing.Point(94, 65);
+			this.txtSearch.Location = new System.Drawing.Point(98, 18);
 			this.txtSearch.Name = "txtSearch";
 			this.txtSearch.Size = new System.Drawing.Size(141, 23);
 			this.txtSearch.TabIndex = 0;
@@ -67,6 +69,7 @@
 			this.dgvShip.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvShip.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
+            this.図鑑,
             this.dataGridViewTextBoxColumn2,
             this.Column1,
             this.Column2,
@@ -76,13 +79,13 @@
             this.Column6,
             this.Column7,
             this.Column8});
-			this.dgvShip.Location = new System.Drawing.Point(12, 94);
+			this.dgvShip.Location = new System.Drawing.Point(12, 50);
 			this.dgvShip.MultiSelect = false;
 			this.dgvShip.Name = "dgvShip";
 			this.dgvShip.RowHeadersVisible = false;
 			this.dgvShip.RowTemplate.Height = 21;
 			this.dgvShip.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvShip.Size = new System.Drawing.Size(825, 363);
+			this.dgvShip.Size = new System.Drawing.Size(825, 407);
 			this.dgvShip.TabIndex = 12;
 			this.dgvShip.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvShips_CellDoubleClick);
 			// 
@@ -93,6 +96,14 @@
 			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
 			this.dataGridViewTextBoxColumn1.ReadOnly = true;
 			this.dataGridViewTextBoxColumn1.Width = 42;
+			// 
+			// 図鑑
+			// 
+			this.図鑑.DataPropertyName = "AlbumID";
+			this.図鑑.HeaderText = "図鑑";
+			this.図鑑.Name = "図鑑";
+			this.図鑑.ReadOnly = true;
+			this.図鑑.Width = 54;
 			// 
 			// dataGridViewTextBoxColumn2
 			// 
@@ -171,7 +182,7 @@
 			// 
 			this.cmbShipType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbShipType.FormattingEnabled = true;
-			this.cmbShipType.Location = new System.Drawing.Point(241, 65);
+			this.cmbShipType.Location = new System.Drawing.Point(245, 18);
 			this.cmbShipType.Name = "cmbShipType";
 			this.cmbShipType.Size = new System.Drawing.Size(174, 23);
 			this.cmbShipType.TabIndex = 1;
@@ -180,7 +191,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 68);
+			this.label1.Location = new System.Drawing.Point(16, 21);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(64, 15);
 			this.label1.TabIndex = 13;
@@ -198,7 +209,7 @@
 			// 
 			// btnAdd
 			// 
-			this.btnAdd.Location = new System.Drawing.Point(752, 56);
+			this.btnAdd.Location = new System.Drawing.Point(661, 12);
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(85, 32);
 			this.btnAdd.TabIndex = 3;
@@ -206,11 +217,23 @@
 			this.btnAdd.UseVisualStyleBackColor = true;
 			this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
 			// 
+			// chkEnabled
+			// 
+			this.chkEnabled.AutoSize = true;
+			this.chkEnabled.Location = new System.Drawing.Point(425, 20);
+			this.chkEnabled.Name = "chkEnabled";
+			this.chkEnabled.Size = new System.Drawing.Size(105, 19);
+			this.chkEnabled.TabIndex = 14;
+			this.chkEnabled.Text = "有効な艦娘のみ";
+			this.chkEnabled.UseVisualStyleBackColor = true;
+			this.chkEnabled.CheckedChanged += new System.EventHandler(this.chkEnabled_CheckedChanged);
+			// 
 			// FrmShipList
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(849, 469);
+			this.Controls.Add(this.chkEnabled);
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.btnClose);
 			this.Controls.Add(this.label1);
@@ -237,6 +260,7 @@
 		private System.Windows.Forms.Button btnClose;
 		private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn 図鑑;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -246,5 +270,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+		private System.Windows.Forms.CheckBox chkEnabled;
 	}
 }

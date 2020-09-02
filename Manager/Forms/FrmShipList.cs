@@ -81,12 +81,23 @@ namespace Manager.Forms
 		}
 
 		/// <summary>
+		/// 有効チェックボックス変更
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void chkEnabled_CheckedChanged(object sender, EventArgs e)
+		{
+			Filter();
+		}
+
+		/// <summary>
 		/// 表示物のフィルタ　もとい検索処理
 		/// </summary>
 		private void Filter()
 		{
 			var keyword = txtSearch.Text.Trim();
 			dgvShip.DataSource = null;
+
 			if (keyword != "")
 			{
 				// キーワード検索
@@ -96,7 +107,6 @@ namespace Manager.Forms
 					if (v.ID.ToString().Contains(keyword)) return true;
 					return false;
 				});
-				dgvShip.DataSource = ships;
 			}
 			else
 			{
@@ -111,8 +121,11 @@ namespace Manager.Forms
 					// 全件取得
 					ships = shipAll.FindAll(v => true);
 				}
-				dgvShip.DataSource = ships;
 			}
+
+			if (chkEnabled.Checked) ships = ships.FindAll(v => v.Enabled == true);
+
+			dgvShip.DataSource = ships;
 		}
 
 		/// <summary>
@@ -128,9 +141,11 @@ namespace Manager.Forms
 			}
 
 			var firstIndex = dgvShip.FirstDisplayedScrollingRowIndex;
+
 			// 新規追加終了後再読み込み再検索
 			RefreshData();
 			Filter();
+
 			if (firstIndex > 0 && firstIndex < dgvShip.Rows.Count)
 			{
 				dgvShip.FirstDisplayedScrollingRowIndex = firstIndex;
@@ -153,15 +168,16 @@ namespace Manager.Forms
 			}
 
 			var firstIndex = dgvShip.FirstDisplayedScrollingRowIndex;
+
 			// 編集終了後再読み込み再検索
 			RefreshData();
 			Filter();
 
-			if(firstIndex > 0 && firstIndex < dgvShip.Rows.Count)
+			if (firstIndex > 0 && firstIndex < dgvShip.Rows.Count)
 			{
 				dgvShip.FirstDisplayedScrollingRowIndex = firstIndex;
 			}
-			if(rowIndex < dgvShip.Rows.Count)
+			if (rowIndex < dgvShip.Rows.Count)
 			{
 				dgvShip[0, rowIndex].Selected = true;
 			}

@@ -14,7 +14,7 @@ namespace Manager.Models
 			var list = new List<ShipType>();
 			using (var db = new DBManager())
 			{
-				var dt = db.Select("SELECT id, name FROM ship_types");
+				var dt = db.Select("SELECT id, name FROM ship_types ORDER BY sort");
 
 				foreach (DataRow dr in dt.Rows)
 				{
@@ -38,9 +38,13 @@ namespace Manager.Models
 			var output = "";
 			var sql = @"
 SELECT
-	  '  { id: ' || id || ', name: ""' || name || '"" },' AS json 
+	  '  { id: ' || id || ', name: ""' || name || '"", sort: ' || sort || ' },' AS json 
 FROM
 	ship_types
+WHERE
+	sort < 99
+ORDER BY
+	sort
 ";
 			using (var db = new DBManager())
 			{

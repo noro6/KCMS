@@ -100,6 +100,7 @@ namespace Manager.Util
 			{
 				if (value is null) return alt;
 				if (bool.TryParse(ToString(value), out bool result)) return result;
+				if ((int)ToDecimal(value) == 1) return true;
 				return alt;
 			}
 			catch (Exception)

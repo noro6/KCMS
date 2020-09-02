@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.label1 = new System.Windows.Forms.Label();
-			this.txtID = new System.Windows.Forms.TextBox();
+			this.txtAlbumID = new System.Windows.Forms.TextBox();
 			this.txtName = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
@@ -48,7 +48,7 @@
 			this.btnClose = new System.Windows.Forms.Button();
 			this.btnSave = new System.Windows.Forms.Button();
 			this.cmbType = new System.Windows.Forms.ComboBox();
-			this.txtDeckID = new System.Windows.Forms.TextBox();
+			this.txtID = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.chkIsFinal = new System.Windows.Forms.CheckBox();
@@ -57,6 +57,8 @@
 			this.chkEnabledSlot4 = new System.Windows.Forms.CheckBox();
 			this.chkEnabledSlot3 = new System.Windows.Forms.CheckBox();
 			this.chkEnabledSlot5 = new System.Windows.Forms.CheckBox();
+			this.label7 = new System.Windows.Forms.Label();
+			this.chkEnabled = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot3)).BeginInit();
@@ -67,22 +69,22 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(14, 69);
+			this.label1.Location = new System.Drawing.Point(12, 98);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(54, 15);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "図鑑ID：";
 			// 
-			// txtID
+			// txtAlbumID
 			// 
-			this.txtID.Location = new System.Drawing.Point(74, 66);
-			this.txtID.Name = "txtID";
-			this.txtID.Size = new System.Drawing.Size(50, 23);
-			this.txtID.TabIndex = 0;
+			this.txtAlbumID.Location = new System.Drawing.Point(72, 95);
+			this.txtAlbumID.Name = "txtAlbumID";
+			this.txtAlbumID.Size = new System.Drawing.Size(50, 23);
+			this.txtAlbumID.TabIndex = 0;
 			// 
 			// txtName
 			// 
-			this.txtName.Location = new System.Drawing.Point(74, 95);
+			this.txtName.Location = new System.Drawing.Point(72, 124);
 			this.txtName.MaxLength = 60;
 			this.txtName.Name = "txtName";
 			this.txtName.Size = new System.Drawing.Size(138, 23);
@@ -91,7 +93,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(25, 98);
+			this.label2.Location = new System.Drawing.Point(23, 127);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(43, 15);
 			this.label2.TabIndex = 2;
@@ -100,7 +102,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(25, 156);
+			this.label3.Location = new System.Drawing.Point(23, 185);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(43, 15);
 			this.label3.TabIndex = 5;
@@ -214,7 +216,7 @@
 			// label21
 			// 
 			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(25, 127);
+			this.label21.Location = new System.Drawing.Point(23, 156);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(43, 15);
 			this.label21.TabIndex = 31;
@@ -225,7 +227,7 @@
 			this.cmbOriginalShip.DisplayMember = "Name";
 			this.cmbOriginalShip.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbOriginalShip.FormattingEnabled = true;
-			this.cmbOriginalShip.Location = new System.Drawing.Point(74, 124);
+			this.cmbOriginalShip.Location = new System.Drawing.Point(72, 153);
 			this.cmbOriginalShip.Name = "cmbOriginalShip";
 			this.cmbOriginalShip.Size = new System.Drawing.Size(138, 23);
 			this.cmbOriginalShip.TabIndex = 3;
@@ -256,32 +258,32 @@
 			this.cmbType.DisplayMember = "Name";
 			this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbType.FormattingEnabled = true;
-			this.cmbType.Location = new System.Drawing.Point(74, 153);
+			this.cmbType.Location = new System.Drawing.Point(72, 182);
 			this.cmbType.Name = "cmbType";
 			this.cmbType.Size = new System.Drawing.Size(138, 23);
 			this.cmbType.TabIndex = 4;
 			this.cmbType.ValueMember = "ID";
 			// 
-			// txtDeckID
+			// txtID
 			// 
-			this.txtDeckID.Location = new System.Drawing.Point(74, 208);
-			this.txtDeckID.Name = "txtDeckID";
-			this.txtDeckID.Size = new System.Drawing.Size(50, 23);
-			this.txtDeckID.TabIndex = 6;
+			this.txtID.Location = new System.Drawing.Point(72, 66);
+			this.txtID.Name = "txtID";
+			this.txtID.Size = new System.Drawing.Size(50, 23);
+			this.txtID.TabIndex = 6;
 			// 
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(12, 211);
+			this.label5.Location = new System.Drawing.Point(36, 70);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(56, 15);
+			this.label5.Size = new System.Drawing.Size(30, 15);
 			this.label5.TabIndex = 36;
-			this.label5.Text = "DeckID：";
+			this.label5.Text = "ID：";
 			// 
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(25, 184);
+			this.label6.Location = new System.Drawing.Point(23, 213);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(43, 15);
 			this.label6.TabIndex = 38;
@@ -290,7 +292,7 @@
 			// chkIsFinal
 			// 
 			this.chkIsFinal.AutoSize = true;
-			this.chkIsFinal.Location = new System.Drawing.Point(74, 183);
+			this.chkIsFinal.Location = new System.Drawing.Point(72, 212);
 			this.chkIsFinal.Name = "chkIsFinal";
 			this.chkIsFinal.Size = new System.Drawing.Size(98, 19);
 			this.chkIsFinal.TabIndex = 5;
@@ -352,11 +354,32 @@
 			this.chkEnabledSlot5.UseVisualStyleBackColor = true;
 			this.chkEnabledSlot5.CheckedChanged += new System.EventHandler(this.ChkEnabledSlot5_CheckedChanged);
 			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(238, 212);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(43, 15);
+			this.label7.TabIndex = 39;
+			this.label7.Text = "状態：";
+			// 
+			// chkEnabled
+			// 
+			this.chkEnabled.AutoSize = true;
+			this.chkEnabled.Location = new System.Drawing.Point(287, 213);
+			this.chkEnabled.Name = "chkEnabled";
+			this.chkEnabled.Size = new System.Drawing.Size(50, 19);
+			this.chkEnabled.TabIndex = 40;
+			this.chkEnabled.Text = "有効";
+			this.chkEnabled.UseVisualStyleBackColor = true;
+			// 
 			// FrmShipEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(405, 244);
+			this.Controls.Add(this.chkEnabled);
+			this.Controls.Add(this.label7);
 			this.Controls.Add(this.chkEnabledSlot5);
 			this.Controls.Add(this.chkEnabledSlot4);
 			this.Controls.Add(this.chkEnabledSlot3);
@@ -364,7 +387,7 @@
 			this.Controls.Add(this.chkEnabledSlot1);
 			this.Controls.Add(this.chkIsFinal);
 			this.Controls.Add(this.label6);
-			this.Controls.Add(this.txtDeckID);
+			this.Controls.Add(this.txtID);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.cmbType);
 			this.Controls.Add(this.numSlot5);
@@ -384,7 +407,7 @@
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.txtName);
 			this.Controls.Add(this.label2);
-			this.Controls.Add(this.txtID);
+			this.Controls.Add(this.txtAlbumID);
 			this.Controls.Add(this.label1);
 			this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -406,7 +429,7 @@
 		#endregion
 
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.TextBox txtID;
+		private System.Windows.Forms.TextBox txtAlbumID;
 		private System.Windows.Forms.TextBox txtName;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
@@ -425,7 +448,7 @@
 		private System.Windows.Forms.NumericUpDown numSlot5;
 		private System.Windows.Forms.NumericUpDown numSlot4;
 		private System.Windows.Forms.ComboBox cmbType;
-		private System.Windows.Forms.TextBox txtDeckID;
+		private System.Windows.Forms.TextBox txtID;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.CheckBox chkIsFinal;
@@ -434,5 +457,7 @@
 		private System.Windows.Forms.CheckBox chkEnabledSlot4;
 		private System.Windows.Forms.CheckBox chkEnabledSlot3;
 		private System.Windows.Forms.CheckBox chkEnabledSlot5;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.CheckBox chkEnabled;
 	}
 }

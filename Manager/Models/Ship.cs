@@ -19,7 +19,8 @@ namespace Manager.Models
 		public string IsFinalString { set; get; }
 		public int OriginalID { set; get; }
 		public string OriginalName { set; get; }
-		public int DeckID { set; get; }
+		public int AlbumID { set; get; }
+		public bool Enabled { set; get; }
 		public Ship()
 		{
 			TableName = "ships";
@@ -47,12 +48,13 @@ namespace Manager.Models
 				IsFinal = ships[0].IsFinal;
 				IsFinalString = ships[0].IsFinalString;
 				OriginalID = ships[0].OriginalID;
-				DeckID = ships[0].DeckID;
+				AlbumID = ships[0].AlbumID;
+				Enabled = ships[0].Enabled;
 			}
 		}
 
 		/// <summary>
-		/// 敵艦全体取得
+		/// 艦全体取得
 		/// </summary>
 		/// <returns></returns>
 		public static List<Ship> Select()
@@ -72,37 +74,36 @@ namespace Manager.Models
 			{
 				var dt = db.Select($@"
 SELECT
-	  ships.id            AS ship_id
-	, ships.name          AS ship_name
-	, ship_types.id       AS type_id
-	, ship_types.name     AS type_name
-	, ships.slot_1
-	, ships.slot_2
-	, ships.slot_3
-	, ships.slot_4
-	, ships.slot_5
-	, ships.is_final
-	, ships.original_id
-	, ships.deck_id
-	, original_ships.name AS original_name 
+    main.id AS ship_id
+    , main.name AS ship_name
+    , main.ship_type_id
+    , main.ship_type_name
+    , main.slot_1
+    , main.slot_2
+    , main.slot_3
+    , main.slot_4
+    , main.slot_5
+    , IFNULL(main.is_final, 0) AS is_final
+    , IFNULL(main.original_id, -1) AS original_id
+    , main.album_id
+    , IFNULL(origin.name, '') AS original_name
+	, IFNULL(main.enabled, false) AS enabled
 FROM
-	ships 
-	LEFT JOIN ship_types 
-		ON ships.ship_type_id = ship_types.id 
-	LEFT JOIN ships AS original_ships 
-		ON ships.original_id = original_ships.id
+    ships_view AS main 
+    LEFT JOIN ships_view AS origin 
+        ON main.original_id = origin.album_id 
 WHERE
-	1 = 1
-	{(shipId != 0 ? "AND ships.id = " + shipId : "")}
-");
+    main.id < 1500
+	{(shipId != 0 ? "AND main.id = " + shipId : "")}
+;");
 				foreach (DataRow dr in dt.Rows)
 				{
 					var ship = new Ship()
 					{
 						ID = ConvertUtil.ToInt(dr["ship_id"]),
 						Name = ConvertUtil.ToString(dr["ship_name"]),
-						TypeID = ConvertUtil.ToInt(dr["type_id"]),
-						TypeName = ConvertUtil.ToString(dr["type_name"]),
+						TypeID = ConvertUtil.ToInt(dr["ship_type_id"]),
+						TypeName = ConvertUtil.ToString(dr["ship_type_name"]),
 						Slot1 = ConvertUtil.ToInt(dr["slot_1"], -1),
 						Slot2 = ConvertUtil.ToInt(dr["slot_2"], -1),
 						Slot3 = ConvertUtil.ToInt(dr["slot_3"], -1),
@@ -112,7 +113,8 @@ WHERE
 						IsFinalString = ConvertUtil.ToBool(dr["is_final"]) ? "最終" : "",
 						OriginalID = ConvertUtil.ToInt(dr["original_id"]),
 						OriginalName = ConvertUtil.ToString(dr["original_name"]),
-						DeckID = ConvertUtil.ToInt(dr["deck_id"])
+						AlbumID = ConvertUtil.ToInt(dr["album_id"]),
+						Enabled = ConvertUtil.ToBool(dr["enabled"])
 					};
 					ship.Slot1 = ship.Slot1 < 0 ? null : ship.Slot1;
 					ship.Slot2 = ship.Slot2 < 0 ? null : ship.Slot2;
@@ -157,7 +159,7 @@ VALUES (
 	, @slot_5
 	, {(IsFinal ? 1 : 0)}
 	, {OriginalID}
-	, {DeckID}
+	, {AlbumID}
 ) ";
 			var param = new Dictionary<string, object>()
 			{
@@ -183,7 +185,7 @@ VALUES (
 		}
 
 		/// <summary>
-		/// 敵出現海域(js側 ENEMY_PATTERN)出力
+		/// (js側 SHIP_DATA)出力
 		/// </summary>
 		/// <returns></returns>
 		public static string OutputShip()
@@ -191,31 +193,44 @@ VALUES (
 			var output = "";
 			var sql = @"
 SELECT
-	  '  { id: ' || ships.id || ', type: ' || ships.ship_type_id || ', name: ""' || ships.name || '""' || ', slot: ['
-	 || CASE
-		WHEN slot_1 >= 0
-			THEN slot_1 || ', '
-		ELSE ''
-		END || CASE
-		WHEN slot_2 >= 0
-			THEN slot_2 || ', '
-		ELSE ''
-		END || CASE
-		WHEN slot_3 >= 0
-			THEN slot_3 || ', '
-		ELSE ''
-		END || CASE
-		WHEN slot_4 >= 0
-			THEN slot_4 || ', '
-		ELSE ''
-		END || CASE
-		WHEN slot_5 >= 0
-			THEN slot_5 || ', '
-		ELSE ''
-		END || ']' || 
-	', final: ' || ships.is_final || ', orig: ' || ships.original_id || ', deckid: ' || ships.deck_id || ' },' AS json
+    '  { id: ' || album_id || ', api: ' || id || ', type: ' || ship_type_id || ', name: ""' || name || '""'
+     || ', slot: [' || CASE 
+        WHEN slot_1 > 0 
+            THEN slot_1 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_2 > 0 
+            THEN slot_2 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_3 > 0 
+            THEN slot_3 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_4 > 0 
+            THEN slot_4 || ', ' 
+        ELSE '' 
+        END || CASE 
+        WHEN slot_5 > 0 
+            THEN slot_5 || ', ' 
+        ELSE '' 
+        END || ']' || ', final: ' || is_final || ', orig: ' || original_id || ', valid: ' || enabled || ', sort1: ' || sort_1 || ', sort2: ' || sort_2 || 
+    ' },' AS json 
 FROM
-	ships
+    ships_view 
+WHERE
+    id < 1500 
+    and ( 
+        slot_1 > 0 
+        OR slot_2 > 0 
+        OR slot_3 > 0 
+        OR slot_4 > 0 
+        OR slot_5 > 0
+    ) 
+ORDER BY
+    enabled DESC
+    , album_id;
+
 ";
 			using (var db = new DBManager())
 			{

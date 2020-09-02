@@ -34,11 +34,11 @@ namespace Manager.Forms
 			{
 				// データセット
 				txtID.Text = ConvertUtil.ToString(ship.ID);
-				txtID.ReadOnly = true;
 				txtName.Text = ConvertUtil.ToString(ship.Name);
 				chkIsFinal.Checked = ship.IsFinal;
 				cmbOriginalShip.SelectedValue = ship.OriginalID;
-				txtDeckID.Text = ConvertUtil.ToString(ship.DeckID);
+				txtAlbumID.Text = ConvertUtil.ToString(ship.AlbumID);
+				cmbType.SelectedValue = ship.TypeID;
 
 				chkEnabledSlot1.Checked = !(ship.Slot1 is null);
 				chkEnabledSlot2.Checked = !(ship.Slot2 is null);
@@ -58,6 +58,7 @@ namespace Manager.Forms
 				numSlot4.Enabled = chkEnabledSlot4.Checked;
 				numSlot5.Enabled = chkEnabledSlot5.Checked;
 
+				chkEnabled.Checked = ship.Enabled;
 			}
 			else
 			{
@@ -102,7 +103,8 @@ namespace Manager.Forms
 				Slot5 = chkEnabledSlot5.Checked ? ConvertUtil.ToInt(numSlot5.Value) : (int?)null,
 				IsFinal = chkIsFinal.Checked,
 				OriginalID = ConvertUtil.ToInt(cmbOriginalShip.SelectedValue),
-				DeckID = ConvertUtil.ToInt(txtDeckID.Text),
+				AlbumID = ConvertUtil.ToInt(txtAlbumID.Text),
+				Enabled = chkEnabled.Checked
 			};
 			// 未選択なら自身を無印とする
 			ship.OriginalID = ship.OriginalID == 0 ? ship.ID : ship.OriginalID;
@@ -154,21 +156,28 @@ namespace Manager.Forms
 			if (ship.ID == 0)
 			{
 				MessageBox.Show("ID未入力エラー", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				txtID.SelectAll();
+				txtAlbumID.SelectAll();
 				ActiveControl = txtID;
+				return true;
+			}
+			if (ship.AlbumID == 0)
+			{
+				MessageBox.Show("図鑑ID未入力エラー", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtAlbumID.SelectAll();
+				ActiveControl = txtAlbumID;
 				return true;
 			}
 			if (EditShipID == 0 && new Ship(ship.ID).ID > 0)
 			{
 				MessageBox.Show("ID重複エラー", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				txtID.SelectAll();
+				txtAlbumID.SelectAll();
 				ActiveControl = txtID;
 				return true;
 			}
 			if (ship.Name == "")
 			{
 				MessageBox.Show("名前未入力エラー", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				ActiveControl = txtID;
+				ActiveControl = txtAlbumID;
 				return true;
 			}
 			if (ship.TypeID < 1)
@@ -183,7 +192,7 @@ namespace Manager.Forms
 				cmbOriginalShip.DroppedDown = true;
 				return true;
 			}
-			if (ship.DeckID <= 0)
+			if (ship.AlbumID <= 0)
 			{
 				var dr = MessageBox.Show("デッキビルダーID未入力警告\r\nこのまま続行しますか？", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 				if(dr != DialogResult.OK)
