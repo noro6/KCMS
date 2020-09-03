@@ -590,8 +590,15 @@ namespace Manager.Forms
 		/// </summary>
 		private void ReSearch()
 		{
-			patternAll = EnemyInfomation.Select();
-			Search();
+			try
+			{
+				patternAll = EnemyInfomation.Select();
+				Search();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("検索に失敗しました。" + Environment.NewLine + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
 		}
 
 		/// <summary>

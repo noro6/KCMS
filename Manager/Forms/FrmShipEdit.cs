@@ -30,7 +30,7 @@ namespace Manager.Forms
 			InitializeControl();
 
 			var ship = new Ship(EditShipID);
-			if(ship.ID > 0)
+			if (ship.ID > 0)
 			{
 				// データセット
 				txtID.Text = ConvertUtil.ToString(ship.ID);
@@ -40,23 +40,11 @@ namespace Manager.Forms
 				txtAlbumID.Text = ConvertUtil.ToString(ship.AlbumID);
 				cmbType.SelectedValue = ship.TypeID;
 
-				chkEnabledSlot1.Checked = !(ship.Slot1 is null);
-				chkEnabledSlot2.Checked = !(ship.Slot2 is null);
-				chkEnabledSlot3.Checked = !(ship.Slot3 is null);
-				chkEnabledSlot4.Checked = !(ship.Slot4 is null);
-				chkEnabledSlot5.Checked = !(ship.Slot5 is null);
-
 				numSlot1.Value = ConvertUtil.ToInt(ship.Slot1 is null ? 0 : ship.Slot1);
 				numSlot2.Value = ConvertUtil.ToInt(ship.Slot2 is null ? 0 : ship.Slot2);
 				numSlot3.Value = ConvertUtil.ToInt(ship.Slot3 is null ? 0 : ship.Slot3);
 				numSlot4.Value = ConvertUtil.ToInt(ship.Slot4 is null ? 0 : ship.Slot4);
 				numSlot5.Value = ConvertUtil.ToInt(ship.Slot5 is null ? 0 : ship.Slot5);
-
-				numSlot1.Enabled = chkEnabledSlot1.Checked;
-				numSlot2.Enabled = chkEnabledSlot2.Checked;
-				numSlot3.Enabled = chkEnabledSlot3.Checked;
-				numSlot4.Enabled = chkEnabledSlot4.Checked;
-				numSlot5.Enabled = chkEnabledSlot5.Checked;
 
 				chkEnabled.Checked = ship.Enabled;
 			}
@@ -73,7 +61,8 @@ namespace Manager.Forms
 		{
 			// コンボボックス初期化
 			var originals = Ship.Select();
-			originals.Insert(0, new Ship() { ID = 0, Name = "" });
+			originals.Insert(0, new Ship() { ID = 0, Name = "", Version = 0, AlbumID = 0 });
+			originals = originals.FindAll(v => v.Version == 0);
 			cmbOriginalShip.DataSource = originals;
 
 			cmbType.DataSource = ShipType.Select();
@@ -96,18 +85,13 @@ namespace Manager.Forms
 				ID = ConvertUtil.ToInt(txtID.Text),
 				Name = ConvertUtil.ToString(txtName.Text).Trim(),
 				TypeID = ConvertUtil.ToInt(cmbType.SelectedValue),
-				Slot1 = chkEnabledSlot1.Checked ? ConvertUtil.ToInt(numSlot1.Value) : (int?)null,
-				Slot2 = chkEnabledSlot2.Checked ? ConvertUtil.ToInt(numSlot2.Value) : (int?)null,
-				Slot3 = chkEnabledSlot3.Checked ? ConvertUtil.ToInt(numSlot3.Value) : (int?)null,
-				Slot4 = chkEnabledSlot4.Checked ? ConvertUtil.ToInt(numSlot4.Value) : (int?)null,
-				Slot5 = chkEnabledSlot5.Checked ? ConvertUtil.ToInt(numSlot5.Value) : (int?)null,
 				IsFinal = chkIsFinal.Checked,
 				OriginalID = ConvertUtil.ToInt(cmbOriginalShip.SelectedValue),
 				AlbumID = ConvertUtil.ToInt(txtAlbumID.Text),
 				Enabled = chkEnabled.Checked
 			};
 			// 未選択なら自身を無印とする
-			ship.OriginalID = ship.OriginalID == 0 ? ship.ID : ship.OriginalID;
+			ship.OriginalID = ship.OriginalID == 0 ? ship.AlbumID : ship.OriginalID;
 
 			if (HasError(ship)) return;
 			if (MessageBox.Show("登録を行います。", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Information) != DialogResult.OK) return;
@@ -122,14 +106,12 @@ namespace Manager.Forms
 					// 新規追加
 					if (EditShipID == 0)
 					{
-						// ships 登録
 						ship.Insert(db);
-
+						EditShipID = ship.ID;
 					}
 					// 編集
 					else
 					{
-						// ships 更新
 						Ship.Delete(db, ship.ID);
 						ship.Insert(db);
 					}
@@ -185,7 +167,7 @@ namespace Manager.Forms
 				MessageBox.Show("艦種未選択エラー", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return true;
 			}
-			if((ship.IsFinal || ship.ID > 1000) && ship.OriginalID <= 0)
+			if ((ship.IsFinal || ship.ID > 1000) && ship.OriginalID <= 0)
 			{
 				MessageBox.Show("無印状態未選択エラー", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				ActiveControl = cmbOriginalShip;
@@ -195,7 +177,7 @@ namespace Manager.Forms
 			if (ship.AlbumID <= 0)
 			{
 				var dr = MessageBox.Show("デッキビルダーID未入力警告\r\nこのまま続行しますか？", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-				if(dr != DialogResult.OK)
+				if (dr != DialogResult.OK)
 				{
 					return true;
 				}
@@ -204,29 +186,42 @@ namespace Manager.Forms
 			return false;
 		}
 
-		private void ChkEnabledSlot1_CheckedChanged(object sender, EventArgs e)
+		/// <summary>
+		/// 削除
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnDelete_Click(object sender, EventArgs e)
 		{
-			numSlot1.Enabled = chkEnabledSlot1.Checked;
-		}
+			if (MessageBox.Show("削除を行います。", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Information) != DialogResult.OK) return;
 
-		private void ChkEnabledSlot2_CheckedChanged(object sender, EventArgs e)
-		{
-			numSlot2.Enabled = chkEnabledSlot2.Checked;
-		}
+			using (var db = new DBManager())
+			{
+				try
+				{
+					db.CreateConnection();
+					db.BeginTran();
 
-		private void ChkEnabledSlot3_CheckedChanged(object sender, EventArgs e)
-		{
-			numSlot3.Enabled = chkEnabledSlot3.Checked;
-		}
+					var deleted = Ship.Delete(db, EditShipID) == 1;
 
-		private void ChkEnabledSlot4_CheckedChanged(object sender, EventArgs e)
-		{
-			numSlot4.Enabled = chkEnabledSlot4.Checked;
-		}
+					db.Commit();
 
-		private void ChkEnabledSlot5_CheckedChanged(object sender, EventArgs e)
-		{
-			numSlot5.Enabled = chkEnabledSlot5.Checked;
+					if (deleted)
+					{
+						MessageBox.Show("削除完了", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+						Close();
+					}
+					else
+					{
+						MessageBox.Show("削除対象ではありません。", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					}
+				}
+				catch (Exception ex)
+				{
+					db.RollBack();
+					MessageBox.Show("削除失敗\r\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+			}
 		}
 	}
 }

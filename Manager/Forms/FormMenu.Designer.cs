@@ -1,6 +1,6 @@
 ﻿namespace Manager
 {
-	partial class Menu
+	partial class FormMenu
 	{
 		/// <summary>
 		/// 必要なデザイナー変数です。
@@ -247,6 +247,7 @@
 			this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.MaximizeBox = false;
 			this.Name = "Menu";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "メインメニュー";

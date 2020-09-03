@@ -2,6 +2,7 @@
 using Manager.Util;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -38,6 +39,7 @@ namespace Manager.Forms
 		{
 			dgvShip.AutoGenerateColumns = false;
 			typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvShip, true, null);
+			dgvShip.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
 
 			RefreshData();
 
@@ -53,10 +55,17 @@ namespace Manager.Forms
 		/// </summary>
 		private void RefreshData()
 		{
-			dgvShip.DataSource = null;
-			shipAll = Ship.Select();
-			ships = Ship.Select();
-			dgvShip.DataSource = ships;
+			try
+			{
+				dgvShip.DataSource = null;
+				shipAll = Ship.Select();
+				ships = Ship.Select();
+				dgvShip.DataSource = ships;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("検索に失敗しました。" + Environment.NewLine + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
 		}
 
 		/// <summary>

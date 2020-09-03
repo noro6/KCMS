@@ -101,9 +101,9 @@ namespace Manager.DB
 		/// <para name="query">SQL文</para>
 		/// <para name="paramDict">SQLパラメータ</para>
 		/// </summary>
-		public void ExecuteNonQuery(string query)
+		public int ExecuteNonQuery(string query)
 		{
-			ExecuteNonQuery(query, new Dictionary<string, object>());
+			return ExecuteNonQuery(query, new Dictionary<string, object>());
 		}
 
 		/// <summary>

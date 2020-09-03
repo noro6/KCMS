@@ -2,6 +2,7 @@
 using Manager.Util;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -38,14 +39,16 @@ namespace Manager.Forms
 		{
 			dgvEquipments.AutoGenerateColumns = false;
 			typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvEquipments, true, null);
-
-			RefreshData();
+			dgvEquipments.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
 
 			var types = EquipmentType.Select();
 			types.Insert(0, new EquipmentType() { ID = -99, Name = "全て" });
 			cmbType.DataSource = types;
 			cmbType.DisplayMember = "name";
 			cmbType.ValueMember = "id";
+
+			RefreshData();
+			Filter();
 		}
 
 		/// <summary>
@@ -53,10 +56,16 @@ namespace Manager.Forms
 		/// </summary>
 		private void RefreshData()
 		{
-			dgvEquipments.DataSource = null;
-			equipmentAll = Equipment.Select();
-			equipments = Equipment.Select();
-			dgvEquipments.DataSource = equipments;
+			try
+			{
+				dgvEquipments.DataSource = null;
+				equipmentAll = Equipment.Select();
+				dgvEquipments.DataSource = equipments;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("検索に失敗しました。" + Environment.NewLine + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
 		}
 
 		/// <summary>
@@ -87,7 +96,7 @@ namespace Manager.Forms
 		{
 			var keyword = txtSearch.Text.Trim();
 			dgvEquipments.DataSource = null;
-			if(keyword != "")
+			if (keyword != "")
 			{
 				// キーワード検索
 				equipments = equipmentAll.FindAll(v =>
@@ -163,7 +172,7 @@ namespace Manager.Forms
 			{
 				dgvEquipments.FirstDisplayedScrollingRowIndex = scrollIndex;
 			}
-			if(rowIndex < dgvEquipments.Rows.Count)
+			if (rowIndex < dgvEquipments.Rows.Count)
 			{
 				dgvEquipments[0, rowIndex].Selected = true;
 			}

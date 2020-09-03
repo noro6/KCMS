@@ -1,15 +1,14 @@
 ﻿using Manager.Forms;
 using Manager.Models;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Manager
 {
-	public partial class Menu : Form
+	public partial class FormMenu : Form
 	{
 
-		public Menu()
+		public FormMenu()
 		{
 			InitializeComponent();
 		}

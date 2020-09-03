@@ -50,15 +50,9 @@
 			this.cmbType = new System.Windows.Forms.ComboBox();
 			this.txtID = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
 			this.chkIsFinal = new System.Windows.Forms.CheckBox();
-			this.chkEnabledSlot1 = new System.Windows.Forms.CheckBox();
-			this.chkEnabledSlot2 = new System.Windows.Forms.CheckBox();
-			this.chkEnabledSlot4 = new System.Windows.Forms.CheckBox();
-			this.chkEnabledSlot3 = new System.Windows.Forms.CheckBox();
-			this.chkEnabledSlot5 = new System.Windows.Forms.CheckBox();
-			this.label7 = new System.Windows.Forms.Label();
 			this.chkEnabled = new System.Windows.Forms.CheckBox();
+			this.btnDelete = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot3)).BeginInit();
@@ -69,157 +63,163 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 98);
+			this.label1.Location = new System.Drawing.Point(130, 70);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(54, 15);
-			this.label1.TabIndex = 0;
+			this.label1.TabIndex = 2;
 			this.label1.Text = "図鑑ID：";
 			// 
 			// txtAlbumID
 			// 
-			this.txtAlbumID.Location = new System.Drawing.Point(72, 95);
+			this.txtAlbumID.Location = new System.Drawing.Point(190, 67);
 			this.txtAlbumID.Name = "txtAlbumID";
 			this.txtAlbumID.Size = new System.Drawing.Size(50, 23);
-			this.txtAlbumID.TabIndex = 0;
+			this.txtAlbumID.TabIndex = 3;
 			// 
 			// txtName
 			// 
-			this.txtName.Location = new System.Drawing.Point(72, 124);
+			this.txtName.Location = new System.Drawing.Point(72, 95);
 			this.txtName.MaxLength = 60;
 			this.txtName.Name = "txtName";
-			this.txtName.Size = new System.Drawing.Size(138, 23);
-			this.txtName.TabIndex = 2;
+			this.txtName.ReadOnly = true;
+			this.txtName.Size = new System.Drawing.Size(168, 23);
+			this.txtName.TabIndex = 5;
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(23, 127);
+			this.label2.Location = new System.Drawing.Point(23, 98);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(43, 15);
-			this.label2.TabIndex = 2;
+			this.label2.TabIndex = 4;
 			this.label2.Text = "艦名：";
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(23, 185);
+			this.label3.Location = new System.Drawing.Point(23, 156);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(43, 15);
-			this.label3.TabIndex = 5;
+			this.label3.TabIndex = 8;
 			this.label3.Text = "艦種：";
 			// 
 			// numSlot1
 			// 
-			this.numSlot1.Location = new System.Drawing.Point(343, 67);
+			this.numSlot1.Location = new System.Drawing.Point(312, 67);
 			this.numSlot1.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
 			this.numSlot1.Name = "numSlot1";
+			this.numSlot1.ReadOnly = true;
 			this.numSlot1.Size = new System.Drawing.Size(50, 23);
-			this.numSlot1.TabIndex = 8;
+			this.numSlot1.TabIndex = 13;
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(232, 69);
+			this.label4.Location = new System.Drawing.Point(257, 69);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(49, 15);
-			this.label4.TabIndex = 19;
+			this.label4.TabIndex = 12;
 			this.label4.Text = "搭載1：";
 			// 
 			// numSlot2
 			// 
-			this.numSlot2.Location = new System.Drawing.Point(343, 96);
+			this.numSlot2.Location = new System.Drawing.Point(312, 96);
 			this.numSlot2.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
 			this.numSlot2.Name = "numSlot2";
+			this.numSlot2.ReadOnly = true;
 			this.numSlot2.Size = new System.Drawing.Size(50, 23);
-			this.numSlot2.TabIndex = 10;
+			this.numSlot2.TabIndex = 15;
 			// 
 			// label9
 			// 
 			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(232, 98);
+			this.label9.Location = new System.Drawing.Point(257, 98);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(49, 15);
-			this.label9.TabIndex = 19;
+			this.label9.TabIndex = 14;
 			this.label9.Text = "搭載2：";
 			// 
 			// numSlot3
 			// 
-			this.numSlot3.Location = new System.Drawing.Point(343, 125);
+			this.numSlot3.Location = new System.Drawing.Point(312, 125);
 			this.numSlot3.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
 			this.numSlot3.Name = "numSlot3";
+			this.numSlot3.ReadOnly = true;
 			this.numSlot3.Size = new System.Drawing.Size(50, 23);
-			this.numSlot3.TabIndex = 12;
+			this.numSlot3.TabIndex = 17;
 			// 
 			// label12
 			// 
 			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(232, 127);
+			this.label12.Location = new System.Drawing.Point(257, 127);
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(49, 15);
-			this.label12.TabIndex = 19;
+			this.label12.TabIndex = 16;
 			this.label12.Text = "搭載3：";
 			// 
 			// numSlot5
 			// 
-			this.numSlot5.Location = new System.Drawing.Point(343, 183);
+			this.numSlot5.Location = new System.Drawing.Point(312, 183);
 			this.numSlot5.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
 			this.numSlot5.Name = "numSlot5";
+			this.numSlot5.ReadOnly = true;
 			this.numSlot5.Size = new System.Drawing.Size(50, 23);
-			this.numSlot5.TabIndex = 16;
+			this.numSlot5.TabIndex = 21;
 			// 
 			// label15
 			// 
 			this.label15.AutoSize = true;
-			this.label15.Location = new System.Drawing.Point(232, 185);
+			this.label15.Location = new System.Drawing.Point(257, 185);
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(49, 15);
-			this.label15.TabIndex = 19;
+			this.label15.TabIndex = 20;
 			this.label15.Text = "搭載5：";
 			// 
 			// numSlot4
 			// 
-			this.numSlot4.Location = new System.Drawing.Point(343, 154);
+			this.numSlot4.Location = new System.Drawing.Point(312, 154);
 			this.numSlot4.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
 			this.numSlot4.Name = "numSlot4";
+			this.numSlot4.ReadOnly = true;
 			this.numSlot4.Size = new System.Drawing.Size(50, 23);
-			this.numSlot4.TabIndex = 14;
+			this.numSlot4.TabIndex = 19;
 			// 
 			// label18
 			// 
 			this.label18.AutoSize = true;
-			this.label18.Location = new System.Drawing.Point(232, 156);
+			this.label18.Location = new System.Drawing.Point(257, 156);
 			this.label18.Name = "label18";
 			this.label18.Size = new System.Drawing.Size(49, 15);
-			this.label18.TabIndex = 19;
+			this.label18.TabIndex = 18;
 			this.label18.Text = "搭載4：";
 			// 
 			// label21
 			// 
 			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(23, 156);
+			this.label21.Location = new System.Drawing.Point(23, 127);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(43, 15);
-			this.label21.TabIndex = 31;
+			this.label21.TabIndex = 6;
 			this.label21.Text = "無印：";
 			// 
 			// cmbOriginalShip
@@ -227,28 +227,28 @@
 			this.cmbOriginalShip.DisplayMember = "Name";
 			this.cmbOriginalShip.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbOriginalShip.FormattingEnabled = true;
-			this.cmbOriginalShip.Location = new System.Drawing.Point(72, 153);
+			this.cmbOriginalShip.Location = new System.Drawing.Point(72, 124);
 			this.cmbOriginalShip.Name = "cmbOriginalShip";
-			this.cmbOriginalShip.Size = new System.Drawing.Size(138, 23);
-			this.cmbOriginalShip.TabIndex = 3;
-			this.cmbOriginalShip.ValueMember = "ID";
+			this.cmbOriginalShip.Size = new System.Drawing.Size(168, 23);
+			this.cmbOriginalShip.TabIndex = 7;
+			this.cmbOriginalShip.ValueMember = "AlbumID";
 			// 
 			// btnClose
 			// 
-			this.btnClose.Location = new System.Drawing.Point(297, 12);
+			this.btnClose.Location = new System.Drawing.Point(274, 12);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(88, 35);
-			this.btnClose.TabIndex = 18;
+			this.btnClose.TabIndex = 23;
 			this.btnClose.Text = "閉じる";
 			this.btnClose.UseVisualStyleBackColor = true;
 			this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
 			// 
 			// btnSave
 			// 
-			this.btnSave.Location = new System.Drawing.Point(203, 12);
+			this.btnSave.Location = new System.Drawing.Point(96, 216);
 			this.btnSave.Name = "btnSave";
 			this.btnSave.Size = new System.Drawing.Size(88, 35);
-			this.btnSave.TabIndex = 17;
+			this.btnSave.TabIndex = 22;
 			this.btnSave.Text = "保存";
 			this.btnSave.UseVisualStyleBackColor = true;
 			this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -257,11 +257,12 @@
 			// 
 			this.cmbType.DisplayMember = "Name";
 			this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbType.Enabled = false;
 			this.cmbType.FormattingEnabled = true;
-			this.cmbType.Location = new System.Drawing.Point(72, 182);
+			this.cmbType.Location = new System.Drawing.Point(72, 153);
 			this.cmbType.Name = "cmbType";
-			this.cmbType.Size = new System.Drawing.Size(138, 23);
-			this.cmbType.TabIndex = 4;
+			this.cmbType.Size = new System.Drawing.Size(168, 23);
+			this.cmbType.TabIndex = 9;
 			this.cmbType.ValueMember = "ID";
 			// 
 			// txtID
@@ -269,7 +270,7 @@
 			this.txtID.Location = new System.Drawing.Point(72, 66);
 			this.txtID.Name = "txtID";
 			this.txtID.Size = new System.Drawing.Size(50, 23);
-			this.txtID.TabIndex = 6;
+			this.txtID.TabIndex = 1;
 			// 
 			// label5
 			// 
@@ -277,116 +278,47 @@
 			this.label5.Location = new System.Drawing.Point(36, 70);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(30, 15);
-			this.label5.TabIndex = 36;
+			this.label5.TabIndex = 0;
 			this.label5.Text = "ID：";
-			// 
-			// label6
-			// 
-			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(23, 213);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(43, 15);
-			this.label6.TabIndex = 38;
-			this.label6.Text = "状態：";
 			// 
 			// chkIsFinal
 			// 
 			this.chkIsFinal.AutoSize = true;
-			this.chkIsFinal.Location = new System.Drawing.Point(72, 212);
+			this.chkIsFinal.Location = new System.Drawing.Point(62, 184);
 			this.chkIsFinal.Name = "chkIsFinal";
 			this.chkIsFinal.Size = new System.Drawing.Size(98, 19);
-			this.chkIsFinal.TabIndex = 5;
+			this.chkIsFinal.TabIndex = 10;
 			this.chkIsFinal.Text = "最終改造状態";
 			this.chkIsFinal.UseVisualStyleBackColor = true;
-			// 
-			// chkEnabledSlot1
-			// 
-			this.chkEnabledSlot1.AutoSize = true;
-			this.chkEnabledSlot1.Location = new System.Drawing.Point(287, 69);
-			this.chkEnabledSlot1.Name = "chkEnabledSlot1";
-			this.chkEnabledSlot1.Size = new System.Drawing.Size(50, 19);
-			this.chkEnabledSlot1.TabIndex = 7;
-			this.chkEnabledSlot1.Text = "有効";
-			this.chkEnabledSlot1.UseVisualStyleBackColor = true;
-			this.chkEnabledSlot1.CheckedChanged += new System.EventHandler(this.ChkEnabledSlot1_CheckedChanged);
-			// 
-			// chkEnabledSlot2
-			// 
-			this.chkEnabledSlot2.AutoSize = true;
-			this.chkEnabledSlot2.Location = new System.Drawing.Point(287, 97);
-			this.chkEnabledSlot2.Name = "chkEnabledSlot2";
-			this.chkEnabledSlot2.Size = new System.Drawing.Size(50, 19);
-			this.chkEnabledSlot2.TabIndex = 9;
-			this.chkEnabledSlot2.Text = "有効";
-			this.chkEnabledSlot2.UseVisualStyleBackColor = true;
-			this.chkEnabledSlot2.CheckedChanged += new System.EventHandler(this.ChkEnabledSlot2_CheckedChanged);
-			// 
-			// chkEnabledSlot4
-			// 
-			this.chkEnabledSlot4.AutoSize = true;
-			this.chkEnabledSlot4.Location = new System.Drawing.Point(287, 154);
-			this.chkEnabledSlot4.Name = "chkEnabledSlot4";
-			this.chkEnabledSlot4.Size = new System.Drawing.Size(50, 19);
-			this.chkEnabledSlot4.TabIndex = 13;
-			this.chkEnabledSlot4.Text = "有効";
-			this.chkEnabledSlot4.UseVisualStyleBackColor = true;
-			this.chkEnabledSlot4.CheckedChanged += new System.EventHandler(this.ChkEnabledSlot4_CheckedChanged);
-			// 
-			// chkEnabledSlot3
-			// 
-			this.chkEnabledSlot3.AutoSize = true;
-			this.chkEnabledSlot3.Location = new System.Drawing.Point(287, 126);
-			this.chkEnabledSlot3.Name = "chkEnabledSlot3";
-			this.chkEnabledSlot3.Size = new System.Drawing.Size(50, 19);
-			this.chkEnabledSlot3.TabIndex = 11;
-			this.chkEnabledSlot3.Text = "有効";
-			this.chkEnabledSlot3.UseVisualStyleBackColor = true;
-			this.chkEnabledSlot3.CheckedChanged += new System.EventHandler(this.ChkEnabledSlot3_CheckedChanged);
-			// 
-			// chkEnabledSlot5
-			// 
-			this.chkEnabledSlot5.AutoSize = true;
-			this.chkEnabledSlot5.Location = new System.Drawing.Point(287, 184);
-			this.chkEnabledSlot5.Name = "chkEnabledSlot5";
-			this.chkEnabledSlot5.Size = new System.Drawing.Size(50, 19);
-			this.chkEnabledSlot5.TabIndex = 15;
-			this.chkEnabledSlot5.Text = "有効";
-			this.chkEnabledSlot5.UseVisualStyleBackColor = true;
-			this.chkEnabledSlot5.CheckedChanged += new System.EventHandler(this.ChkEnabledSlot5_CheckedChanged);
-			// 
-			// label7
-			// 
-			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(238, 212);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(43, 15);
-			this.label7.TabIndex = 39;
-			this.label7.Text = "状態：";
 			// 
 			// chkEnabled
 			// 
 			this.chkEnabled.AutoSize = true;
-			this.chkEnabled.Location = new System.Drawing.Point(287, 213);
+			this.chkEnabled.Location = new System.Drawing.Point(166, 184);
 			this.chkEnabled.Name = "chkEnabled";
-			this.chkEnabled.Size = new System.Drawing.Size(50, 19);
-			this.chkEnabled.TabIndex = 40;
-			this.chkEnabled.Text = "有効";
+			this.chkEnabled.Size = new System.Drawing.Size(74, 19);
+			this.chkEnabled.TabIndex = 11;
+			this.chkEnabled.Text = "常時表示";
 			this.chkEnabled.UseVisualStyleBackColor = true;
+			// 
+			// btnDelete
+			// 
+			this.btnDelete.Location = new System.Drawing.Point(202, 216);
+			this.btnDelete.Name = "btnDelete";
+			this.btnDelete.Size = new System.Drawing.Size(88, 35);
+			this.btnDelete.TabIndex = 24;
+			this.btnDelete.Text = "削除";
+			this.btnDelete.UseVisualStyleBackColor = true;
+			this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
 			// 
 			// FrmShipEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(405, 244);
+			this.ClientSize = new System.Drawing.Size(380, 263);
+			this.Controls.Add(this.btnDelete);
 			this.Controls.Add(this.chkEnabled);
-			this.Controls.Add(this.label7);
-			this.Controls.Add(this.chkEnabledSlot5);
-			this.Controls.Add(this.chkEnabledSlot4);
-			this.Controls.Add(this.chkEnabledSlot3);
-			this.Controls.Add(this.chkEnabledSlot2);
-			this.Controls.Add(this.chkEnabledSlot1);
 			this.Controls.Add(this.chkIsFinal);
-			this.Controls.Add(this.label6);
 			this.Controls.Add(this.txtID);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.cmbType);
@@ -412,6 +344,7 @@
 			this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.MaximizeBox = false;
 			this.Name = "FrmShipEdit";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "敵艦編集";
@@ -450,14 +383,8 @@
 		private System.Windows.Forms.ComboBox cmbType;
 		private System.Windows.Forms.TextBox txtID;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.CheckBox chkIsFinal;
-		private System.Windows.Forms.CheckBox chkEnabledSlot1;
-		private System.Windows.Forms.CheckBox chkEnabledSlot2;
-		private System.Windows.Forms.CheckBox chkEnabledSlot4;
-		private System.Windows.Forms.CheckBox chkEnabledSlot3;
-		private System.Windows.Forms.CheckBox chkEnabledSlot5;
-		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.CheckBox chkEnabled;
+		private System.Windows.Forms.Button btnDelete;
 	}
 }

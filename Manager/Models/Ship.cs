@@ -10,12 +10,14 @@ namespace Manager.Models
 	{
 		public int TypeID { set; get; }
 		public string TypeName { set; get; }
+		public int SlotCount { set; get; }
 		public int? Slot1 { set; get; }
 		public int? Slot2 { set; get; }
 		public int? Slot3 { set; get; }
 		public int? Slot4 { set; get; }
 		public int? Slot5 { set; get; }
 		public bool IsFinal { set; get; }
+		public int Version { set; get; }
 		public string IsFinalString { set; get; }
 		public int OriginalID { set; get; }
 		public string OriginalName { set; get; }
@@ -40,11 +42,13 @@ namespace Manager.Models
 				Name = ships[0].Name;
 				TypeID = ships[0].TypeID;
 				TypeName = ships[0].TypeName;
+				SlotCount = ships[0].SlotCount;
 				Slot1 = ships[0].Slot1;
 				Slot2 = ships[0].Slot2;
 				Slot3 = ships[0].Slot3;
 				Slot4 = ships[0].Slot4;
 				Slot5 = ships[0].Slot5;
+				Version = ships[0].Version;
 				IsFinal = ships[0].IsFinal;
 				IsFinalString = ships[0].IsFinalString;
 				OriginalID = ships[0].OriginalID;
@@ -78,16 +82,18 @@ SELECT
     , main.name AS ship_name
     , main.ship_type_id
     , main.ship_type_name
+	, main.slot_count
     , main.slot_1
     , main.slot_2
     , main.slot_3
     , main.slot_4
     , main.slot_5
+	, main.version
     , IFNULL(main.is_final, 0) AS is_final
     , IFNULL(main.original_id, -1) AS original_id
     , main.album_id
     , IFNULL(origin.name, '') AS original_name
-	, IFNULL(main.enabled, false) AS enabled
+	, IFNULL(main.enabled, 0) AS enabled
 FROM
     ships_view AS main 
     LEFT JOIN ships_view AS origin 
@@ -104,11 +110,13 @@ WHERE
 						Name = ConvertUtil.ToString(dr["ship_name"]),
 						TypeID = ConvertUtil.ToInt(dr["ship_type_id"]),
 						TypeName = ConvertUtil.ToString(dr["ship_type_name"]),
+						SlotCount = ConvertUtil.ToInt(dr["slot_count"], 0),
 						Slot1 = ConvertUtil.ToInt(dr["slot_1"], -1),
 						Slot2 = ConvertUtil.ToInt(dr["slot_2"], -1),
 						Slot3 = ConvertUtil.ToInt(dr["slot_3"], -1),
 						Slot4 = ConvertUtil.ToInt(dr["slot_4"], -1),
 						Slot5 = ConvertUtil.ToInt(dr["slot_5"], -1),
+						Version = ConvertUtil.ToInt(dr["version"], -1),
 						IsFinal = ConvertUtil.ToBool(dr["is_final"]),
 						IsFinalString = ConvertUtil.ToBool(dr["is_final"]) ? "最終" : "",
 						OriginalID = ConvertUtil.ToInt(dr["original_id"]),
@@ -116,11 +124,11 @@ WHERE
 						AlbumID = ConvertUtil.ToInt(dr["album_id"]),
 						Enabled = ConvertUtil.ToBool(dr["enabled"])
 					};
-					ship.Slot1 = ship.Slot1 < 0 ? null : ship.Slot1;
-					ship.Slot2 = ship.Slot2 < 0 ? null : ship.Slot2;
-					ship.Slot3 = ship.Slot3 < 0 ? null : ship.Slot3;
-					ship.Slot4 = ship.Slot4 < 0 ? null : ship.Slot4;
-					ship.Slot5 = ship.Slot5 < 0 ? null : ship.Slot5;
+					ship.Slot1 = ship.SlotCount < 1 || ship.Slot1 < 0 ? null : ship.Slot1;
+					ship.Slot2 = ship.SlotCount < 2 || ship.Slot2 < 0 ? null : ship.Slot2;
+					ship.Slot3 = ship.SlotCount < 3 || ship.Slot3 < 0 ? null : ship.Slot3;
+					ship.Slot4 = ship.SlotCount < 4 || ship.Slot4 < 0 ? null : ship.Slot4;
+					ship.Slot5 = ship.SlotCount < 5 || ship.Slot5 < 0 ? null : ship.Slot5;
 					list.Add(ship);
 				}
 			}
@@ -137,39 +145,19 @@ WHERE
 INSERT 
 INTO ships( 
 	id
-	, ship_type_id
-	, name
-	, slot_1
-	, slot_2
-	, slot_3
-	, slot_4
-	, slot_5
+	, album_id
 	, is_final
 	, original_id
-	, deck_id
+	, enabled
 ) 
 VALUES ( 
 	{ID}
-	, {TypeID}
-	, @name
-	, @slot_1
-	, @slot_2
-	, @slot_3
-	, @slot_4
-	, @slot_5
+	, {AlbumID}
 	, {(IsFinal ? 1 : 0)}
 	, {OriginalID}
-	, {AlbumID}
+	, {Enabled}
 ) ";
-			var param = new Dictionary<string, object>()
-			{
-				{ "@name", Name },
-				{ "@slot_1", Slot1 == null ? (object)DBNull.Value : Slot1 },
-				{ "@slot_2", Slot2 == null ? (object)DBNull.Value : Slot2 },
-				{ "@slot_3", Slot3 == null ? (object)DBNull.Value : Slot3 },
-				{ "@slot_4", Slot4 == null ? (object)DBNull.Value : Slot4 },
-				{ "@slot_5", Slot5 == null ? (object)DBNull.Value : Slot5 },
-			};
+			var param = new Dictionary<string, object>() { { "@name", Name }, };
 			db.ExecuteNonQuery(sql, param);
 		}
 
@@ -178,10 +166,10 @@ VALUES (
 		/// </summary>
 		/// <param name="db"></param>
 		/// <param name="nodeDetailId"></param>
-		internal static void Delete(DBManager db, int enemyId)
+		internal static int Delete(DBManager db, int enemyId)
 		{
 			var sql = $@"DELETE FROM ships WHERE ID = " + enemyId;
-			db.ExecuteNonQuery(sql);
+			return db.ExecuteNonQuery(sql);
 		}
 
 		/// <summary>
@@ -195,23 +183,23 @@ VALUES (
 SELECT
     '  { id: ' || album_id || ', api: ' || id || ', type: ' || ship_type_id || ', name: ""' || name || '""'
      || ', slot: [' || CASE 
-        WHEN slot_1 > 0 
+        WHEN slot_1 >= 0 AND slot_count >= 1 
             THEN slot_1 || ', ' 
         ELSE '' 
         END || CASE 
-        WHEN slot_2 > 0 
+        WHEN slot_2 >= 0 AND slot_count >= 2 
             THEN slot_2 || ', ' 
         ELSE '' 
         END || CASE 
-        WHEN slot_3 > 0 
+        WHEN slot_3 >= 0 AND slot_count >= 3
             THEN slot_3 || ', ' 
         ELSE '' 
         END || CASE 
-        WHEN slot_4 > 0 
+        WHEN slot_4 >= 0 AND slot_count >= 4
             THEN slot_4 || ', ' 
         ELSE '' 
         END || CASE 
-        WHEN slot_5 > 0 
+        WHEN slot_5 >= 0 AND slot_count >= 5
             THEN slot_5 || ', ' 
         ELSE '' 
         END || ']' || ', final: ' || is_final || ', orig: ' || original_id || ', valid: ' || enabled || ', sort1: ' || sort_1 || ', sort2: ' || sort_2 || 

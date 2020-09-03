@@ -42,13 +42,29 @@ namespace Manager.Forms
 			typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvEnemies, true, null);
 			dgvEnemies.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
 
-			enemiesAll = Enemy.Select();
-			enemies = Enemy.Select();
-			dgvEnemies.DataSource = enemies;
-
 			cmbEnemyType.DataSource = EnemyType.Select();
 			cmbEnemyType.DisplayMember = "name";
 			cmbEnemyType.ValueMember = "id";
+
+			RefreshData();
+			Filter();
+		}
+
+		/// <summary>
+		/// データ関連初期化再読み込み
+		/// </summary>
+		private void RefreshData()
+		{
+			try
+			{
+				dgvEnemies.DataSource = null;
+				enemiesAll = Enemy.Select();
+				dgvEnemies.DataSource = enemies;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("検索に失敗しました。" + Environment.NewLine + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
 		}
 
 		/// <summary>
@@ -58,7 +74,7 @@ namespace Manager.Forms
 		/// <param name="e"></param>
 		private void TxtSearch_TextChanged(object sender, EventArgs e)
 		{
-			Search();
+			Filter();
 		}
 
 		/// <summary>
@@ -87,13 +103,16 @@ namespace Manager.Forms
 				frm.ShowDialog();
 			}
 
-			// 編集終了後再検索
-			dgvEnemies.DataSource = null;
+			// 新規追加終了後再読み込み再検索
+			var firstIndex = dgvEnemies.FirstDisplayedScrollingRowIndex;
 
-			enemiesAll = Enemy.Select();
-			Search();
+			RefreshData();
+			Filter();
 
-			dgvEnemies.DataSource = enemies;
+			if (firstIndex > 0 && firstIndex < dgvEnemies.Rows.Count)
+			{
+				dgvEnemies.FirstDisplayedScrollingRowIndex = firstIndex;
+			}
 		}
 
 		/// <summary>
@@ -111,15 +130,20 @@ namespace Manager.Forms
 				frm.ShowDialog();
 			}
 
-			// 編集終了後再検索
-			dgvEnemies.DataSource = null;
+			var firstIndex = dgvEnemies.FirstDisplayedScrollingRowIndex;
 
-			enemiesAll = Enemy.Select();
-			Search();
+			// 編集終了後再読み込み再検索
+			RefreshData();
+			Filter();
 
-			dgvEnemies.DataSource = enemies;
-
-			dgvEnemies.FirstDisplayedScrollingRowIndex = enemies.Count - 1 < rowIndex ? enemies.Count - 1 : rowIndex;
+			if (firstIndex > 0 && firstIndex < dgvEnemies.Rows.Count)
+			{
+				dgvEnemies.FirstDisplayedScrollingRowIndex = firstIndex;
+			}
+			if (rowIndex < dgvEnemies.Rows.Count)
+			{
+				dgvEnemies[0, rowIndex].Selected = true;
+			}
 		}
 
 		/// <summary>
@@ -147,15 +171,22 @@ namespace Manager.Forms
 				frm.ShowDialog();
 			}
 
-			// 編集終了後再検索
-			Search();
-			dgvEnemies.FirstDisplayedScrollingRowIndex = enemies.Count - 1 < rowIndex ? enemies.Count - 1 : rowIndex;
+			// 新規追加終了後再読み込み再検索
+			var firstIndex = dgvEnemies.FirstDisplayedScrollingRowIndex;
+
+			RefreshData();
+			Filter();
+
+			if (firstIndex > 0 && firstIndex < dgvEnemies.Rows.Count)
+			{
+				dgvEnemies.FirstDisplayedScrollingRowIndex = firstIndex;
+			}
 		}
 
 		/// <summary>
 		/// 検索処理
 		/// </summary>
-		private void Search()
+		private void Filter()
 		{
 			var text = txtSearch.Text.Trim();
 

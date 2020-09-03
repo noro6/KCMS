@@ -85,7 +85,7 @@
 			this.dgvShip.RowHeadersVisible = false;
 			this.dgvShip.RowTemplate.Height = 21;
 			this.dgvShip.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvShip.Size = new System.Drawing.Size(825, 407);
+			this.dgvShip.Size = new System.Drawing.Size(880, 403);
 			this.dgvShip.TabIndex = 12;
 			this.dgvShip.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvShips_CellDoubleClick);
 			// 
@@ -199,7 +199,8 @@
 			// 
 			// btnClose
 			// 
-			this.btnClose.Location = new System.Drawing.Point(752, 12);
+			this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnClose.Location = new System.Drawing.Point(807, 12);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(85, 32);
 			this.btnClose.TabIndex = 2;
@@ -209,7 +210,8 @@
 			// 
 			// btnAdd
 			// 
-			this.btnAdd.Location = new System.Drawing.Point(661, 12);
+			this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAdd.Location = new System.Drawing.Point(716, 12);
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(85, 32);
 			this.btnAdd.TabIndex = 3;
@@ -232,7 +234,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(849, 469);
+			this.ClientSize = new System.Drawing.Size(904, 465);
 			this.Controls.Add(this.chkEnabled);
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.btnClose);
@@ -242,6 +244,7 @@
 			this.Controls.Add(this.cmbShipType);
 			this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.MinimumSize = new System.Drawing.Size(920, 504);
 			this.Name = "FrmShipList";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "艦娘一覧";
