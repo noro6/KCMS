@@ -63,6 +63,7 @@ namespace Manager.Forms
 			var originals = Ship.Select();
 			originals.Insert(0, new Ship() { ID = 0, Name = "", Version = 0, AlbumID = 0 });
 			originals = originals.FindAll(v => v.Version == 0);
+			originals.Sort((a, b) => a.AlbumID - b.AlbumID);
 			cmbOriginalShip.DataSource = originals;
 
 			cmbType.DataSource = ShipType.Select();
