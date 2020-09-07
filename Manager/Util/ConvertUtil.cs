@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Manager.Util
 {
@@ -106,6 +109,63 @@ namespace Manager.Util
 			catch (Exception)
 			{
 				return alt;
+			}
+		}
+
+		/// <summary>
+		/// CSVファイルを読み込み、各string配列として返却
+		/// </summary>
+		/// <returns></returns>
+		public static List<List<string>> ReadCSV()
+		{
+			var list = new List<List<string>>();
+			try
+			{
+				//OpenFileDialogクラスのインスタンスを作成
+				var ofd = new OpenFileDialog
+				{
+					InitialDirectory = @"D:\Downloads\",
+					Filter = "CSVファイル(*.csv)|*.csv",
+					Title = "ファイルを選択してください",
+					RestoreDirectory = true,
+				};
+
+				//ダイアログを表示する
+				if (ofd.ShowDialog() == DialogResult.OK)
+				{
+					var parser = new TextFieldParser(ofd.FileName, Encoding.GetEncoding("UTF-8"))
+					{
+						TextFieldType = FieldType.Delimited
+					};
+					parser.SetDelimiters(",");
+
+					while (parser.EndOfData == false)
+					{
+						var column = parser.ReadFields();
+						var row = new List<string>();
+
+						for (int i = 0; i < column.Length; i++)
+						{
+							row.Add(column[i]);
+						}
+
+						if (row.Count > 0)
+						{
+							list.Add(row);
+						}
+					}
+				}
+
+				if(list.Count > 0 )
+				{
+					return list;
+				}
+				return null;
+			}
+			catch (IOException ex)
+			{
+				MessageBox.Show("失敗しました。" + Environment.NewLine + ex.Message, "CSV読込失敗", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return null;
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using Manager.Forms;
 using Manager.Models;
+using Manager.Util;
 using System;
 using System.Windows.Forms;
 
@@ -160,6 +161,16 @@ namespace Manager
 			txtOutput.Text = "const ENEMY_PATTERN = [\r\n" + Enemy.OutputEnemyPatterns() + "];";
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
+		/// <summary>
+		/// 敵編成パターン出力 poiから
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void btnOutputEnemyPatterns2_Click(object sender, EventArgs e)
+		{
+			txtOutput.Text = "const ENEMY_PATTERN = [\r\n" + Enemy.OutputEnemyPatterns2() + "];";
+			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
 
 		/// <summary>
 		/// 全出力
@@ -183,6 +194,16 @@ namespace Manager
 
 			txtOutput.Text = outputText.Trim();
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+
+		/// <summary>
+		/// POICSV取込
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void btnImportCSV_Click(object sender, EventArgs e)
+		{
+			Poi.ReadCSVAndRegist();
 		}
 	}
 }

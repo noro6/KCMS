@@ -82,7 +82,7 @@ namespace Manager.Models
 				LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment3ID), ConvertUtil.ToInt(Slot3), true);
 				LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment4ID), ConvertUtil.ToInt(Slot4), true);
 				LandBaseAirPower += GetAirPower(equipments, ConvertUtil.ToInt(Equipment5ID), ConvertUtil.ToInt(Slot5), true);
-			} 
+			}
 		}
 
 		/// <summary>
@@ -95,10 +95,11 @@ namespace Manager.Models
 		public static int GetAirPower(List<EnemyEquipment> equipments, int equipmentId, int slot, bool isLandBase = false)
 		{
 			if (equipments == null || equipments.Count == 0) return 0;
-			
+
 			var equipment = equipments.Find(v => v.ID == equipmentId);
 			if (equipment == null) return 0;
-			if(!isLandBase && (equipment.TypeID == 4 || equipment.TypeID == 5)) {
+			if (!isLandBase && (equipment.TypeID == 4 || equipment.TypeID == 5))
+			{
 				return 0;
 			}
 
@@ -163,7 +164,7 @@ namespace Manager.Models
 			// 高角砲
 			if (equipment.TypeID == 1002) return 0.35 * aa;
 			// 主砲（赤）副砲　機銃　艦戦　艦爆　水偵
-			if (equipment.TypeID == 1001 
+			if (equipment.TypeID == 1001
 				|| equipment.TypeID == 1003
 				|| equipment.TypeID == 1005
 				|| equipment.TypeID == 1
@@ -190,10 +191,10 @@ namespace Manager.Models
 		/// </summary>
 		/// <param name="enemyId">敵艦ID</param>
 		/// <returns></returns>
-        public static List<Enemy> Select(int enemyId)
+		public static List<Enemy> Select(int enemyId)
 		{
 			var list = new List<Enemy>();
-			using(var db = new DBManager())
+			using (var db = new DBManager())
 			{
 				var dt = db.Select($@"
 SELECT
@@ -414,7 +415,40 @@ FROM
 	node_information
 ";
 
-			using(var db = new DBManager())
+			using (var db = new DBManager())
+			{
+				var dt = db.Select(sql);
+
+				foreach (DataRow dr in dt.Rows)
+				{
+					output += ConvertUtil.ToString(dr["json"]) + "\r\n";
+				}
+			}
+			return output;
+		}
+		/// <summary>
+		/// 敵出現海域(ENEMY_PATTERN)出力 poidbから
+		/// </summary>
+		/// <returns></returns>
+		public static string OutputEnemyPatterns2()
+		{
+			var output = "";
+			var sql = @"
+SELECT
+	'  { a: ' || map_id || 
+	', n: ""' || node_name || 
+	'"", d: ""' || node_remarks || 
+	'"", l: ' || level_id || 
+	', t: ' || node_type_id || 
+	', f: ' || formation_id || 
+	', r: ' || radius || 
+	', e: [' || enemy_id || ']' || 
+	', c: ""' || IFNULL(coords, '') || '"" },' AS json 
+FROM
+	poidb_node_info
+";
+
+			using (var db = new DBManager())
 			{
 				var dt = db.Select(sql);
 
@@ -435,7 +469,7 @@ FROM
 			var output = "";
 			var sql = @"
 SELECT
-    '  { id: ' || id || ', type: [' || GROUP_CONCAT(enemies_types.enemy_type_id, ', ') || ']' || ', name: ""' || name || '""' || ', slot: [' || CASE 
+    '  { id: ' || (id - 1500) || ', type: [' || GROUP_CONCAT(enemies_types.enemy_type_id, ', ') || ']' || ', name: ""' || name || '""' || ', slot: [' || CASE 
         WHEN slot_1 > 0 
             THEN slot_1 || ', ' 
         ELSE '' 

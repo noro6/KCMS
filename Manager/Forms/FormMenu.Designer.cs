@@ -44,6 +44,8 @@
 			this.btnOutputEquipmentTypes = new System.Windows.Forms.Button();
 			this.btnOutputWorlds = new System.Windows.Forms.Button();
 			this.btnOutputAll = new System.Windows.Forms.Button();
+			this.btnOutputEnemyPatterns2 = new System.Windows.Forms.Button();
+			this.btnImportCSV = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnEnd
@@ -70,7 +72,7 @@
 			// 
 			this.btnOutputEnemyPatterns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputEnemyPatterns.Location = new System.Drawing.Point(358, 232);
+			this.btnOutputEnemyPatterns.Location = new System.Drawing.Point(358, 193);
 			this.btnOutputEnemyPatterns.Name = "btnOutputEnemyPatterns";
 			this.btnOutputEnemyPatterns.Size = new System.Drawing.Size(114, 33);
 			this.btnOutputEnemyPatterns.TabIndex = 2;
@@ -203,7 +205,7 @@
 			// 
 			this.btnOutputWorlds.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputWorlds.Location = new System.Drawing.Point(358, 193);
+			this.btnOutputWorlds.Location = new System.Drawing.Point(358, 154);
 			this.btnOutputWorlds.Name = "btnOutputWorlds";
 			this.btnOutputWorlds.Size = new System.Drawing.Size(114, 33);
 			this.btnOutputWorlds.TabIndex = 14;
@@ -223,11 +225,37 @@
 			this.btnOutputAll.UseVisualStyleBackColor = true;
 			this.btnOutputAll.Click += new System.EventHandler(this.BtnOutputAll_Click);
 			// 
-			// Menu
+			// btnOutputEnemyPatterns2
+			// 
+			this.btnOutputEnemyPatterns2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOutputEnemyPatterns2.Location = new System.Drawing.Point(358, 232);
+			this.btnOutputEnemyPatterns2.Name = "btnOutputEnemyPatterns2";
+			this.btnOutputEnemyPatterns2.Size = new System.Drawing.Size(114, 33);
+			this.btnOutputEnemyPatterns2.TabIndex = 16;
+			this.btnOutputEnemyPatterns2.Text = "敵パターン出力poi";
+			this.btnOutputEnemyPatterns2.UseVisualStyleBackColor = true;
+			this.btnOutputEnemyPatterns2.Click += new System.EventHandler(this.btnOutputEnemyPatterns2_Click);
+			// 
+			// btnImportCSV
+			// 
+			this.btnImportCSV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnImportCSV.Location = new System.Drawing.Point(358, 100);
+			this.btnImportCSV.Name = "btnImportCSV";
+			this.btnImportCSV.Size = new System.Drawing.Size(114, 33);
+			this.btnImportCSV.TabIndex = 17;
+			this.btnImportCSV.Text = "poi_csv取込";
+			this.btnImportCSV.UseVisualStyleBackColor = true;
+			this.btnImportCSV.Click += new System.EventHandler(this.btnImportCSV_Click);
+			// 
+			// FormMenu
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(484, 361);
+			this.Controls.Add(this.btnImportCSV);
+			this.Controls.Add(this.btnOutputEnemyPatterns2);
 			this.Controls.Add(this.btnOutputAll);
 			this.Controls.Add(this.btnOutputWorlds);
 			this.Controls.Add(this.btnOutputEquipmentTypes);
@@ -248,7 +276,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
-			this.Name = "Menu";
+			this.Name = "FormMenu";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "メインメニュー";
 			this.ResumeLayout(false);
@@ -274,6 +302,8 @@
 		private System.Windows.Forms.Button btnOutputEquipmentTypes;
 		private System.Windows.Forms.Button btnOutputWorlds;
 		private System.Windows.Forms.Button btnOutputAll;
+		private System.Windows.Forms.Button btnOutputEnemyPatterns2;
+		private System.Windows.Forms.Button btnImportCSV;
 	}
 }
 
