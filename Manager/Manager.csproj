@@ -128,6 +128,7 @@
       <DependentUpon>FormMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Avoid.cs" />
+    <Compile Include="Models\EnemyPattern.cs" />
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\EquipmentType.cs" />
     <Compile Include="Models\Poi.cs" />

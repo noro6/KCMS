@@ -168,7 +168,7 @@ namespace Manager
 		/// <param name="e"></param>
 		private void btnOutputEnemyPatterns2_Click(object sender, EventArgs e)
 		{
-			txtOutput.Text = "const ENEMY_PATTERN = [\r\n" + Enemy.OutputEnemyPatterns2() + "];";
+			txtOutput.Text = "const ENEMY_PATTERN = [\r\n" + Poi.OutputEnemyPatterns() + "];";
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
@@ -204,6 +204,17 @@ namespace Manager
 		private void btnImportCSV_Click(object sender, EventArgs e)
 		{
 			Poi.ReadCSVAndRegist();
+		}
+
+		/// <summary>
+		/// poidbと手入力からハイブリッド出力
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnOutputEnemy_Click(object sender, EventArgs e)
+		{
+			txtOutput.Text = "const ENEMY_PATTERN = [\r\n" + EnemyPattern.OutputEnemyPatterns() + "];";
+			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 	}
 }

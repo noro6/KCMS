@@ -46,13 +46,14 @@
 			this.btnOutputAll = new System.Windows.Forms.Button();
 			this.btnOutputEnemyPatterns2 = new System.Windows.Forms.Button();
 			this.btnImportCSV = new System.Windows.Forms.Button();
+			this.btnOutputEnemy = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnEnd
 			// 
-			this.btnEnd.Location = new System.Drawing.Point(358, 12);
+			this.btnEnd.Location = new System.Drawing.Point(390, 12);
 			this.btnEnd.Name = "btnEnd";
-			this.btnEnd.Size = new System.Drawing.Size(114, 35);
+			this.btnEnd.Size = new System.Drawing.Size(120, 33);
 			this.btnEnd.TabIndex = 0;
 			this.btnEnd.Text = "終了";
 			this.btnEnd.UseVisualStyleBackColor = true;
@@ -60,9 +61,9 @@
 			// 
 			// btnMapEdit
 			// 
-			this.btnMapEdit.Location = new System.Drawing.Point(358, 61);
+			this.btnMapEdit.Location = new System.Drawing.Point(390, 61);
 			this.btnMapEdit.Name = "btnMapEdit";
-			this.btnMapEdit.Size = new System.Drawing.Size(114, 33);
+			this.btnMapEdit.Size = new System.Drawing.Size(120, 33);
 			this.btnMapEdit.TabIndex = 1;
 			this.btnMapEdit.Text = "マップ情報編集";
 			this.btnMapEdit.UseVisualStyleBackColor = true;
@@ -70,11 +71,9 @@
 			// 
 			// btnOutputEnemyPatterns
 			// 
-			this.btnOutputEnemyPatterns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputEnemyPatterns.Location = new System.Drawing.Point(358, 193);
+			this.btnOutputEnemyPatterns.Location = new System.Drawing.Point(390, 178);
 			this.btnOutputEnemyPatterns.Name = "btnOutputEnemyPatterns";
-			this.btnOutputEnemyPatterns.Size = new System.Drawing.Size(114, 33);
+			this.btnOutputEnemyPatterns.Size = new System.Drawing.Size(120, 33);
 			this.btnOutputEnemyPatterns.TabIndex = 2;
 			this.btnOutputEnemyPatterns.Text = "敵パターン出力";
 			this.btnOutputEnemyPatterns.UseVisualStyleBackColor = true;
@@ -82,9 +81,9 @@
 			// 
 			// btnEnemyEdit
 			// 
-			this.btnEnemyEdit.Location = new System.Drawing.Point(246, 61);
+			this.btnEnemyEdit.Location = new System.Drawing.Point(264, 61);
 			this.btnEnemyEdit.Name = "btnEnemyEdit";
-			this.btnEnemyEdit.Size = new System.Drawing.Size(106, 33);
+			this.btnEnemyEdit.Size = new System.Drawing.Size(120, 33);
 			this.btnEnemyEdit.TabIndex = 3;
 			this.btnEnemyEdit.Text = "敵艦編集";
 			this.btnEnemyEdit.UseVisualStyleBackColor = true;
@@ -94,10 +93,11 @@
 			// 
 			this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.txtOutput.Location = new System.Drawing.Point(12, 271);
+			this.txtOutput.Location = new System.Drawing.Point(12, 297);
 			this.txtOutput.Multiline = true;
 			this.txtOutput.Name = "txtOutput";
-			this.txtOutput.Size = new System.Drawing.Size(460, 78);
+			this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.txtOutput.Size = new System.Drawing.Size(498, 150);
 			this.txtOutput.TabIndex = 4;
 			// 
 			// label1
@@ -111,11 +111,9 @@
 			// 
 			// btnOutputEnemies
 			// 
-			this.btnOutputEnemies.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputEnemies.Location = new System.Drawing.Point(246, 232);
+			this.btnOutputEnemies.Location = new System.Drawing.Point(264, 256);
 			this.btnOutputEnemies.Name = "btnOutputEnemies";
-			this.btnOutputEnemies.Size = new System.Drawing.Size(106, 33);
+			this.btnOutputEnemies.Size = new System.Drawing.Size(120, 33);
 			this.btnOutputEnemies.TabIndex = 6;
 			this.btnOutputEnemies.Text = "敵艦出力";
 			this.btnOutputEnemies.UseVisualStyleBackColor = true;
@@ -123,11 +121,9 @@
 			// 
 			// btnOutputShips
 			// 
-			this.btnOutputShips.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputShips.Location = new System.Drawing.Point(12, 232);
+			this.btnOutputShips.Location = new System.Drawing.Point(12, 256);
 			this.btnOutputShips.Name = "btnOutputShips";
-			this.btnOutputShips.Size = new System.Drawing.Size(111, 33);
+			this.btnOutputShips.Size = new System.Drawing.Size(120, 33);
 			this.btnOutputShips.TabIndex = 8;
 			this.btnOutputShips.Text = "艦娘情報出力";
 			this.btnOutputShips.UseVisualStyleBackColor = true;
@@ -137,7 +133,7 @@
 			// 
 			this.btnShipEdit.Location = new System.Drawing.Point(12, 61);
 			this.btnShipEdit.Name = "btnShipEdit";
-			this.btnShipEdit.Size = new System.Drawing.Size(111, 33);
+			this.btnShipEdit.Size = new System.Drawing.Size(120, 33);
 			this.btnShipEdit.TabIndex = 7;
 			this.btnShipEdit.Text = "艦娘編集";
 			this.btnShipEdit.UseVisualStyleBackColor = true;
@@ -145,11 +141,9 @@
 			// 
 			// btnOutputEquipments
 			// 
-			this.btnOutputEquipments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputEquipments.Location = new System.Drawing.Point(129, 232);
+			this.btnOutputEquipments.Location = new System.Drawing.Point(138, 256);
 			this.btnOutputEquipments.Name = "btnOutputEquipments";
-			this.btnOutputEquipments.Size = new System.Drawing.Size(111, 33);
+			this.btnOutputEquipments.Size = new System.Drawing.Size(120, 33);
 			this.btnOutputEquipments.TabIndex = 10;
 			this.btnOutputEquipments.Text = "装備情報出力";
 			this.btnOutputEquipments.UseVisualStyleBackColor = true;
@@ -157,9 +151,9 @@
 			// 
 			// btnEquipmentEdit
 			// 
-			this.btnEquipmentEdit.Location = new System.Drawing.Point(129, 61);
+			this.btnEquipmentEdit.Location = new System.Drawing.Point(138, 61);
 			this.btnEquipmentEdit.Name = "btnEquipmentEdit";
-			this.btnEquipmentEdit.Size = new System.Drawing.Size(111, 33);
+			this.btnEquipmentEdit.Size = new System.Drawing.Size(120, 33);
 			this.btnEquipmentEdit.TabIndex = 9;
 			this.btnEquipmentEdit.Text = "装備編集";
 			this.btnEquipmentEdit.UseVisualStyleBackColor = true;
@@ -167,11 +161,9 @@
 			// 
 			// btnOutputEnemyTypes
 			// 
-			this.btnOutputEnemyTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputEnemyTypes.Location = new System.Drawing.Point(246, 193);
+			this.btnOutputEnemyTypes.Location = new System.Drawing.Point(264, 217);
 			this.btnOutputEnemyTypes.Name = "btnOutputEnemyTypes";
-			this.btnOutputEnemyTypes.Size = new System.Drawing.Size(106, 33);
+			this.btnOutputEnemyTypes.Size = new System.Drawing.Size(120, 33);
 			this.btnOutputEnemyTypes.TabIndex = 11;
 			this.btnOutputEnemyTypes.Text = "敵艦カテゴリ出力";
 			this.btnOutputEnemyTypes.UseVisualStyleBackColor = true;
@@ -179,11 +171,9 @@
 			// 
 			// btnOutputShipTypes
 			// 
-			this.btnOutputShipTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputShipTypes.Location = new System.Drawing.Point(12, 193);
+			this.btnOutputShipTypes.Location = new System.Drawing.Point(12, 217);
 			this.btnOutputShipTypes.Name = "btnOutputShipTypes";
-			this.btnOutputShipTypes.Size = new System.Drawing.Size(111, 33);
+			this.btnOutputShipTypes.Size = new System.Drawing.Size(120, 33);
 			this.btnOutputShipTypes.TabIndex = 12;
 			this.btnOutputShipTypes.Text = "艦娘カテゴリ出力";
 			this.btnOutputShipTypes.UseVisualStyleBackColor = true;
@@ -191,11 +181,9 @@
 			// 
 			// btnOutputEquipmentTypes
 			// 
-			this.btnOutputEquipmentTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputEquipmentTypes.Location = new System.Drawing.Point(129, 193);
+			this.btnOutputEquipmentTypes.Location = new System.Drawing.Point(138, 217);
 			this.btnOutputEquipmentTypes.Name = "btnOutputEquipmentTypes";
-			this.btnOutputEquipmentTypes.Size = new System.Drawing.Size(111, 33);
+			this.btnOutputEquipmentTypes.Size = new System.Drawing.Size(120, 33);
 			this.btnOutputEquipmentTypes.TabIndex = 13;
 			this.btnOutputEquipmentTypes.Text = "装備カテゴリ出力";
 			this.btnOutputEquipmentTypes.UseVisualStyleBackColor = true;
@@ -203,11 +191,9 @@
 			// 
 			// btnOutputWorlds
 			// 
-			this.btnOutputWorlds.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputWorlds.Location = new System.Drawing.Point(358, 154);
+			this.btnOutputWorlds.Location = new System.Drawing.Point(390, 139);
 			this.btnOutputWorlds.Name = "btnOutputWorlds";
-			this.btnOutputWorlds.Size = new System.Drawing.Size(114, 33);
+			this.btnOutputWorlds.Size = new System.Drawing.Size(120, 33);
 			this.btnOutputWorlds.TabIndex = 14;
 			this.btnOutputWorlds.Text = "海域一覧出力";
 			this.btnOutputWorlds.UseVisualStyleBackColor = true;
@@ -215,11 +201,9 @@
 			// 
 			// btnOutputAll
 			// 
-			this.btnOutputAll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputAll.Location = new System.Drawing.Point(12, 154);
+			this.btnOutputAll.Location = new System.Drawing.Point(12, 178);
 			this.btnOutputAll.Name = "btnOutputAll";
-			this.btnOutputAll.Size = new System.Drawing.Size(111, 33);
+			this.btnOutputAll.Size = new System.Drawing.Size(120, 33);
 			this.btnOutputAll.TabIndex = 15;
 			this.btnOutputAll.Text = "全出力";
 			this.btnOutputAll.UseVisualStyleBackColor = true;
@@ -227,11 +211,9 @@
 			// 
 			// btnOutputEnemyPatterns2
 			// 
-			this.btnOutputEnemyPatterns2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOutputEnemyPatterns2.Location = new System.Drawing.Point(358, 232);
+			this.btnOutputEnemyPatterns2.Location = new System.Drawing.Point(390, 217);
 			this.btnOutputEnemyPatterns2.Name = "btnOutputEnemyPatterns2";
-			this.btnOutputEnemyPatterns2.Size = new System.Drawing.Size(114, 33);
+			this.btnOutputEnemyPatterns2.Size = new System.Drawing.Size(120, 33);
 			this.btnOutputEnemyPatterns2.TabIndex = 16;
 			this.btnOutputEnemyPatterns2.Text = "敵パターン出力poi";
 			this.btnOutputEnemyPatterns2.UseVisualStyleBackColor = true;
@@ -239,21 +221,30 @@
 			// 
 			// btnImportCSV
 			// 
-			this.btnImportCSV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnImportCSV.Location = new System.Drawing.Point(358, 100);
+			this.btnImportCSV.Location = new System.Drawing.Point(390, 100);
 			this.btnImportCSV.Name = "btnImportCSV";
-			this.btnImportCSV.Size = new System.Drawing.Size(114, 33);
+			this.btnImportCSV.Size = new System.Drawing.Size(120, 33);
 			this.btnImportCSV.TabIndex = 17;
 			this.btnImportCSV.Text = "poi_csv取込";
 			this.btnImportCSV.UseVisualStyleBackColor = true;
 			this.btnImportCSV.Click += new System.EventHandler(this.btnImportCSV_Click);
 			// 
+			// btnOutputEnemy
+			// 
+			this.btnOutputEnemy.Location = new System.Drawing.Point(390, 256);
+			this.btnOutputEnemy.Name = "btnOutputEnemy";
+			this.btnOutputEnemy.Size = new System.Drawing.Size(120, 33);
+			this.btnOutputEnemy.TabIndex = 18;
+			this.btnOutputEnemy.Text = "敵パターン出力改";
+			this.btnOutputEnemy.UseVisualStyleBackColor = true;
+			this.btnOutputEnemy.Click += new System.EventHandler(this.BtnOutputEnemy_Click);
+			// 
 			// FormMenu
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(484, 361);
+			this.ClientSize = new System.Drawing.Size(521, 459);
+			this.Controls.Add(this.btnOutputEnemy);
 			this.Controls.Add(this.btnImportCSV);
 			this.Controls.Add(this.btnOutputEnemyPatterns2);
 			this.Controls.Add(this.btnOutputAll);
@@ -304,6 +295,7 @@
 		private System.Windows.Forms.Button btnOutputAll;
 		private System.Windows.Forms.Button btnOutputEnemyPatterns2;
 		private System.Windows.Forms.Button btnImportCSV;
+		private System.Windows.Forms.Button btnOutputEnemy;
 	}
 }
 

@@ -3,6 +3,7 @@ using Manager.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Manager.Models
@@ -321,7 +322,6 @@ WHERE
     and formation = {FormationID} 
     and enemies1 = @enemies1
     and enemies2 = @enemies2
-
 ";
 			var param = new Dictionary<string, object>()
 			{
@@ -332,12 +332,27 @@ WHERE
 		}
 
 		/// <summary>
-		/// 陣形の整理 艦隊防空値の高い陣形にまとめられればそうする
+		/// 敵出現海域(ENEMY_PATTERN)出力 poidbから
 		/// </summary>
-		public void FormatPoiDB()
+		/// <returns></returns>
+		public static string OutputEnemyPatterns()
 		{
-			var list = Select();
+			var list = EnemyPattern.FormatEnemyPattern(EnemyPattern.SelectPoi());
 
+			var output = "";
+			foreach (var poiView in list)
+			{
+				output += "  { a: " + poiView.MapID + ", " +
+					"n: \"" + poiView.NodeName + "\", " +
+					"d: \"" + poiView.NodeRemarks + "\", " +
+					"l: " + poiView.LevelID + ", " +
+					"t: " + poiView.TypeID + ", " +
+					"f: " + poiView.FormationID + ", " +
+					"r: " + poiView.Radius + ", " +
+					"e: [" + poiView.Enemies + "], " +
+					"c: \"" + poiView.Coords + "\" },\r\n";
+			}
+			return output;
 		}
 	}
 }

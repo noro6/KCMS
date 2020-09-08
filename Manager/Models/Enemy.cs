@@ -426,39 +426,6 @@ FROM
 			}
 			return output;
 		}
-		/// <summary>
-		/// 敵出現海域(ENEMY_PATTERN)出力 poidbから
-		/// </summary>
-		/// <returns></returns>
-		public static string OutputEnemyPatterns2()
-		{
-			var output = "";
-			var sql = @"
-SELECT
-	'  { a: ' || map_id || 
-	', n: ""' || node_name || 
-	'"", d: ""' || node_remarks || 
-	'"", l: ' || level_id || 
-	', t: ' || node_type_id || 
-	', f: ' || formation_id || 
-	', r: ' || radius || 
-	', e: [' || enemy_id || ']' || 
-	', c: ""' || IFNULL(coords, '') || '"" },' AS json 
-FROM
-	poidb_node_info
-";
-
-			using (var db = new DBManager())
-			{
-				var dt = db.Select(sql);
-
-				foreach (DataRow dr in dt.Rows)
-				{
-					output += ConvertUtil.ToString(dr["json"]) + "\r\n";
-				}
-			}
-			return output;
-		}
 
 		/// <summary>
 		/// Json出力

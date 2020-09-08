@@ -218,7 +218,7 @@ namespace Manager.Forms
 					return;
 				}
 			}
-			if (worldId > 1000 && level < 0)
+			if (worldId > 20 && level <= 0)
 			{
 				var dr = MessageBox.Show("イベント海域ですが難易度が選択されていません。\r\nこのまま登録しますか？", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 				if (dr == DialogResult.Cancel)
@@ -228,7 +228,7 @@ namespace Manager.Forms
 					return;
 				}
 			}
-			if (worldId < 1000 && level >= 0)
+			if (worldId < 20 && level > 0)
 			{
 				var dr = MessageBox.Show("通常海域ですが難易度が選択されています。\r\nこのまま登録しますか？", Text, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 				if (dr == DialogResult.Cancel)
