@@ -35,7 +35,24 @@ namespace Manager.Models
 			var list = new List<EnemyPattern>();
 			using (var db = new DBManager())
 			{
-				var dt = db.Select("SELECT * FROM poidb_node_info");
+				var dt = db.Select(@"
+SELECT
+    * 
+FROM
+    poidb_node_info 
+WHERE
+    EXISTS ( 
+        SELECT
+            worlds.status 
+        FROM
+            maps 
+            LEFT JOIN worlds 
+                ON maps.world_id = worlds.id 
+        WHERE
+            poidb_node_info.map_id = (worlds.id || maps.map_no) 
+            AND worlds.status = 1
+    )
+");
 				foreach (DataRow dr in dt.Rows)
 				{
 					var poi = new EnemyPattern()
