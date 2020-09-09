@@ -124,7 +124,7 @@ namespace Manager.Forms
 				catch (Exception ex)
 				{
 					db.RollBack();
-					MessageBox.Show("登録失敗\r\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show("登録失敗\r\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 		}
@@ -220,7 +220,7 @@ namespace Manager.Forms
 				catch (Exception ex)
 				{
 					db.RollBack();
-					MessageBox.Show("削除失敗\r\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show("削除失敗\r\n" + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 		}

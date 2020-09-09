@@ -68,33 +68,27 @@ namespace Manager.Models
 					};
 
 					// 敵艦隊詳細インスタンス格納
-					if (poi.Enemies1.IndexOf(',') >= 0)
+					foreach (var id in poi.Enemies1.Split(','))
 					{
-						foreach (var id in poi.Enemies1.Split(','))
+						var enemy = enemyList.Find(v => v.ID == ConvertUtil.ToInt(id));
+						if (enemy == null)
 						{
-							var enemy = enemyList.Find(v => v.ID == ConvertUtil.ToInt(id));
-							if (enemy == null)
-							{
-								continue;
-							}
-							poi.EnemyList1.Add(enemy);
-							poi.AirPower += enemy.AirPower;
-							poi.LandBaseAirPower += enemy.LandBaseAirPower;
+							continue;
 						}
+						poi.EnemyList1.Add(enemy);
+						poi.AirPower += enemy.AirPower;
+						poi.LandBaseAirPower += enemy.LandBaseAirPower;
 					}
-					if (poi.Enemies2.IndexOf(',') >= 0)
+					foreach (var id in poi.Enemies2.Split(','))
 					{
-						foreach (var id in poi.Enemies2.Split(','))
+						var enemy = enemyList.Find(v => v.ID == ConvertUtil.ToInt(id));
+						if (enemy == null)
 						{
-							var enemy = enemyList.Find(v => v.ID == ConvertUtil.ToInt(id));
-							if (enemy == null)
-							{
-								continue;
-							}
-							poi.EnemyList2.Add(enemy);
-							poi.AirPower += enemy.AirPower;
-							poi.LandBaseAirPower += enemy.LandBaseAirPower;
+							continue;
 						}
+						poi.EnemyList2.Add(enemy);
+						poi.AirPower += enemy.AirPower;
+						poi.LandBaseAirPower += enemy.LandBaseAirPower;
 					}
 
 					list.Add(poi);
@@ -131,33 +125,27 @@ namespace Manager.Models
 				};
 
 				// 敵艦隊詳細インスタンス格納
-				if (poi.Enemies1.IndexOf(',') >= 0)
+				foreach (var id in poi.Enemies1.Split(','))
 				{
-					foreach (var id in poi.Enemies1.Split(','))
+					var enemy = enemyList.Find(v => v.ID == ConvertUtil.ToInt(id));
+					if (enemy == null)
 					{
-						var enemy = enemyList.Find(v => v.ID == ConvertUtil.ToInt(id));
-						if (enemy == null)
-						{
-							continue;
-						}
-						poi.EnemyList1.Add(enemy);
-						poi.AirPower += enemy.AirPower;
-						poi.LandBaseAirPower += enemy.LandBaseAirPower;
+						continue;
 					}
+					poi.EnemyList1.Add(enemy);
+					poi.AirPower += enemy.AirPower;
+					poi.LandBaseAirPower += enemy.LandBaseAirPower;
 				}
-				if (poi.Enemies2.IndexOf(',') >= 0)
+				foreach (var id in poi.Enemies2.Split(','))
 				{
-					foreach (var id in poi.Enemies2.Split(','))
+					var enemy = enemyList.Find(v => v.ID == ConvertUtil.ToInt(id));
+					if (enemy == null)
 					{
-						var enemy = enemyList.Find(v => v.ID == ConvertUtil.ToInt(id));
-						if (enemy == null)
-						{
-							continue;
-						}
-						poi.EnemyList2.Add(enemy);
-						poi.AirPower += enemy.AirPower;
-						poi.LandBaseAirPower += enemy.LandBaseAirPower;
+						continue;
 					}
+					poi.EnemyList2.Add(enemy);
+					poi.AirPower += enemy.AirPower;
+					poi.LandBaseAirPower += enemy.LandBaseAirPower;
 				}
 				list.Add(poi);
 			}
@@ -171,7 +159,7 @@ namespace Manager.Models
 		public static void ReadCSVAndRegist()
 		{
 			var csv = ConvertUtil.ReadCSV();
-			if (csv.Count == 0)
+			if (csv == null || csv.Count == 0)
 			{
 				return;
 			}
@@ -256,7 +244,7 @@ namespace Manager.Models
 				catch (Exception ex)
 				{
 					db.RollBack();
-					MessageBox.Show("失敗しました。" + Environment.NewLine + ex.Message, "poidb更新失敗", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show("失敗しました。" + Environment.NewLine + ex.Message, "poidb更新失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 		}
@@ -329,6 +317,47 @@ WHERE
 				{ "@enemies2", Enemies2 },
 			};
 			db.ExecuteNonQuery(sql, param);
+		}
+
+		/// <summary>
+		/// <see cref="EnemyInfomation"/>データを条件としてpoidbからデータ削除
+		/// </summary>
+		/// <param name="db"></param>
+		/// <param name="e"></param>
+		/// <returns>削除件数</returns>
+		public static int DeletePoi(DBManager db, EnemyInfomation e)
+		{
+			var sql = $@"
+DELETE FROM poidb 
+WHERE
+    mapID = {e.MapId} 
+    and mapLv = {e.LevelId} 
+    and formation = {(e.FormationId == 11 ? 14 : e.FormationId == 14 ? 11 : e.FormationId)} 
+    and enemies1 = @enemies1
+	and enemies2 = @enemies2
+    and exists ( 
+        SELECT
+            cell_id 
+        FROM
+            cells 
+        WHERE
+            map_id = {e.MapId} 
+            and cell_id = poidb.cellId 
+            and next_node = @node
+    )
+";
+			var list = e.Enemies;
+			var cnt = e.Enemies.Count;
+			var enemies1 = list.GetRange(0, cnt >= 6 ? 6 : cnt).Select(v => v.ID).ToList();
+			var enemies2 = cnt > 6 ? list.GetRange(6, cnt - 6).Select(v => v.ID).ToList() : new List<int>();
+
+			var param = new Dictionary<string, object>()
+			{
+				{ "@enemies1", string.Join(",", enemies1) },
+				{ "@enemies2", string.Join(",", enemies2) },
+				{ "@node", e.NodeName },
+			};
+			return db.ExecuteNonQuery(sql, param);
 		}
 
 		/// <summary>

@@ -28,13 +28,21 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.cmbWorld = new System.Windows.Forms.ComboBox();
 			this.cmbMap = new System.Windows.Forms.ComboBox();
 			this.cmbNode = new System.Windows.Forms.ComboBox();
@@ -69,10 +77,27 @@
 			this.chkHei = new System.Windows.Forms.CheckBox();
 			this.chkTei = new System.Windows.Forms.CheckBox();
 			this.chkAll = new System.Windows.Forms.CheckBox();
+			this.tabDataBase = new System.Windows.Forms.TabControl();
+			this.tabManual = new System.Windows.Forms.TabPage();
+			this.tabPoi = new System.Windows.Forms.TabPage();
+			this.dgvPois = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnRegistName = new System.Windows.Forms.Button();
+			this.btnDeletePoi = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvPatterns)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
+			this.tabDataBase.SuspendLayout();
+			this.tabManual.SuspendLayout();
+			this.tabPoi.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgvPois)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// cmbWorld
@@ -143,14 +168,14 @@
 			this.dgvPatterns.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dgvPatterns.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle16.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvPatterns.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
 			this.dgvPatterns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvPatterns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
@@ -160,21 +185,22 @@
             this.Column2,
             this.Column7,
             this.Column1});
-			this.dgvPatterns.Location = new System.Drawing.Point(12, 130);
+			this.dgvPatterns.Location = new System.Drawing.Point(6, 6);
 			this.dgvPatterns.MultiSelect = false;
 			this.dgvPatterns.Name = "dgvPatterns";
 			this.dgvPatterns.RowHeadersVisible = false;
 			this.dgvPatterns.RowTemplate.Height = 21;
 			this.dgvPatterns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvPatterns.Size = new System.Drawing.Size(941, 219);
+			this.dgvPatterns.Size = new System.Drawing.Size(956, 264);
 			this.dgvPatterns.TabIndex = 6;
 			this.dgvPatterns.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPatterns_CellDoubleClick);
+			this.dgvPatterns.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPatterns_CellFormatting);
 			// 
 			// Column3
 			// 
 			this.Column3.DataPropertyName = "NodeRemarks";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column3.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column3.DefaultCellStyle = dataGridViewCellStyle17;
 			this.Column3.HeaderText = "編成名";
 			this.Column3.Name = "Column3";
 			this.Column3.ReadOnly = true;
@@ -184,8 +210,8 @@
 			// Column4
 			// 
 			this.Column4.DataPropertyName = "TypeName";
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column4.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column4.DefaultCellStyle = dataGridViewCellStyle18;
 			this.Column4.HeaderText = "形式";
 			this.Column4.Name = "Column4";
 			this.Column4.ReadOnly = true;
@@ -195,8 +221,8 @@
 			// Column5
 			// 
 			this.Column5.DataPropertyName = "FormationName";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column5.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column5.DefaultCellStyle = dataGridViewCellStyle19;
 			this.Column5.HeaderText = "陣形";
 			this.Column5.Name = "Column5";
 			this.Column5.ReadOnly = true;
@@ -206,8 +232,8 @@
 			// Column6
 			// 
 			this.Column6.DataPropertyName = "LevelName";
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column6.DefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column6.DefaultCellStyle = dataGridViewCellStyle20;
 			this.Column6.HeaderText = "Lv";
 			this.Column6.Name = "Column6";
 			this.Column6.ReadOnly = true;
@@ -217,9 +243,9 @@
 			// Column2
 			// 
 			this.Column2.DataPropertyName = "AirPower";
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.Column2.DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.Column2.DefaultCellStyle = dataGridViewCellStyle21;
 			this.Column2.HeaderText = "制空";
 			this.Column2.Name = "Column2";
 			this.Column2.ReadOnly = true;
@@ -230,8 +256,8 @@
 			// 
 			this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.Column7.DataPropertyName = "EnemyName";
-			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.Column7.DefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.Column7.DefaultCellStyle = dataGridViewCellStyle22;
 			this.Column7.HeaderText = "敵一覧";
 			this.Column7.Name = "Column7";
 			this.Column7.ReadOnly = true;
@@ -248,7 +274,7 @@
 			// btnAddPattern
 			// 
 			this.btnAddPattern.Enabled = false;
-			this.btnAddPattern.Location = new System.Drawing.Point(766, 24);
+			this.btnAddPattern.Location = new System.Drawing.Point(801, 22);
 			this.btnAddPattern.Name = "btnAddPattern";
 			this.btnAddPattern.Size = new System.Drawing.Size(110, 32);
 			this.btnAddPattern.TabIndex = 7;
@@ -258,7 +284,7 @@
 			// 
 			// btnClose
 			// 
-			this.btnClose.Location = new System.Drawing.Point(882, 24);
+			this.btnClose.Location = new System.Drawing.Point(917, 22);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(110, 32);
 			this.btnClose.TabIndex = 9;
@@ -268,7 +294,7 @@
 			// 
 			// btnCopyPattern
 			// 
-			this.btnCopyPattern.Location = new System.Drawing.Point(766, 62);
+			this.btnCopyPattern.Location = new System.Drawing.Point(801, 60);
 			this.btnCopyPattern.Name = "btnCopyPattern";
 			this.btnCopyPattern.Size = new System.Drawing.Size(110, 32);
 			this.btnCopyPattern.TabIndex = 11;
@@ -378,7 +404,7 @@
 			// btnDown
 			// 
 			this.btnDown.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.btnDown.Location = new System.Drawing.Point(959, 253);
+			this.btnDown.Location = new System.Drawing.Point(994, 291);
 			this.btnDown.Name = "btnDown";
 			this.btnDown.Size = new System.Drawing.Size(33, 60);
 			this.btnDown.TabIndex = 22;
@@ -389,7 +415,7 @@
 			// btnUp
 			// 
 			this.btnUp.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.btnUp.Location = new System.Drawing.Point(959, 187);
+			this.btnUp.Location = new System.Drawing.Point(994, 225);
 			this.btnUp.Name = "btnUp";
 			this.btnUp.Size = new System.Drawing.Size(33, 60);
 			this.btnUp.TabIndex = 21;
@@ -399,7 +425,7 @@
 			// 
 			// btnUpdateSort
 			// 
-			this.btnUpdateSort.Location = new System.Drawing.Point(882, 62);
+			this.btnUpdateSort.Location = new System.Drawing.Point(801, 98);
 			this.btnUpdateSort.Name = "btnUpdateSort";
 			this.btnUpdateSort.Size = new System.Drawing.Size(110, 32);
 			this.btnUpdateSort.TabIndex = 23;
@@ -412,7 +438,7 @@
 			this.chkKo.AutoSize = true;
 			this.chkKo.Checked = true;
 			this.chkKo.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.chkKo.Location = new System.Drawing.Point(12, 105);
+			this.chkKo.Location = new System.Drawing.Point(16, 100);
 			this.chkKo.Name = "chkKo";
 			this.chkKo.Size = new System.Drawing.Size(38, 19);
 			this.chkKo.TabIndex = 24;
@@ -425,7 +451,7 @@
 			this.chkOtsu.AutoSize = true;
 			this.chkOtsu.Checked = true;
 			this.chkOtsu.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.chkOtsu.Location = new System.Drawing.Point(56, 105);
+			this.chkOtsu.Location = new System.Drawing.Point(60, 100);
 			this.chkOtsu.Name = "chkOtsu";
 			this.chkOtsu.Size = new System.Drawing.Size(38, 19);
 			this.chkOtsu.TabIndex = 25;
@@ -438,7 +464,7 @@
 			this.chkHei.AutoSize = true;
 			this.chkHei.Checked = true;
 			this.chkHei.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.chkHei.Location = new System.Drawing.Point(100, 105);
+			this.chkHei.Location = new System.Drawing.Point(104, 100);
 			this.chkHei.Name = "chkHei";
 			this.chkHei.Size = new System.Drawing.Size(38, 19);
 			this.chkHei.TabIndex = 26;
@@ -451,7 +477,7 @@
 			this.chkTei.AutoSize = true;
 			this.chkTei.Checked = true;
 			this.chkTei.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.chkTei.Location = new System.Drawing.Point(144, 105);
+			this.chkTei.Location = new System.Drawing.Point(148, 100);
 			this.chkTei.Name = "chkTei";
 			this.chkTei.Size = new System.Drawing.Size(38, 19);
 			this.chkTei.TabIndex = 27;
@@ -464,7 +490,7 @@
 			this.chkAll.AutoSize = true;
 			this.chkAll.Checked = true;
 			this.chkAll.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.chkAll.Location = new System.Drawing.Point(188, 105);
+			this.chkAll.Location = new System.Drawing.Point(192, 100);
 			this.chkAll.Name = "chkAll";
 			this.chkAll.Size = new System.Drawing.Size(50, 19);
 			this.chkAll.TabIndex = 28;
@@ -472,29 +498,199 @@
 			this.chkAll.UseVisualStyleBackColor = true;
 			this.chkAll.CheckedChanged += new System.EventHandler(this.ChkAll_CheckedChanged);
 			// 
+			// tabDataBase
+			// 
+			this.tabDataBase.Controls.Add(this.tabManual);
+			this.tabDataBase.Controls.Add(this.tabPoi);
+			this.tabDataBase.Location = new System.Drawing.Point(12, 125);
+			this.tabDataBase.Name = "tabDataBase";
+			this.tabDataBase.SelectedIndex = 0;
+			this.tabDataBase.Size = new System.Drawing.Size(976, 304);
+			this.tabDataBase.TabIndex = 29;
+			this.tabDataBase.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+			// 
+			// tabManual
+			// 
+			this.tabManual.Controls.Add(this.dgvPatterns);
+			this.tabManual.Location = new System.Drawing.Point(4, 24);
+			this.tabManual.Name = "tabManual";
+			this.tabManual.Padding = new System.Windows.Forms.Padding(3);
+			this.tabManual.Size = new System.Drawing.Size(968, 276);
+			this.tabManual.TabIndex = 0;
+			this.tabManual.Text = "手動";
+			this.tabManual.UseVisualStyleBackColor = true;
+			// 
+			// tabPoi
+			// 
+			this.tabPoi.Controls.Add(this.dgvPois);
+			this.tabPoi.Location = new System.Drawing.Point(4, 24);
+			this.tabPoi.Name = "tabPoi";
+			this.tabPoi.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPoi.Size = new System.Drawing.Size(968, 276);
+			this.tabPoi.TabIndex = 1;
+			this.tabPoi.Text = "Poi";
+			this.tabPoi.UseVisualStyleBackColor = true;
+			// 
+			// dgvPois
+			// 
+			this.dgvPois.AllowUserToAddRows = false;
+			this.dgvPois.AllowUserToDeleteRows = false;
+			this.dgvPois.AllowUserToResizeRows = false;
+			this.dgvPois.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle23.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvPois.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
+			this.dgvPois.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvPois.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.Rate,
+            this.dataGridViewTextBoxColumn6});
+			this.dgvPois.Location = new System.Drawing.Point(6, 6);
+			this.dgvPois.MultiSelect = false;
+			this.dgvPois.Name = "dgvPois";
+			this.dgvPois.RowHeadersVisible = false;
+			this.dgvPois.RowTemplate.Height = 21;
+			this.dgvPois.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgvPois.Size = new System.Drawing.Size(956, 264);
+			this.dgvPois.TabIndex = 7;
+			this.dgvPois.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPois_CellDoubleClick);
+			this.dgvPois.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPois_CellFormatting);
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "NodeRemarks";
+			dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle24;
+			this.dataGridViewTextBoxColumn1.HeaderText = "編成名";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn1.Width = 80;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.DataPropertyName = "TypeName";
+			dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle25;
+			this.dataGridViewTextBoxColumn2.HeaderText = "形式";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn2.ReadOnly = true;
+			this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn2.Width = 80;
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this.dataGridViewTextBoxColumn3.DataPropertyName = "FormationName";
+			dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle26;
+			this.dataGridViewTextBoxColumn3.HeaderText = "陣形";
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.dataGridViewTextBoxColumn3.ReadOnly = true;
+			this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn3.Width = 64;
+			// 
+			// dataGridViewTextBoxColumn4
+			// 
+			this.dataGridViewTextBoxColumn4.DataPropertyName = "LevelName";
+			dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle27;
+			this.dataGridViewTextBoxColumn4.HeaderText = "Lv";
+			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+			this.dataGridViewTextBoxColumn4.ReadOnly = true;
+			this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn4.Width = 32;
+			// 
+			// dataGridViewTextBoxColumn5
+			// 
+			this.dataGridViewTextBoxColumn5.DataPropertyName = "AirPower";
+			dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle28;
+			this.dataGridViewTextBoxColumn5.HeaderText = "制空";
+			this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+			this.dataGridViewTextBoxColumn5.ReadOnly = true;
+			this.dataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewTextBoxColumn5.Width = 48;
+			// 
+			// Rate
+			// 
+			this.Rate.DataPropertyName = "Rate";
+			dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Rate.DefaultCellStyle = dataGridViewCellStyle29;
+			this.Rate.HeaderText = "割合";
+			this.Rate.Name = "Rate";
+			this.Rate.ReadOnly = true;
+			this.Rate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.Rate.Width = 48;
+			// 
+			// dataGridViewTextBoxColumn6
+			// 
+			this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn6.DataPropertyName = "EnemyName";
+			dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle30;
+			this.dataGridViewTextBoxColumn6.HeaderText = "敵一覧";
+			this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+			this.dataGridViewTextBoxColumn6.ReadOnly = true;
+			this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			// 
+			// btnRegistName
+			// 
+			this.btnRegistName.Location = new System.Drawing.Point(917, 60);
+			this.btnRegistName.Name = "btnRegistName";
+			this.btnRegistName.Size = new System.Drawing.Size(110, 32);
+			this.btnRegistName.TabIndex = 30;
+			this.btnRegistName.Text = "編成取込";
+			this.btnRegistName.UseVisualStyleBackColor = true;
+			this.btnRegistName.Click += new System.EventHandler(this.btnRegistName_Click);
+			// 
+			// btnDeletePoi
+			// 
+			this.btnDeletePoi.Location = new System.Drawing.Point(917, 98);
+			this.btnDeletePoi.Name = "btnDeletePoi";
+			this.btnDeletePoi.Size = new System.Drawing.Size(110, 32);
+			this.btnDeletePoi.TabIndex = 31;
+			this.btnDeletePoi.Text = "Poi編成削除";
+			this.btnDeletePoi.UseVisualStyleBackColor = true;
+			this.btnDeletePoi.Click += new System.EventHandler(this.btnDeletePoi_Click);
+			// 
 			// FrmMapMaster
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1004, 361);
-			this.Controls.Add(this.chkAll);
-			this.Controls.Add(this.chkTei);
-			this.Controls.Add(this.chkHei);
-			this.Controls.Add(this.chkOtsu);
-			this.Controls.Add(this.chkKo);
-			this.Controls.Add(this.btnUpdateSort);
+			this.ClientSize = new System.Drawing.Size(1039, 441);
+			this.Controls.Add(this.btnDeletePoi);
 			this.Controls.Add(this.btnDown);
+			this.Controls.Add(this.btnUpdateSort);
 			this.Controls.Add(this.btnUp);
+			this.Controls.Add(this.btnRegistName);
+			this.Controls.Add(this.chkAll);
+			this.Controls.Add(this.chkKo);
+			this.Controls.Add(this.tabDataBase);
+			this.Controls.Add(this.chkTei);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
+			this.Controls.Add(this.chkOtsu);
 			this.Controls.Add(this.groupBox1);
+			this.Controls.Add(this.chkHei);
 			this.Controls.Add(this.btnCopyPattern);
 			this.Controls.Add(this.btnClose);
 			this.Controls.Add(this.btnAddPattern);
-			this.Controls.Add(this.dgvPatterns);
 			this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.MinimumSize = new System.Drawing.Size(1020, 400);
+			this.MinimumSize = new System.Drawing.Size(1024, 458);
 			this.Name = "FrmMapMaster";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "海域編集";
@@ -503,6 +699,10 @@
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox3.ResumeLayout(false);
+			this.tabDataBase.ResumeLayout(false);
+			this.tabManual.ResumeLayout(false);
+			this.tabPoi.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dgvPois)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -544,5 +744,18 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+		private System.Windows.Forms.TabControl tabDataBase;
+		private System.Windows.Forms.TabPage tabManual;
+		private System.Windows.Forms.TabPage tabPoi;
+		private System.Windows.Forms.DataGridView dgvPois;
+		private System.Windows.Forms.Button btnRegistName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Rate;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+		private System.Windows.Forms.Button btnDeletePoi;
 	}
 }

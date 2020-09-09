@@ -64,7 +64,7 @@ namespace Manager.Forms
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show("検索に失敗しました。" + Environment.NewLine + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("検索に失敗しました。" + Environment.NewLine + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 

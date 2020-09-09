@@ -164,7 +164,7 @@ namespace Manager.Util
 			}
 			catch (IOException ex)
 			{
-				MessageBox.Show("失敗しました。" + Environment.NewLine + ex.Message, "CSV読込失敗", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("失敗しました。" + Environment.NewLine + ex.Message, "CSV読込失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return null;
 			}
 		}

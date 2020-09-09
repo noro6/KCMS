@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -22,6 +23,9 @@ namespace Manager.Forms
 
 		private List<EnemyInfomation> patternAll = null;
 		private List<EnemyInfomation> patterns = null;
+
+		private List<EnemyInfomation> poisAll = null;
+		private List<EnemyInfomation> pois = null;
 
 		private bool isLoading = false;
 
@@ -41,6 +45,11 @@ namespace Manager.Forms
 			typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvPatterns, true, null);
 			dgvPatterns.RowTemplate.Height = 36;
 			dgvPatterns.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+
+			dgvPois.AutoGenerateColumns = false;
+			typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(dgvPois, true, null);
+			dgvPois.RowTemplate.Height = 36;
+			dgvPois.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
 
 			// 海域データ取得
 			InitializeComboBoxDataSource();
@@ -126,7 +135,7 @@ namespace Manager.Forms
 				world.Name = frm.InputText;
 			}
 
-			using(var db = new DBManager())
+			using (var db = new DBManager())
 			{
 				try
 				{
@@ -461,7 +470,7 @@ namespace Manager.Forms
 			using (var frm = new FrmTextInput())
 			{
 				var exist = false;
-				frm.InfomationText = "新しいマス名を入力\r\n(現在："+ node.Name + ")";
+				frm.InfomationText = "新しいマス名を入力\r\n(現在：" + node.Name + ")";
 				do
 				{
 					frm.ShowDialog();
@@ -565,9 +574,9 @@ namespace Manager.Forms
 		/// </summary>
 		private void Search()
 		{
-			var worldId = ConvertUtil.ToInt(cmbWorld.SelectedValue);
-			var mapNo = ConvertUtil.ToInt(cmbMap.SelectedValue);
+			var mapId = ConvertUtil.ToInt(ConvertUtil.ToString(cmbWorld.SelectedValue) + ConvertUtil.ToString(cmbMap.SelectedValue));
 			var nodeId = ConvertUtil.ToInt(cmbNode.SelectedValue);
+			var nodeName = ConvertUtil.ToString(cmbNode.Text);
 
 			var displayLevels = new List<string>() { "-" };
 			if (chkKo.Checked) displayLevels.Add("甲");
@@ -577,12 +586,31 @@ namespace Manager.Forms
 
 			patterns = patternAll.FindAll(v =>
 			{
-				return v.WorldId == worldId && v.MapNo == mapNo && v.NodeId == nodeId && displayLevels.Contains(v.LevelName);
+				return v.MapId == mapId && v.NodeId == nodeId && displayLevels.Contains(v.LevelName);
 			});
+
+			pois = poisAll.FindAll(v =>
+			{
+				return v.MapId == mapId && v.NodeName == nodeName && displayLevels.Contains(v.LevelName);
+			});
+
+			// pois 手動入力で設定されている編成名と一致するデータはNodeRemarksを解決させる。
+			foreach (var poi in pois)
+			{
+				var x = patterns.Find(v => v.LevelId == poi.LevelId && v.EnemyID == poi.EnemyID && v.NodeRemarks != "");
+				if (x != null)
+				{
+					poi.NodeRemarks = x.NodeRemarks;
+				}
+			}
 
 			dgvPatterns.SuspendLayout();
 			dgvPatterns.DataSource = patterns;
 			dgvPatterns.ResumeLayout();
+
+			dgvPois.SuspendLayout();
+			dgvPois.DataSource = pois;
+			dgvPois.ResumeLayout();
 		}
 
 		/// <summary>
@@ -593,11 +621,12 @@ namespace Manager.Forms
 			try
 			{
 				patternAll = EnemyInfomation.Select();
+				poisAll = EnemyInfomation.SelectFromPoi();
 				Search();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show("検索に失敗しました。" + Environment.NewLine + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("検索に失敗しました。" + Environment.NewLine + ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -658,6 +687,9 @@ namespace Manager.Forms
 			patternAll = EnemyInfomation.Select();
 			patterns = EnemyInfomation.Select();
 
+			poisAll = EnemyInfomation.SelectFromPoi();
+			pois = EnemyInfomation.SelectFromPoi();
+
 			cmbWorld.DataSource = worlds;
 			cmbMap.DataSource = maps;
 			cmbNode.DataSource = nodes;
@@ -683,7 +715,7 @@ namespace Manager.Forms
 
 			btnAddMap.Enabled = worldId > 0;
 			btnAddNode.Enabled = worldId > 0 && mapNo > 0;
-			btnAddPattern.Enabled = worldId > 0 && mapNo > 0 && nodeName != "";
+			btnAddPattern.Enabled = (worldId > 0 && mapNo > 0 && nodeName != "") && tabDataBase.SelectedTab == tabManual;
 
 			btnEditNode.Enabled = nodeName != "";
 			btnDeleteNode.Enabled = nodeName != "";
@@ -698,7 +730,7 @@ namespace Manager.Forms
 		{
 			var nodeId = ConvertUtil.ToInt(cmbNode.SelectedValue);
 			if (nodeId < 1) return;
-			using(var frm = new FrmEnemyFleetEdit())
+			using (var frm = new FrmEnemyFleetEdit())
 			{
 				frm.NodeId = nodeId;
 				frm.ShowDialog();
@@ -800,7 +832,7 @@ namespace Manager.Forms
 
 					db.Commit();
 				}
-				catch(Exception ex)
+				catch (Exception ex)
 				{
 					db.RollBack();
 					throw ex;
@@ -921,20 +953,263 @@ namespace Manager.Forms
 		private void ChkAll_CheckedChanged(object sender, EventArgs e)
 		{
 			if (isLoading) return;
-			if (chkAll.Checked)
+			chkKo.Checked = chkAll.Checked;
+			chkOtsu.Checked = chkAll.Checked;
+			chkHei.Checked = chkAll.Checked;
+			chkTei.Checked = chkAll.Checked;
+		}
+		/// <summary>
+		/// poi側セルダブルクリック
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void dgvPois_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			RegistFleetFromPoi();
+		}
+
+		/// <summary>
+		/// 編成名登録
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void btnRegistName_Click(object sender, EventArgs e)
+		{
+			RegistFleetFromPoi();
+		}
+
+		/// <summary>
+		/// POIベースに、同じ編成をDBに登録する
+		/// </summary>
+		private void RegistFleetFromPoi()
+		{
+			if (dgvPois.CurrentCell == null)
 			{
-				chkKo.Checked = true;
-				chkOtsu.Checked = true;
-				chkHei.Checked = true;
-				chkTei.Checked = true;
+				MessageBox.Show("対象を選択してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+			var rowIndex = dgvPois.CurrentCell.RowIndex;
+			if (rowIndex < 0 || pois[rowIndex] == null)
+			{
+				MessageBox.Show("対象を選択してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+			var poi = pois[rowIndex];
+			if (poi == null || poi.EnemyID == "")
+			{
+				MessageBox.Show("対象を選択してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+
+			// 取得できた敵id羅列と一致する編成がすでに登録されていないかどうかをチェック
+			var nodeId = ConvertUtil.ToInt(cmbNode.SelectedValue);
+			var data = patternAll.Find(v => v.MapId == poi.MapId && v.LevelId == poi.LevelId && v.NodeId == nodeId && v.EnemyID == poi.EnemyID);
+			if (data != null)
+			{
+				MessageBox.Show("既に登録されている編成です。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+
+			using (var frm = new FrmTextInput())
+			{
+				frm.InfomationText = "編成名を入力してください。";
+				frm.ShowDialog();
+				if (frm.IsCanceled) return;
+
+				var nodeDetail = new NodeDetail()
+				{
+					NodeId = nodeId,
+					Name = frm.InputText,
+					PatternNo = NodeDetail.GetNextPatternNo(nodeId) + 1,
+					FormationId = poi.FormationId,
+					LevelId = poi.LevelId,
+					NodeTypeId = poi.TypeId,
+				};
+
+				using (var db = new DBManager())
+				{
+					try
+					{
+						db.CreateConnection();
+						db.BeginTran();
+
+						var nodeDetailId = nodeDetail.SelectMaxId(db) + 1;
+						nodeDetail.ID = nodeDetailId;
+						nodeDetail.Insert(db);
+
+						var startId = new NodeDetailsEnemies().SelectMaxId(db) + 1;
+						var detailsEnemies = new NodeDetailsEnemies
+						{
+							ID = startId,
+							NodeDetailId = nodeDetailId,
+							Enemies = poi.Enemies
+						};
+						detailsEnemies.Insert(db);
+
+						db.Commit();
+						MessageBox.Show("登録完了", Text, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+					}
+					catch (Exception ex)
+					{
+						db.RollBack();
+						MessageBox.Show("登録失敗\r\n" + ex.Message + "\r\n" + ex.StackTrace, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+			}
+
+			ReSearch();
+		}
+
+		private void btnDeletePoi_Click(object sender, EventArgs e)
+		{
+			if (dgvPois.CurrentCell == null)
+			{
+				MessageBox.Show("対象を選択してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+			var rowIndex = dgvPois.CurrentCell.RowIndex;
+			if (rowIndex < 0 || pois[rowIndex] == null)
+			{
+				MessageBox.Show("対象を選択してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+			var poi = pois[rowIndex];
+			if (poi == null || poi.EnemyID == "")
+			{
+				MessageBox.Show("対象を選択してください。", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+
+			// 対象のデータ確認
+			var data = $@"
+難易度: {poi.LevelName}
+編成: {poi.EnemyID}
+陣形: {poi.FormationName}
+総件数: {poi.Count:N0}
+割合: {poi.Rate}%
+このマスのデータ件数: {poi.Count / (poi.Rate / 100):N0}
+";
+			var dr = MessageBox.Show("選択されたデータをpoidbから削除します。よろしいですか？\r\n" + data, Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+			if(dr != DialogResult.Yes)
+			{
+				return;
+			}
+
+			// コネクション作成
+			using (var db = new DBManager())
+			{
+				try
+				{
+					db.CreateConnection();
+					db.BeginTran();
+
+					var deletedCount = Poi.DeletePoi(db, poi);
+
+					db.Commit();
+					MessageBox.Show(deletedCount + "件のデータをpoidbから削除しました。", "poidb更新完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+				catch (Exception ex)
+				{
+					db.RollBack();
+					MessageBox.Show("失敗しました。" + Environment.NewLine + ex.Message, "poidb更新失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
+
+			ReSearch();
+		}
+
+		/// <summary>
+		/// タブ切り替え時
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			btnUpdateSort.Enabled = tabDataBase.SelectedTab == tabManual;
+			btnCopyPattern.Enabled = tabDataBase.SelectedTab == tabManual;
+			btnAddPattern.Enabled = tabDataBase.SelectedTab == tabManual;
+			btnUp.Enabled = tabDataBase.SelectedTab == tabManual;
+			btnDown.Enabled = tabDataBase.SelectedTab == tabManual;
+			btnRegistName.Enabled = tabDataBase.SelectedTab == tabPoi;
+			btnDeletePoi.Enabled = tabDataBase.SelectedTab == tabPoi;
+		}
+
+		private void dgvPatterns_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+		{
+			if (e.ColumnIndex != 0 || e.RowIndex < 0 || e.RowIndex >= patterns.Count)
+			{
+				return;
+			}
+
+			var data = patterns[e.RowIndex];
+			var style = dgvPatterns.Rows[e.RowIndex].DefaultCellStyle;
+			// poi内に同じ編成データがあるかどうかチェック
+			if (pois.FindIndex(v => v.LevelId == data.LevelId && v.EnemyID == data.EnemyID) > -1)
+			{
+				// 同じ編成データがある OK
+				style.BackColor = Color.FromArgb(255, 255, 255);
+				style.SelectionBackColor = Color.FromArgb(172, 172, 172);
 			}
 			else
 			{
-				chkKo.Checked = false;
-				chkOtsu.Checked = false;
-				chkHei.Checked = false;
-				chkTei.Checked = false;
+				// ここ独自のデータだよこれ
+				style.BackColor = Color.FromArgb(255, 255, 220);
+				style.SelectionBackColor = Color.FromArgb(255, 255, 128);
 			}
+			style.SelectionForeColor = Color.Black;
+		}
+
+		private void dgvPois_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+		{
+			if (e.ColumnIndex != 0 || e.RowIndex < 0 || e.RowIndex >= pois.Count)
+			{
+				return;
+			}
+
+			var poi = pois[e.RowIndex];
+			var style = dgvPois.Rows[e.RowIndex].DefaultCellStyle;
+
+			// パターン内に同じ編成データがあるかどうかチェック
+			if (patterns.FindIndex(v => v.LevelId == poi.LevelId && v.EnemyID == poi.EnemyID) > -1)
+			{
+				// 同じ編成データがあるが、全体の1%以下
+				if (poi.Rate < 1.0)
+				{
+					// これいる？？ 赤
+					style.BackColor = Color.FromArgb(255, 220, 220);
+					style.SelectionBackColor = Color.FromArgb(255, 128, 128);
+				}
+				else
+				{
+					// ほぼ問題ないデータ　青
+					style.BackColor = Color.FromArgb(220, 240, 255);
+					style.SelectionBackColor = Color.FromArgb(128, 172, 255);
+				}
+			}
+			else
+			{
+				// パターン内に存在しないが、そこそこある
+				if (poi.Rate >= 10.0)
+				{
+					// これ取り込んでもいいかも　緑
+					style.BackColor = Color.FromArgb(220, 255, 220);
+					style.SelectionBackColor = Color.FromArgb(128, 255, 128);
+				}
+				else if (poi.Rate > 1.0 || poi.Count >= 1000)
+				{
+					// 取り込んでもいいか微妙　要チェック 黄
+					style.BackColor = Color.FromArgb(255, 255, 220);
+					style.SelectionBackColor = Color.FromArgb(255, 255, 128);
+				}
+				else
+				{
+					// 取り込む必要なし 灰色
+					style.BackColor = Color.FromArgb(150, 150, 150);
+					style.SelectionBackColor = Color.FromArgb(128, 128, 128);
+				}
+			}
+			style.SelectionForeColor = Color.Black;
 		}
 	}
 }

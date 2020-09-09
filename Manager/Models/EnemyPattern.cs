@@ -1,10 +1,8 @@
 ﻿using Manager.DB;
 using Manager.Util;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace Manager.Models
 {
@@ -150,15 +148,15 @@ WHERE
 						{
 							data.FormationID = com;
 						}
-						else if ((com == 3 || com == 2 || com == 6) && (prev != 3 && prev != 2))
+						else if ((com == 3 || com == 2 || com == 6) && prev != 3 && prev != 2)
 						{
 							data.FormationID = com;
 						}
-						else if ((com == 3 || com == 2 || com == 6 || com == 1) && (prev != 3 && prev != 2 && prev != 6))
+						else if ((com == 3 || com == 2 || com == 6 || com == 1) && prev != 3 && prev != 2 && prev != 6)
 						{
 							data.FormationID = com;
 						}
-						else if (com != 5)
+						else if (com != 5 && prev != 3 && prev != 2 && prev != 6 && prev != 1)
 						{
 							data.FormationID = com;
 						}
