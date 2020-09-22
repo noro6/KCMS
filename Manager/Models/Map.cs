@@ -100,6 +100,9 @@ LEFT JOIN worlds
 	ON maps.world_id = worlds.id
 WHERE
 	worlds.status = 1
+ORDER BY 
+	world_id
+	, map_no
 ";
 			using (var db = new DBManager())
 			{

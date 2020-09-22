@@ -23,6 +23,7 @@ namespace Manager.Models
 		public int Count { set; get; }
 		public int LandBaseAirPower { set; get; }
 		public int AirPower { set; get; }
+		public int SortValue { set; get; }
 
 		/// <summary>
 		/// poidb_node_info 全件取得
@@ -84,10 +85,25 @@ WHERE
 			var list = new List<EnemyPattern>();
 			using (var db = new DBManager())
 			{
-				var dt = db.Select("SELECT * FROM node_information");
+				var dt = db.Select(@"
+SELECT
+    * 
+FROM
+    node_information 
+WHERE
+    EXISTS ( 
+        SELECT
+            worlds.status 
+        FROM
+            worlds 
+        WHERE
+            node_information.world_id = worlds.id 
+            AND worlds.status = 1
+    )
+");
 				foreach (DataRow dr in dt.Rows)
 				{
-					var poi = new EnemyPattern()
+					var p = new EnemyPattern()
 					{
 						MapID = ConvertUtil.ToInt(ConvertUtil.ToString(dr["world_id"]) + ConvertUtil.ToString(dr["map_no"])),
 						NodeName = ConvertUtil.ToString(dr["node_name"]),
@@ -102,7 +118,7 @@ WHERE
 						AirPower = ConvertUtil.ToInt(dr["air_power"]),
 						LandBaseAirPower = ConvertUtil.ToInt(dr["land_base_air_power"]),
 					};
-					list.Add(poi);
+					list.Add(p);
 				}
 			}
 			return list;
@@ -175,15 +191,24 @@ WHERE
 					enemyIDs.Add(id > 1500 ? id - 1500 : id);
 				}
 				poi.Enemies = string.Join(",", enemyIDs);
+
+				// 敵IDの合算値をソート順に使う (値が大きいほど強い傾向にあるので)
+				poi.SortValue = enemyIDs.Sum();
 			}
 
-			// ソート
-			outputList = outputList.OrderBy(v => v.MapID)
+			// ソート 
+			outputList = outputList
+				// 海域 昇順
+				.OrderBy(v => v.MapID)
+				// マス名 昇順
 				.ThenBy(v => v.NodeName)
+				// 難易度 昇順
 				.ThenBy(v => v.LevelID)
-				.ThenByDescending(v => v.LandBaseAirPower)
+				// 制空値 降順
 				.ThenByDescending(v => v.AirPower)
-				.ThenByDescending(v => v.Enemies).ToList();
+				.ThenByDescending(v => v.LandBaseAirPower)
+				// 敵編成 降順
+				.ThenByDescending(v => v.SortValue).ToList();
 			return outputList;
 		}
 
@@ -225,6 +250,10 @@ WHERE
 					{
 						outputList.Insert(index - 1, data);
 						addList.Add(data);
+					}
+					else
+					{
+						outputList.Add(data);
 					}
 				}
 				else

@@ -399,30 +399,19 @@ VALUES (
 		/// <returns></returns>
 		public static string OutputEnemyPatterns()
 		{
+			var outputList = EnemyPattern.SelectManual();
 			var output = "";
-			var sql = @"
-SELECT
-	'  { a: ' || world_id || map_no || 
-	', n: ""' || node_name || 
-	'"", d: ""' || node_remarks || 
-	'"", l: ' || level_id || 
-	', t: ' || node_type_id || 
-	', f: ' || formation_id || 
-	', r: ' || radius || 
-	', e: [' || enemy_id || ']' || 
-	', c: ""' || IFNULL(coords, '') || '"" },' AS json 
-FROM
-	node_information
-";
-
-			using (var db = new DBManager())
+			foreach (var p in outputList)
 			{
-				var dt = db.Select(sql);
-
-				foreach (DataRow dr in dt.Rows)
-				{
-					output += ConvertUtil.ToString(dr["json"]) + "\r\n";
-				}
+				output += "  { a: " + p.MapID + ", " +
+					"n: \"" + p.NodeName + "\", " +
+					"d: \"" + p.NodeRemarks + "\", " +
+					"l: " + p.LevelID + ", " +
+					"t: " + p.TypeID + ", " +
+					"f: " + p.FormationID + ", " +
+					"r: " + p.Radius + ", " +
+					"e: [" + p.Enemies + "], " +
+					"c: \"" + p.Coords + "\" },\r\n";
 			}
 			return output;
 		}
