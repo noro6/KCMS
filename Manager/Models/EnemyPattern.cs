@@ -1,5 +1,6 @@
 ﻿using Manager.DB;
 using Manager.Util;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -132,6 +133,10 @@ WHERE
 		{
 			var outputList = new List<EnemyPattern>();
 
+			// 敵一覧(マスタから)
+			var enemyList = Enemy.Select();
+			var formations = Formation.Select();
+
 			foreach (var poi in list)
 			{
 				// 「マップ　マス 難易度　敵編成」が同じものを検索
@@ -184,16 +189,31 @@ WHERE
 			var enemyIDs = new List<int>();
 			foreach (var poi in outputList)
 			{
+				var sumWeight = 0;
+				var sumBonus = 0;
 				enemyIDs.Clear();
 				foreach (var s in poi.Enemies.Split(','))
 				{
 					var id = ConvertUtil.ToInt(s);
 					enemyIDs.Add(id > 1500 ? id - 1500 : id);
+
+					var enemy = enemyList.Find(v => v.ID == id);
+					if (enemy != null)
+					{
+						sumWeight += enemy.AntiAirWeight;
+						sumBonus += enemy.AntiAirBonus;
+					}
 				}
 				poi.Enemies = string.Join(",", enemyIDs);
 
+				// 対空砲火具合の計算
+				var correct = formations.Find(v => v.ID == poi.FormationID).AntiAirCorrect;
+				poi.SortValue = (int)Math.Floor(2 * Math.Floor(correct * sumBonus) + sumWeight);
+
 				// 敵IDの合算値をソート順に使う (値が大きいほど強い傾向にあるので)
-				poi.SortValue = enemyIDs.Sum();
+				// poi.SortValue = enemyIDs.Sum();
+
+				// 敵IDから対空性能を取得し、加算
 			}
 
 			// ソート 
