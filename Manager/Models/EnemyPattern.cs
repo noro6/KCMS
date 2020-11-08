@@ -24,7 +24,7 @@ namespace Manager.Models
 		public int Count { set; get; }
 		public int LandBaseAirPower { set; get; }
 		public int AirPower { set; get; }
-		public int SortValue { set; get; }
+		public double SortValue { set; get; }
 
 		/// <summary>
 		/// poidb_node_info 全件取得
@@ -189,7 +189,7 @@ WHERE
 			var enemyIDs = new List<int>();
 			foreach (var poi in outputList)
 			{
-				var sumWeight = 0;
+				var weights = new List<int>();
 				var sumBonus = 0;
 				enemyIDs.Clear();
 				foreach (var s in poi.Enemies.Split(','))
@@ -200,7 +200,7 @@ WHERE
 					var enemy = enemyList.Find(v => v.ID == id);
 					if (enemy != null)
 					{
-						sumWeight += enemy.AntiAirWeight;
+						weights.Add(enemy.AntiAirWeight);
 						sumBonus += enemy.AntiAirBonus;
 					}
 				}
@@ -208,12 +208,12 @@ WHERE
 
 				// 対空砲火具合の計算
 				var correct = formations.Find(v => v.ID == poi.FormationID).AntiAirCorrect;
-				poi.SortValue = (int)Math.Floor(2 * Math.Floor(correct * sumBonus) + sumWeight);
-
-				// 敵IDの合算値をソート順に使う (値が大きいほど強い傾向にあるので)
-				// poi.SortValue = enemyIDs.Sum();
-
-				// 敵IDから対空性能を取得し、加算
+				// 撃墜数の加算
+				foreach (var weight in weights)
+				{
+					poi.SortValue += 99 * weight / 400;
+					poi.SortValue += (2 * Math.Floor(correct * sumBonus) + weight) * 0.09375;
+				}
 			}
 
 			// ソート 
