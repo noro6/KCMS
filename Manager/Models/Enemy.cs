@@ -403,15 +403,15 @@ VALUES (
 			var output = "";
 			foreach (var p in outputList)
 			{
-				output += "  { a: " + p.MapID + ", " +
-					"n: \"" + p.NodeName + "\", " +
-					"d: \"" + p.NodeRemarks + "\", " +
-					"l: " + p.LevelID + ", " +
-					"t: " + p.TypeID + ", " +
-					"f: " + p.FormationID + ", " +
-					"r: " + p.Radius + ", " +
-					"e: [" + p.Enemies + "], " +
-					"c: \"" + p.Coords + "\" },\r\n";
+				output += "  { \"a\": " + p.MapID + ", " +
+					"\"n\": \"" + p.NodeName + "\", " +
+					"\"d\": \"" + p.NodeRemarks + "\", " +
+					"\"l\": " + p.LevelID + ", " +
+					"\"t\": " + p.TypeID + ", " +
+					"\"f\": " + p.FormationID + ", " +
+					"\"r\": " + p.Radius + ", " +
+					"\"e\": [" + p.Enemies + "], " +
+					"\"c\": \"" + p.Coords + "\" },\r\n";
 			}
 			return output;
 		}

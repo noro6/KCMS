@@ -292,15 +292,15 @@ WHERE
 			var output = "";
 			foreach (var poiView in outputList)
 			{
-				output += "  { a: " + poiView.MapID + ", " +
-					"n: \"" + poiView.NodeName + "\", " +
-					"d: \"" + poiView.NodeRemarks + "\", " +
-					"l: " + poiView.LevelID + ", " +
-					"t: " + poiView.TypeID + ", " +
-					"f: " + poiView.FormationID + ", " +
-					"r: " + poiView.Radius + ", " +
-					"e: [" + poiView.Enemies + "], " +
-					"c: \"" + poiView.Coords + "\" },\r\n";
+				output += "  { \"a\": " + poiView.MapID + ", " +
+					"\"n\": \"" + poiView.NodeName + "\", " +
+					"\"d\": \"" + poiView.NodeRemarks + "\", " +
+					"\"l\": " + poiView.LevelID + ", " +
+					"\"t\": " + poiView.TypeID + ", " +
+					"\"f\": " + poiView.FormationID + ", " +
+					"\"r\": " + poiView.Radius + ", " +
+					"\"e\": [" + poiView.Enemies + "], " +
+					"\"c\": \"" + poiView.Coords + "\" },\r\n";
 			}
 			return output;
 		}

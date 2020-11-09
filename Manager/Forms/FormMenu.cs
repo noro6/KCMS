@@ -147,8 +147,8 @@ namespace Manager
 		/// <param name="e"></param>
 		private void BtnOutputWorlds_Click(object sender, EventArgs e)
 		{
-			txtOutput.Text = "const WORLD_DATA = [\r\n" + World.OutputJson() + "];\r\n";
-			txtOutput.Text += "const MAP_DATA = [\r\n" + Map.OutputJson() + "];";
+			txtOutput.Text = "\"WORLD_DATA\": [\r\n" + World.OutputJson() + "],\r\n";
+			txtOutput.Text += "\"MAP_DATA\": [\r\n" + Map.OutputJson() + "],";
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		/// <summary>
@@ -158,7 +158,7 @@ namespace Manager
 		/// <param name="e"></param>
 		private void BtnOutputEnemyPatterns_Click(object sender, EventArgs e)
 		{
-			txtOutput.Text = "const ENEMY_PATTERN = [\r\n" + Enemy.OutputEnemyPatterns() + "];";
+			txtOutput.Text = "\"ENEMY_PATTERN\": [\r\n" + Enemy.OutputEnemyPatterns() + "]";
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		/// <summary>
@@ -168,7 +168,7 @@ namespace Manager
 		/// <param name="e"></param>
 		private void btnOutputEnemyPatterns2_Click(object sender, EventArgs e)
 		{
-			txtOutput.Text = "const ENEMY_PATTERN = [\r\n" + Poi.OutputEnemyPatterns() + "];";
+			txtOutput.Text = "\"ENEMY_PATTERN\": [\r\n" + Poi.OutputEnemyPatterns() + "]";
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
@@ -213,7 +213,7 @@ namespace Manager
 		/// <param name="e"></param>
 		private void BtnOutputEnemy_Click(object sender, EventArgs e)
 		{
-			txtOutput.Text = "const ENEMY_PATTERN = [\r\n" + EnemyPattern.OutputEnemyPatterns() + "];";
+			txtOutput.Text = "\"ENEMY_PATTERN\": [\r\n" + EnemyPattern.OutputEnemyPatterns() + "]";
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 	}

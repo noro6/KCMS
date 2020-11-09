@@ -55,7 +55,7 @@ VALUES(@id, @name, true)
 			var output = "";
 			var sql = @"
 SELECT
-	  '  { world: ' || id || ', name: ""' || name || '"" },' AS json 
+	  '  { ""world"": ' || id || ', ""name"": ""' || name || '"" },' AS json 
 FROM
 	worlds 
 WHERE
