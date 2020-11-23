@@ -147,8 +147,8 @@ namespace Manager
 		/// <param name="e"></param>
 		private void BtnOutputWorlds_Click(object sender, EventArgs e)
 		{
-			txtOutput.Text = "\"WORLD_DATA\": [\r\n" + World.OutputJson() + "],\r\n";
-			txtOutput.Text += "\"MAP_DATA\": [\r\n" + Map.OutputJson() + "],";
+			txtOutput.Text = "const WORLD_DATA = [\r\n" + World.OutputJson() + "];\r\n";
+			txtOutput.Text += "const MAP_DATA = [\r\n" + Map.OutputJson() + "];";
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		/// <summary>

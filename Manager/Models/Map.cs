@@ -93,7 +93,7 @@ VALUES({ID}, {WorldId}, {MapNo}, @name)
 			var output = "";
 			var sql = @"
 SELECT
-	  '  { ""area"": ' || world_id || map_no || ', ""name"": ""' || maps.name || '"" },' AS json 
+	  '  { area: ' || world_id || map_no || ', name: ""' || maps.name || '"" },' AS json 
 FROM
 	maps
 LEFT JOIN worlds
