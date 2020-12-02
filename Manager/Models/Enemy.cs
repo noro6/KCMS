@@ -158,23 +158,13 @@ namespace Manager.Models
 
 			var aa = ConvertUtil.ToInt(equipment.AntiAir);
 			// 三式弾
-			//if (equipment.TypeID == 2000) return 0.6 * aa;
+			if (equipment.TypeID == 1006) return 0.6 * aa;
 			// 電探
-			if (equipment.TypeID == 1004) return 0.4 * aa;
+			else if (equipment.TypeID == 1004) return 0.4 * aa;
 			// 高角砲
-			if (equipment.TypeID == 1002) return 0.35 * aa;
+			else if (equipment.TypeID == 1002) return 0.35 * aa;
 			// 主砲（赤）副砲　機銃　艦戦　艦爆　水偵
-			if (equipment.TypeID == 1001
-				|| equipment.TypeID == 1003
-				|| equipment.TypeID == 1005
-				|| equipment.TypeID == 1
-				|| equipment.TypeID == -1
-				|| equipment.TypeID == 2
-				|| equipment.TypeID == -2
-				|| equipment.TypeID == 3
-				|| equipment.TypeID == 5) return 0.2 * aa;
-
-			return 0;
+			else return 0.2 * aa;
 		}
 
 		/// <summary>
