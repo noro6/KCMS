@@ -192,6 +192,11 @@ namespace Manager.Forms
 
 			dgvEnemies.DataSource = null;
 
+			if (enemiesAll is null)
+			{
+				Close();
+				return;
+			}
 			enemies = enemiesAll.FindAll(v =>
 			{
 				if (v.Name.Contains(text)) return true;

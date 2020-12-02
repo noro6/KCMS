@@ -30,6 +30,7 @@ namespace Manager.Models
 		public int AntiAirBonus { set; get; }
 		public int AirPower { set; get; }
 		public int LandBaseAirPower { set; get; }
+		public int AntiAir { set; get; }
 
 		public Enemy()
 		{
@@ -68,6 +69,7 @@ namespace Manager.Models
 				OriginalID = enemies[0].OriginalID;
 				AntiAirWeight = enemies[0].AntiAirWeight;
 				AntiAirBonus = enemies[0].AntiAirBonus;
+				AntiAir = enemies[0].AntiAir;
 
 				var equipments = EnemyEquipment.Select();
 
@@ -193,7 +195,7 @@ SELECT
 	, ' ' || GROUP_CONCAT(enemies_types.enemy_type_id, ', ') || ', ' AS type_ids
 	, GROUP_CONCAT(enemy_types.name, ', ')                           AS type_names
 	, IFNULL(slot_1, '')                                             AS slot_1
-	, IFNULL(enemy_plane1.id, '')                                    AS equipment1_id
+	, '' || IFNULL(enemy_plane1.id, '')                                    AS equipment1_id
 	, enemy_plane1.name                                              AS equipment1
 	, IFNULL(slot_2, '')                                             AS slot_2
 	, IFNULL(enemy_plane2.id, '')                                    AS equipment2_id
@@ -209,7 +211,8 @@ SELECT
 	, enemy_plane5.name                                              AS equipment5
 	, original_id
 	, anti_air_weight
-	, anti_air_bonus 
+	, anti_air_bonus
+	, enemies.anti_air
 FROM
 	enemies
 	LEFT JOIN enemies_types 
@@ -260,6 +263,7 @@ GROUP BY
 					enemy.OriginalID = ConvertUtil.ToInt(dr["original_id"]);
 					enemy.AntiAirWeight = ConvertUtil.ToInt(dr["anti_air_weight"]);
 					enemy.AntiAirBonus = ConvertUtil.ToInt(dr["anti_air_bonus"]);
+					enemy.AntiAir = ConvertUtil.ToInt(dr["anti_air"]);
 
 					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment1ID), ConvertUtil.ToInt(enemy.Slot1));
 					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment2ID), ConvertUtil.ToInt(enemy.Slot2));
@@ -305,6 +309,7 @@ INTO enemies(
 	, anti_air_bonus
 	, air_power
 	, land_base_air_power
+	, anti_air
 ) 
 VALUES ( 
 	{ID}
@@ -324,6 +329,7 @@ VALUES (
 	, {AntiAirBonus}
 	, {AirPower}
 	, {LandBaseAirPower}
+	, {AntiAir}
 ) ";
 			var param = new Dictionary<string, object>()
 			{

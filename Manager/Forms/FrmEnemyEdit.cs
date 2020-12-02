@@ -76,6 +76,8 @@ namespace Manager.Forms
 				cmbEquipment4.SelectedValue = enemy.Equipment4ID;
 				cmbEquipment5.SelectedValue = enemy.Equipment5ID;
 
+				numAntiAir.Value = enemy.AntiAir;
+
 				// 鬼姫じゃないなら元選択
 				if (!chkType1.Checked)
 				{
@@ -91,6 +93,8 @@ namespace Manager.Forms
 					txtName.Text = "";
 					cmbOriginalEnemy.Enabled = true;
 				}
+
+				EquipmentStatus_Changed(null, null);
 			}
 			else
 			{
@@ -264,6 +268,7 @@ namespace Manager.Forms
 			enemy.OriginalID = cmbOriginalEnemy.Enabled ? ConvertUtil.ToInt(cmbOriginalEnemy.SelectedValue) : enemy.ID;
 			enemy.AirPower = ConvertUtil.ToInt(lblAirPower.Text);
 			enemy.LandBaseAirPower = ConvertUtil.ToInt(lblLandBaseAirPower.Text);
+			enemy.AntiAir = ConvertUtil.ToInt(numAntiAir.Value);
 
 			// 艦種
 			var types = new List<int>();
