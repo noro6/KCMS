@@ -30,6 +30,8 @@ namespace Manager.Models
 		public int AntiAirBonus { set; get; }
 		public int AirPower { set; get; }
 		public int LandBaseAirPower { set; get; }
+		public int AntiAir { set; get; }
+		public int SlotCount { set; get; }
 
 		public Enemy()
 		{
@@ -68,6 +70,8 @@ namespace Manager.Models
 				OriginalID = enemies[0].OriginalID;
 				AntiAirWeight = enemies[0].AntiAirWeight;
 				AntiAirBonus = enemies[0].AntiAirBonus;
+				AntiAir = enemies[0].AntiAir;
+				SlotCount = enemies[0].SlotCount;
 
 				var equipments = EnemyEquipment.Select();
 
@@ -158,23 +162,13 @@ namespace Manager.Models
 
 			var aa = ConvertUtil.ToInt(equipment.AntiAir);
 			// 三式弾
-			//if (equipment.TypeID == 2000) return 0.6 * aa;
+			if (equipment.TypeID == 1006) return 0.6 * aa;
 			// 電探
-			if (equipment.TypeID == 1004) return 0.4 * aa;
+			else if (equipment.TypeID == 1004) return 0.4 * aa;
 			// 高角砲
-			if (equipment.TypeID == 1002) return 0.35 * aa;
+			else if (equipment.TypeID == 1002) return 0.35 * aa;
 			// 主砲（赤）副砲　機銃　艦戦　艦爆　水偵
-			if (equipment.TypeID == 1001
-				|| equipment.TypeID == 1003
-				|| equipment.TypeID == 1005
-				|| equipment.TypeID == 1
-				|| equipment.TypeID == -1
-				|| equipment.TypeID == 2
-				|| equipment.TypeID == -2
-				|| equipment.TypeID == 3
-				|| equipment.TypeID == 5) return 0.2 * aa;
-
-			return 0;
+			else return 0.2 * aa;
 		}
 
 		/// <summary>
@@ -203,7 +197,7 @@ SELECT
 	, ' ' || GROUP_CONCAT(enemies_types.enemy_type_id, ', ') || ', ' AS type_ids
 	, GROUP_CONCAT(enemy_types.name, ', ')                           AS type_names
 	, IFNULL(slot_1, '')                                             AS slot_1
-	, IFNULL(enemy_plane1.id, '')                                    AS equipment1_id
+	, '' || IFNULL(enemy_plane1.id, '')                                    AS equipment1_id
 	, enemy_plane1.name                                              AS equipment1
 	, IFNULL(slot_2, '')                                             AS slot_2
 	, IFNULL(enemy_plane2.id, '')                                    AS equipment2_id
@@ -217,9 +211,11 @@ SELECT
 	, IFNULL(slot_5, '')                                             AS slot_5
 	, IFNULL(enemy_plane5.id, '')                                    AS equipment5_id
 	, enemy_plane5.name                                              AS equipment5
-	, original_id
-	, anti_air_weight
-	, anti_air_bonus 
+	, enemies.original_id
+	, enemies.anti_air_weight
+	, enemies.anti_air_bonus
+	, enemies.anti_air
+	, raw.slot_count
 FROM
 	enemies
 	LEFT JOIN enemies_types 
@@ -236,6 +232,8 @@ FROM
 		ON enemies.equipment_4 = enemy_plane4.id 
 	LEFT JOIN equipments_view AS enemy_plane5 
 		ON enemies.equipment_5 = enemy_plane5.id
+	LEFT JOIN enemies_view AS raw 
+		ON raw.id = enemies.id
 WHERE
 	enemies.id <> - 1 
 	{(enemyId != 0 ? "AND enemies.id = " + enemyId : "")}
@@ -270,6 +268,8 @@ GROUP BY
 					enemy.OriginalID = ConvertUtil.ToInt(dr["original_id"]);
 					enemy.AntiAirWeight = ConvertUtil.ToInt(dr["anti_air_weight"]);
 					enemy.AntiAirBonus = ConvertUtil.ToInt(dr["anti_air_bonus"]);
+					enemy.AntiAir = ConvertUtil.ToInt(dr["anti_air"]);
+					enemy.SlotCount = ConvertUtil.ToInt(dr["slot_count"]);
 
 					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment1ID), ConvertUtil.ToInt(enemy.Slot1));
 					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment2ID), ConvertUtil.ToInt(enemy.Slot2));
@@ -315,6 +315,7 @@ INTO enemies(
 	, anti_air_bonus
 	, air_power
 	, land_base_air_power
+	, anti_air
 ) 
 VALUES ( 
 	{ID}
@@ -334,6 +335,7 @@ VALUES (
 	, {AntiAirBonus}
 	, {AirPower}
 	, {LandBaseAirPower}
+	, {AntiAir}
 ) ";
 			var param = new Dictionary<string, object>()
 			{
@@ -425,53 +427,34 @@ VALUES (
 			var output = "";
 			var sql = @"
 SELECT
-    '  { id: ' || (id - 1500) || ', type: [' || GROUP_CONCAT(enemies_types.enemy_type_id, ', ') || ']' || ', name: ""' || name || '""' || ', slot: [' || CASE 
-        WHEN slot_1 > 0 
-            THEN slot_1 || ', ' 
+    '  { id: ' || (id - 1500) || ', type: [' || GROUP_CONCAT(enemies_types.enemy_type_id, ', ') || ']' || 
+    ', name: ""' || name || '""' || ', slot: [' || slot1 || ', ' || slot2 || ', ' || slot3 || ', ' || slot4 || ', ' || slot5 || ']' || ', eqp: [' || CASE 
+        WHEN equipment1 > 0 
+            THEN equipment1 || ', ' 
         ELSE '' 
         END || CASE 
-        WHEN slot_2 > 0 
-            THEN slot_2 || ', ' 
+        WHEN equipment2 > 0 
+            THEN equipment2 || ', ' 
         ELSE '' 
         END || CASE 
-        WHEN slot_3 > 0 
-            THEN slot_3 || ', ' 
+        WHEN equipment3 > 0 
+            THEN equipment3 || ', ' 
         ELSE '' 
         END || CASE 
-        WHEN slot_4 > 0 
-            THEN slot_4 || ', ' 
+        WHEN equipment4 > 0 
+            THEN equipment4 || ', ' 
         ELSE '' 
         END || CASE 
-        WHEN slot_5 > 0 
-            THEN slot_5 || ', ' 
+        WHEN equipment5 > 0 
+            THEN equipment5 || ', ' 
         ELSE '' 
-        END || ']' || ', eqp: [' || CASE 
-        WHEN slot_1 > 0 AND equipment_1 > 0 
-            THEN equipment_1 || ', ' 
-        ELSE '' 
-        END || CASE 
-        WHEN slot_2 > 0 AND equipment_2 > 0 
-            THEN equipment_2 || ', ' 
-        ELSE '' 
-        END || CASE 
-        WHEN slot_3 > 0 AND equipment_3 > 0 
-            THEN equipment_3 || ', ' 
-        ELSE '' 
-        END || CASE 
-        WHEN slot_4 > 0 AND equipment_4 > 0 
-            THEN equipment_4 || ', ' 
-        ELSE '' 
-        END || CASE 
-        WHEN slot_5 > 0 AND equipment_5 > 0 
-            THEN equipment_5 || ', ' 
-        ELSE '' 
-        END || ']' || ', orig: ' || original_id || ', aaw: ' || anti_air_weight || ', aabo: ' || anti_air_bonus || ' },' AS json 
+        END || ']' || ', orig: ' || original_id || ', aa: ' || anti_air || ' },' AS json 
 FROM
-    enemies 
+    enemies_view 
     LEFT JOIN enemies_types 
-        ON enemies.id = enemies_types.enemy_id 
+        ON enemies_view.id = enemies_types.enemy_id 
 GROUP BY
-    enemies.id
+    enemies_view.id
 ";
 			using (var db = new DBManager())
 			{

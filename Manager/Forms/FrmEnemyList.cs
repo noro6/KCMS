@@ -192,6 +192,11 @@ namespace Manager.Forms
 
 			dgvEnemies.DataSource = null;
 
+			if (enemiesAll is null)
+			{
+				Close();
+				return;
+			}
 			enemies = enemiesAll.FindAll(v =>
 			{
 				if (v.Name.Contains(text)) return true;
@@ -200,6 +205,83 @@ namespace Manager.Forms
 			});
 
 			dgvEnemies.DataSource = enemies;
+		}
+
+		/// <summary>
+		/// 特定セルに色付け
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void dgvEnemies_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+		{
+			var dgv = (DataGridView)sender;
+
+			if (e.RowIndex > -1 && e.RowIndex < enemies.Count)
+			{
+				var enemy = enemies[e.RowIndex];
+
+				// 対空値未登録チェック => 潜水じゃないのに対空0チェック どうせcsvデータ使うので色は警告程度
+				if (enemy.TypeNames.IndexOf("潜水艦") < 0 && enemy.AntiAir == 0)
+				{
+					dgv[0, e.RowIndex].Style.BackColor = Color.LightGoldenrodYellow;
+					dgv[1, e.RowIndex].Style.BackColor = Color.LightGoldenrodYellow;
+					dgv[2, e.RowIndex].Style.BackColor = Color.LightGoldenrodYellow;
+				}
+				else
+				{
+					dgv[0, e.RowIndex].Style.BackColor = Color.White;
+					dgv[1, e.RowIndex].Style.BackColor = Color.White;
+					dgv[2, e.RowIndex].Style.BackColor = Color.White;
+				}
+				// 装備未登録チェック
+				if (enemy.SlotCount >= 1 && enemy.Equipment1ID == 0)
+				{
+					dgv[3, e.RowIndex].Style.BackColor = Color.MistyRose;
+				}
+				else
+				{
+					dgv[3, e.RowIndex].Style.BackColor = Color.White;
+				}
+				// 装備2未登録チェック
+				if (enemy.SlotCount >= 2 && enemy.Equipment2ID == 0)
+				{
+					dgv[4, e.RowIndex].Style.BackColor = Color.MistyRose;
+				}
+				else
+				{
+					dgv[4, e.RowIndex].Style.BackColor = Color.White;
+				}
+
+				// 装備3未登録チェック
+				if (enemy.SlotCount >= 3 && enemy.Equipment3ID == 0)
+				{
+					dgv[5, e.RowIndex].Style.BackColor = Color.MistyRose;
+				}
+				else
+				{
+					dgv[5, e.RowIndex].Style.BackColor = Color.White;
+				}
+
+				// 装備4未登録チェック
+				if (enemy.SlotCount >= 4 && enemy.Equipment4ID == 0)
+				{
+					dgv[6, e.RowIndex].Style.BackColor = Color.MistyRose;
+				}
+				else
+				{
+					dgv[6, e.RowIndex].Style.BackColor = Color.White;
+				}
+
+				// 装備5未登録チェック
+				if (enemy.SlotCount >= 5 && enemy.Equipment5ID == 0)
+				{
+					dgv[7, e.RowIndex].Style.BackColor = Color.MistyRose;
+				}
+				else
+				{
+					dgv[7, e.RowIndex].Style.BackColor = Color.White;
+				}
+			}
 		}
 	}
 }

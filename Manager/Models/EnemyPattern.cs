@@ -206,6 +206,10 @@ WHERE
 				}
 				poi.Enemies = string.Join(",", enemyIDs);
 
+				if (poi.AirPower == 0)
+				{
+					poi.LandBaseAirPower = 0;
+				}
 				// 対空砲火具合の計算
 				var correct = formations.Find(v => v.ID == poi.FormationID).AntiAirCorrect;
 				// 撃墜数の加算

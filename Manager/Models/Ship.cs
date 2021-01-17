@@ -202,7 +202,7 @@ SELECT
         WHEN slot_5 >= 0 AND slot_count >= 5
             THEN slot_5 || ', ' 
         ELSE '' 
-        END || ']' || ', final: ' || is_final || ', orig: ' || original_id || ', valid: ' || enabled || ', sort1: ' || sort_1 || ', sort2: ' || sort_2 || 
+        END || ']' || ', final: ' || is_final || ', orig: ' || original_id || ', valid: ' || enabled || ', range: ' || range || ', sort1: ' || sort_1 || ', sort2: ' || sort_2 || 
     ' },' AS json 
 FROM
     ships_view 
