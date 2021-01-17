@@ -258,11 +258,11 @@ namespace Manager.Forms
 			enemy.Slot3 = enemy.Slot3 > 0 ? enemy.Slot3 : null;
 			enemy.Slot4 = enemy.Slot4 > 0 ? enemy.Slot4 : null;
 			enemy.Slot5 = enemy.Slot5 > 0 ? enemy.Slot5 : null;
-			enemy.Equipment1ID = ConvertUtil.ToInt(cmbEquipment1.SelectedValue);
-			enemy.Equipment2ID = ConvertUtil.ToInt(cmbEquipment2.SelectedValue);
-			enemy.Equipment3ID = ConvertUtil.ToInt(cmbEquipment3.SelectedValue);
-			enemy.Equipment4ID = ConvertUtil.ToInt(cmbEquipment4.SelectedValue);
-			enemy.Equipment5ID = ConvertUtil.ToInt(cmbEquipment5.SelectedValue);
+			enemy.Equipment1ID = ConvertUtil.ToInt(cmbEquipment1.SelectedValue, -1);
+			enemy.Equipment2ID = ConvertUtil.ToInt(cmbEquipment2.SelectedValue, -1);
+			enemy.Equipment3ID = ConvertUtil.ToInt(cmbEquipment3.SelectedValue, -1);
+			enemy.Equipment4ID = ConvertUtil.ToInt(cmbEquipment4.SelectedValue, -1);
+			enemy.Equipment5ID = ConvertUtil.ToInt(cmbEquipment5.SelectedValue, -1);
 			enemy.AntiAirWeight = ConvertUtil.ToInt(numAntiAirWeight.Value);
 			enemy.AntiAirBonus = ConvertUtil.ToInt(numAntiAirBonus.Value);
 			enemy.OriginalID = cmbOriginalEnemy.Enabled ? ConvertUtil.ToInt(cmbOriginalEnemy.SelectedValue) : enemy.ID;

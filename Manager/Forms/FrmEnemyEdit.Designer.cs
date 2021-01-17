@@ -101,8 +101,6 @@
 			this.lblLandBaseAirPower = new System.Windows.Forms.Label();
 			this.numAntiAir = new System.Windows.Forms.NumericUpDown();
 			this.label22 = new System.Windows.Forms.Label();
-			this.numEquipmentAntiAir = new System.Windows.Forms.NumericUpDown();
-			this.label24 = new System.Windows.Forms.Label();
 			this.lblAntiAirWeight = new System.Windows.Forms.Label();
 			this.lblAntiAirBonus = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
@@ -118,7 +116,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirWeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirBonus)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAir)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numEquipmentAntiAir)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -890,27 +887,6 @@
 			this.label22.TabIndex = 36;
 			this.label22.Text = "素対空：";
 			// 
-			// numEquipmentAntiAir
-			// 
-			this.numEquipmentAntiAir.Location = new System.Drawing.Point(237, 99);
-			this.numEquipmentAntiAir.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-			this.numEquipmentAntiAir.Name = "numEquipmentAntiAir";
-			this.numEquipmentAntiAir.Size = new System.Drawing.Size(54, 23);
-			this.numEquipmentAntiAir.TabIndex = 37;
-			// 
-			// label24
-			// 
-			this.label24.AutoSize = true;
-			this.label24.Location = new System.Drawing.Point(153, 102);
-			this.label24.Name = "label24";
-			this.label24.Size = new System.Drawing.Size(79, 15);
-			this.label24.TabIndex = 38;
-			this.label24.Text = "総装備対空：";
-			// 
 			// lblAntiAirWeight
 			// 
 			this.lblAntiAirWeight.AutoSize = true;
@@ -936,8 +912,6 @@
 			this.ClientSize = new System.Drawing.Size(599, 495);
 			this.Controls.Add(this.lblAntiAirBonus);
 			this.Controls.Add(this.lblAntiAirWeight);
-			this.Controls.Add(this.numEquipmentAntiAir);
-			this.Controls.Add(this.label24);
 			this.Controls.Add(this.numAntiAir);
 			this.Controls.Add(this.label22);
 			this.Controls.Add(this.lblLandBaseAirPower);
@@ -1004,7 +978,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirWeight)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirBonus)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAir)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numEquipmentAntiAir)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1085,8 +1058,6 @@
 		private System.Windows.Forms.Label lblLandBaseAirPower;
 		private System.Windows.Forms.NumericUpDown numAntiAir;
 		private System.Windows.Forms.Label label22;
-		private System.Windows.Forms.NumericUpDown numEquipmentAntiAir;
-		private System.Windows.Forms.Label label24;
 		private System.Windows.Forms.Label lblAntiAirWeight;
 		private System.Windows.Forms.Label lblAntiAirBonus;
 	}
