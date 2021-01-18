@@ -17,14 +17,14 @@ namespace Manager.Models
 			var list = new List<EquipmentType>();
 			using (var db = new DBManager())
 			{
-				var dt = db.Select("SELECT id, name FROM equipment_types ORDER BY ABS(id), id DESC");
+				var dt = db.Select("SELECT * FROM api_item_types");
 
 				foreach (DataRow dr in dt.Rows)
 				{
 					var shipType = new EquipmentType()
 					{
-						ID = ConvertUtil.ToInt(dr["id"]),
-						Name = ConvertUtil.ToString(dr["name"])
+						ID = ConvertUtil.ToInt(dr["api_id"]),
+						Name = ConvertUtil.ToString(dr["api_name"])
 					};
 					list.Add(shipType);
 				}
@@ -41,14 +41,40 @@ namespace Manager.Models
 			var output = "";
 			var sql = @"
 SELECT
-	  '  { id: ' || id || ', name: ""' || name || '"", abbr: ""' || abbr || '"", css: ""' || css || '"" },' AS json 
+    '  { id: ' || api_id || ', name: ""' || api_name || '"", css: ""' || IFNULL(css, '') || '"" },' AS json
 FROM
-	equipment_types
-WHERE
-	ABS(id) < 1000
+    api_item_types 
 ORDER BY
-	ABS(id)
-	, id DESC
+    api_id
+";
+			using (var db = new DBManager())
+			{
+				var dt = db.Select(sql);
+
+				foreach (DataRow dr in dt.Rows)
+				{
+					output += ConvertUtil.ToString(dr["json"]) + "\r\n";
+				}
+			}
+
+			output = output.Replace(",]", "]");
+			return output;
+		}
+
+		/// <summary>
+		/// JSON出力
+		/// </summary>
+		/// <returns></returns>
+		internal static string OutputJson2()
+		{
+			var output = "";
+			var sql = @"
+SELECT
+    '  { id: ' || api_id || ', name: ""' || name || '"", css: ""' || IFNULL(css, '') || '"" },' AS json
+FROM
+    icon_item_types 
+ORDER BY
+    api_id
 ";
 			using (var db = new DBManager())
 			{

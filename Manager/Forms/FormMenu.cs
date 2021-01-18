@@ -83,7 +83,8 @@ namespace Manager
 		/// <param name="e"></param>
 		private void BtnOutputEquipmentTypes_Click(object sender, EventArgs e)
 		{
-			txtOutput.Text = "const PLANE_TYPE = [\r\n" + EquipmentType.OutputJson() + "];";
+			txtOutput.Text = "const ITEM_API_TYPE = [\r\n" + EquipmentType.OutputJson() + "];";
+			txtOutput.Text += "\r\nconst ITEM_ICON_TYPE = [\r\n" + EquipmentType.OutputJson2() + "];";
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		/// <summary>
@@ -180,7 +181,8 @@ namespace Manager
 		private void BtnOutputAll_Click(object sender, EventArgs e)
 		{
 			var outputText = "";
-			outputText += "const PLANE_TYPE = [\r\n" + EquipmentType.OutputJson() + "];\r\n";
+			outputText += "const ITEM_API_TYPE = [\r\n" + EquipmentType.OutputJson() + "];\r\n";
+			outputText += "const ITEM_ICON_TYPE = [\r\n" + EquipmentType.OutputJson2() + "];\r\n";
 			outputText += "const PLANE_DATA = [\r\n" + Equipment.OutputJson() + "];\r\n";
 			outputText += "const SHIP_TYPE = [\r\n" + ShipType.OutputJson() + "];\r\n";
 			outputText += "const SHIP_DATA = [\r\n" + Ship.OutputShip() + "];\r\n";

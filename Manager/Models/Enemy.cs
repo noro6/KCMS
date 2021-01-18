@@ -120,12 +120,19 @@ namespace Manager.Models
 		public static int GetAirPower(EnemyEquipment equipment, int slot, bool isLandBase = false)
 		{
 			if (equipment == null) return 0;
-			if (!isLandBase && (equipment.TypeID == 4 || equipment.TypeID == 5))
+
+			if (isLandBase && Const.PLANES_ALL.Contains(equipment.ID))
+			{
+				return (int)(ConvertUtil.ToInt(equipment.AntiAir) * Math.Sqrt(slot));
+			}
+			else if (Const.PLANES.Contains(equipment.ID))
+			{
+				return (int)(ConvertUtil.ToInt(equipment.AntiAir) * Math.Sqrt(slot));
+			}
+			else
 			{
 				return 0;
 			}
-
-			return (int)(ConvertUtil.ToInt(equipment.AntiAir) * Math.Sqrt(slot));
 		}
 
 		/// <summary>
@@ -141,11 +148,11 @@ namespace Manager.Models
 			var aa = ConvertUtil.ToInt(equipment.AntiAir);
 
 			// 機銃
-			if (equipment.TypeID == 1005) return 6 * aa;
+			if (equipment.TypeID == 21) return 6 * aa;
 			// 高角砲
-			if (equipment.TypeID == 1002) return 4 * aa;
+			if (equipment.IconTypeID == 16) return 4 * aa;
 			// 電探
-			if (equipment.TypeID == 1004) return 3 * aa;
+			if (equipment.TypeID == 12 || equipment.TypeID == 13) return 3 * aa;
 
 			return 0;
 		}
@@ -162,12 +169,12 @@ namespace Manager.Models
 
 			var aa = ConvertUtil.ToInt(equipment.AntiAir);
 			// 三式弾
-			if (equipment.TypeID == 1006) return 0.6 * aa;
+			if (equipment.TypeID == 18) return 0.6 * aa;
 			// 電探
-			else if (equipment.TypeID == 1004) return 0.4 * aa;
+			else if (equipment.TypeID == 12 || equipment.TypeID == 13) return 0.4 * aa;
 			// 高角砲
-			else if (equipment.TypeID == 1002) return 0.35 * aa;
-			// 主砲（赤）副砲　機銃　艦戦　艦爆　水偵
+			else if (equipment.IconTypeID == 16) return 0.35 * aa;
+			// その他全部
 			else return 0.2 * aa;
 		}
 

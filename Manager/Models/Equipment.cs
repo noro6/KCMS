@@ -23,10 +23,7 @@ namespace Manager.Models
 		public int Cost { set; get; }
 		public int AvoidID { set; get; }
 		public string AvoidName { set; get; }
-		public Equipment()
-		{
-			TableName = "equipments";
-		}
+		public Equipment() {}
 
 		/// <summary>
 		/// 指定したIDのインスタンス生成
@@ -34,7 +31,6 @@ namespace Manager.Models
 		/// <param name="equipmentID"></param>
 		public Equipment(int equipmentID)
 		{
-			TableName = "equipments";
 			var ships = Select(equipmentID);
 			if (ships.Count == 1)
 			{
@@ -79,30 +75,30 @@ namespace Manager.Models
 			{
 				var dt = db.Select($@"
 SELECT
-	  equipments.id        AS id
-	, equipment_types.id   AS type_id
-	, equipment_types.name AS type_name
-	, equipments.name
-	, equipments.abbr
-	, equipments.anti_air
-	, equipments.torpedo
-	, equipments.bomber
-	, equipments.interception
-	, equipments.anti_bomer
-	, equipments.scout
-	, equipments.can_remodel
-	, equipments.radius
-	, equipments.cost
-	, equipments.avoid_id 
-	, avoids.name          AS avoid_name 
+    equipments.id AS id
+    , api_item_types.api_id AS type_id
+    , api_item_types.api_name AS type_name
+    , equipments.name
+    , equipments.abbr
+    , equipments.anti_air
+    , equipments.torpedo
+    , equipments.bomber
+    , equipments.interception
+    , equipments.anti_bomer
+    , equipments.scout
+    , equipments.can_remodel
+    , equipments.radius
+    , equipments.cost
+    , equipments.avoid_id
+    , avoids.name AS avoid_name 
 FROM
-	equipments 
-	LEFT JOIN equipment_types 
-		ON equipments.equipment_type_id = equipment_types.id
-	LEFT JOIN avoids 
-		ON equipments.avoid_id = avoids.id
+    equipments_view AS equipments
+    LEFT JOIN api_item_types 
+        ON equipments.api_type_id = api_item_types.api_id 
+    LEFT JOIN avoids 
+        ON equipments.avoid_id = avoids.id 
 WHERE
-	1 = 1
+    1 = 1
 	{(equipmentId != 0 ? "AND equipments.id = " + equipmentId : "")}
 ");
 				foreach (DataRow dr in dt.Rows)
@@ -143,34 +139,16 @@ WHERE
 INSERT 
 INTO equipments( 
 	id
-	, equipment_type_id
 	, name
 	, abbr
-	, anti_air
-	, anti_bomer
-	, interception
-	, torpedo
-	, bomber
-	, scout
 	, can_remodel
-	, radius
-	, cost
 	, avoid_id
 ) 
 VALUES ( 
 	{ID}
-	, {TypeID}
 	, @name
 	, @abbr
-	, {AntiAir}
-	, {AntiBomber}
-	, {Interception}
-	, {Torpedo}
-	, {Bomber}
-	, {Scout}
 	, {CanRemodel}
-	, {Radius}
-	, {Cost}
 	, {AvoidID}
 ) ";
 			var param = new Dictionary<string, object>()
@@ -199,10 +177,11 @@ VALUES (
 		public static string OutputJson()
 		{
 			var output = "";
-			var sql = @"
+			var sql = $@"
 SELECT
-	'  { id: ' || id || 
-	', type: ' || equipment_type_id || 
+	'  {{ id: ' || id || 
+	', type: ' || api_type_id || 
+	', itype: ' || icon_type_id || 
 	', name: ""' || name || '""' || 
 	', abbr: ""' || IFNULL(abbr, '') || '""' || 
 	', fire: ' || fire || 
@@ -220,16 +199,18 @@ SELECT
 	', radius: ' || radius || 
 	', cost: ' || cost || 
 	', avoid: ' || avoid_id || 
-	' },' AS JSON 
+	' }},' AS JSON 
 FROM
 	equipments_view
 WHERE
 	id < 500
-	AND equipment_type_id < 1000
+	AND api_type_id in ({string.Join(", ", Const.PLANES_ALL)})
 ORDER BY
-	ABS(equipment_type_id)
-	, equipment_type_id DESC
+	api_type_id
+	, id
 ";
+			// WHERE条件 まだ艦載機だけ！
+
 			using (var db = new DBManager())
 			{
 				var dt = db.Select(sql);

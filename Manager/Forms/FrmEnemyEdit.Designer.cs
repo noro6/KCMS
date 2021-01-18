@@ -46,6 +46,7 @@
 			this.chkType19 = new System.Windows.Forms.CheckBox();
 			this.chkType21 = new System.Windows.Forms.CheckBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.txtEquipmentID1 = new System.Windows.Forms.TextBox();
 			this.lblAirPower1 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.numSlot1 = new System.Windows.Forms.NumericUpDown();
@@ -54,6 +55,7 @@
 			this.cmbEquipment1 = new System.Windows.Forms.ComboBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.txtEquipmentID2 = new System.Windows.Forms.TextBox();
 			this.lblAirPower2 = new System.Windows.Forms.Label();
 			this.numSlot2 = new System.Windows.Forms.NumericUpDown();
 			this.label11 = new System.Windows.Forms.Label();
@@ -62,6 +64,7 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.txtEquipmentID3 = new System.Windows.Forms.TextBox();
 			this.lblAirPower3 = new System.Windows.Forms.Label();
 			this.numSlot3 = new System.Windows.Forms.NumericUpDown();
 			this.label17 = new System.Windows.Forms.Label();
@@ -70,6 +73,7 @@
 			this.label10 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.txtEquipmentID5 = new System.Windows.Forms.TextBox();
 			this.lblAirPower5 = new System.Windows.Forms.Label();
 			this.numSlot5 = new System.Windows.Forms.NumericUpDown();
 			this.label25 = new System.Windows.Forms.Label();
@@ -78,6 +82,7 @@
 			this.label13 = new System.Windows.Forms.Label();
 			this.label15 = new System.Windows.Forms.Label();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.txtEquipmentID4 = new System.Windows.Forms.TextBox();
 			this.lblAirPower4 = new System.Windows.Forms.Label();
 			this.numSlot4 = new System.Windows.Forms.NumericUpDown();
 			this.label23 = new System.Windows.Forms.Label();
@@ -103,6 +108,8 @@
 			this.label22 = new System.Windows.Forms.Label();
 			this.lblAntiAirWeight = new System.Windows.Forms.Label();
 			this.lblAntiAirBonus = new System.Windows.Forms.Label();
+			this.label24 = new System.Windows.Forms.Label();
+			this.label26 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot1)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -164,7 +171,7 @@
 			// chkType1
 			// 
 			this.chkType1.AutoSize = true;
-			this.chkType1.Location = new System.Drawing.Point(438, 154);
+			this.chkType1.Location = new System.Drawing.Point(241, 154);
 			this.chkType1.Name = "chkType1";
 			this.chkType1.Size = new System.Drawing.Size(55, 19);
 			this.chkType1.TabIndex = 14;
@@ -175,7 +182,7 @@
 			// chkType2
 			// 
 			this.chkType2.AutoSize = true;
-			this.chkType2.Location = new System.Drawing.Point(382, 154);
+			this.chkType2.Location = new System.Drawing.Point(173, 154);
 			this.chkType2.Name = "chkType2";
 			this.chkType2.Size = new System.Drawing.Size(50, 19);
 			this.chkType2.TabIndex = 13;
@@ -215,7 +222,7 @@
 			// chkType14
 			// 
 			this.chkType14.AutoSize = true;
-			this.chkType14.Location = new System.Drawing.Point(297, 129);
+			this.chkType14.Location = new System.Drawing.Point(302, 129);
 			this.chkType14.Name = "chkType14";
 			this.chkType14.Size = new System.Drawing.Size(50, 19);
 			this.chkType14.TabIndex = 5;
@@ -225,7 +232,7 @@
 			// chkType15
 			// 
 			this.chkType15.AutoSize = true;
-			this.chkType15.Location = new System.Drawing.Point(382, 129);
+			this.chkType15.Location = new System.Drawing.Point(358, 129);
 			this.chkType15.Name = "chkType15";
 			this.chkType15.Size = new System.Drawing.Size(50, 19);
 			this.chkType15.TabIndex = 6;
@@ -235,7 +242,7 @@
 			// chkType16
 			// 
 			this.chkType16.AutoSize = true;
-			this.chkType16.Location = new System.Drawing.Point(438, 129);
+			this.chkType16.Location = new System.Drawing.Point(414, 129);
 			this.chkType16.Name = "chkType16";
 			this.chkType16.Size = new System.Drawing.Size(50, 19);
 			this.chkType16.TabIndex = 7;
@@ -245,7 +252,7 @@
 			// chkType17
 			// 
 			this.chkType17.AutoSize = true;
-			this.chkType17.Location = new System.Drawing.Point(499, 129);
+			this.chkType17.Location = new System.Drawing.Point(475, 129);
 			this.chkType17.Name = "chkType17";
 			this.chkType17.Size = new System.Drawing.Size(50, 19);
 			this.chkType17.TabIndex = 8;
@@ -255,7 +262,7 @@
 			// chkType18
 			// 
 			this.chkType18.AutoSize = true;
-			this.chkType18.Location = new System.Drawing.Point(93, 154);
+			this.chkType18.Location = new System.Drawing.Point(531, 129);
 			this.chkType18.Name = "chkType18";
 			this.chkType18.Size = new System.Drawing.Size(50, 19);
 			this.chkType18.TabIndex = 9;
@@ -265,7 +272,7 @@
 			// chkType19
 			// 
 			this.chkType19.AutoSize = true;
-			this.chkType19.Location = new System.Drawing.Point(173, 154);
+			this.chkType19.Location = new System.Drawing.Point(587, 129);
 			this.chkType19.Name = "chkType19";
 			this.chkType19.Size = new System.Drawing.Size(50, 19);
 			this.chkType19.TabIndex = 10;
@@ -275,7 +282,7 @@
 			// chkType21
 			// 
 			this.chkType21.AutoSize = true;
-			this.chkType21.Location = new System.Drawing.Point(297, 154);
+			this.chkType21.Location = new System.Drawing.Point(93, 154);
 			this.chkType21.Name = "chkType21";
 			this.chkType21.Size = new System.Drawing.Size(79, 19);
 			this.chkType21.TabIndex = 12;
@@ -284,6 +291,7 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.txtEquipmentID1);
 			this.groupBox1.Controls.Add(this.lblAirPower1);
 			this.groupBox1.Controls.Add(this.label5);
 			this.groupBox1.Controls.Add(this.numSlot1);
@@ -293,15 +301,26 @@
 			this.groupBox1.Controls.Add(this.label4);
 			this.groupBox1.Location = new System.Drawing.Point(15, 185);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(572, 54);
+			this.groupBox1.Size = new System.Drawing.Size(755, 54);
 			this.groupBox1.TabIndex = 16;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "スロット1";
 			// 
+			// txtEquipmentID1
+			// 
+			this.txtEquipmentID1.ImeMode = System.Windows.Forms.ImeMode.Disable;
+			this.txtEquipmentID1.Location = new System.Drawing.Point(338, 22);
+			this.txtEquipmentID1.MaxLength = 4;
+			this.txtEquipmentID1.Name = "txtEquipmentID1";
+			this.txtEquipmentID1.Size = new System.Drawing.Size(124, 23);
+			this.txtEquipmentID1.TabIndex = 25;
+			this.txtEquipmentID1.TextChanged += new System.EventHandler(this.txtEquipmentID1_TextChanged);
+			this.txtEquipmentID1.Enter += new System.EventHandler(this.txtEquipmentID_Enter);
+			// 
 			// lblAirPower1
 			// 
 			this.lblAirPower1.AutoSize = true;
-			this.lblAirPower1.Location = new System.Drawing.Point(535, 25);
+			this.lblAirPower1.Location = new System.Drawing.Point(736, 25);
 			this.lblAirPower1.Name = "lblAirPower1";
 			this.lblAirPower1.Size = new System.Drawing.Size(13, 15);
 			this.lblAirPower1.TabIndex = 24;
@@ -310,7 +329,7 @@
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(486, 25);
+			this.label5.Location = new System.Drawing.Point(687, 25);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(43, 15);
 			this.label5.TabIndex = 23;
@@ -336,7 +355,7 @@
 			this.cmbType1.FormattingEnabled = true;
 			this.cmbType1.Location = new System.Drawing.Point(186, 22);
 			this.cmbType1.Name = "cmbType1";
-			this.cmbType1.Size = new System.Drawing.Size(98, 23);
+			this.cmbType1.Size = new System.Drawing.Size(146, 23);
 			this.cmbType1.TabIndex = 1;
 			this.cmbType1.ValueMember = "ID";
 			this.cmbType1.SelectedIndexChanged += new System.EventHandler(this.CmbType1_SelectedIndexChanged);
@@ -355,9 +374,9 @@
 			this.cmbEquipment1.DisplayMember = "Name";
 			this.cmbEquipment1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbEquipment1.FormattingEnabled = true;
-			this.cmbEquipment1.Location = new System.Drawing.Point(290, 22);
+			this.cmbEquipment1.Location = new System.Drawing.Point(468, 22);
 			this.cmbEquipment1.Name = "cmbEquipment1";
-			this.cmbEquipment1.Size = new System.Drawing.Size(190, 23);
+			this.cmbEquipment1.Size = new System.Drawing.Size(213, 23);
 			this.cmbEquipment1.TabIndex = 2;
 			this.cmbEquipment1.ValueMember = "ID";
 			this.cmbEquipment1.SelectedIndexChanged += new System.EventHandler(this.EquipmentStatus_Changed);
@@ -373,6 +392,7 @@
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.txtEquipmentID2);
 			this.groupBox2.Controls.Add(this.lblAirPower2);
 			this.groupBox2.Controls.Add(this.numSlot2);
 			this.groupBox2.Controls.Add(this.label11);
@@ -382,15 +402,26 @@
 			this.groupBox2.Controls.Add(this.label9);
 			this.groupBox2.Location = new System.Drawing.Point(15, 245);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(572, 54);
+			this.groupBox2.Size = new System.Drawing.Size(755, 54);
 			this.groupBox2.TabIndex = 17;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "スロット2";
 			// 
+			// txtEquipmentID2
+			// 
+			this.txtEquipmentID2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+			this.txtEquipmentID2.Location = new System.Drawing.Point(338, 22);
+			this.txtEquipmentID2.MaxLength = 4;
+			this.txtEquipmentID2.Name = "txtEquipmentID2";
+			this.txtEquipmentID2.Size = new System.Drawing.Size(124, 23);
+			this.txtEquipmentID2.TabIndex = 26;
+			this.txtEquipmentID2.TextChanged += new System.EventHandler(this.txtEquipmentID2_TextChanged);
+			this.txtEquipmentID2.Enter += new System.EventHandler(this.txtEquipmentID_Enter);
+			// 
 			// lblAirPower2
 			// 
 			this.lblAirPower2.AutoSize = true;
-			this.lblAirPower2.Location = new System.Drawing.Point(535, 25);
+			this.lblAirPower2.Location = new System.Drawing.Point(736, 25);
 			this.lblAirPower2.Name = "lblAirPower2";
 			this.lblAirPower2.Size = new System.Drawing.Size(13, 15);
 			this.lblAirPower2.TabIndex = 26;
@@ -412,7 +443,7 @@
 			// label11
 			// 
 			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(486, 25);
+			this.label11.Location = new System.Drawing.Point(687, 25);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(43, 15);
 			this.label11.TabIndex = 25;
@@ -425,7 +456,7 @@
 			this.cmbType2.FormattingEnabled = true;
 			this.cmbType2.Location = new System.Drawing.Point(186, 22);
 			this.cmbType2.Name = "cmbType2";
-			this.cmbType2.Size = new System.Drawing.Size(98, 23);
+			this.cmbType2.Size = new System.Drawing.Size(146, 23);
 			this.cmbType2.TabIndex = 1;
 			this.cmbType2.ValueMember = "ID";
 			this.cmbType2.SelectedIndexChanged += new System.EventHandler(this.CmbType2_SelectedIndexChanged);
@@ -435,9 +466,9 @@
 			this.cmbEquipment2.DisplayMember = "Name";
 			this.cmbEquipment2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbEquipment2.FormattingEnabled = true;
-			this.cmbEquipment2.Location = new System.Drawing.Point(290, 22);
+			this.cmbEquipment2.Location = new System.Drawing.Point(468, 22);
 			this.cmbEquipment2.Name = "cmbEquipment2";
-			this.cmbEquipment2.Size = new System.Drawing.Size(190, 23);
+			this.cmbEquipment2.Size = new System.Drawing.Size(213, 23);
 			this.cmbEquipment2.TabIndex = 2;
 			this.cmbEquipment2.ValueMember = "ID";
 			this.cmbEquipment2.SelectedIndexChanged += new System.EventHandler(this.EquipmentStatus_Changed);
@@ -462,6 +493,7 @@
 			// 
 			// groupBox3
 			// 
+			this.groupBox3.Controls.Add(this.txtEquipmentID3);
 			this.groupBox3.Controls.Add(this.lblAirPower3);
 			this.groupBox3.Controls.Add(this.numSlot3);
 			this.groupBox3.Controls.Add(this.label17);
@@ -471,15 +503,26 @@
 			this.groupBox3.Controls.Add(this.label12);
 			this.groupBox3.Location = new System.Drawing.Point(15, 305);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(572, 54);
+			this.groupBox3.Size = new System.Drawing.Size(755, 54);
 			this.groupBox3.TabIndex = 18;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "スロット3";
 			// 
+			// txtEquipmentID3
+			// 
+			this.txtEquipmentID3.ImeMode = System.Windows.Forms.ImeMode.Disable;
+			this.txtEquipmentID3.Location = new System.Drawing.Point(338, 22);
+			this.txtEquipmentID3.MaxLength = 4;
+			this.txtEquipmentID3.Name = "txtEquipmentID3";
+			this.txtEquipmentID3.Size = new System.Drawing.Size(124, 23);
+			this.txtEquipmentID3.TabIndex = 26;
+			this.txtEquipmentID3.TextChanged += new System.EventHandler(this.txtEquipmentID3_TextChanged);
+			this.txtEquipmentID3.Enter += new System.EventHandler(this.txtEquipmentID_Enter);
+			// 
 			// lblAirPower3
 			// 
 			this.lblAirPower3.AutoSize = true;
-			this.lblAirPower3.Location = new System.Drawing.Point(535, 25);
+			this.lblAirPower3.Location = new System.Drawing.Point(736, 25);
 			this.lblAirPower3.Name = "lblAirPower3";
 			this.lblAirPower3.Size = new System.Drawing.Size(13, 15);
 			this.lblAirPower3.TabIndex = 28;
@@ -501,7 +544,7 @@
 			// label17
 			// 
 			this.label17.AutoSize = true;
-			this.label17.Location = new System.Drawing.Point(486, 25);
+			this.label17.Location = new System.Drawing.Point(687, 25);
 			this.label17.Name = "label17";
 			this.label17.Size = new System.Drawing.Size(43, 15);
 			this.label17.TabIndex = 27;
@@ -514,7 +557,7 @@
 			this.cmbType3.FormattingEnabled = true;
 			this.cmbType3.Location = new System.Drawing.Point(186, 22);
 			this.cmbType3.Name = "cmbType3";
-			this.cmbType3.Size = new System.Drawing.Size(98, 23);
+			this.cmbType3.Size = new System.Drawing.Size(146, 23);
 			this.cmbType3.TabIndex = 1;
 			this.cmbType3.ValueMember = "ID";
 			this.cmbType3.SelectedIndexChanged += new System.EventHandler(this.CmbType3_SelectedIndexChanged);
@@ -524,9 +567,9 @@
 			this.cmbEquipment3.DisplayMember = "Name";
 			this.cmbEquipment3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbEquipment3.FormattingEnabled = true;
-			this.cmbEquipment3.Location = new System.Drawing.Point(290, 22);
+			this.cmbEquipment3.Location = new System.Drawing.Point(468, 22);
 			this.cmbEquipment3.Name = "cmbEquipment3";
-			this.cmbEquipment3.Size = new System.Drawing.Size(190, 23);
+			this.cmbEquipment3.Size = new System.Drawing.Size(213, 23);
 			this.cmbEquipment3.TabIndex = 2;
 			this.cmbEquipment3.ValueMember = "ID";
 			this.cmbEquipment3.SelectedIndexChanged += new System.EventHandler(this.EquipmentStatus_Changed);
@@ -551,6 +594,7 @@
 			// 
 			// groupBox4
 			// 
+			this.groupBox4.Controls.Add(this.txtEquipmentID5);
 			this.groupBox4.Controls.Add(this.lblAirPower5);
 			this.groupBox4.Controls.Add(this.numSlot5);
 			this.groupBox4.Controls.Add(this.label25);
@@ -560,15 +604,26 @@
 			this.groupBox4.Controls.Add(this.label15);
 			this.groupBox4.Location = new System.Drawing.Point(15, 425);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(572, 54);
+			this.groupBox4.Size = new System.Drawing.Size(755, 54);
 			this.groupBox4.TabIndex = 20;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "スロット5";
 			// 
+			// txtEquipmentID5
+			// 
+			this.txtEquipmentID5.ImeMode = System.Windows.Forms.ImeMode.Disable;
+			this.txtEquipmentID5.Location = new System.Drawing.Point(338, 22);
+			this.txtEquipmentID5.MaxLength = 4;
+			this.txtEquipmentID5.Name = "txtEquipmentID5";
+			this.txtEquipmentID5.Size = new System.Drawing.Size(124, 23);
+			this.txtEquipmentID5.TabIndex = 31;
+			this.txtEquipmentID5.TextChanged += new System.EventHandler(this.txtEquipmentID5_TextChanged);
+			this.txtEquipmentID5.Enter += new System.EventHandler(this.txtEquipmentID_Enter);
+			// 
 			// lblAirPower5
 			// 
 			this.lblAirPower5.AutoSize = true;
-			this.lblAirPower5.Location = new System.Drawing.Point(535, 25);
+			this.lblAirPower5.Location = new System.Drawing.Point(736, 25);
 			this.lblAirPower5.Name = "lblAirPower5";
 			this.lblAirPower5.Size = new System.Drawing.Size(13, 15);
 			this.lblAirPower5.TabIndex = 32;
@@ -590,7 +645,7 @@
 			// label25
 			// 
 			this.label25.AutoSize = true;
-			this.label25.Location = new System.Drawing.Point(486, 25);
+			this.label25.Location = new System.Drawing.Point(687, 25);
 			this.label25.Name = "label25";
 			this.label25.Size = new System.Drawing.Size(43, 15);
 			this.label25.TabIndex = 31;
@@ -603,7 +658,7 @@
 			this.cmbType5.FormattingEnabled = true;
 			this.cmbType5.Location = new System.Drawing.Point(186, 22);
 			this.cmbType5.Name = "cmbType5";
-			this.cmbType5.Size = new System.Drawing.Size(98, 23);
+			this.cmbType5.Size = new System.Drawing.Size(146, 23);
 			this.cmbType5.TabIndex = 1;
 			this.cmbType5.ValueMember = "ID";
 			this.cmbType5.SelectedIndexChanged += new System.EventHandler(this.CmbType5_SelectedIndexChanged);
@@ -613,9 +668,9 @@
 			this.cmbEquipment5.DisplayMember = "Name";
 			this.cmbEquipment5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbEquipment5.FormattingEnabled = true;
-			this.cmbEquipment5.Location = new System.Drawing.Point(290, 22);
+			this.cmbEquipment5.Location = new System.Drawing.Point(468, 22);
 			this.cmbEquipment5.Name = "cmbEquipment5";
-			this.cmbEquipment5.Size = new System.Drawing.Size(190, 23);
+			this.cmbEquipment5.Size = new System.Drawing.Size(213, 23);
 			this.cmbEquipment5.TabIndex = 2;
 			this.cmbEquipment5.ValueMember = "ID";
 			this.cmbEquipment5.SelectedIndexChanged += new System.EventHandler(this.EquipmentStatus_Changed);
@@ -640,6 +695,7 @@
 			// 
 			// groupBox5
 			// 
+			this.groupBox5.Controls.Add(this.txtEquipmentID4);
 			this.groupBox5.Controls.Add(this.lblAirPower4);
 			this.groupBox5.Controls.Add(this.numSlot4);
 			this.groupBox5.Controls.Add(this.label23);
@@ -649,15 +705,26 @@
 			this.groupBox5.Controls.Add(this.label18);
 			this.groupBox5.Location = new System.Drawing.Point(15, 365);
 			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(572, 54);
+			this.groupBox5.Size = new System.Drawing.Size(755, 54);
 			this.groupBox5.TabIndex = 19;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "スロット4";
 			// 
+			// txtEquipmentID4
+			// 
+			this.txtEquipmentID4.ImeMode = System.Windows.Forms.ImeMode.Disable;
+			this.txtEquipmentID4.Location = new System.Drawing.Point(338, 22);
+			this.txtEquipmentID4.MaxLength = 4;
+			this.txtEquipmentID4.Name = "txtEquipmentID4";
+			this.txtEquipmentID4.Size = new System.Drawing.Size(124, 23);
+			this.txtEquipmentID4.TabIndex = 29;
+			this.txtEquipmentID4.TextChanged += new System.EventHandler(this.txtEquipmentID4_TextChanged);
+			this.txtEquipmentID4.Enter += new System.EventHandler(this.txtEquipmentID_Enter);
+			// 
 			// lblAirPower4
 			// 
 			this.lblAirPower4.AutoSize = true;
-			this.lblAirPower4.Location = new System.Drawing.Point(535, 25);
+			this.lblAirPower4.Location = new System.Drawing.Point(736, 25);
 			this.lblAirPower4.Name = "lblAirPower4";
 			this.lblAirPower4.Size = new System.Drawing.Size(13, 15);
 			this.lblAirPower4.TabIndex = 30;
@@ -679,7 +746,7 @@
 			// label23
 			// 
 			this.label23.AutoSize = true;
-			this.label23.Location = new System.Drawing.Point(486, 25);
+			this.label23.Location = new System.Drawing.Point(687, 25);
 			this.label23.Name = "label23";
 			this.label23.Size = new System.Drawing.Size(43, 15);
 			this.label23.TabIndex = 29;
@@ -692,7 +759,7 @@
 			this.cmbType4.FormattingEnabled = true;
 			this.cmbType4.Location = new System.Drawing.Point(186, 22);
 			this.cmbType4.Name = "cmbType4";
-			this.cmbType4.Size = new System.Drawing.Size(98, 23);
+			this.cmbType4.Size = new System.Drawing.Size(146, 23);
 			this.cmbType4.TabIndex = 1;
 			this.cmbType4.ValueMember = "ID";
 			this.cmbType4.SelectedIndexChanged += new System.EventHandler(this.CmbType4_SelectedIndexChanged);
@@ -702,9 +769,9 @@
 			this.cmbEquipment4.DisplayMember = "Name";
 			this.cmbEquipment4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbEquipment4.FormattingEnabled = true;
-			this.cmbEquipment4.Location = new System.Drawing.Point(290, 22);
+			this.cmbEquipment4.Location = new System.Drawing.Point(468, 22);
 			this.cmbEquipment4.Name = "cmbEquipment4";
-			this.cmbEquipment4.Size = new System.Drawing.Size(190, 23);
+			this.cmbEquipment4.Size = new System.Drawing.Size(213, 23);
 			this.cmbEquipment4.TabIndex = 2;
 			this.cmbEquipment4.ValueMember = "ID";
 			this.cmbEquipment4.SelectedIndexChanged += new System.EventHandler(this.EquipmentStatus_Changed);
@@ -730,7 +797,7 @@
 			// label19
 			// 
 			this.label19.AutoSize = true;
-			this.label19.Location = new System.Drawing.Point(328, 102);
+			this.label19.Location = new System.Drawing.Point(530, 102);
 			this.label19.Name = "label19";
 			this.label19.Size = new System.Drawing.Size(103, 15);
 			this.label19.TabIndex = 29;
@@ -739,7 +806,7 @@
 			// label20
 			// 
 			this.label20.AutoSize = true;
-			this.label20.Location = new System.Drawing.Point(364, 73);
+			this.label20.Location = new System.Drawing.Point(566, 73);
 			this.label20.Name = "label20";
 			this.label20.Size = new System.Drawing.Size(67, 15);
 			this.label20.TabIndex = 27;
@@ -768,7 +835,7 @@
 			// 
 			// btnClose
 			// 
-			this.btnClose.Location = new System.Drawing.Point(499, 12);
+			this.btnClose.Location = new System.Drawing.Point(682, 12);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(88, 35);
 			this.btnClose.TabIndex = 24;
@@ -778,7 +845,7 @@
 			// 
 			// btnSave
 			// 
-			this.btnSave.Location = new System.Drawing.Point(368, 12);
+			this.btnSave.Location = new System.Drawing.Point(551, 12);
 			this.btnSave.Name = "btnSave";
 			this.btnSave.Size = new System.Drawing.Size(125, 35);
 			this.btnSave.TabIndex = 23;
@@ -788,7 +855,7 @@
 			// 
 			// numAntiAirWeight
 			// 
-			this.numAntiAirWeight.Location = new System.Drawing.Point(437, 71);
+			this.numAntiAirWeight.Location = new System.Drawing.Point(639, 71);
 			this.numAntiAirWeight.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -800,7 +867,7 @@
 			// 
 			// numAntiAirBonus
 			// 
-			this.numAntiAirBonus.Location = new System.Drawing.Point(437, 100);
+			this.numAntiAirBonus.Location = new System.Drawing.Point(639, 100);
 			this.numAntiAirBonus.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -813,7 +880,7 @@
 			// chkType0
 			// 
 			this.chkType0.AutoSize = true;
-			this.chkType0.Location = new System.Drawing.Point(499, 154);
+			this.chkType0.Location = new System.Drawing.Point(302, 154);
 			this.chkType0.Name = "chkType0";
 			this.chkType0.Size = new System.Drawing.Size(50, 19);
 			this.chkType0.TabIndex = 15;
@@ -823,7 +890,7 @@
 			// chkType20
 			// 
 			this.chkType20.AutoSize = true;
-			this.chkType20.Location = new System.Drawing.Point(241, 154);
+			this.chkType20.Location = new System.Drawing.Point(643, 129);
 			this.chkType20.Name = "chkType20";
 			this.chkType20.Size = new System.Drawing.Size(50, 19);
 			this.chkType20.TabIndex = 11;
@@ -833,7 +900,7 @@
 			// label8
 			// 
 			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(500, 73);
+			this.label8.Location = new System.Drawing.Point(702, 73);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(43, 15);
 			this.label8.TabIndex = 32;
@@ -842,7 +909,7 @@
 			// lblAirPower
 			// 
 			this.lblAirPower.AutoSize = true;
-			this.lblAirPower.Location = new System.Drawing.Point(549, 71);
+			this.lblAirPower.Location = new System.Drawing.Point(751, 71);
 			this.lblAirPower.Name = "lblAirPower";
 			this.lblAirPower.Size = new System.Drawing.Size(13, 15);
 			this.lblAirPower.TabIndex = 25;
@@ -851,7 +918,7 @@
 			// label14
 			// 
 			this.label14.AutoSize = true;
-			this.label14.Location = new System.Drawing.Point(500, 102);
+			this.label14.Location = new System.Drawing.Point(702, 102);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(43, 15);
 			this.label14.TabIndex = 33;
@@ -860,7 +927,7 @@
 			// lblLandBaseAirPower
 			// 
 			this.lblLandBaseAirPower.AutoSize = true;
-			this.lblLandBaseAirPower.Location = new System.Drawing.Point(549, 102);
+			this.lblLandBaseAirPower.Location = new System.Drawing.Point(751, 102);
 			this.lblLandBaseAirPower.Name = "lblLandBaseAirPower";
 			this.lblLandBaseAirPower.Size = new System.Drawing.Size(13, 15);
 			this.lblLandBaseAirPower.TabIndex = 34;
@@ -877,6 +944,7 @@
 			this.numAntiAir.Name = "numAntiAir";
 			this.numAntiAir.Size = new System.Drawing.Size(54, 23);
 			this.numAntiAir.TabIndex = 35;
+			this.numAntiAir.ValueChanged += new System.EventHandler(this.numAntiAir_ValueChanged);
 			// 
 			// label22
 			// 
@@ -890,7 +958,7 @@
 			// lblAntiAirWeight
 			// 
 			this.lblAntiAirWeight.AutoSize = true;
-			this.lblAntiAirWeight.Location = new System.Drawing.Point(334, 53);
+			this.lblAntiAirWeight.Location = new System.Drawing.Point(472, 73);
 			this.lblAntiAirWeight.Name = "lblAntiAirWeight";
 			this.lblAntiAirWeight.Size = new System.Drawing.Size(13, 15);
 			this.lblAntiAirWeight.TabIndex = 39;
@@ -899,17 +967,37 @@
 			// lblAntiAirBonus
 			// 
 			this.lblAntiAirBonus.AutoSize = true;
-			this.lblAntiAirBonus.Location = new System.Drawing.Point(480, 53);
+			this.lblAntiAirBonus.Location = new System.Drawing.Point(472, 101);
 			this.lblAntiAirBonus.Name = "lblAntiAirBonus";
 			this.lblAntiAirBonus.Size = new System.Drawing.Size(13, 15);
 			this.lblAntiAirBonus.TabIndex = 40;
 			this.lblAntiAirBonus.Text = "0";
 			// 
+			// label24
+			// 
+			this.label24.AutoSize = true;
+			this.label24.Location = new System.Drawing.Point(375, 73);
+			this.label24.Name = "label24";
+			this.label24.Size = new System.Drawing.Size(91, 15);
+			this.label24.TabIndex = 41;
+			this.label24.Text = "加重対空予想：";
+			// 
+			// label26
+			// 
+			this.label26.AutoSize = true;
+			this.label26.Location = new System.Drawing.Point(375, 102);
+			this.label26.Name = "label26";
+			this.label26.Size = new System.Drawing.Size(91, 15);
+			this.label26.TabIndex = 42;
+			this.label26.Text = "加重防空予想：";
+			// 
 			// FrmEnemyEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(599, 495);
+			this.ClientSize = new System.Drawing.Size(782, 495);
+			this.Controls.Add(this.label26);
+			this.Controls.Add(this.label24);
 			this.Controls.Add(this.lblAntiAirBonus);
 			this.Controls.Add(this.lblAntiAirWeight);
 			this.Controls.Add(this.numAntiAir);
@@ -954,7 +1042,6 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
-			this.MaximumSize = new System.Drawing.Size(615, 534);
 			this.MinimumSize = new System.Drawing.Size(615, 534);
 			this.Name = "FrmEnemyEdit";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -1060,5 +1147,12 @@
 		private System.Windows.Forms.Label label22;
 		private System.Windows.Forms.Label lblAntiAirWeight;
 		private System.Windows.Forms.Label lblAntiAirBonus;
+		private System.Windows.Forms.TextBox txtEquipmentID1;
+		private System.Windows.Forms.TextBox txtEquipmentID2;
+		private System.Windows.Forms.TextBox txtEquipmentID3;
+		private System.Windows.Forms.TextBox txtEquipmentID5;
+		private System.Windows.Forms.TextBox txtEquipmentID4;
+		private System.Windows.Forms.Label label24;
+		private System.Windows.Forms.Label label26;
 	}
 }

@@ -15,6 +15,7 @@ namespace Manager.Models
 	class EnemyEquipment : ModelBase
 	{
 		public int TypeID { set; get; }
+		public int IconTypeID { set; get; }
 		public string TypeName { set; get; }
 		public string AntiAir { set; get; }
 
@@ -50,15 +51,16 @@ namespace Manager.Models
 			{
 				var dt = db.Select($@"
 SELECT
-	  equipments_view.id   AS id
-	, equipments_view.name AS name
-	, equipment_types.id    AS type_id
-	, equipment_types.name  AS type_name
+	  equipments_view.id			AS id
+	, equipments_view.name			AS name
+	, equipments_view.api_type_id	AS type_id
+	, equipments_view.icon_type_id	AS icon_type_id
+	, api_item_types.api_name		AS type_name
 	, equipments_view.anti_air 
 FROM
 	equipments_view 
-	LEFT JOIN equipment_types 
-		ON equipments_view.equipment_type_id = equipment_types.id 
+	LEFT JOIN api_item_types 
+		ON equipments_view.api_type_id = api_item_types.api_id 
 WHERE
 	equipments_view.id >= 500
 	{(planeId != 0 ? "AND equipments_view.id = " + planeId : "")}
@@ -70,47 +72,7 @@ WHERE
 						ID = ConvertUtil.ToInt(dr["id"]),
 						Name = "ID:" + ConvertUtil.ToInt(dr["id"]) + " " + ConvertUtil.ToString(dr["name"]),
 						TypeID = ConvertUtil.ToInt(dr["type_id"]),
-						TypeName = ConvertUtil.ToString(dr["type_name"]),
-						AntiAir = ConvertUtil.ToString(dr["anti_air"]),
-					};
-					list.Add(plane);
-				}
-			}
-			return list;
-		}
-
-		/// <summary>
-		/// 敵装備カテゴリ指定取得
-		/// </summary>
-		/// <param name="enemyId">敵艦ID</param>
-		/// <returns></returns>
-		public static List<EnemyEquipment> Filter(int typeId)
-		{
-			var list = new List<EnemyEquipment>();
-			using (var db = new DBManager())
-			{
-				var dt = db.Select($@"
-SELECT
-	  equipments_view.id   AS id
-	, equipments_view.name AS name
-	, equipment_types.id    AS type_id
-	, equipment_types.name  AS type_name
-	, equipments_view.anti_air 
-FROM
-	equipments_view 
-	LEFT JOIN equipment_types 
-		ON equipments_view.equipment_type_id = equipment_types.id 
-WHERE
-	equipments_view.id >= 500
-	{(typeId != 0 ? "AND equipment_types.id = " + typeId : "")}
-");
-				foreach (DataRow dr in dt.Rows)
-				{
-					var plane = new EnemyEquipment()
-					{
-						ID = ConvertUtil.ToInt(dr["id"]),
-						Name = ConvertUtil.ToString(dr["name"]),
-						TypeID = ConvertUtil.ToInt(dr["type_id"]),
+						IconTypeID = ConvertUtil.ToInt(dr["icon_type_id"]),
 						TypeName = ConvertUtil.ToString(dr["type_name"]),
 						AntiAir = ConvertUtil.ToString(dr["anti_air"]),
 					};
@@ -129,14 +91,13 @@ WHERE
 			var output = "";
 			var sql = @"
 SELECT
-	'  { id: ' || id || ', type: ' || equipment_type_id || ', name: ""' || name || '""' || ', antiAir: ' || anti_air || ', torpedo: ' || torpedo || ', bomber: ' || bomber || ' },' AS JSON 
+	'  { id: ' || id || ', type: ' || api_type_id || ', name: ""' || name || '""' || ', antiAir: ' || anti_air || ', torpedo: ' || torpedo || ', bomber: ' || bomber || ' },' AS JSON 
 FROM
 	equipments_view
 WHERE
 	id >= 500
 ORDER BY
-	ABS(equipment_type_id)
-	, equipment_type_id DESC
+	id
 ";
 			using (var db = new DBManager())
 			{
