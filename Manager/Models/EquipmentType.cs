@@ -41,11 +41,14 @@ namespace Manager.Models
 			var output = "";
 			var sql = @"
 SELECT
-    '  { id: ' || api_id || ', name: ""' || api_name || '"", css: ""' || IFNULL(css, '') || '"" },' AS json
+    '  { id: ' || api_id || ', name: ""' || api_name || '"", sort: ""' || IFNULL(sort, 99) || '"" },' AS json
 FROM
-    api_item_types 
+    api_item_types
+WHERE
+	api_name <> ''
 ORDER BY
-    api_id
+	IFNULL(sort, 999)
+	, api_id
 ";
 			using (var db = new DBManager())
 			{
@@ -72,7 +75,9 @@ ORDER BY
 SELECT
     '  { id: ' || api_id || ', name: ""' || name || '"", css: ""' || IFNULL(css, '') || '"" },' AS json
 FROM
-    icon_item_types 
+    icon_item_types
+WHERE
+	name <> ''
 ORDER BY
     api_id
 ";

@@ -91,7 +91,7 @@ WHERE
 			var output = "";
 			var sql = @"
 SELECT
-	'  { id: ' || id || ', type: ' || api_type_id || ', name: ""' || name || '""' || ', antiAir: ' || anti_air || ', torpedo: ' || torpedo || ', bomber: ' || bomber || ' },' AS JSON 
+	'  { id: ' || id || ', type: ' || api_type_id || ', itype: ' || icon_type_id || ', name: ""' || name || '""' || ', antiAir: ' || anti_air || ', torpedo: ' || torpedo || ', bomber: ' || bomber || ' },' AS JSON 
 FROM
 	equipments_view
 WHERE
