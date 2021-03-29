@@ -45,10 +45,18 @@ SELECT
 FROM
     api_item_types
 WHERE
-	api_name <> ''
+    api_name <> '' 
+    AND EXISTS ( 
+        SELECT
+            id 
+        FROM
+            equipments_view 
+        WHERE
+            api_id = api_type_id
+    ) 
 ORDER BY
-	IFNULL(sort, 999)
-	, api_id
+    IFNULL(sort, 999)
+    , api_id
 ";
 			using (var db = new DBManager())
 			{

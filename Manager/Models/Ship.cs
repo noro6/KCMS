@@ -202,23 +202,18 @@ SELECT
         WHEN slot_5 >= 0 AND slot_count >= 5
             THEN slot_5 || ', ' 
         ELSE '' 
-        END || ']' || ', final: ' || is_final || ', orig: ' || original_id || ', valid: ' || enabled || ', range: ' || range || ', sort1: ' || sort_1 || ', sort2: ' || sort_2 || 
+        END || ']' || ', final: ' || is_final || ', orig: ' || original_id || ', ver: ' || version || ', range: ' || range || ', type2: ' || ship_type_2 || ', hp: ' || hp || ', hp2: ' || hp2 || ', max_hp: ' || max_hp || ', max_aa: ' || anti_air || ', max_armor: ' || armor || ', luck: ' || luck || ', max_luck: ' || max_luck ||
     ' },' AS json 
 FROM
     ships_view 
 WHERE
     id < 1500 
-    and ( 
-        slot_1 > 0 
-        OR slot_2 > 0 
-        OR slot_3 > 0 
-        OR slot_4 > 0 
-        OR slot_5 > 0
-    ) 
 ORDER BY
-    enabled DESC
-    , album_id;
-
+    ship_type_id
+	, ship_type_2
+	, original_id
+	, version
+;
 ";
 			using (var db = new DBManager())
 			{

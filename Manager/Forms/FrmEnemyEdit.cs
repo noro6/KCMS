@@ -77,6 +77,8 @@ namespace Manager.Forms
 				cmbEquipment5.SelectedValue = enemy.Equipment5ID;
 
 				numAntiAir.Value = enemy.AntiAir;
+				numHP.Value = enemy.HP;
+				numArmor.Value = enemy.Armor;
 
 				// 鬼姫じゃないなら元選択
 				if (!chkType1.Checked)
@@ -268,6 +270,8 @@ namespace Manager.Forms
 			enemy.AirPower = ConvertUtil.ToInt(lblAirPower.Text);
 			enemy.LandBaseAirPower = ConvertUtil.ToInt(lblLandBaseAirPower.Text);
 			enemy.AntiAir = ConvertUtil.ToInt(numAntiAir.Value);
+			enemy.HP = ConvertUtil.ToInt(numHP.Value);
+			enemy.Armor = ConvertUtil.ToInt(numArmor.Value);
 
 			// 艦種
 			var types = new List<int>();

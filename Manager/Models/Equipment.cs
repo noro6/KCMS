@@ -199,17 +199,16 @@ SELECT
 	', radius: ' || radius || 
 	', cost: ' || cost || 
 	', avoid: ' || avoid_id || 
+	', range2: ' || range2 || 
 	' }},' AS JSON 
 FROM
 	equipments_view
 WHERE
 	id < 500
-	AND api_type_id in ({string.Join(", ", Const.PLANES_ALL)})
 ORDER BY
 	api_type_id
 	, id
 ";
-			// WHERE条件 まだ艦載機だけ！
 
 			using (var db = new DBManager())
 			{

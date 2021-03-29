@@ -31,6 +31,8 @@ namespace Manager.Models
 		public int AirPower { set; get; }
 		public int LandBaseAirPower { set; get; }
 		public int AntiAir { set; get; }
+		public int HP { set; get; }
+		public int Armor { set; get; }
 		public int SlotCount { set; get; }
 
 		public Enemy()
@@ -71,6 +73,8 @@ namespace Manager.Models
 				AntiAirWeight = enemies[0].AntiAirWeight;
 				AntiAirBonus = enemies[0].AntiAirBonus;
 				AntiAir = enemies[0].AntiAir;
+				HP = enemies[0].HP;
+				Armor = enemies[0].Armor;
 				SlotCount = enemies[0].SlotCount;
 
 				var equipments = EnemyEquipment.Select();
@@ -222,6 +226,8 @@ SELECT
 	, enemies.anti_air_weight
 	, enemies.anti_air_bonus
 	, enemies.anti_air
+	, enemies.hp
+	, enemies.armor
 	, raw.slot_count
 FROM
 	enemies
@@ -276,6 +282,8 @@ GROUP BY
 					enemy.AntiAirWeight = ConvertUtil.ToInt(dr["anti_air_weight"]);
 					enemy.AntiAirBonus = ConvertUtil.ToInt(dr["anti_air_bonus"]);
 					enemy.AntiAir = ConvertUtil.ToInt(dr["anti_air"]);
+					enemy.HP = ConvertUtil.ToInt(dr["hp"]);
+					enemy.Armor = ConvertUtil.ToInt(dr["armor"]);
 					enemy.SlotCount = ConvertUtil.ToInt(dr["slot_count"]);
 
 					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment1ID), ConvertUtil.ToInt(enemy.Slot1));
@@ -323,6 +331,8 @@ INTO enemies(
 	, air_power
 	, land_base_air_power
 	, anti_air
+	, hp
+	, armor
 ) 
 VALUES ( 
 	{ID}
@@ -343,6 +353,8 @@ VALUES (
 	, {AirPower}
 	, {LandBaseAirPower}
 	, {AntiAir}
+	, {HP}
+	, {Armor}
 ) ";
 			var param = new Dictionary<string, object>()
 			{
@@ -455,7 +467,7 @@ SELECT
         WHEN equipment5 > 0 
             THEN equipment5 || ', ' 
         ELSE '' 
-        END || ']' || ', orig: ' || original_id || ', aa: ' || anti_air || ' },' AS json 
+        END || ']' || ', orig: ' || original_id || ', hp: ' || hp || ', aa: ' || anti_air || ', armor: ' || armor || ' },' AS json 
 FROM
     enemies_view 
     LEFT JOIN enemies_types 

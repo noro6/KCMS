@@ -110,6 +110,10 @@
 			this.lblAntiAirBonus = new System.Windows.Forms.Label();
 			this.label24 = new System.Windows.Forms.Label();
 			this.label26 = new System.Windows.Forms.Label();
+			this.numHP = new System.Windows.Forms.NumericUpDown();
+			this.label27 = new System.Windows.Forms.Label();
+			this.numArmor = new System.Windows.Forms.NumericUpDown();
+			this.label28 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numSlot1)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -123,6 +127,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirWeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirBonus)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAir)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numHP)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numArmor)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -949,16 +955,16 @@
 			// label22
 			// 
 			this.label22.AutoSize = true;
-			this.label22.Location = new System.Drawing.Point(32, 102);
+			this.label22.Location = new System.Drawing.Point(44, 102);
 			this.label22.Name = "label22";
-			this.label22.Size = new System.Drawing.Size(55, 15);
+			this.label22.Size = new System.Drawing.Size(43, 15);
 			this.label22.TabIndex = 36;
-			this.label22.Text = "素対空：";
+			this.label22.Text = "対空：";
 			// 
 			// lblAntiAirWeight
 			// 
 			this.lblAntiAirWeight.AutoSize = true;
-			this.lblAntiAirWeight.Location = new System.Drawing.Point(472, 73);
+			this.lblAntiAirWeight.Location = new System.Drawing.Point(488, 74);
 			this.lblAntiAirWeight.Name = "lblAntiAirWeight";
 			this.lblAntiAirWeight.Size = new System.Drawing.Size(13, 15);
 			this.lblAntiAirWeight.TabIndex = 39;
@@ -967,7 +973,7 @@
 			// lblAntiAirBonus
 			// 
 			this.lblAntiAirBonus.AutoSize = true;
-			this.lblAntiAirBonus.Location = new System.Drawing.Point(472, 101);
+			this.lblAntiAirBonus.Location = new System.Drawing.Point(488, 102);
 			this.lblAntiAirBonus.Name = "lblAntiAirBonus";
 			this.lblAntiAirBonus.Size = new System.Drawing.Size(13, 15);
 			this.lblAntiAirBonus.TabIndex = 40;
@@ -976,7 +982,7 @@
 			// label24
 			// 
 			this.label24.AutoSize = true;
-			this.label24.Location = new System.Drawing.Point(375, 73);
+			this.label24.Location = new System.Drawing.Point(391, 74);
 			this.label24.Name = "label24";
 			this.label24.Size = new System.Drawing.Size(91, 15);
 			this.label24.TabIndex = 41;
@@ -985,17 +991,63 @@
 			// label26
 			// 
 			this.label26.AutoSize = true;
-			this.label26.Location = new System.Drawing.Point(375, 102);
+			this.label26.Location = new System.Drawing.Point(391, 103);
 			this.label26.Name = "label26";
 			this.label26.Size = new System.Drawing.Size(91, 15);
 			this.label26.TabIndex = 42;
 			this.label26.Text = "加重防空予想：";
+			// 
+			// numHP
+			// 
+			this.numHP.Location = new System.Drawing.Point(201, 99);
+			this.numHP.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numHP.Name = "numHP";
+			this.numHP.Size = new System.Drawing.Size(54, 23);
+			this.numHP.TabIndex = 43;
+			// 
+			// label27
+			// 
+			this.label27.AutoSize = true;
+			this.label27.Location = new System.Drawing.Point(152, 103);
+			this.label27.Name = "label27";
+			this.label27.Size = new System.Drawing.Size(43, 15);
+			this.label27.TabIndex = 44;
+			this.label27.Text = "耐久：";
+			// 
+			// numArmor
+			// 
+			this.numArmor.Location = new System.Drawing.Point(310, 100);
+			this.numArmor.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.numArmor.Name = "numArmor";
+			this.numArmor.Size = new System.Drawing.Size(54, 23);
+			this.numArmor.TabIndex = 45;
+			// 
+			// label28
+			// 
+			this.label28.AutoSize = true;
+			this.label28.Location = new System.Drawing.Point(261, 103);
+			this.label28.Name = "label28";
+			this.label28.Size = new System.Drawing.Size(43, 15);
+			this.label28.TabIndex = 46;
+			this.label28.Text = "装甲：";
 			// 
 			// FrmEnemyEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(782, 495);
+			this.Controls.Add(this.numArmor);
+			this.Controls.Add(this.label28);
+			this.Controls.Add(this.numHP);
+			this.Controls.Add(this.label27);
 			this.Controls.Add(this.label26);
 			this.Controls.Add(this.label24);
 			this.Controls.Add(this.lblAntiAirBonus);
@@ -1065,6 +1117,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirWeight)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAirBonus)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numAntiAir)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numHP)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numArmor)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1154,5 +1208,9 @@
 		private System.Windows.Forms.TextBox txtEquipmentID4;
 		private System.Windows.Forms.Label label24;
 		private System.Windows.Forms.Label label26;
+		private System.Windows.Forms.NumericUpDown numHP;
+		private System.Windows.Forms.Label label27;
+		private System.Windows.Forms.NumericUpDown numArmor;
+		private System.Windows.Forms.Label label28;
 	}
 }
