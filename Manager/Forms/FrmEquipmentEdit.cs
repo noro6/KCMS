@@ -78,17 +78,8 @@ namespace Manager.Forms
 			{
 				ID = ConvertUtil.ToInt(txtID.Text),
 				Name = ConvertUtil.ToString(txtName.Text).Trim(),
-				TypeID = ConvertUtil.ToInt(cmbType.SelectedValue),
 				Abbr = ConvertUtil.ToString(txtAbbr.Text).Trim(),
 				CanRemodel = chkCanRemodel.Checked,
-				AntiAir = ConvertUtil.ToInt(numAntiAir.Value),
-				Torpedo = ConvertUtil.ToInt(numTorpedo.Value),
-				Bomber = ConvertUtil.ToInt(numBomber.Value),
-				Interception = ConvertUtil.ToInt(numInterception.Value),
-				AntiBomber = ConvertUtil.ToInt(numAntiBomber.Value),
-				Scout = ConvertUtil.ToInt(numScout.Value),
-				Radius = ConvertUtil.ToInt(numRadius.Value),
-				Cost = ConvertUtil.ToInt(numCost.Value),
 				AvoidID = ConvertUtil.ToInt(cmbAvoid.SelectedValue),
 			};
 
@@ -149,17 +140,6 @@ namespace Manager.Forms
 				MessageBox.Show("ID重複エラー", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				txtID.SelectAll();
 				ActiveControl = txtID;
-				return true;
-			}
-			if (equipment.Name == "")
-			{
-				MessageBox.Show("名前未入力エラー", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				ActiveControl = txtID;
-				return true;
-			}
-			if (equipment.TypeID == 0)
-			{
-				MessageBox.Show("種別未選択エラー", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return true;
 			}
 

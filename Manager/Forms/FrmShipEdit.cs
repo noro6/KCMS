@@ -47,6 +47,19 @@ namespace Manager.Forms
 				numSlot5.Value = ConvertUtil.ToInt(ship.Slot5 is null ? 0 : ship.Slot5);
 
 				chkEnabled.Checked = ship.Enabled;
+
+				// 無印自動補完　できたら
+				if (ConvertUtil.ToInt(cmbOriginalShip.SelectedValue) <= 0)
+				{
+					var originals = Ship.Select();
+					originals.Sort((v, x) => v.AlbumID - x.AlbumID);
+					var idx = originals.FindIndex(v => ship.Name.IndexOf(v.Name) >= 0);
+
+					if (idx >= 0)
+					{
+						cmbOriginalShip.SelectedValue = originals[idx].AlbumID;
+					}
+				}
 			}
 			else
 			{

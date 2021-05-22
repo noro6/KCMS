@@ -83,7 +83,8 @@ namespace Manager
 		/// <param name="e"></param>
 		private void BtnOutputEquipmentTypes_Click(object sender, EventArgs e)
 		{
-			txtOutput.Text = "const PLANE_TYPE = [\r\n" + EquipmentType.OutputJson() + "];";
+			txtOutput.Text = "const ITEM_API_TYPE = [\r\n" + EquipmentType.OutputJson() + "];";
+			txtOutput.Text += "\r\nconst ITEM_ICON_TYPE = [\r\n" + EquipmentType.OutputJson2() + "];";
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		/// <summary>
@@ -93,7 +94,7 @@ namespace Manager
 		/// <param name="e"></param>
 		private void BtnOutputEquipments_Click(object sender, EventArgs e)
 		{
-			txtOutput.Text = "const PLANE_DATA = [\r\n" + Equipment.OutputJson() + "];";
+			txtOutput.Text = "const ITEM_DATA = [\r\n" + Equipment.OutputJson() + "];";
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
@@ -136,7 +137,7 @@ namespace Manager
 		private void BtnOutputEnemies_Click(object sender, EventArgs e)
 		{
 			txtOutput.Text = "const ENEMY_DATA = [\r\n" + Enemy.OutputJson() + "];\r\n";
-			txtOutput.Text += "const ENEMY_PLANE_DATA = [\r\n" + EnemyEquipment.OutputJson() + "];";
+			txtOutput.Text += "const ENEMY_ITEM = [\r\n" + EnemyEquipment.OutputJson() + "];";
 			MessageBox.Show("出力しました", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
@@ -180,13 +181,14 @@ namespace Manager
 		private void BtnOutputAll_Click(object sender, EventArgs e)
 		{
 			var outputText = "";
-			outputText += "const PLANE_TYPE = [\r\n" + EquipmentType.OutputJson() + "];\r\n";
-			outputText += "const PLANE_DATA = [\r\n" + Equipment.OutputJson() + "];\r\n";
+			outputText += "const ITEM_API_TYPE = [\r\n" + EquipmentType.OutputJson() + "];\r\n";
+			outputText += "const ITEM_ICON_TYPE = [\r\n" + EquipmentType.OutputJson2() + "];\r\n";
+			outputText += "const ITEM_DATA = [\r\n" + Equipment.OutputJson() + "];\r\n";
 			outputText += "const SHIP_TYPE = [\r\n" + ShipType.OutputJson() + "];\r\n";
 			outputText += "const SHIP_DATA = [\r\n" + Ship.OutputShip() + "];\r\n";
 			outputText += "const ENEMY_TYPE = [\r\n" + EnemyType.OutputJson() + "];\r\n";
 			outputText += "const ENEMY_DATA = [\r\n" + Enemy.OutputJson() + "];\r\n";
-			outputText += "const ENEMY_PLANE_DATA = [\r\n" + EnemyEquipment.OutputJson() + "];\r\n";
+			outputText += "const ENEMY_ITEM = [\r\n" + EnemyEquipment.OutputJson() + "];\r\n";
 			outputText += "const DIFFICULTY = [\r\n" + Level.OutputJson() + "];\r\n";
 			outputText += "const WORLD_DATA = [\r\n" + World.OutputJson() + "];\r\n";
 			outputText += "const MAP_DATA = [\r\n" + Map.OutputJson() + "];\r\n";

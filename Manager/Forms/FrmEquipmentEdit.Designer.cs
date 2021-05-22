@@ -134,6 +134,7 @@
 			// 
 			this.cmbType.DisplayMember = "Name";
 			this.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbType.Enabled = false;
 			this.cmbType.FormattingEnabled = true;
 			this.cmbType.Location = new System.Drawing.Point(74, 153);
 			this.cmbType.Name = "cmbType";
@@ -214,6 +215,7 @@
 			// 
 			// numAntiAir
 			// 
+			this.numAntiAir.Enabled = false;
 			this.numAntiAir.Location = new System.Drawing.Point(281, 67);
 			this.numAntiAir.Maximum = new decimal(new int[] {
             1000,
@@ -235,6 +237,7 @@
 			// 
 			// numTorpedo
 			// 
+			this.numTorpedo.Enabled = false;
 			this.numTorpedo.Location = new System.Drawing.Point(281, 96);
 			this.numTorpedo.Maximum = new decimal(new int[] {
             1000,
@@ -247,6 +250,7 @@
 			// 
 			// numBomber
 			// 
+			this.numBomber.Enabled = false;
 			this.numBomber.Location = new System.Drawing.Point(281, 125);
 			this.numBomber.Maximum = new decimal(new int[] {
             1000,
@@ -259,6 +263,7 @@
 			// 
 			// numInterception
 			// 
+			this.numInterception.Enabled = false;
 			this.numInterception.Location = new System.Drawing.Point(281, 154);
 			this.numInterception.Maximum = new decimal(new int[] {
             1000,
@@ -271,6 +276,7 @@
 			// 
 			// numAntiBomber
 			// 
+			this.numAntiBomber.Enabled = false;
 			this.numAntiBomber.Location = new System.Drawing.Point(281, 183);
 			this.numAntiBomber.Maximum = new decimal(new int[] {
             1000,
@@ -283,6 +289,7 @@
 			// 
 			// numCost
 			// 
+			this.numCost.Enabled = false;
 			this.numCost.Location = new System.Drawing.Point(405, 125);
 			this.numCost.Maximum = new decimal(new int[] {
             1000,
@@ -295,6 +302,7 @@
 			// 
 			// numRadius
 			// 
+			this.numRadius.Enabled = false;
 			this.numRadius.Location = new System.Drawing.Point(405, 96);
 			this.numRadius.Maximum = new decimal(new int[] {
             1000,
@@ -307,6 +315,7 @@
 			// 
 			// numScout
 			// 
+			this.numScout.Enabled = false;
 			this.numScout.Location = new System.Drawing.Point(405, 67);
 			this.numScout.Maximum = new decimal(new int[] {
             1000,

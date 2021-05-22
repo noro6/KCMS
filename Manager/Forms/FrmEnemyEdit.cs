@@ -77,6 +77,8 @@ namespace Manager.Forms
 				cmbEquipment5.SelectedValue = enemy.Equipment5ID;
 
 				numAntiAir.Value = enemy.AntiAir;
+				numHP.Value = enemy.HP;
+				numArmor.Value = enemy.Armor;
 
 				// 鬼姫じゃないなら元選択
 				if (!chkType1.Checked)
@@ -115,12 +117,11 @@ namespace Manager.Forms
 			cmbOriginalEnemy.DataSource = originals;
 
 			var planeType = EquipmentType.Select();
-			var enabledTypes = new List<int>() { 1, 2, 3, 5, 6, 101, 1001, 1002, 1003, 1004, 1005 };
-			cmbType1.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
-			cmbType2.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
-			cmbType3.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
-			cmbType4.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
-			cmbType5.DataSource = planeType.FindAll(v => enabledTypes.Contains(Math.Abs(v.ID)));
+			cmbType1.DataSource = planeType.FindAll(v => v.Name != "");
+			cmbType2.DataSource = planeType.FindAll(v => v.Name != "");
+			cmbType3.DataSource = planeType.FindAll(v => v.Name != "");
+			cmbType4.DataSource = planeType.FindAll(v => v.Name != "");
+			cmbType5.DataSource = planeType.FindAll(v => v.Name != "");
 
 			var allEquipments = EnemyEquipment.Select();
 			// 空データ挿入
@@ -269,6 +270,8 @@ namespace Manager.Forms
 			enemy.AirPower = ConvertUtil.ToInt(lblAirPower.Text);
 			enemy.LandBaseAirPower = ConvertUtil.ToInt(lblLandBaseAirPower.Text);
 			enemy.AntiAir = ConvertUtil.ToInt(numAntiAir.Value);
+			enemy.HP = ConvertUtil.ToInt(numHP.Value);
+			enemy.Armor = ConvertUtil.ToInt(numArmor.Value);
 
 			// 艦種
 			var types = new List<int>();
@@ -473,6 +476,46 @@ namespace Manager.Forms
 			var antiAirBonus5 = Enemy.GetAntiAirBonus(equipment5);
 			var sumantiAirBonus = antiAirBonus1 + antiAirBonus2 + antiAirBonus3 + antiAirBonus4 + antiAirBonus5;
 			lblAntiAirBonus.Text = Math.Floor(sumantiAirBonus).ToString();
+		}
+
+		private void txtEquipmentID1_TextChanged(object sender, EventArgs e)
+		{
+			var id = ConvertUtil.ToInt(txtEquipmentID1.Text.Trim());
+			cmbEquipment1.SelectedValue = id;
+		}
+
+		private void txtEquipmentID2_TextChanged(object sender, EventArgs e)
+		{
+			var id = ConvertUtil.ToInt(txtEquipmentID2.Text.Trim());
+			cmbEquipment2.SelectedValue = id;
+		}
+
+		private void txtEquipmentID3_TextChanged(object sender, EventArgs e)
+		{
+			var id = ConvertUtil.ToInt(txtEquipmentID3.Text.Trim());
+			cmbEquipment3.SelectedValue = id;
+		}
+
+		private void txtEquipmentID4_TextChanged(object sender, EventArgs e)
+		{
+			var id = ConvertUtil.ToInt(txtEquipmentID4.Text.Trim());
+			cmbEquipment4.SelectedValue = id;
+		}
+
+		private void txtEquipmentID5_TextChanged(object sender, EventArgs e)
+		{
+			var id = ConvertUtil.ToInt(txtEquipmentID5.Text.Trim());
+			cmbEquipment5.SelectedValue = id;
+		}
+
+		private void txtEquipmentID_Enter(object sender, EventArgs e)
+		{
+			((TextBox)sender).SelectAll();
+		}
+
+		private void numAntiAir_ValueChanged(object sender, EventArgs e)
+		{
+			EquipmentStatus_Changed(sender, e);
 		}
 	}
 }

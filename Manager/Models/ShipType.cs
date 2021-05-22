@@ -38,13 +38,9 @@ namespace Manager.Models
 			var output = "";
 			var sql = @"
 SELECT
-	  '  { id: ' || id || ', name: ""' || name || '"", sort: ' || sort || ' },' AS json 
+	  '  { id: ' || id || ', name: ""' || name || '"" },' AS json 
 FROM
 	ship_types
-WHERE
-	sort < 99
-ORDER BY
-	sort
 ";
 			using (var db = new DBManager())
 			{

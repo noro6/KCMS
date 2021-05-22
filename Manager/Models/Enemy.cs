@@ -31,6 +31,8 @@ namespace Manager.Models
 		public int AirPower { set; get; }
 		public int LandBaseAirPower { set; get; }
 		public int AntiAir { set; get; }
+		public int HP { set; get; }
+		public int Armor { set; get; }
 		public int SlotCount { set; get; }
 
 		public Enemy()
@@ -71,6 +73,8 @@ namespace Manager.Models
 				AntiAirWeight = enemies[0].AntiAirWeight;
 				AntiAirBonus = enemies[0].AntiAirBonus;
 				AntiAir = enemies[0].AntiAir;
+				HP = enemies[0].HP;
+				Armor = enemies[0].Armor;
 				SlotCount = enemies[0].SlotCount;
 
 				var equipments = EnemyEquipment.Select();
@@ -120,12 +124,19 @@ namespace Manager.Models
 		public static int GetAirPower(EnemyEquipment equipment, int slot, bool isLandBase = false)
 		{
 			if (equipment == null) return 0;
-			if (!isLandBase && (equipment.TypeID == 4 || equipment.TypeID == 5))
+
+			if (isLandBase && Const.PLANES_ALL.Contains(equipment.ID))
+			{
+				return (int)(ConvertUtil.ToInt(equipment.AntiAir) * Math.Sqrt(slot));
+			}
+			else if (Const.PLANES.Contains(equipment.ID))
+			{
+				return (int)(ConvertUtil.ToInt(equipment.AntiAir) * Math.Sqrt(slot));
+			}
+			else
 			{
 				return 0;
 			}
-
-			return (int)(ConvertUtil.ToInt(equipment.AntiAir) * Math.Sqrt(slot));
 		}
 
 		/// <summary>
@@ -141,11 +152,11 @@ namespace Manager.Models
 			var aa = ConvertUtil.ToInt(equipment.AntiAir);
 
 			// 機銃
-			if (equipment.TypeID == 1005) return 6 * aa;
+			if (equipment.TypeID == 21) return 6 * aa;
 			// 高角砲
-			if (equipment.TypeID == 1002) return 4 * aa;
+			if (equipment.IconTypeID == 16) return 4 * aa;
 			// 電探
-			if (equipment.TypeID == 1004) return 3 * aa;
+			if (equipment.TypeID == 12 || equipment.TypeID == 13) return 3 * aa;
 
 			return 0;
 		}
@@ -162,12 +173,12 @@ namespace Manager.Models
 
 			var aa = ConvertUtil.ToInt(equipment.AntiAir);
 			// 三式弾
-			if (equipment.TypeID == 1006) return 0.6 * aa;
+			if (equipment.TypeID == 18) return 0.6 * aa;
 			// 電探
-			else if (equipment.TypeID == 1004) return 0.4 * aa;
+			else if (equipment.TypeID == 12 || equipment.TypeID == 13) return 0.4 * aa;
 			// 高角砲
-			else if (equipment.TypeID == 1002) return 0.35 * aa;
-			// 主砲（赤）副砲　機銃　艦戦　艦爆　水偵
+			else if (equipment.IconTypeID == 16) return 0.35 * aa;
+			// その他全部
 			else return 0.2 * aa;
 		}
 
@@ -215,6 +226,8 @@ SELECT
 	, enemies.anti_air_weight
 	, enemies.anti_air_bonus
 	, enemies.anti_air
+	, enemies.hp
+	, enemies.armor
 	, raw.slot_count
 FROM
 	enemies
@@ -269,6 +282,8 @@ GROUP BY
 					enemy.AntiAirWeight = ConvertUtil.ToInt(dr["anti_air_weight"]);
 					enemy.AntiAirBonus = ConvertUtil.ToInt(dr["anti_air_bonus"]);
 					enemy.AntiAir = ConvertUtil.ToInt(dr["anti_air"]);
+					enemy.HP = ConvertUtil.ToInt(dr["hp"]);
+					enemy.Armor = ConvertUtil.ToInt(dr["armor"]);
 					enemy.SlotCount = ConvertUtil.ToInt(dr["slot_count"]);
 
 					enemy.AirPower += GetAirPower(equipments, ConvertUtil.ToInt(enemy.Equipment1ID), ConvertUtil.ToInt(enemy.Slot1));
@@ -316,6 +331,8 @@ INTO enemies(
 	, air_power
 	, land_base_air_power
 	, anti_air
+	, hp
+	, armor
 ) 
 VALUES ( 
 	{ID}
@@ -336,6 +353,8 @@ VALUES (
 	, {AirPower}
 	, {LandBaseAirPower}
 	, {AntiAir}
+	, {HP}
+	, {Armor}
 ) ";
 			var param = new Dictionary<string, object>()
 			{
@@ -448,7 +467,7 @@ SELECT
         WHEN equipment5 > 0 
             THEN equipment5 || ', ' 
         ELSE '' 
-        END || ']' || ', orig: ' || original_id || ', aa: ' || anti_air || ' },' AS json 
+        END || ']' || ', orig: ' || original_id || ', hp: ' || hp || ', aa: ' || anti_air || ', armor: ' || armor || ' },' AS json 
 FROM
     enemies_view 
     LEFT JOIN enemies_types 
