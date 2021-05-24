@@ -136,6 +136,9 @@ namespace Manager.Models
 					poi.AirPower += enemy.AirPower;
 					poi.LandBaseAirPower += enemy.LandBaseAirPower;
 				}
+				// 敵id配列を格納しなおす
+				poi.Enemies1 = string.Join(",", poi.EnemyList1.Select(v => v.ID).ToList());
+
 				foreach (var id in poi.Enemies2.Split(','))
 				{
 					var enemy = enemyList.Find(v => v.ID == ConvertUtil.ToInt(id));
@@ -147,6 +150,9 @@ namespace Manager.Models
 					poi.AirPower += enemy.AirPower;
 					poi.LandBaseAirPower += enemy.LandBaseAirPower;
 				}
+				// 敵id配列を格納しなおす
+				poi.Enemies2 = string.Join(",", poi.EnemyList2.Select(v => v.ID).ToList());
+
 				list.Add(poi);
 			}
 
@@ -187,9 +193,8 @@ namespace Manager.Models
 					foreach (var poi in csvList)
 					{
 						// 敵データがない or イベント海域(mapID > 400)なのにmapLvが1未満 or 通常海域なのにmapLvが1以上
-						if (string.IsNullOrEmpty(poi.Enemies1) ||
-							((poi.MapID > 400) && poi.MapLv < 1) ||
-							((poi.MapID < 400) && poi.MapLv > 0))
+						if (string.IsNullOrEmpty(poi.Enemies1) || poi.EnemyList1.Count == 0 ||
+							((poi.MapID > 400) && poi.MapLv < 1) || ((poi.MapID < 400) && poi.MapLv > 0))
 						{
 							ignoreCount++;
 							continue;
