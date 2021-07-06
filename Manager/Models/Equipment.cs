@@ -200,6 +200,7 @@ SELECT
 	', cost: ' || cost || 
 	', avoid: ' || avoid_id || 
 	', range2: ' || range2 || 
+	', grow: ' || grow || 
 	' }},' AS JSON 
 FROM
 	equipments_view

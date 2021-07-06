@@ -125,11 +125,11 @@ namespace Manager.Models
 		{
 			if (equipment == null) return 0;
 
-			if (isLandBase && Const.PLANES_ALL.Contains(equipment.ID))
+			if (isLandBase && Const.PLANES_ALL.Contains(equipment.TypeID))
 			{
 				return (int)(ConvertUtil.ToInt(equipment.AntiAir) * Math.Sqrt(slot));
 			}
-			else if (Const.PLANES.Contains(equipment.ID))
+			else if (Const.PLANES.Contains(equipment.TypeID))
 			{
 				return (int)(ConvertUtil.ToInt(equipment.AntiAir) * Math.Sqrt(slot));
 			}
