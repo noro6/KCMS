@@ -202,7 +202,7 @@ SELECT
         WHEN slot_5 >= 0 AND slot_count >= 5
             THEN slot_5 || ', ' 
         ELSE '' 
-        END || ']' || ', final: ' || is_final || ', orig: ' || original_id || ', ver: ' || version || ', range: ' || range || ', type2: ' || ship_type_2 || ', hp: ' || hp || ', hp2: ' || hp2 || ', max_hp: ' || max_hp || ', max_aa: ' || anti_air || ', max_armor: ' || armor || ', luck: ' || luck || ', max_luck: ' || max_luck ||
+        END || ']' || ', final: ' || is_final || ', orig: ' || original_id || ', ver: ' || version || ', range: ' || range || ', type2: ' || ship_type_2 || ', hp: ' || hp || ', hp2: ' || hp2 || ', max_hp: ' || max_hp || ', max_aa: ' || anti_air || ', max_armor: ' || armor || ', luck: ' || luck || ', max_luck: ' || max_luck || ', scout: ' || min_scout || ', max_scout: ' || max_scout ||
     ' },' AS json 
 FROM
     ships_view 
